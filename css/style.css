@@ -261,15 +261,16 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 /* ---------- home: name centered-left, glyph columns on both sides, tab tiles on the right ---------- */
 .home {
   display: grid;
-  grid-template-columns: clamp(56px, 9vw, 150px) minmax(0, 1fr) minmax(240px, 300px) clamp(0px, 7vw, 130px) clamp(56px, 9vw, 150px);
-  gap: clamp(20px, 3vw, 48px);
+  grid-template-columns: clamp(56px, 9vw, 150px) minmax(0, auto) auto minmax(0, 1fr) clamp(56px, 9vw, 150px);
+  column-gap: 0;
   height: max(640px, 100svh);
   padding-left: max(0px, env(safe-area-inset-left, 0px));
   padding-right: max(0px, env(safe-area-inset-right, 0px));
 }
 .home .side { height: 100%; width: 100%; }
 .home .side[data-field="right"] { grid-column: 5; }
-.home .tiles { grid-column: 3; }
+.home .tiles { grid-column: 3; margin-left: 96px; width: clamp(240px, 22vw, 300px); }
+.home .home-center { margin-left: clamp(20px, 3vw, 48px); }
 .home-center { align-self: center; display: grid; gap: 22px; min-width: 0; padding-left: clamp(0px, 5vw, 96px); }
 .home-center .name {
   font-family: "Archivo", var(--display); font-weight: 800; margin: 0;
@@ -302,6 +303,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
     padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px));
   }
   .home .side, .home .side[data-field="right"], .home .tiles { grid-column: auto; }
+  .home .tiles, .home .home-center { margin-left: 0; }
+  .home .tiles { width: auto; }
   .home .side { height: 90px; }
   .home-center { padding-left: 0; }
   .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -314,4 +317,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   .tiles { grid-template-columns: 1fr; }
   .tile { grid-template-columns: 64px minmax(0, 1fr); }
   .tile canvas { width: 64px; height: 64px; }
+}
+/* the name alone sets the width of the left column; tagline and facts wrap inside it */
+@media (min-width: 901px) {
+  .home-center > :not(.name) { width: 0; min-width: 100%; }
 }
