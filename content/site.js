@@ -9,7 +9,7 @@
 window.SITE = {
   name: "Michelle Choi",
   role: "Product designer",
-  tagline: "I'm a curious artist learning how people move through the spaces we create, figuring it out one design at a time.",
+  tagline: "I'm a curious artist learning how people move through the spaces I create, finding my way into product design one prototype at a time :)",
   school: "Cornell University · Design & Environmental Analysis, minor in Information Science · Class of 2029",
   status: "Looking for Summer 2027 product design internships",
   email: "[you@email.com]",
