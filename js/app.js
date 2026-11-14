@@ -160,7 +160,7 @@
     const links = S.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener"><span>${esc(l.label)}</span><span>↗</span></a></li>`).join("");
     return header("about") + `<main class="view"><section class="wrap about">
       <div>${media({ src: S.portrait, ratio: "4/5", alt: "Portrait" }, "Portrait")}</div>
-      <div><canvas class="orb" id="orb" aria-hidden="true"></canvas><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
+      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle"></canvas><canvas class="seal mark" data-seal="choi-03"></canvas><canvas class="seal mark" data-seal="cornell"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
         <p>${txt(S.about)}</p>
         <ul class="links mono">
           <li><div class="row"><span id="email">${esc(S.email)}</span><button class="copy mono" id="copy-email" type="button">Copy</button></div></li>

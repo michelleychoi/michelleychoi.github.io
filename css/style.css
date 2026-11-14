@@ -373,3 +373,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .home .box .name { display: flex; flex-direction: column; gap: 0.12em; font-variation-settings: normal; font-stretch: normal; letter-spacing: 0; line-height: 1; font-size: clamp(2.6rem, 5.6vw, 5.6rem); }
 .home .box .name .hi { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; color: var(--ink); font-size: 0.62em; line-height: 1; letter-spacing: 0; margin-bottom: 0.06em; }
 .home .box .name .nm { font-family: "Syne", "Archivo", var(--display); font-weight: 700; color: var(--name); line-height: 1.08; letter-spacing: 0.005em; }
+
+/* about page: three glyph marks above the heading, content sits higher */
+.about { padding-block: clamp(24px, 3.5vw, 44px) 96px; }
+.about-marks { display: flex; gap: 14px; margin-bottom: 18px; }
+.about-marks .mark { width: 64px; height: 64px; margin: 0; }
