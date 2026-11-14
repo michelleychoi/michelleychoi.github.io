@@ -181,7 +181,7 @@
     if (window.Glyphs) {
       document.querySelectorAll("canvas[data-seal]").forEach((c) => Glyphs.seal(c, c.dataset.seal));
       const cfg = {
-        left: { seed: 7, cell: 20, soft: true }, right: { seed: 31, cell: 20, soft: true },
+        left: { seed: 7, cell: 20, soft: true, edge: "left" }, right: { seed: 31, cell: 20, soft: true, edge: "right" },
         physical: { seed: 11, cell: 13, colors: [0, 1] }, digital: { seed: 23, cell: 13, colors: [2, 3] }, about: { seed: 5, cell: 13, colors: [1, 3] }
       };
       document.querySelectorAll("canvas[data-field]").forEach((c) => Glyphs.field(c, cfg[c.dataset.field] || { seed: 3 }));

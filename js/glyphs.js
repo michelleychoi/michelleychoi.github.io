@@ -87,7 +87,17 @@
       const R = rng(seedBase);
       cells = [];
       for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++)
-        cells.push({ x: (x + 0.5) * cell, y: (y + 0.5) * cell, s: Math.floor(R() * sp.length), j: R() });
+      {
+        // edge mode: the two columns nearest the page edge stay a full grid, the rest scatter and thin out toward the center
+        const edge = h > w ? opts.edge : null; // only when the strip runs down the side of the page
+        const k = edge ? x : -1;
+        const px = edge === "right" ? w - (k + 0.5) * cell : (x + 0.5) * cell;
+        const s0 = Math.floor(R() * sp.length), j = R(), keep = R(), jx = R() - 0.5, jy = R() - 0.5;
+        if (k >= 2 && keep > Math.exp(-(k - 1) * 0.5)) continue;
+        const spread = k >= 2 ? Math.min(1, (k - 1) / 3) * cell * 0.9 : 0;
+        const f = k >= 2 ? Math.max(0.55, 1 - (k - 1) * 0.07) : 1;
+        cells.push({ x: px + jx * spread, y: (y + 0.5) * cell + jy * spread, s: s0, j, f, b: k < 0 ? 0 : k < 2 ? 0.35 : 0.15 });
+      }
       if (opts.onCount) opts.onCount(cells.length);
       draw(performance.now());
     }
@@ -102,10 +112,10 @@
         let v = 0.5 + wave * 0.35 + (c.j - 0.5) * 0.5;
         const dx = c.x - pointer.x, dy = c.y - pointer.y, d2 = dx * dx + dy * dy;
         const near = d2 < 160 * 160 ? 1 - Math.sqrt(d2) / 160 : 0;
-        v += near * 0.6;
+        v += near * 0.6 + (c.b || 0);
         if (v < 0.32) continue;
         const scale = Math.min(1, 0.35 + (v - 0.32) * 2.2) * (0.9 + near * 0.9);
-        const size = cell * 2 * 0.5 * scale;
+        const size = cell * 2 * 0.5 * scale * (c.f || 1);
         ctx.drawImage(sp[c.s], c.x - size / 2, c.y - size / 2, size, size);
       }
     }

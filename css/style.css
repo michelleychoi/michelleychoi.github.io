@@ -261,17 +261,18 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 /* ---------- home: name centered-left, glyph columns on both sides, tab tiles on the right ---------- */
 .home {
   display: grid;
-  grid-template-columns: clamp(56px, 9vw, 150px) minmax(0, auto) auto minmax(0, 1fr) clamp(56px, 9vw, 150px);
+  grid-template-columns: clamp(80px, 13vw, 220px) minmax(0, auto) auto minmax(0, 1fr) clamp(80px, 13vw, 220px);
   column-gap: 0;
   height: max(640px, 100svh);
   padding-left: max(0px, env(safe-area-inset-left, 0px));
   padding-right: max(0px, env(safe-area-inset-right, 0px));
 }
-.home .side { height: 100%; width: 100%; }
+.home .side { height: max(640px, 100svh); width: 100%; min-height: 0; }
+.home { grid-template-rows: minmax(0, 1fr); }
 .home .side[data-field="right"] { grid-column: 5; }
 .home .tiles { grid-column: 3; margin-left: 96px; width: clamp(240px, 22vw, 300px); }
-.home .home-center { margin-left: clamp(20px, 3vw, 48px); }
-.home-center { align-self: center; display: grid; gap: 22px; min-width: 0; padding-left: clamp(0px, 5vw, 96px); }
+.home .home-center { margin-left: clamp(8px, 1vw, 16px); }
+.home-center { align-self: center; display: grid; gap: 22px; min-width: 0; padding-left: clamp(0px, 3vw, 56px); }
 .home-center .name {
   font-family: "Archivo", var(--display); font-weight: 800; margin: 0;
   font-size: clamp(3rem, 7.4vw, 7.4rem); line-height: 0.95; letter-spacing: -0.025em;
