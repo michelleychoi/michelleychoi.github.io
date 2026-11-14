@@ -270,7 +270,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .home .side { height: max(640px, 100svh); width: 100%; min-height: 0; }
 .home { grid-template-rows: minmax(0, 1fr); }
 .home .side[data-field="right"] { grid-column: 5; }
-.home .tiles { grid-column: 3; margin-left: 96px; width: clamp(240px, 22vw, 300px); }
+.home .tiles { grid-column: 3; margin-left: 136px; width: clamp(240px, 22vw, 300px); }
 .home .home-center { margin-left: clamp(8px, 1vw, 16px); }
 .home-center { align-self: center; display: grid; gap: 22px; min-width: 0; padding-left: clamp(0px, 3vw, 56px); }
 .home-center .name {
