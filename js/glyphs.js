@@ -16,7 +16,8 @@
   function palette() {
     const cs = getComputedStyle(document.documentElement);
     const v = (n) => cs.getPropertyValue(n).trim();
-    return { ink: v("--ink"), c: [v("--g-yellow"), v("--g-magenta"), v("--accent"), v("--g-purple")], paper: v("--paper") };
+    return { ink: v("--ink"), c: [v("--g-yellow"), v("--g-magenta"), v("--accent"), v("--g-purple")],
+      soft: [v("--s-yellow"), v("--s-pink"), v("--s-blue"), v("--s-purple")], paper: v("--paper") };
   }
 
   // Draw one glyph centered at 0,0 with radius r.
@@ -76,7 +77,9 @@
     function build() {
       pal = palette();
       const colors = opts.colors ? opts.colors.map((i) => pal.c[i]) : pal.c;
-      sp = sprites(48, cell * 2, (i) => (i % 5 === 0 ? [pal.ink] : colors), pal.ink, seedBase);
+      sp = opts.soft
+        ? sprites(48, cell * 2, () => pal.soft, pal.soft[3], seedBase)
+        : sprites(48, cell * 2, (i) => (i % 5 === 0 ? [pal.ink] : colors), pal.ink, seedBase);
       const rect = canvas.getBoundingClientRect();
       w = rect.width; h = rect.height;
       canvas.width = Math.round(w * DPR); canvas.height = Math.round(h * DPR);
