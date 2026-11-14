@@ -69,7 +69,7 @@
         <span class="art"><canvas data-field="${field}" aria-hidden="true"></canvas></span>
         <span class="lbl"><span class="mono muted">${n}</span><b>${label}</b><span class="mono muted">${sub} →</span></span></a>`;
     return `<main class="view">
-      <section class="home" style="position:relative">
+      <section class="home">
         <canvas class="home-bg" id="home-bg" aria-hidden="true"></canvas>
         <canvas class="field side" data-field="left" aria-hidden="true"></canvas>
         <div class="stage">
@@ -90,11 +90,11 @@
         <canvas class="field side" data-field="right" aria-hidden="true"></canvas>
         <a class="scroll-cue mono muted" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Selected work ↓</a>
       </section>
-      <section class="wrap work" id="work">
+      <div class="work-panel"><section class="wrap work" id="work">
         ${["physical", "digital"].map((t) => `
           <div class="index-head"><h2>${S.tabs[t].label}</h2><a class="mono" href="#${t}">View all →</a></div>
           <ul class="index">${indexList(t)}</ul>`).join("")}
-      </section></main><div class="peek" aria-hidden="true"></div>` + footer();
+      </section></div></main><div class="peek" aria-hidden="true"></div>` + footer();
   }
 
   function tabView(id) {
@@ -160,7 +160,7 @@
     const links = S.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener"><span>${esc(l.label)}</span><span>↗</span></a></li>`).join("");
     return header("about") + `<main class="view"><section class="wrap about">
       <div>${media({ src: S.portrait, ratio: "4/5", alt: "Portrait" }, "Portrait")}</div>
-      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle"></canvas><canvas class="seal mark" data-seal="choi-03"></canvas><canvas class="seal mark" data-seal="cornell"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
+      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="choi-03" data-colors="3,2"></canvas><canvas class="seal mark" data-seal="cornell" data-colors="1,3"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
         <p>${txt(S.about)}</p>
         <ul class="links mono">
           <li><div class="row"><span id="email">${esc(S.email)}</span><button class="copy mono" id="copy-email" type="button">Copy</button></div></li>
@@ -169,6 +169,26 @@
   }
 
   // ---------- router (plain #name hashes) ----------
+  // home: as "Selected work" scrolls up, the cover recedes (moves up a little, shrinks, fades) underneath it
+  let shiftOff = null;
+  function coverShift() {
+    if (shiftOff) { shiftOff(); shiftOff = null; }
+    const home = document.querySelector(".home");
+    if (!home || !matchMedia("(min-width: 901px)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const p = Math.min(1, Math.max(0, scrollY / home.offsetHeight));
+      const e = p * p * (3 - 2 * p);
+      home.style.transform = `translateY(${-e * 8}vh) scale(${1 - e * 0.08})`;
+      home.style.opacity = String(1 - e * 0.65);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    addEventListener("scroll", onScroll, { passive: true });
+    update();
+    shiftOff = () => removeEventListener("scroll", onScroll);
+  }
+
   function render() {
     const h = decodeURIComponent(location.hash.slice(1));
     let html;
@@ -180,11 +200,12 @@
     document.title = (PROJECTS[h]?.title ? PROJECTS[h].title + " · " : "") + S.name;
     window.scrollTo(0, 0);
     wire();
+    coverShift();
   }
 
   function wire() {
     if (window.Glyphs) {
-      document.querySelectorAll("canvas[data-seal]").forEach((c) => Glyphs.seal(c, c.dataset.seal));
+      document.querySelectorAll("canvas[data-seal]").forEach((c) => Glyphs.seal(c, c.dataset.seal, c.dataset.colors ? c.dataset.colors.split(",").map(Number) : null));
       const cfg = {
         left: { seed: 7, cell: 20, soft: true, edge: "left" }, right: { seed: 31, cell: 20, soft: true, edge: "right" },
         physical: { seed: 11, cell: 13, colors: [0, 1] }, digital: { seed: 23, cell: 13, colors: [2, 3] }, about: { seed: 5, cell: 13, colors: [1, 3] }

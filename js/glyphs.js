@@ -145,8 +145,9 @@
     if (!reduce) start(tick);
   }
 
-  function seal(canvas, text) {
+  function seal(canvas, text, pick) {
     const pal = palette();
+    if (pick) { const cs = pick.map((i) => pal.c[i]); pal.c = cs; pal.ink = cs[cs.length - 1]; } // only these colors, no black
     const px = canvas.clientWidth || 48;
     canvas.width = canvas.height = Math.ceil(px * DPR);
     const g = canvas.getContext("2d");

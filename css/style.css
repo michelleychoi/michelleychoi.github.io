@@ -375,6 +375,19 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .home .box .name .nm { font-family: "Syne", "Archivo", var(--display); font-weight: 700; color: var(--name); line-height: 1.08; letter-spacing: 0.005em; }
 
 /* about page: three glyph marks above the heading, content sits higher */
-.about { padding-block: clamp(24px, 3.5vw, 44px) 96px; }
+.about { padding-block: clamp(32px, 4.8vw, 68px) 96px; }
 .about-marks { display: flex; gap: 14px; margin-bottom: 18px; }
 .about-marks .mark { width: 64px; height: 64px; margin: 0; }
+
+.brand { color: var(--name); }
+/* home: cover stays pinned while the work panel slides up over it */
+@media (min-width: 901px) {
+  .home { position: sticky; top: 0; z-index: 0; transform-origin: 50% 30%; will-change: transform, opacity; }
+  .work-panel, .view:has(.home) + .peek + footer { position: relative; z-index: 2; background: var(--paper); }
+  .work-panel {
+    border-radius: 28px 28px 0 0; margin-top: -12px;
+    box-shadow: 0 -18px 40px -24px color-mix(in srgb, var(--ink) 35%, transparent);
+    border-top: 1px solid var(--line);
+  }
+}
+@media (max-width: 900px) { .home { position: relative; } }
