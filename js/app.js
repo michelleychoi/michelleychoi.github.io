@@ -76,7 +76,7 @@
           <span class="eyebrow">${esc(S.role)} · Portfolio</span>
           <div class="box">
             <div class="home-center">
-              <h1 class="name"><span class="hi">Hi, I'm</span><span class="nm"><span class="ln">${esc(parts.join(" "))}</span>${last ? `<span class="ln">${esc(last)}</span>` : ""}</span></h1>
+              <h1 class="name"><span class="hi">Hi, I'm</span><span class="nm">${esc(parts.join(" "))}${last ? "<br>" : ""}${esc(last)}</span></h1>
               <p class="tagline">${txt(S.tagline)}</p>
             </div>
             <nav class="tiles" aria-label="Sections">
