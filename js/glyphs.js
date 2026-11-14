@@ -16,7 +16,7 @@
   function palette() {
     const cs = getComputedStyle(document.documentElement);
     const v = (n) => cs.getPropertyValue(n).trim();
-    return { ink: v("--ink"), c: [v("--g-yellow"), v("--g-magenta"), v("--accent"), v("--g-green")], paper: v("--paper") };
+    return { ink: v("--ink"), c: [v("--g-yellow"), v("--g-magenta"), v("--accent"), v("--g-purple")], paper: v("--paper") };
   }
 
   // Draw one glyph centered at 0,0 with radius r.

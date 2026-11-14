@@ -64,19 +64,28 @@
   function home() {
     const parts = S.name.trim().split(" ");
     const last = parts.length > 1 ? parts.pop() : "";
-    return header("") + `<main class="view">
-      <section class="wrap hero">
-        <h1>${esc(parts.join(" "))}${last ? " " : ""}<span class="accent">${esc(last)}</span></h1>
-        <div class="hero-meta">
-          <p>${txt(S.tagline)}</p>
-          <div class="facts mono muted"><span>${esc(S.role)}</span><span>${esc(S.school)}</span><span>${esc(S.status)}</span></div>
+    const count = (t) => S.tabs[t].projects.filter((s) => PROJECTS[s]).length;
+    const tile = (href, n, label, sub, field) => `<a class="tile" href="#${href}">
+        <canvas data-field="${field}" aria-hidden="true"></canvas>
+        <span class="lbl"><span class="mono muted">${n}</span><b>${label}</b><span class="mono muted">${sub} →</span></span></a>`;
+    return `<main class="view">
+      <section class="home" style="position:relative">
+        <canvas class="field side" data-field="left" aria-hidden="true"></canvas>
+        <div class="home-center">
+          <span class="mono muted">${esc(S.role)} · Portfolio</span>
+          <h1 class="name">${esc(parts.join(" "))}${last ? "<br>" : ""}<span>${esc(last)}</span></h1>
+          <p class="tagline">${txt(S.tagline)}</p>
+          <div class="facts mono muted"><span><span class="dot"></span>${esc(S.status)}</span><span>${esc(S.school)}</span></div>
         </div>
+        <nav class="tiles" aria-label="Sections">
+          ${tile("physical", "01", "Physical", count("physical") + " projects", "physical")}
+          ${tile("digital", "02", "Digital", count("digital") + " projects", "digital")}
+          ${tile("about", "03", "About", "Contact + resume", "about")}
+        </nav>
+        <canvas class="field side" data-field="right" aria-hidden="true"></canvas>
+        <a class="scroll-cue mono muted" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Selected work ↓</a>
       </section>
-      <section class="wrap band">
-        <canvas class="field" id="field-home" aria-hidden="true"></canvas>
-        <div class="band-cap mono muted"><span id="field-count">Glyph field</span><span class="hint">Move your cursor through it</span></div>
-      </section>
-      <section class="wrap">
+      <section class="wrap work" id="work">
         ${["physical", "digital"].map((t) => `
           <div class="index-head"><h2>${S.tabs[t].label}</h2><a class="mono" href="#${t}">View all →</a></div>
           <ul class="index">${indexList(t)}</ul>`).join("")}
@@ -171,10 +180,11 @@
   function wire() {
     if (window.Glyphs) {
       document.querySelectorAll("canvas[data-seal]").forEach((c) => Glyphs.seal(c, c.dataset.seal));
-      const home = document.getElementById("field-home");
-      if (home) Glyphs.field(home, { seed: 7, onCount: (n) => { const el = document.getElementById("field-count"); if (el) el.textContent = n.toLocaleString() + " glyphs, generated on load"; } });
-      document.querySelectorAll("canvas[data-field]").forEach((c) =>
-        Glyphs.field(c, { seed: c.dataset.field === "physical" ? 11 : 23, cell: 18, colors: c.dataset.field === "physical" ? [0, 1] : [2, 3] }));
+      const cfg = {
+        left: { seed: 7, cell: 20 }, right: { seed: 31, cell: 20 },
+        physical: { seed: 11, cell: 13, colors: [0, 1] }, digital: { seed: 23, cell: 13, colors: [2, 3] }, about: { seed: 5, cell: 13, colors: [1, 3] }
+      };
+      document.querySelectorAll("canvas[data-field]").forEach((c) => Glyphs.field(c, cfg[c.dataset.field] || { seed: 3 }));
       const orb = document.getElementById("orb");
       if (orb) Glyphs.orb(orb);
     }
