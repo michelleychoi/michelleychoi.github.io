@@ -85,7 +85,7 @@
               ${tile("about", "03", "About", "Contact + resume", "about")}
             </nav>
           </div>
-          <div class="facts">${esc(S.school)}</div>
+          <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
         </div>
         <canvas class="field side" data-field="right" aria-hidden="true"></canvas>
         <a class="scroll-cue mono muted" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Selected work ↓</a>
