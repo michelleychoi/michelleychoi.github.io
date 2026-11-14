@@ -407,3 +407,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .resume-btn[aria-disabled="true"] { pointer-events: none; opacity: 0.35; }
 .resume.ready { border-style: solid; border-color: var(--line); background: var(--paper); }
 .resume.ready .resume-btn { background: var(--name); }
+
+/* tab tiles: one glyph per tab (same marks as the About page), spins on hover */
+.tile .art.glyph { background: none; overflow: visible; }
+.tile .art.glyph canvas { width: 100%; height: 100%; margin: 0; background: none; border-radius: 0; transition: transform 0.7s cubic-bezier(.3,1.4,.5,1); }
+.tile:hover .art.glyph canvas, .tile:focus-visible .art.glyph canvas { transform: rotate(180deg) scale(1.08); }

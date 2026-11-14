@@ -66,7 +66,7 @@
     const last = parts.length > 1 ? parts.pop() : "";
     const count = (t) => S.tabs[t].projects.filter((s) => PROJECTS[s]).length;
     const tile = (href, n, label, sub, field) => `<a class="tile" href="#${href}">
-        <span class="art"><canvas data-field="${field}" aria-hidden="true"></canvas></span>
+        <span class="art glyph"><canvas class="seal" data-seal="${field.seal}" data-colors="${field.colors}" aria-hidden="true"></canvas></span>
         <span class="lbl"><span class="mono muted">${n}</span><b>${label}</b><span class="mono muted">${sub} →</span></span></a>`;
     return `<main class="view">
       <section class="home">
@@ -80,9 +80,9 @@
               <p class="tagline">${txt(S.tagline)}</p>
             </div>
             <nav class="tiles" aria-label="Sections">
-              ${tile("physical", "01", "Physical", count("physical") + " projects", "physical")}
-              ${tile("digital", "02", "Digital", count("digital") + " projects", "digital")}
-              ${tile("about", "03", "About", "Contact + resume", "about")}
+              ${tile("physical", "01", "Physical", count("physical") + " projects", { seal: "michelle", colors: "0,1" })}
+              ${tile("digital", "02", "Digital", count("digital") + " projects", { seal: "choi-03", colors: "3,2" })}
+              ${tile("about", "03", "About", "Contact + resume", { seal: "cornell", colors: "1,3" })}
             </nav>
           </div>
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
