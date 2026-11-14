@@ -73,7 +73,7 @@
         <canvas class="home-bg" id="home-bg" aria-hidden="true"></canvas>
         <canvas class="field side" data-field="left" aria-hidden="true"></canvas>
         <div class="stage">
-          <span class="mono muted">${esc(S.role)} · Portfolio</span>
+          <span class="eyebrow">${esc(S.role)} · Portfolio</span>
           <div class="box">
             <div class="home-center">
               <h1 class="name">${esc(parts.join(" "))}${last ? "<br>" : ""}<span>${esc(last)}</span></h1>
@@ -85,7 +85,7 @@
               ${tile("about", "03", "About", "Contact + resume", "about")}
             </nav>
           </div>
-          <div class="facts mono muted"><span><span class="dot"></span>${esc(S.status)}</span><span>${esc(S.school)}</span></div>
+          <div class="facts">${esc(S.school)}</div>
         </div>
         <canvas class="field side" data-field="right" aria-hidden="true"></canvas>
         <a class="scroll-cue mono muted" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Selected work ↓</a>

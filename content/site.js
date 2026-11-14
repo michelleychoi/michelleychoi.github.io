@@ -10,7 +10,7 @@ window.SITE = {
   name: "Michelle Choi",
   role: "Product designer",
   tagline: "[One line about what you make. e.g. I design objects and interfaces, starting with a pencil and ending with a prototype.]",
-  school: "[School] · [Major] · Class of [Year]",
+  school: "Cornell University · Design & Environmental Analysis, minor in Information Science · Class of 2029",
   status: "Looking for Summer 2027 product design internships",
   email: "[you@email.com]",
   links: [

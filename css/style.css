@@ -358,3 +358,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   .box .tile { grid-template-columns: 64px minmax(0, 1fr); }
   .tile .art { height: 64px; width: 64px; }
 }
+
+.stage .eyebrow, .stage .facts {
+  font-family: var(--body); font-weight: 500; font-size: 1rem; letter-spacing: 0.005em; color: var(--muted);
+  text-transform: none;
+}
+.stage .eyebrow { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.35rem; color: var(--ink); }
+.stage .facts { display: block; max-width: none; }
+.home .box .name { margin-top: 18px; }
+@media (max-width: 900px) { .home .box .name { margin-top: 6px; } }
