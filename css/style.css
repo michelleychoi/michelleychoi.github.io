@@ -391,3 +391,19 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   }
 }
 @media (max-width: 900px) { .home { position: relative; } }
+
+/* about: contact rows + resume slot */
+.links .row, .links a { align-items: center; }
+.links .k { width: 96px; flex: none; color: var(--muted); }
+.links .v { flex: 1; min-width: 0; overflow-wrap: anywhere; text-transform: none; letter-spacing: 0; }
+.resume {
+  margin-top: 22px; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 16px 18px; border: 1px dashed var(--muted); border-radius: 14px; background: var(--panel);
+}
+.resume > div { display: grid; gap: 2px; min-width: 0; }
+.resume b { font-family: var(--display); font-size: 1.25rem; letter-spacing: -0.01em; }
+.resume .small { font-size: 0.85rem; overflow-wrap: anywhere; }
+.resume-btn { flex: none; text-decoration: none; padding: 8px 14px; border-radius: 999px; background: var(--ink); color: var(--paper); }
+.resume-btn[aria-disabled="true"] { pointer-events: none; opacity: 0.35; }
+.resume.ready { border-style: solid; border-color: var(--line); background: var(--paper); }
+.resume.ready .resume-btn { background: var(--name); }

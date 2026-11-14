@@ -157,14 +157,20 @@
   }
 
   function about() {
-    const links = S.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener"><span>${esc(l.label)}</span><span>↗</span></a></li>`).join("");
+    const emails = (S.emails || [{ label: "Email", address: S.email }]).map((e, i) => `<li><div class="row">
+        <span class="k">${esc(e.label)}</span><span class="v" id="email-${i}">${esc(e.address)}</span>
+        <button class="copy mono" type="button" data-copy="${i}">Copy</button></div></li>`).join("");
+    const links = S.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">
+        <span class="k">${esc(l.label)}</span><span class="v">${esc(l.handle || "")}</span><span>↗</span></a></li>`).join("");
     return header("about") + `<main class="view"><section class="wrap about">
-      <div>${media({ src: S.portrait, ratio: "4/5", alt: "Portrait" }, "Portrait")}</div>
+      <div>${media({ src: S.collage, ratio: "4/5", alt: "Photo collage" }, "Photo collage")}</div>
       <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="choi-03" data-colors="3,2"></canvas><canvas class="seal mark" data-seal="cornell" data-colors="1,3"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
         <p>${txt(S.about)}</p>
-        <ul class="links mono">
-          <li><div class="row"><span id="email">${esc(S.email)}</span><button class="copy mono" id="copy-email" type="button">Copy</button></div></li>
-          ${links}</ul></div>
+        <ul class="links mono">${emails}${links}</ul>
+        <div class="resume" id="resume-slot">
+          <div><span class="mono muted">Resume</span><b>Michelle Choi · Resume</b><span class="muted small" id="resume-note">Coming soon</span></div>
+          <a class="resume-btn mono" id="resume-btn" href="${esc(S.resume)}" target="_blank" rel="noopener" aria-disabled="true">View PDF ↗</a>
+        </div></div>
     </section></main>` + footer();
   }
 
@@ -224,6 +230,16 @@
       const orb = document.getElementById("orb");
       if (orb) Glyphs.orb(orb);
     }
+    document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", () => {
+      const el = document.getElementById("email-" + b.dataset.copy);
+      navigator.clipboard?.writeText(el.textContent).then(() => { b.textContent = "Copied"; }).catch(() => {
+        const r = document.createRange(); r.selectNodeContents(el); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      });
+    }));
+    const rb = document.getElementById("resume-btn");
+    if (rb) fetch(S.resume, { method: "HEAD" }).then((r) => {
+      if (r.ok) { rb.removeAttribute("aria-disabled"); document.getElementById("resume-slot").classList.add("ready"); document.getElementById("resume-note").textContent = "PDF · opens in a new tab"; }
+    }).catch(() => {});
     const btn = document.getElementById("copy-email");
     if (btn) btn.addEventListener("click", () => {
       navigator.clipboard?.writeText(S.email).then(() => { btn.textContent = "Copied"; }).catch(() => {
