@@ -340,7 +340,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .stage .facts { display: flex; flex-wrap: wrap; gap: 6px 18px; }
 .stage .facts .dot { display: inline-block; margin-right: 6px; vertical-align: 1px; }
 .box { display: grid; grid-template-columns: max-content clamp(280px, 24vw, 360px); column-gap: clamp(44px, 4.5vw, 72px); align-items: stretch; }
-.home .box .home-center { margin: 0; padding: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; gap: 26px; }
+.home .box .home-center { margin: 0; padding: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
 .box .name { text-box: trim-start cap alphabetic; }
 .box .tagline { text-box: trim-end cap alphabetic; }
 .home .box .tiles { grid-column: auto; margin: 0; width: auto; align-self: stretch; display: grid; grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 14px; }
