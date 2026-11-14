@@ -9,6 +9,7 @@
   --g-yellow: #ffc81f;
   --g-magenta: #ff3d8b;
   --g-purple: #8a4dff;
+  --name: #5a46f0;
   --s-pink: #ff6fae;
   --s-purple: #a67bff;
   --s-blue: #6f8cff;
@@ -29,12 +30,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #111014; --ink: #efedf2; --muted: #98939f; --line: #2a2830; --panel: #1b1a20;
-    --accent: #7f8cff; --on-accent: #111014; --g-yellow: #ffd34d; --g-magenta: #ff5fa2; --g-purple: #a77bff; --s-pink: #ff5fa2; --s-purple: #a77bff; --s-blue: #7f8cff; --s-yellow: #ffd34d; color-scheme: dark;
+    --accent: #7f8cff; --on-accent: #111014; --g-yellow: #ffd34d; --g-magenta: #ff5fa2; --g-purple: #a77bff; --name: #a597ff; --s-pink: #ff5fa2; --s-purple: #a77bff; --s-blue: #7f8cff; --s-yellow: #ffd34d; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #111014; --ink: #efedf2; --muted: #98939f; --line: #2a2830; --panel: #1b1a20;
-  --accent: #7f8cff; --on-accent: #111014; --g-yellow: #ffd34d; --g-magenta: #ff5fa2; --g-purple: #a77bff; --s-pink: #ff5fa2; --s-purple: #a77bff; --s-blue: #7f8cff; --s-yellow: #ffd34d; color-scheme: dark;
+  --accent: #7f8cff; --on-accent: #111014; --g-yellow: #ffd34d; --g-magenta: #ff5fa2; --g-purple: #a77bff; --name: #a597ff; --s-pink: #ff5fa2; --s-purple: #a77bff; --s-blue: #7f8cff; --s-yellow: #ffd34d; color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -367,3 +368,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .stage .facts { display: block; max-width: none; }
 .home .box .name { margin-top: 18px; }
 @media (max-width: 900px) { .home .box .name { margin-top: 6px; } }
+
+/* hero: "Hi, I'm" in an italic serif, the name in a wide display face in violet */
+.home .box .name { display: flex; flex-direction: column; gap: 0.12em; font-variation-settings: normal; font-stretch: normal; letter-spacing: 0; line-height: 1; font-size: clamp(2.6rem, 5.6vw, 5.6rem); }
+.home .box .name .hi { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; color: var(--ink); font-size: 0.78em; line-height: 0.9; letter-spacing: -0.01em; }
+.home .box .name .nm { font-family: "Syne", "Archivo", var(--display); font-weight: 800; color: var(--name); line-height: 0.95; letter-spacing: -0.035em; }
