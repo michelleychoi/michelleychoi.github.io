@@ -82,7 +82,7 @@
             <nav class="tiles" aria-label="Sections">
               ${tile("physical", "01", "Physical", count("physical") + " projects", { seal: "michelle", colors: "0,1" })}
               ${tile("digital", "02", "Digital", count("digital") + " projects", { seal: "choi-03", colors: "3,2" })}
-              ${tile("about", "03", "About", "Contact + resume", { seal: "star", colors: "1,2" })}
+              ${tile("about", "03", "About", "Contact + resume", { seal: "#245496", colors: "soft" })}
             </nav>
           </div>
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
@@ -164,7 +164,7 @@
         <span class="k">${esc(l.label)}</span><span class="v">${esc(l.handle || "")}</span><span>↗</span></a></li>`).join("");
     return header("about") + `<main class="view"><section class="wrap about">
       <div>${media({ src: S.collage, ratio: "4/5", alt: "Photo collage" }, "Photo collage")}</div>
-      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="choi-03" data-colors="3,2"></canvas><canvas class="seal mark" data-seal="star" data-colors="1,2"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
+      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="choi-03" data-colors="3,2"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
         <p>${txt(S.about)}</p>
         <ul class="links mono">${emails}${links}</ul>
         <div class="resume" id="resume-slot">
@@ -211,7 +211,7 @@
 
   function wire() {
     if (window.Glyphs) {
-      document.querySelectorAll("canvas[data-seal]").forEach((c) => Glyphs.seal(c, c.dataset.seal, c.dataset.colors ? c.dataset.colors.split(",").map(Number) : null));
+      document.querySelectorAll("canvas[data-seal]").forEach((c) => Glyphs.seal(c, c.dataset.seal, c.dataset.colors === "soft" ? "soft" : c.dataset.colors ? c.dataset.colors.split(",").map(Number) : null));
       const cfg = {
         left: { seed: 7, cell: 20, soft: true, edge: "left" }, right: { seed: 31, cell: 20, soft: true, edge: "right" },
         physical: { seed: 11, cell: 13, colors: [0, 1] }, digital: { seed: 23, cell: 13, colors: [2, 3] }, about: { seed: 5, cell: 13, colors: [1, 3] }

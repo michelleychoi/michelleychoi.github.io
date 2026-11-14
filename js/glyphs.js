@@ -147,12 +147,13 @@
 
   function seal(canvas, text, pick) {
     const pal = palette();
-    if (pick) { const cs = pick.map((i) => pal.c[i]); pal.c = cs; pal.ink = cs[cs.length - 1]; } // only these colors, no black
+    if (pick === "soft") { pal.c = pal.soft; pal.ink = pal.soft[3]; } // the side-graphics palette
+    else if (pick) { const cs = pick.map((i) => pal.c[i]); pal.c = cs; pal.ink = cs[cs.length - 1]; } // only these colors, no black
     const px = canvas.clientWidth || 48;
     canvas.width = canvas.height = Math.ceil(px * DPR);
     const g = canvas.getContext("2d");
     g.scale(DPR, DPR); g.translate(px / 2, px / 2);
-    drawGlyph(g, px * 0.47, hash(text), pal.c, pal.ink);
+    drawGlyph(g, px * 0.47, String(text).startsWith("#") ? Number(String(text).slice(1)) : hash(text), pal.c, pal.ink);
   }
 
   function orb(canvas) {
@@ -181,5 +182,5 @@
     if (!reduce) start(tick);
   }
 
-  window.Glyphs = { field, seal, orb, hash };
+  window.Glyphs = { field, seal, orb, hash, draw: drawGlyph };
 })();
