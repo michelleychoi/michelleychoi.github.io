@@ -66,23 +66,27 @@
     const last = parts.length > 1 ? parts.pop() : "";
     const count = (t) => S.tabs[t].projects.filter((s) => PROJECTS[s]).length;
     const tile = (href, n, label, sub, field) => `<a class="tile" href="#${href}">
-        <canvas data-field="${field}" aria-hidden="true"></canvas>
+        <span class="art"><canvas data-field="${field}" aria-hidden="true"></canvas></span>
         <span class="lbl"><span class="mono muted">${n}</span><b>${label}</b><span class="mono muted">${sub} →</span></span></a>`;
     return `<main class="view">
       <section class="home" style="position:relative">
         <canvas class="home-bg" id="home-bg" aria-hidden="true"></canvas>
         <canvas class="field side" data-field="left" aria-hidden="true"></canvas>
-        <div class="home-center">
+        <div class="stage">
           <span class="mono muted">${esc(S.role)} · Portfolio</span>
-          <h1 class="name">${esc(parts.join(" "))}${last ? "<br>" : ""}<span>${esc(last)}</span></h1>
-          <p class="tagline">${txt(S.tagline)}</p>
+          <div class="box">
+            <div class="home-center">
+              <h1 class="name">${esc(parts.join(" "))}${last ? "<br>" : ""}<span>${esc(last)}</span></h1>
+              <p class="tagline">${txt(S.tagline)}</p>
+            </div>
+            <nav class="tiles" aria-label="Sections">
+              ${tile("physical", "01", "Physical", count("physical") + " projects", "physical")}
+              ${tile("digital", "02", "Digital", count("digital") + " projects", "digital")}
+              ${tile("about", "03", "About", "Contact + resume", "about")}
+            </nav>
+          </div>
           <div class="facts mono muted"><span><span class="dot"></span>${esc(S.status)}</span><span>${esc(S.school)}</span></div>
         </div>
-        <nav class="tiles" aria-label="Sections">
-          ${tile("physical", "01", "Physical", count("physical") + " projects", "physical")}
-          ${tile("digital", "02", "Digital", count("digital") + " projects", "digital")}
-          ${tile("about", "03", "About", "Contact + resume", "about")}
-        </nav>
         <canvas class="field side" data-field="right" aria-hidden="true"></canvas>
         <a class="scroll-cue mono muted" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Selected work ↓</a>
       </section>
@@ -193,7 +197,7 @@
         Glyphs.field(bg, { seed: 53, cell: 20, soft: true, corners: {
           reach: 110,
           side: () => home.querySelector(".side").getBoundingClientRect().width,
-          avoid: () => [rel(home.querySelector(".home-center")), rel(home.querySelector(".tiles")), rel(home.querySelector(".scroll-cue"))]
+          avoid: () => [rel(home.querySelector(".stage")), rel(home.querySelector(".scroll-cue"))]
         } });
       }
       const orb = document.getElementById("orb");
