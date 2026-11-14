@@ -93,9 +93,19 @@
         const k = edge ? x : -1;
         const px = edge === "right" ? w - (k + 0.5) * cell : (x + 0.5) * cell;
         const s0 = Math.floor(R() * sp.length), j = R(), keep = R(), jx = R() - 0.5, jy = R() - 0.5;
-        if (k >= 2 && keep > Math.exp(-(k - 1) * 0.5)) continue;
+        if (k >= 2 && keep > Math.exp(-(k - 1) * 0.36)) continue;
         const spread = k >= 2 ? Math.min(1, (k - 1) / 3) * cell * 0.9 : 0;
         const f = k >= 2 ? Math.max(0.55, 1 - (k - 1) * 0.07) : 1;
+        if (opts.corners) {
+          // corner mode: a light scatter fanning out from the four corners, kept off the side strips and the content
+          const cx = (x + 0.5) * cell, cy = (y + 0.5) * cell, side = opts.corners.side();
+          if (cx < side || cx > w - side) continue;
+          const dc = Math.min(Math.hypot(cx - side, cy), Math.hypot(w - side - cx, cy), Math.hypot(cx - side, h - cy), Math.hypot(w - side - cx, h - cy));
+          if (dc > opts.corners.reach * 2.4 || keep > Math.exp(-dc / opts.corners.reach) * 0.7) continue;
+          if (opts.corners.avoid().some((r) => cx > r.left - 40 && cx < r.right + 40 && cy > r.top - 40 && cy < r.bottom + 40)) continue;
+          cells.push({ x: cx + jx * cell * 0.9, y: cy + jy * cell * 0.9, s: s0, j, f: Math.max(0.55, 0.95 - dc / 600), b: 0.2 });
+          continue;
+        }
         cells.push({ x: px + jx * spread, y: (y + 0.5) * cell + jy * spread, s: s0, j, f, b: k < 0 ? 0 : k < 2 ? 0.35 : 0.15 });
       }
       if (opts.onCount) opts.onCount(cells.length);

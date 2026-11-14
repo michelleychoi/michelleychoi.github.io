@@ -70,6 +70,7 @@
         <span class="lbl"><span class="mono muted">${n}</span><b>${label}</b><span class="mono muted">${sub} →</span></span></a>`;
     return `<main class="view">
       <section class="home" style="position:relative">
+        <canvas class="home-bg" id="home-bg" aria-hidden="true"></canvas>
         <canvas class="field side" data-field="left" aria-hidden="true"></canvas>
         <div class="home-center">
           <span class="mono muted">${esc(S.role)} · Portfolio</span>
@@ -185,6 +186,16 @@
         physical: { seed: 11, cell: 13, colors: [0, 1] }, digital: { seed: 23, cell: 13, colors: [2, 3] }, about: { seed: 5, cell: 13, colors: [1, 3] }
       };
       document.querySelectorAll("canvas[data-field]").forEach((c) => Glyphs.field(c, cfg[c.dataset.field] || { seed: 3 }));
+      const bg = document.getElementById("home-bg");
+      if (bg && matchMedia("(min-width: 901px)").matches) {
+        const home = bg.parentElement;
+        const rel = (el) => { const r = el.getBoundingClientRect(), o = home.getBoundingClientRect(); return { left: r.left - o.left, right: r.right - o.left, top: r.top - o.top, bottom: r.bottom - o.top }; };
+        Glyphs.field(bg, { seed: 53, cell: 20, soft: true, corners: {
+          reach: 110,
+          side: () => home.querySelector(".side").getBoundingClientRect().width,
+          avoid: () => [rel(home.querySelector(".home-center")), rel(home.querySelector(".tiles")), rel(home.querySelector(".scroll-cue"))]
+        } });
+      }
       const orb = document.getElementById("orb");
       if (orb) Glyphs.orb(orb);
     }
