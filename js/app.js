@@ -266,14 +266,16 @@
             return im.back ? `<div class="flip" tabindex="0" aria-label="${esc((im.caption || "") + ": " + im.back)}"><div class="flip-in"><div class="flip-front">${pic}</div><div class="flip-back"><b>${esc(im.card || im.caption || "")}</b><p>${txt(im.back)}</p>${im.link ? `<a class="flip-link" href="${esc(im.link)}" target="_blank" rel="noopener">${esc(im.link.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ↗</a>` : ""}</div></div></div>` : pic;
           })()}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
         }).join("")}</div>${b.note ? `<span class="pin-note">${esc(b.note)}</span>` : ""}</div>`).join("");
-    return header("about") + `<main class="view"><section class="wrap about about-v2">
-      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
-        <p>${txt(S.about)}</p></div>
-      <div><ul class="links mono">${emails}${links}</ul>
+    const snaps = (S.portrait || []).map((im, i) => `<figure class="snap snap-${i + 1}">${media({ src: im.src, ratio: im.ratio || "4/5", alt: im.label }, im.label)}</figure>`).join("");
+    return header("about") + `<main class="view"><section class="wrap about about-v3">
+      <div class="about-text"><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
+        <p>${txt(S.about)}</p>
+        <ul class="links mono">${emails}${links}</ul>
         <div class="resume" id="resume-slot">
           <div><span class="mono muted">Resume</span><b>Michelle Choi · Resume</b><span class="muted small" id="resume-note">Coming soon</span></div>
           <a class="resume-btn mono" id="resume-btn" href="${esc(S.resume)}" target="_blank" rel="noopener" aria-disabled="true">View PDF ↗</a>
         </div></div>
+      <div class="snaps">${snaps}</div>
     </section>
     ${board ? `<section class="wrap bulletin"><div class="b-title"><span class="mono muted">Off the clock</span><h2>Bulletin Board</h2></div>${board}</section>` : ""}
     </main>` + footer();

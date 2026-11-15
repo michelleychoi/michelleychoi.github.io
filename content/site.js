@@ -25,13 +25,15 @@ window.SITE = {
   resume: "assets/resume.pdf",
   about:
     "[2–4 sentences about you. What draws you to product design, what you like to make with your hands vs. on screen, and what kind of team you want to learn from.]",
+  // Photo collage beside "Hi, I'm Michelle" on the About page. Empty src = placeholder box.
+  portrait: [
+    { src: "", ratio: "4/5", label: "Selfie" },
+    { src: "assets/about/friends/alps.jpg", ratio: "3/4", label: "In the Alps" },
+    { src: "assets/about/me-peace.jpg", ratio: "1/1", label: "Peace sign" }
+  ],
   // Bulletin board on the About page. Drop photos in assets/board/ and set "src" (empty src = placeholder).
   // "ratio" is the photo's shape; "caption" is the handwritten-style label under it (optional).
   board: [
-    { title: "Me & Friends", ratio: "4/3", items: [
-      { src: "assets/about/friends/alps.jpg", caption: "", ratio: "3/4" }, { src: "assets/about/friends/boat.jpg", caption: "" },
-      { src: "assets/about/friends/festival.jpg", caption: "" }
-    ]},
     // Until a photo is added (set "src"), each one shows as a colored card ("tint": [bottom, top, text color]).
     { title: "My Communities", note: "(flip the cards!)", ratio: "4/5", items: [
       { src: "", card: "CUSD", caption: "Cornell Undergraduate Sustainable Design", link: "https://www.cusd.cornell.edu/",
