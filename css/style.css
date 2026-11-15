@@ -132,7 +132,7 @@ body::before {
 .tab-head { padding-block: clamp(40px, 7vw, 90px) 28px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .tab-head h1 {
   font-family: var(--display); font-weight: 800; font-size: var(--step-3);
-  line-height: 0.9; letter-spacing: -0.04em; margin: 0; font-variation-settings: "wdth" 80;
+  line-height: 0.9; letter-spacing: 0.01em; margin: 0; font-variation-settings: "wdth" 80;
 }
 .tab-head p { margin: 0; max-width: 46ch; color: var(--muted); font-size: var(--step-1); }
 
