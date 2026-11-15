@@ -57,7 +57,7 @@ window.SITE = {
       { src: "assets/about/films/interstellar.jpg", caption: "Interstellar (2014)", stars: 5,
         review: "Never getting over this movie, watching it in IMAX for the sixth time on its 10 year anniversary and hearing Hans Zimmer blasting on speakers right above my head was full full circle." },
       { src: "assets/about/films/truman-show.jpg", caption: "The Truman Show (1998)", stars: 5,
-        review: "Need to watch all of the YouTube analysis videos first and come back." },
+        review: "Need to watch all of the YouTube analyses videos again, love this movie" },
       { src: "assets/about/films/walter-mitty.jpg", caption: "The Secret Life of Walter Mitty (2013)", stars: 5,
         review: "Wow I wish I was Ben Stiller watching Sean Penn take photos of an active volcano standing on a flying plane." },
       { src: "assets/about/films/dead-poets-society.jpg", caption: "Dead Poets Society (1989)", stars: 5,
