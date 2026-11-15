@@ -465,7 +465,7 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
   background: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ink) 9%, transparent) 1px, transparent 1.5px) 0 0 / 14px 14px, var(--panel); }
 .pin-head { display: flex; gap: 12px; align-items: baseline; margin-bottom: 22px; }
 .pin-head h2 { margin: 0; font-family: var(--serif, "Instrument Serif"), Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1; }
-.pins { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2.6vw, 34px); align-items: start; }
+.pins { display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: clamp(16px, 2.6vw, 34px); align-items: start; }
 .pinned { position: relative; margin: 0; background: #fff; padding: 10px 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 10px 22px rgba(20,10,40,.10);
   transform: rotate(var(--r, 0deg)); transition: transform .35s cubic-bezier(.2,1.2,.4,1), box-shadow .35s; display: grid; gap: 8px; }
 .pinned:hover { transform: rotate(0deg) translateY(-6px) scale(1.03); box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 22px 40px rgba(20,10,40,.16); z-index: 2; }
@@ -576,3 +576,5 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
   background: radial-gradient(120% 80% at 70% 15%, color-mix(in srgb, var(--c2) 85%, transparent), transparent 60%), linear-gradient(170deg, var(--c2), var(--c1) 70%); }
 .title-card b { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(1.2rem, 2.2vw, 1.9rem); line-height: 1; text-wrap: balance; }
 .title-card span { font-family: var(--mono); font-size: .72rem; letter-spacing: .14em; opacity: .8; }
+/* boards with 3 items keep the same card size as 4-item boards, centered */
+@media (min-width: 901px) { .pins[style*="--n:3"] { width: 75%; margin-inline: auto; } }

@@ -224,7 +224,7 @@
         <span class="k">${esc(l.label)}</span><span class="v">${esc(l.handle || "")}</span><span>↗</span></a></li>`).join("");
     const board = (S.board || []).map((b, bi) => `<div class="pin-board">
         <div class="pin-head"><span class="mono muted">${String(bi + 1).padStart(2, "0")}</span><h2>${esc(b.title)}</h2></div>
-        <div class="pins">${b.items.map((im, i) => {
+        <div class="pins" style="--n:${Math.min(b.items.length, 4)}">${b.items.map((im, i) => {
           const tilt = [-3, 2.2, -1.4, 3, -2.4, 1.6][(i + bi) % 6];
           const fix = (i + bi) % 2 ? `<span class="tape" aria-hidden="true"></span>` : `<canvas class="seal pin" data-seal="#${[237623, 245496, 110919, 142549][(i + bi) % 4]}" data-colors="${["1,1,1,3", "soft", "soft", "0,1"][(i + bi) % 4]}" aria-hidden="true"></canvas>`;
           return `<figure class="pinned ${b.shape || ""}" style="--r:${tilt}deg">${fix}${!im.src && im.tint ? titleCard(im, im.ratio || b.ratio || "2/3") : media({ src: im.src, ratio: im.ratio || b.ratio || "4/5", alt: im.caption }, im.caption || b.title)}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;

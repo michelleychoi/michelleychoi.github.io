@@ -34,8 +34,11 @@ window.SITE = {
     { title: "Photography", ratio: "4/5", items: [
       { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }, { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }
     ]},
-    { title: "Favorite Albums", ratio: "1/1", shape: "album", items: [
-      { src: "", caption: "Album · Artist" }, { src: "", caption: "Album · Artist" }, { src: "", caption: "Album · Artist" }, { src: "", caption: "Album · Artist" }
+    // Until a photo is added (set "src"), each one shows as a colored card ("tint": [bottom, top, text color]).
+    { title: "My Communities", ratio: "4/5", items: [
+      { src: "", caption: "CUSD", tint: ["#3d2fd6", "#8f7dff"] },
+      { src: "", caption: "Mediocre Melodies", tint: ["#d42a73", "#ff9cc6"] },
+      { src: "", caption: "Teaching Kindergarten", tint: ["#e0a100", "#ffe27a", "#2a2017"] }
     ]},
     { title: "Cinephilia Collection", ratio: "2/3", shape: "poster", items: [
       { src: "assets/about/films/interstellar.jpg", caption: "Interstellar (2014)" }, { src: "assets/about/films/truman-show.jpg", caption: "The Truman Show (1998)" },
