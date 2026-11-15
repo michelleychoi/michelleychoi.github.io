@@ -28,8 +28,9 @@ window.SITE = {
   // Bulletin board on the About page. Drop photos in assets/board/ and set "src" (empty src = placeholder).
   // "ratio" is the photo's shape; "caption" is the handwritten-style label under it (optional).
   board: [
-    { title: "Me & Friends", ratio: "4/5", items: [
-      { src: "", caption: "" }, { src: "", caption: "" }, { src: "", caption: "" }, { src: "", caption: "" }
+    { title: "Me & Friends", ratio: "4/3", items: [
+      { src: "assets/about/friends/alps.jpg", caption: "", ratio: "3/4" }, { src: "assets/about/friends/boat.jpg", caption: "" },
+      { src: "assets/about/friends/festival.jpg", caption: "" }
     ]},
     // Until a photo is added (set "src"), each one shows as a colored card ("tint": [bottom, top, text color]).
     { title: "My Communities", ratio: "4/5", items: [
