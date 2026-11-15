@@ -629,3 +629,22 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .snap-2 { --r: 3.5deg; margin-top: 46px; }
 .snap-3 { --r: -2deg; grid-column: 1 / -1; width: 64%; justify-self: center; margin-top: -42px; z-index: 2; }
 @media (max-width: 900px) { .about-v3 { grid-template-columns: minmax(0, 1fr); } .snaps { max-width: 460px; } .snap { padding: 7px 7px 20px; } }
+
+/* photography: polaroid bottom with black handwriting */
+.pinned.hand { padding: 10px 10px 8px; }
+.pinned.hand figcaption { font-family: "Caveat", "Bradley Hand", cursive; font-style: normal; font-weight: 500; font-size: clamp(1rem, 1.25vw, 1.2rem); color: #111; text-align: left; line-height: 1.12; padding: 9px 4px 6px; min-height: 3.4em; }
+/* films: flip to a Letterboxd-style review card */
+.flip-back.lb { background: #14181c; color: #9ab; padding: 12px 12px 10px; gap: 5px; border-radius: 2px; }
+.lb-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+.lb-dots { display: inline-flex; }
+.lb-dots i { width: 13px; height: 13px; border-radius: 50%; display: block; mix-blend-mode: screen; }
+.lb-dots i:nth-child(1) { background: #ff8000; }
+.lb-dots i:nth-child(2) { background: #00e054; margin-left: -4px; }
+.lb-dots i:nth-child(3) { background: #40bcf4; margin-left: -4px; }
+.lb-src { font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: #678; }
+.lb-by { font-size: .7rem; color: #678; }
+.flip-back.lb .lb-title { font-family: Georgia, "Times New Roman", serif; font-style: normal; font-weight: 700; font-size: clamp(.95rem, 1.2vw, 1.12rem); line-height: 1.12; color: #fff; }
+.lb-title span { font-weight: 400; color: #89a; font-size: .85em; }
+.lb-stars { color: #00e054; font-size: .95rem; letter-spacing: 1px; line-height: 1; }
+.flip-back.lb p { color: #def; font-size: clamp(.72rem, .9vw, .86rem); line-height: 1.4; }
+.lb-foot { margin-top: auto; padding-top: 6px; border-top: 1px solid #2c3440; font-family: var(--mono); font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; color: #678; }

@@ -260,15 +260,26 @@
         <div class="pins${b.items.some((im) => im.back) ? " flips" : ""}" style="--n:${Math.min(b.items.length, 4)}">${b.items.map((im, i) => {
           const tilt = [-3, 2.2, -1.4, 3, -2.4, 1.6][(i + bi) % 6];
           const fix = (i + bi) % 2 ? `<span class="tape" aria-hidden="true"></span>` : `<canvas class="seal pin" data-seal="#${[237623, 245496, 110919, 142549][(i + bi) % 4]}" data-colors="${["1,1,1,3", "soft", "soft", "0,1"][(i + bi) % 4]}" aria-hidden="true"></canvas>`;
-          return `<figure class="pinned ${b.shape || ""}" style="--r:${tilt}deg">${fix}${(() => {
+          return `<figure class="pinned ${b.shape || ""}${b.hand ? " hand" : ""}" style="--r:${tilt}deg">${fix}${(() => {
             const pic = !im.src && im.tint ? titleCard(im, im.ratio || b.ratio || "2/3") : media({ src: im.src, ratio: im.ratio || b.ratio || "4/5", alt: im.caption }, im.caption || b.title);
             // "back": the card flips on hover (tap on phones) to show this text
+            if (im.review) {
+              const m = String(im.caption || "").match(/^(.*?)\s*\((\d{4})\)$/) || [0, im.caption || "", ""];
+              const stars = "★".repeat(Math.floor(im.stars || 0)) + (im.stars % 1 ? "½" : "");
+              return `<div class="flip" tabindex="0" aria-label="${esc(m[1] + ": " + (im.stars || 0) + " stars. " + im.review)}"><div class="flip-in"><div class="flip-front">${pic}</div><div class="flip-back lb">
+                <div class="lb-top"><span class="lb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="lb-src">Letterboxd</span></div>
+                <span class="lb-by">Review by Michelle</span>
+                <b class="lb-title">${esc(m[1])} <span>${esc(m[2])}</span></b>
+                <span class="lb-stars" aria-hidden="true">${stars}</span>
+                <p>${txt(im.review)}</p>
+                <span class="lb-foot">Imported from Letterboxd</span></div></div></div>`;
+            }
             return im.back ? `<div class="flip" tabindex="0" aria-label="${esc((im.caption || "") + ": " + im.back)}"><div class="flip-in"><div class="flip-front">${pic}</div><div class="flip-back"><b>${esc(im.card || im.caption || "")}</b><p>${txt(im.back)}</p>${im.link ? `<a class="flip-link" href="${esc(im.link)}" target="_blank" rel="noopener">${esc(im.link.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ↗</a>` : ""}</div></div></div>` : pic;
           })()}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
         }).join("")}</div>${b.note ? `<span class="pin-note">${esc(b.note)}</span>` : ""}</div>`).join("");
     const snaps = (S.portrait || []).map((im, i) => `<figure class="snap snap-${i + 1}">${media({ src: im.src, ratio: im.ratio || "4/5", alt: im.label }, im.label)}</figure>`).join("");
     return header("about") + `<main class="view"><section class="wrap about about-v3">
-      <div class="about-text"><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
+      <div class="about-text"><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}!</h1>
         <p>${txt(S.about)}</p>
         <ul class="links mono">${emails}${links}</ul>
         <div class="resume" id="resume-slot">
