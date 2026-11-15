@@ -25,7 +25,22 @@ window.SITE = {
   resume: "assets/resume.pdf",
   about:
     "[2–4 sentences about you. What draws you to product design, what you like to make with your hands vs. on screen, and what kind of team you want to learn from.]",
-  collage: "assets/collage.jpg", // photo collage on the About page
+  // Bulletin board on the About page. Drop photos in assets/board/ and set "src" (empty src = placeholder).
+  // "ratio" is the photo's shape; "caption" is the handwritten-style label under it (optional).
+  board: [
+    { title: "Me & Friends", ratio: "4/5", items: [
+      { src: "", caption: "" }, { src: "", caption: "" }, { src: "", caption: "" }, { src: "", caption: "" }
+    ]},
+    { title: "Photography", ratio: "4/5", items: [
+      { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }, { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }
+    ]},
+    { title: "Favorite Albums", ratio: "1/1", shape: "album", items: [
+      { src: "", caption: "Album · Artist" }, { src: "", caption: "Album · Artist" }, { src: "", caption: "Album · Artist" }, { src: "", caption: "Album · Artist" }
+    ]},
+    { title: "Cinephilia Collection", ratio: "2/3", shape: "poster", items: [
+      { src: "", caption: "Film (Year)" }, { src: "", caption: "Film (Year)" }, { src: "", caption: "Film (Year)" }, { src: "", caption: "Film (Year)" }
+    ]}
+  ],
 
   // The two tabs. Order here = order on the site.
   tabs: {

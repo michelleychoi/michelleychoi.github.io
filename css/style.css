@@ -436,12 +436,46 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .brief { margin: 0; display: grid; border-top: 1px solid var(--ink); }
 .brief > div { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 8px 24px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--line); }
 .brief dt { color: var(--muted); }
-.brief dd { margin: 0; font-family: "Syne", var(--display); font-weight: 700; font-size: var(--step-2); line-height: 1.15; letter-spacing: -0.01em; }
+.brief dd { margin: 0; font-family: var(--display); font-weight: 700; font-size: var(--step-2); line-height: 1.15; letter-spacing: -0.02em; }
 @media (max-width: 640px) { .brief > div { grid-template-columns: 1fr; } }
 
 /* project pages: a clear rule between every section */
-.sections > * + * { border-top: 1px solid var(--line); padding-top: clamp(28px, 4vw, 48px); }
-.sections > .brief + * { border-top: 0; padding-top: 0; }
+.grp { display: grid; gap: clamp(36px, 6vw, 64px); }
+.grp-item + .grp-item { border-top: 1px solid var(--line); padding-top: clamp(28px, 4vw, 48px); }
+.grp:not(.solo) { border-top: 2px solid var(--ink); padding-top: 18px; }
+.grp-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: calc(-1 * clamp(8px, 2vw, 24px)); }
+.grp-head .mono { color: var(--name); }
+.grp-t { font-family: var(--serif, "Instrument Serif"), Georgia, serif; font-style: italic; font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1; }
+/* scroll reveal: each group's sections swipe in together, one after another */
+.reveal-on .grp > *, .reveal-on .pin-board > * { opacity: 0; transform: translateX(-36px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--k, 0) * 110ms + 60ms); }
+.reveal-on .grp > .grp-head { --k: 0; transition-delay: 0ms; }
+.reveal-on .grp.in > *, .reveal-on .pin-board.in > * { opacity: 1; transform: none; }
+.reveal-on .grp-item { --k-base: 1; }
+@media (prefers-reduced-motion: reduce) { .reveal-on .grp > *, .reveal-on .pin-board > * { opacity: 1; transform: none; transition: none; } }
+
+/* ---------- About: bulletin board ---------- */
+.about-v2 { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: end; padding-bottom: 40px; }
+.bulletin { padding-bottom: 96px; display: grid; gap: clamp(36px, 5vw, 56px); }
+.b-title { border-top: 2px solid var(--ink); padding-top: 18px; display: grid; gap: 6px; }
+.b-title h2 { font-family: var(--display); font-weight: 800; font-size: var(--step-3); letter-spacing: -0.04em; line-height: .95; margin: 0; }
+.pin-board { position: relative; border-radius: 28px; padding: clamp(18px, 3vw, 34px) clamp(18px, 3vw, 34px) clamp(28px, 4vw, 44px);
+  background: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ink) 9%, transparent) 1px, transparent 1.5px) 0 0 / 14px 14px, var(--panel); }
+.pin-head { display: flex; gap: 12px; align-items: baseline; margin-bottom: 22px; }
+.pin-head h2 { margin: 0; font-family: var(--serif, "Instrument Serif"), Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1; }
+.pins { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2.6vw, 34px); align-items: start; }
+.pinned { position: relative; margin: 0; background: #fff; padding: 10px 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 10px 22px rgba(20,10,40,.10);
+  transform: rotate(var(--r, 0deg)); transition: transform .35s cubic-bezier(.2,1.2,.4,1), box-shadow .35s; display: grid; gap: 8px; }
+.pinned:hover { transform: rotate(0deg) translateY(-6px) scale(1.03); box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 22px 40px rgba(20,10,40,.16); z-index: 2; }
+.pinned .media, .pinned .ph { border-radius: 2px; }
+.pinned figcaption { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-size: 1.05rem; color: #2a2730; text-align: center; line-height: 1.1; min-height: 1.1em; }
+.pinned.album { padding: 8px; }
+.pinned.poster { padding: 6px 6px 10px; }
+.pinned .pin { position: absolute; top: -12px; left: 50%; width: 28px; height: 28px; margin-left: -14px; z-index: 2; filter: drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
+.pinned .tape { position: absolute; top: -11px; left: 50%; width: 76px; height: 22px; margin-left: -38px; transform: rotate(calc(var(--r, 0deg) * -2)); z-index: 2;
+  background: color-mix(in srgb, var(--s-yellow) 55%, transparent); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.reveal-on .pin-board > .pins { transition-delay: 120ms; }
+@media (max-width: 900px) { .about-v2 { grid-template-columns: 1fr; align-items: start; } .pins { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
 .s-intro { margin: -6px 0 18px; color: var(--muted); max-width: 62ch; }
 
 /* "split" section: main image + a column of three small images that matches its height */

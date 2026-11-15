@@ -19,36 +19,36 @@ addProject({
       { label: "Case", value: "Gamify something you find boring or mundane." },
       { label: "Identified challenge", value: "Dating apps." }
     ]},
-    { type: "text", heading: "The Pain Point",
+    { group: "Understanding the Problem", type: "text", heading: "The Pain Point",
       body: "Getting into dating is hard. Over time, the excitement of meeting new people fades, and looking for prospects becomes repetitive and predictable. Dating apps make it easy to look for connections, but harder to actually take action and put yourself out there." },
-    { type: "text", heading: "Who It's For",
+    { group: "Understanding the Problem", type: "text", heading: "Who It's For",
       body: "Young adults and college students on dating apps who catch themselves mindlessly swiping through profiles, overthinking what to text, waiting for conversations to go somewhere, and repeating the same dating routines." },
-    { type: "text", heading: "The Idea",
+    { group: "Understanding the Problem", type: "text", heading: "The Idea",
       body: "My friends and I downloaded Hinge as a joke, and I kept thinking there had to be a more fun way to meet people than swiping. Inspired by BeReal's surprise notification and timer, I designed around \"just going for it\": a card arrives at a random time with a dare (like \"stop someone on the street and get their number\"), you swipe to accept or pass, a 15-minute timer starts, and you snap a photo as proof." },
     // Pitch board with three sketch slots on the right: set each sketch's "src" (e.g. assets/digital/gamify/sketch-1.jpg)
-    { type: "split", heading: "Pitch Board & Sketches", intro: "My first lo-fi flow, annotated with notes and open questions from the pitch, next to early sketches.",
+    { group: "Early Exploration", type: "split", heading: "Pitch Board & Sketches", intro: "My first lo-fi flow, annotated with notes and open questions from the pitch, next to early sketches.",
       main: { src: "assets/digital/gamify/pitch-board.jpg", ratio: "16/9", caption: "Lo-fi flow with handwritten notes" },
       side: [
         { src: "", ratio: "4/3", caption: "[Sketch]" },
         { src: "", ratio: "4/3", caption: "[Sketch]" },
         { src: "", ratio: "4/3", caption: "[Sketch]" }
       ]},
-    { type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
+    { group: "Early Exploration", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
       src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
-    { type: "text", heading: "Making It a Game",
+    { group: "Designing the Game", type: "text", heading: "Making It a Game",
       body: "A leaderboard is what turns it into a game. You join with a group of friends and compete for points. Points depend on the task's difficulty, how fast you finish, and how many cards you accept versus pass. The Winner of the Week unlocks the Task Generator and writes the dares for everyone else's next round, so passing has a real cost: you might get stuck with whatever the winner dreams up." },
-    { type: "image", heading: "Points by Difficulty", src: "assets/digital/gamify/difficulty-cards.jpg", ratio: "3200/1440", caption: "Example dares at each level (point values are illustrative)" },
-    { type: "text", heading: "The Profile",
+    { group: "Designing the Game", type: "image", heading: "Points by Difficulty", src: "assets/digital/gamify/difficulty-cards.jpg", ratio: "3200/1440", caption: "Example dares at each level (point values are illustrative)" },
+    { group: "Designing the Game", type: "text", heading: "The Profile",
       body: "The profile tab keeps a history of every card: completion status, the photo proof, points earned, and the fun extras, like whether you got their name and number, whether you'll actually go on a date, and a 1–10 rating. It becomes a little portfolio of the people you met by taking a chance." },
-    { type: "image", heading: "Lo-fi Wireframes", src: "assets/digital/gamify/lofi-wireframes.png", ratio: "1500/952", caption: "Task alert → task card → countdown, and the three tabs" },
-    { type: "image", heading: "Lo-fi to Hi-fi", src: "assets/digital/gamify/lofi-to-hifi.jpg", ratio: "3200/2050" },
-    { type: "gallery", heading: "Details", columns: 3, images: [
+    { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi Wireframes", src: "assets/digital/gamify/lofi-wireframes.png", ratio: "1500/952", caption: "Task alert → task card → countdown, and the three tabs" },
+    { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi to Hi-fi", src: "assets/digital/gamify/lofi-to-hifi.jpg", ratio: "3200/2050" },
+    { group: "From Lo-fi to Hi-fi", type: "gallery", heading: "Details", columns: 3, images: [
       { src: "assets/digital/gamify/screen-generator-locked.png", ratio: "390/844", caption: "Task Generator, locked for everyone but the winner" },
       { src: "assets/digital/gamify/screen-proof.png", ratio: "390/844", caption: "Card detail: proof, name, number, date? rate 1–10" }
     ]},
     // Clickable prototype (proto/gamify.html). To use a Figma link instead, swap this for:
     // { type: "figma", heading: "Interactive Prototype", url: "https://www.figma.com/..." },
-    { type: "embed", heading: "Interactive Prototype", src: "proto/gamify.html", title: "Go For It clickable prototype",
+    { group: "Try It", type: "embed", heading: "Interactive Prototype", src: "proto/gamify.html", title: "Go For It clickable prototype",
       intro: "Click through one full round. Everything here works.",
       aside: [
         { label: "01 · Alert", body: "Tap the notification to open your card." },
@@ -56,7 +56,7 @@ addProject({
         { label: "03 · Countdown", body: "The 15-minute timer runs for real. Snap a photo, then submit your proof." },
         { label: "04 · Tabs", body: "Watch the leaderboard update. Skip to Sunday on the Task Generator to unlock it as Winner of the Week, then open a past card on your profile to rate the date." }
       ]},
-    { type: "text", heading: "Takeaway",
+    { group: "Try It", type: "text", heading: "Takeaway",
       body: "Rather than judging success by whether someone finds a relationship, the app rewards taking chances, trying something new, and actually putting yourself out there. It's built for groups of friends who want dating to feel more spontaneous, social, and playful." }
   ]
 });

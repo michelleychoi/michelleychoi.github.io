@@ -153,6 +153,20 @@
     }
   }
 
+  // Sections that share a "group" name are wrapped together and slide in as one chunk on scroll.
+  function sectionsHTML(list) {
+    const out = []; let n = 0;
+    for (let i = 0; i < list.length; ) {
+      const g = list[i].group;
+      if (!g) { out.push(`<div class="grp solo">${section(list[i])}</div>`); i++; continue; }
+      const items = []; while (i < list.length && list[i].group === g) items.push(list[i++]);
+      n++;
+      out.push(`<div class="grp"><div class="grp-head"><span class="mono">${String(n).padStart(2, "0")}</span><span class="grp-t">${esc(g)}</span></div>
+        ${items.map((s, k) => `<div class="grp-item" style="--k:${k}">${section(s)}</div>`).join("")}</div>`);
+    }
+    return out.join("");
+  }
+
   function project(p) {
     const list = S.tabs[p.tab].projects.filter((s) => PROJECTS[s]);
     const next = PROJECTS[list[(list.indexOf(p.slug) + 1) % list.length]];
@@ -165,7 +179,7 @@
         <div class="p-title"><canvas class="seal big" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas><h1>${esc(p.title)}</h1></div><p class="summary">${txt(p.summary)}</p>
       </section>
       <section class="wrap"><dl class="spec">${spec}</dl>${media(p.cover, "Cover image")}</section>
-      <section class="wrap sections">${(p.sections || []).map(section).join("")}</section>
+      <section class="wrap sections">${sectionsHTML(p.sections || [])}</section>
       ${next && next.slug !== p.slug ? `<section class="wrap"><a class="next" href="#${next.slug}">
         <span class="mono muted">Next Project</span><span class="t">${esc(next.title)} →</span></a></section>` : ""}
     </main>` + footer();
@@ -177,16 +191,24 @@
         <button class="copy mono" type="button" data-copy="${i}">Copy</button></div></li>`).join("");
     const links = S.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">
         <span class="k">${esc(l.label)}</span><span class="v">${esc(l.handle || "")}</span><span>↗</span></a></li>`).join("");
-    return header("about") + `<main class="view"><section class="wrap about">
-      <div>${media({ src: S.collage, ratio: "4/5", alt: "Photo collage" }, "Photo collage")}</div>
+    const board = (S.board || []).map((b, bi) => `<div class="pin-board">
+        <div class="pin-head"><span class="mono muted">${String(bi + 1).padStart(2, "0")}</span><h2>${esc(b.title)}</h2></div>
+        <div class="pins">${b.items.map((im, i) => {
+          const tilt = [-3, 2.2, -1.4, 3, -2.4, 1.6][(i + bi) % 6];
+          const fix = (i + bi) % 2 ? `<span class="tape" aria-hidden="true"></span>` : `<canvas class="seal pin" data-seal="#${[237623, 245496, 110919, 142549][(i + bi) % 4]}" data-colors="${["1,1,1,3", "soft", "soft", "0,1"][(i + bi) % 4]}" aria-hidden="true"></canvas>`;
+          return `<figure class="pinned ${b.shape || ""}" style="--r:${tilt}deg">${fix}${media({ src: im.src, ratio: im.ratio || b.ratio || "4/5", alt: im.caption }, im.caption || b.title)}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
+        }).join("")}</div></div>`).join("");
+    return header("about") + `<main class="view"><section class="wrap about about-v2">
       <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
-        <p>${txt(S.about)}</p>
-        <ul class="links mono">${emails}${links}</ul>
+        <p>${txt(S.about)}</p></div>
+      <div><ul class="links mono">${emails}${links}</ul>
         <div class="resume" id="resume-slot">
           <div><span class="mono muted">Resume</span><b>Michelle Choi · Resume</b><span class="muted small" id="resume-note">Coming soon</span></div>
           <a class="resume-btn mono" id="resume-btn" href="${esc(S.resume)}" target="_blank" rel="noopener" aria-disabled="true">View PDF ↗</a>
         </div></div>
-    </section></main>` + footer();
+    </section>
+    ${board ? `<section class="wrap bulletin"><div class="b-title"><span class="mono muted">Off the clock</span><h2>Bulletin Board</h2></div>${board}</section>` : ""}
+    </main>` + footer();
   }
 
   // ---------- router (plain #name hashes) ----------
@@ -224,7 +246,18 @@
     coverShift();
   }
 
+  function reveal() {
+    const groups = document.querySelectorAll(".grp, .pin-board");
+    if (!groups.length || matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      groups.forEach((g) => g.classList.add("in")); return;
+    }
+    document.documentElement.classList.add("reveal-on");
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
+    groups.forEach((g) => io.observe(g));
+  }
+
   function wire() {
+    reveal();
     if (window.Glyphs) {
       document.querySelectorAll("canvas[data-seal]").forEach((c) => Glyphs.seal(c, c.dataset.seal, c.dataset.colors === "soft" ? "soft" : c.dataset.colors ? c.dataset.colors.split(",").map(Number) : null));
       const cfg = {
