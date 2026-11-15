@@ -25,8 +25,14 @@ addProject({
       body: "Young adults and college students on dating apps who catch themselves mindlessly swiping through profiles, overthinking what to text, waiting for conversations to go somewhere, and repeating the same dating routines." },
     { type: "text", heading: "The Idea",
       body: "My friends and I downloaded Hinge as a joke, and I kept thinking there had to be a more fun way to meet people than swiping. Inspired by BeReal's surprise notification and timer, I designed around \"just going for it\": a card arrives at a random time with a dare (like \"stop someone on the street and get their number\"), you swipe to accept or pass, a 15-minute timer starts, and you snap a photo as proof." },
-    { type: "image", heading: "Pitch Board", intro: "My first lo-fi flow, annotated with notes and open questions from the pitch.",
-      src: "assets/digital/gamify/pitch-board.jpg", ratio: "16/9", caption: "Lo-fi flow with handwritten notes" },
+    // Pitch board with three sketch slots on the right: set each sketch's "src" (e.g. assets/digital/gamify/sketch-1.jpg)
+    { type: "split", heading: "Pitch Board & Sketches", intro: "My first lo-fi flow, annotated with notes and open questions from the pitch, next to early sketches.",
+      main: { src: "assets/digital/gamify/pitch-board.jpg", ratio: "16/9", caption: "Lo-fi flow with handwritten notes" },
+      side: [
+        { src: "", ratio: "4/3", caption: "[Sketch]" },
+        { src: "", ratio: "4/3", caption: "[Sketch]" },
+        { src: "", ratio: "4/3", caption: "[Sketch]" }
+      ]},
     { type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
       src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
     { type: "text", heading: "Making It a Game",
@@ -35,15 +41,10 @@ addProject({
     { type: "text", heading: "The Profile",
       body: "The profile tab keeps a history of every card: completion status, the photo proof, points earned, and the fun extras, like whether you got their name and number, whether you'll actually go on a date, and a 1–10 rating. It becomes a little portfolio of the people you met by taking a chance." },
     { type: "image", heading: "Lo-fi Wireframes", src: "assets/digital/gamify/lofi-wireframes.png", ratio: "1500/952", caption: "Task alert → task card → countdown, and the three tabs" },
-    { type: "image", heading: "Lo-fi to Hi-fi", src: "assets/digital/gamify/lofi-to-hifi.jpg", ratio: "3200/2050", caption: "Same structure, new visual system" },
+    { type: "image", heading: "Lo-fi to Hi-fi", src: "assets/digital/gamify/lofi-to-hifi.jpg", ratio: "3200/2050" },
     { type: "gallery", heading: "Details", columns: 3, images: [
       { src: "assets/digital/gamify/screen-generator-locked.png", ratio: "390/844", caption: "Task Generator, locked for everyone but the winner" },
       { src: "assets/digital/gamify/screen-proof.png", ratio: "390/844", caption: "Card detail: proof, name, number, date? rate 1–10" }
-    ]},
-    { type: "gallery", heading: "Sketches & Extra Process", columns: 3, images: [
-      { src: "", ratio: "4/5", caption: "[Sketch]" },
-      { src: "", ratio: "4/5", caption: "[Sketch]" },
-      { src: "", ratio: "4/5", caption: "[Sketch]" }
     ]},
     // Paste the Figma share link (File > Share > Copy link). Leave "" to show a placeholder.
     { type: "figma", heading: "Interactive Prototype", url: "" },

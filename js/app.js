@@ -125,6 +125,13 @@
             `<figure>${media(im, im.caption)}${im.caption ? `<figcaption class="mono">${esc(im.caption)}</figcaption>` : ""}</figure>`).join("")}</div></div>`;
       case "stats":
         return `<div class="stats">${s.items.map((i) => `<div class="stat"><span class="mono muted">${esc(i.label)}</span><b>${esc(i.value)}</b></div>`).join("")}</div>`;
+      case "split": {
+        // one main image on the left, a column of small images (e.g. sketches) on the right
+        const cap = (im) => im.caption ? `<figcaption class="mono">${esc(im.caption)}</figcaption>` : "";
+        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
+          <div class="split"><figure class="split-main">${media(s.main, s.main.caption)}${cap(s.main)}</figure>
+          <div class="split-side">${(s.side || []).map((im) => `<figure>${media(im, im.caption)}${cap(im)}</figure>`).join("")}</div></div></div>`;
+      }
       case "brief":
         return `<dl class="brief">${s.items.map((i) => `<div><dt class="mono">${esc(i.label)}:</dt><dd>${esc(i.value)}</dd></div>`).join("")}</dl>`;
       case "figma": {
