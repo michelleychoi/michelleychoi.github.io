@@ -35,7 +35,7 @@ window.SITE = {
     { title: "My Communities", ratio: "4/5", items: [
       { src: "", card: "CUSD", caption: "Cornell Undergraduate Sustainable Design (Cities Design Subteam)", tint: ["#3d2fd6", "#8f7dff"] },
       { src: "assets/about/communities/mediocre-melodies-stage3.jpg", caption: "Mediocre Melodies" },
-      { src: "", caption: "Teaching Kindergarten", tint: ["#e0a100", "#ffe27a", "#2a2017"] },
+      { src: "assets/about/communities/teaching-kindergarten.jpg", caption: "Teaching Kindergarten" },
       { src: "", caption: "Orchestra", tint: ["#0f5c63", "#7fd3cf"] }
     ]},
     { title: "Some Fun Photography :)", ratio: "4/5", items: [
