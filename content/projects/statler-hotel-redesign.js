@@ -47,7 +47,7 @@ addProject({
       ]},
     { group: "Lighting & Materials", type: "image", heading: "Materials Palette",
       intro: "Walnut and white oak veneers, Calacatta marble, espresso brown leather, olive green and carmen red velvet, and cream bouclé.",
-      src: "assets/digital/statler/materials.jpg", ratio: "660/316" },
+      src: "assets/digital/statler/materials-v2.jpg", ratio: "926/452", maxWidth: "520px" },
     { group: "Lighting & Materials", type: "image", heading: "Furniture",
       intro: "All from Restoration Hardware: the Belgian Track Arm sofa in linen, the Arno armless counter stool in whitewashed oak and brass, and an antique Baktiary rug (c. 1900 to 1920, 100% wool).",
       src: "assets/digital/statler/furniture.jpg", ratio: "1071/591" },
