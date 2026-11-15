@@ -45,27 +45,22 @@ addProject({
         { title: "Accent", points: ["Backlit wine shelving", "Illuminated wood slat feature wall", "Stair tread lighting"] },
         { title: "Task", points: ["Bar prep illumination", "Counter service lighting", "Lighting that draws visitors to the stairs"] }
       ]},
-    // Materials collage: x / y / w are percents of the board, r is tilt in degrees, later items sit on top.
-    // cut: "torn" (ripped top + bottom), "torn-all", "torn-sides". kind: "photo", "wide", "hero", "note" (+ "ink" / "script").
+    // Materials collage: x / y / w are percents of the board, r is tilt in degrees. kind "wide" spans both columns on phones.
     { group: "Lighting & Materials", type: "collage", heading: "Materials Palette", ratio: "16/10",
-      intro: "Warm woods, marble, and soft upholstery, layered with the places they show up.",
+      intro: "Warm woods, marble, and soft upholstery, next to where they show up in the space.",
       items: [
-        { src: "assets/digital/statler/bar.jpg", x: 0.5, y: -3, w: 39, r: -3, cut: "torn-all", kind: "hero" },
-        { src: "assets/digital/statler/staircase.jpg", x: 60, y: 55, w: 42, r: 3, cut: "torn", kind: "hero" },
-        { src: "assets/digital/statler/mat/rug.jpg", label: "Antique Baktiary rug", note: "c. 1900 to 1920", x: 80, y: 2, w: 17, r: 6, kind: "photo", tape: true },
-        { src: "assets/digital/statler/mat/lit-slat-wall.jpg", x: 38, y: 4, w: 36, r: 2, cut: "torn-sides", kind: "wide" },
-        { text: "Social Threshold", x: 42, y: 30, w: 14, r: -4, kind: "note", tape: true },
-        { src: "assets/digital/statler/mat/walnut.jpg", label: "Walnut veneer", note: "Bar millwork", x: 3, y: 30, w: 19, r: -7, cut: "torn" },
-        { src: "assets/digital/statler/mat/calacatta.jpg", label: "Calacatta marble", note: "Counter + stair", x: 23, y: 20, w: 17, r: 5, tape: true },
-        { src: "assets/digital/statler/mat/leather.jpg", label: "Espresso leather", note: "Lounge chairs", x: 63, y: 20, w: 14, r: -5, cut: "torn-all" },
-        { src: "assets/digital/statler/mat/stair-rail.jpg", x: 76, y: 31, w: 13, r: 7, kind: "photo" },
-        { src: "assets/digital/statler/mat/olive-velvet.jpg", label: "Olive velvet", note: "Upholstery", x: 1, y: 62, w: 16, r: 4, cut: "torn-all" },
-        { src: "assets/digital/statler/mat/white-oak.jpg", label: "White oak veneer", note: "Slat walls", x: 16, y: 52, w: 16, r: -4, tape: "side" },
-        { src: "assets/digital/statler/mat/carmen-velvet.jpg", label: "Carmen red velvet", note: "Accent seating", x: 29, y: 62, w: 15, r: 7, cut: "torn" },
-        { src: "assets/digital/statler/mat/tread-light.jpg", x: 47, y: 50, w: 13, r: -6, kind: "photo" },
-        { src: "assets/digital/statler/mat/boucle.jpg", label: "Cream bouclé", note: "Sofa + stools", x: 43, y: 68, w: 15, r: -3, tape: true },
-        { src: "assets/digital/statler/mat/backlit-marble.jpg", label: "Backlit marble", x: 86, y: 50, w: 13, r: -4, cut: "torn-sides" },
-        { text: "warm · rich · layered", x: 6, y: 89, w: 17, r: -2, kind: "note script" }
+        { src: "assets/digital/statler/mat/walnut.jpg", label: "Walnut wood veneer", note: "Bar millwork", x: 3, y: 5, w: 17, r: -3, tape: true },
+        { src: "assets/digital/statler/mat/calacatta.jpg", label: "Calacatta marble", note: "Counter + stair", x: 18.5, y: 10, w: 16, r: 2.5 },
+        { src: "assets/digital/statler/mat/leather.jpg", label: "Espresso brown leather", note: "Lounge chairs", x: 35.5, y: 4, w: 14, r: -2, tape: true },
+        { src: "assets/digital/statler/mat/olive-velvet.jpg", label: "Olive green velvet", note: "Upholstery", x: 4, y: 42, w: 14, r: 2.5 },
+        { src: "assets/digital/statler/mat/white-oak.jpg", label: "White oak veneer", note: "Slat walls", x: 21, y: 44, w: 14, r: -1.5, tape: true },
+        { src: "assets/digital/statler/mat/carmen-velvet.jpg", label: "Carmen red velvet", note: "Accent seating", x: 37, y: 38, w: 14, r: 3 },
+        { src: "assets/digital/statler/mat/boucle.jpg", label: "Cream bouclé", note: "Sofa + stools", x: 21, y: 68, w: 13, r: -2 },
+        { src: "assets/digital/statler/mat/rug.jpg", label: "Antique Baktiary rug", note: "c. 1900 to 1920", x: 82, y: 5, w: 15, r: 2.5, kind: "photo" },
+        { src: "assets/digital/statler/mat/lit-slat-wall.jpg", label: "Illuminated slat wall", x: 53, y: 7, w: 27, r: -1.5, kind: "wide", tape: true },
+        { src: "assets/digital/statler/mat/stair-rail.jpg", label: "Integrated stair rail", x: 64, y: 33, w: 13, r: 2 },
+        { src: "assets/digital/statler/mat/backlit-marble.jpg", label: "Backlit marble edge", x: 79, y: 57, w: 14, r: -2.5, tape: true },
+        { src: "assets/digital/statler/mat/tread-light.jpg", label: "Stair tread lighting", x: 44, y: 63, w: 12.5, r: 3 }
       ]},
     { group: "Lighting & Materials", type: "image", heading: "Furniture",
       intro: "All from Restoration Hardware: the Belgian Track Arm sofa in linen, the Arno armless counter stool in whitewashed oak and brass, and an antique Baktiary rug (c. 1900 to 1920, 100% wool).",

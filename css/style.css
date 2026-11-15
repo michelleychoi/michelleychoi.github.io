@@ -532,35 +532,24 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .col li::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; border-radius: 50%; background: var(--name); }
 
 /* collage: material mood board */
-.collage { position: relative; aspect-ratio: var(--ratio); border-radius: 22px; overflow: hidden;
-  background: #e9dfd1 radial-gradient(120% 90% at 25% 15%, #f3ebe0, #e6dacb 55%, #d9cbb8); box-shadow: inset 0 0 0 1px rgba(80,50,20,.08); }
-.collage::before { content: ""; position: absolute; inset: 0; opacity: .35; pointer-events: none;
-  background-image: radial-gradient(rgba(90,60,30,.18) 1px, transparent 1.2px); background-size: 5px 5px; }
+.collage { --paper2: #ece3d6; position: relative; aspect-ratio: var(--ratio); border-radius: 22px; overflow: hidden;
+  background: radial-gradient(120% 90% at 20% 10%, #f4ede3, var(--paper2) 60%, #e2d6c6); box-shadow: inset 0 0 0 1px rgba(80,50,20,.08); }
 .collage .piece { position: absolute; left: var(--x); top: var(--y); width: var(--w); margin: 0; transform: rotate(var(--r));
-  filter: drop-shadow(0 1px 1px rgba(40,20,0,.25)) drop-shadow(0 8px 14px rgba(60,30,0,.22));
-  transition: transform .35s cubic-bezier(.16,1,.3,1); }
-.collage .piece img { display: block; width: 100%; height: auto; }
-.collage .piece.photo img { border: 6px solid #fff; border-bottom-width: 22px; }
-.collage .cut-torn img { clip-path: polygon(0.0% 1.0%, 7.1% 0.5%, 14.3% 2.1%, 21.4% 0.2%, 28.6% 1.7%, 35.7% 1.2%, 42.9% 0.2%, 50.0% 1.6%, 57.1% 0.1%, 64.3% 1.4%, 71.4% 0.2%, 78.6% 0.3%, 85.7% 1.4%, 92.9% 2.6%, 100.0% 0.0%, 100.0% 7.1%, 100.0% 14.3%, 100.0% 21.4%, 100.0% 28.6%, 100.0% 35.7%, 100.0% 42.9%, 100.0% 50.0%, 100.0% 57.1%, 100.0% 64.3%, 100.0% 71.4%, 100.0% 78.6%, 100.0% 85.7%, 100.0% 92.9%, 100.0% 99.6%, 92.9% 99.3%, 85.7% 98.0%, 78.6% 97.0%, 71.4% 98.2%, 64.3% 98.7%, 57.1% 96.9%, 50.0% 99.9%, 42.9% 97.3%, 35.7% 99.1%, 28.6% 99.5%, 21.4% 99.6%, 14.3% 99.0%, 7.1% 97.4%, 0.0% 100.0%, 0.0% 92.9%, 0.0% 85.7%, 0.0% 78.6%, 0.0% 71.4%, 0.0% 64.3%, 0.0% 57.1%, 0.0% 50.0%, 0.0% 42.9%, 0.0% 35.7%, 0.0% 28.6%, 0.0% 21.4%, 0.0% 14.3%, 0.0% 7.1%); }
-.collage .cut-torn-all img { clip-path: polygon(0.0% 0.6%, 7.1% 1.9%, 14.3% 2.0%, 21.4% 1.2%, 28.6% 1.8%, 35.7% 0.2%, 42.9% 0.2%, 50.0% 0.7%, 57.1% 2.2%, 64.3% 1.4%, 71.4% 1.0%, 78.6% 1.9%, 85.7% 1.5%, 92.9% 1.0%, 97.5% 0.0%, 97.8% 7.1%, 99.2% 14.3%, 98.2% 21.4%, 98.3% 28.6%, 97.2% 35.7%, 97.7% 42.9%, 99.1% 50.0%, 96.9% 57.1%, 99.6% 64.3%, 98.7% 71.4%, 97.6% 78.6%, 99.5% 85.7%, 98.4% 92.9%, 100.0% 99.9%, 92.9% 97.9%, 85.7% 97.6%, 78.6% 98.2%, 71.4% 97.2%, 64.3% 99.0%, 57.1% 97.8%, 50.0% 98.1%, 42.9% 98.1%, 35.7% 98.5%, 28.6% 97.3%, 21.4% 97.0%, 14.3% 98.5%, 7.1% 97.9%, 0.2% 100.0%, 2.2% 92.9%, 2.1% 85.7%, 3.2% 78.6%, 2.6% 71.4%, 0.9% 64.3%, 1.2% 57.1%, 2.1% 50.0%, 0.1% 42.9%, 1.5% 35.7%, 0.5% 28.6%, 0.4% 21.4%, 0.2% 14.3%, 2.5% 7.1%); }
-.collage .cut-torn-sides img { clip-path: polygon(0.0% 0.0%, 7.1% 0.0%, 14.3% 0.0%, 21.4% 0.0%, 28.6% 0.0%, 35.7% 0.0%, 42.9% 0.0%, 50.0% 0.0%, 57.1% 0.0%, 64.3% 0.0%, 71.4% 0.0%, 78.6% 0.0%, 85.7% 0.0%, 92.9% 0.0%, 99.6% 0.0%, 99.2% 7.1%, 98.7% 14.3%, 97.2% 21.4%, 99.7% 28.6%, 98.6% 35.7%, 98.2% 42.9%, 97.2% 50.0%, 97.4% 57.1%, 97.2% 64.3%, 99.1% 71.4%, 98.7% 78.6%, 98.9% 85.7%, 97.2% 92.9%, 100.0% 100.0%, 92.9% 100.0%, 85.7% 100.0%, 78.6% 100.0%, 71.4% 100.0%, 64.3% 100.0%, 57.1% 100.0%, 50.0% 100.0%, 42.9% 100.0%, 35.7% 100.0%, 28.6% 100.0%, 21.4% 100.0%, 14.3% 100.0%, 7.1% 100.0%, 3.1% 100.0%, 0.5% 92.9%, 0.6% 85.7%, 0.7% 78.6%, 0.7% 71.4%, 1.6% 64.3%, 1.9% 57.1%, 0.8% 50.0%, 0.0% 42.9%, 1.3% 35.7%, 1.2% 28.6%, 1.8% 21.4%, 3.0% 14.3%, 2.2% 7.1%); }
-.collage .piece:hover { transform: rotate(calc(var(--r) * .3)) translateY(-6px) scale(1.04); z-index: 40 !important; }
-.collage .paper { background: #fbf6ec; color: #2a2017; padding: 10% 9%; font-family: var(--display); font-weight: 800; letter-spacing: -0.02em;
-  font-size: clamp(.8rem, 1.75vw, 1.5rem); line-height: .95; text-transform: uppercase; }
-.collage .piece.script .paper { padding: 5% 8%; font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: clamp(.85rem, 1.5vw, 1.3rem); line-height: 1.1; }
-.collage .piece.ink .paper { background: #5a3420; color: #f6ead8; }
-.collage figcaption { position: absolute; left: 6%; bottom: -10px; display: grid; gap: 0; padding: 3px 8px 4px; background: #fffdf8; color: #2a2017;
-  box-shadow: 0 1px 3px rgba(40,20,0,.2); transform: rotate(calc(var(--r) * -1.3)); }
-.collage figcaption b { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(.78rem, 1.05vw, 1rem); line-height: 1.05; white-space: nowrap; }
-.collage figcaption span { font-family: var(--mono); font-size: .56rem; letter-spacing: .06em; text-transform: uppercase; color: #8a6f55; white-space: nowrap; }
-.collage .tape { position: absolute; top: -9px; left: 50%; width: 58px; height: 18px; margin-left: -29px; z-index: 2; transform: rotate(calc(var(--r) * -2 + 4deg));
-  background: rgba(255,248,228,.7); box-shadow: 0 1px 1px rgba(0,0,0,.06); }
-.collage .tape.side { top: 40%; left: -18px; margin: 0; transform: rotate(-70deg); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .collage { background: #2a231e radial-gradient(120% 90% at 25% 15%, #3a3029, #2a231e 55%, #1f1915); } }
-:root[data-theme="dark"] .collage { background: #2a231e radial-gradient(120% 90% at 25% 15%, #3a3029, #2a231e 55%, #1f1915); }
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s; }
+.collage .piece img { display: block; width: 100%; height: auto; border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(40,20,0,.18), 0 10px 24px rgba(60,30,0,.18); }
+.collage .piece.photo img { border: 7px solid #fff; border-bottom-width: 7px; }
+.collage .piece:hover { transform: rotate(0deg) translateY(-6px) scale(1.04); z-index: 30 !important; }
+.collage figcaption { position: absolute; left: 8px; bottom: -14px; display: grid; gap: 1px; padding: 5px 9px 6px; background: #fffdf8; color: #2a2017;
+  box-shadow: 0 2px 6px rgba(40,20,0,.16); transform: rotate(calc(var(--r) * -1.4)); max-width: calc(100% + 30px); }
+.collage figcaption b { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(.92rem, 1.25vw, 1.12rem); line-height: 1.05; white-space: nowrap; }
+.collage figcaption span { font-family: var(--mono); font-size: .64rem; letter-spacing: .06em; text-transform: uppercase; color: #8a6f55; white-space: nowrap; }
+.collage .tape { position: absolute; top: -10px; left: 50%; width: 64px; height: 20px; margin-left: -32px; z-index: 2; transform: rotate(calc(var(--r) * -2));
+  background: rgba(255,250,235,.62); box-shadow: 0 1px 2px rgba(0,0,0,.08); backdrop-filter: blur(1px); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .collage { --paper2: #2b241f; background: radial-gradient(120% 90% at 20% 10%, #3a3029, var(--paper2) 60%, #221c18); } }
+:root[data-theme="dark"] .collage { --paper2: #2b241f; background: radial-gradient(120% 90% at 20% 10%, #3a3029, var(--paper2) 60%, #221c18); }
 @media (max-width: 760px) {
-  .collage { aspect-ratio: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; padding: 26px 14px 40px; }
-  .collage .piece { position: relative; left: auto; top: auto; width: auto; margin: -10px -8px 12px; align-self: start; }
-  .collage .piece.wide, .collage .piece.hero { grid-column: 1 / -1; }
-  .collage .piece.note { justify-self: center; width: 70%; }
+  .collage { aspect-ratio: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 18px; padding: 24px 18px 34px; }
+  .collage .piece { position: relative; left: auto; top: auto; width: auto; }
+  .collage .piece.wide { grid-column: 1 / -1; }
 }
