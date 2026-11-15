@@ -45,12 +45,14 @@ addProject({
         { title: "Accent", points: ["Backlit wine shelving", "Illuminated wood slat feature wall", "Stair tread lighting"] },
         { title: "Task", points: ["Bar prep illumination", "Counter service lighting", "Lighting that draws visitors to the stairs"] }
       ]},
-    { group: "Lighting & Materials", type: "image", heading: "Materials Palette",
-      intro: "Walnut and white oak veneers, Calacatta marble, espresso brown leather, olive green and carmen red velvet, and cream bouclé.",
-      src: "assets/digital/statler/materials-v2.jpg", ratio: "926/452", maxWidth: "520px" },
-    { group: "Lighting & Materials", type: "image", heading: "Furniture",
-      intro: "All from Restoration Hardware: the Belgian Track Arm sofa in linen, the Arno armless counter stool in whitewashed oak and brass, and an antique Baktiary rug (c. 1900 to 1920, 100% wool).",
-      src: "assets/digital/statler/furniture.jpg", ratio: "1071/591" },
+    { group: "Lighting & Materials", type: "pair", items: [
+        { type: "image", heading: "Materials Palette",
+        intro: "Walnut and white oak veneers, Calacatta marble, espresso brown leather, olive green and carmen red velvet, and cream bouclé.",
+        src: "assets/digital/statler/materials-v2.jpg", ratio: "926/452" },
+        { type: "image", heading: "Furniture",
+        intro: "All from Restoration Hardware: the Belgian Track Arm sofa, the Arno counter stool, and an antique Baktiary rug.",
+        src: "assets/digital/statler/furniture.jpg", ratio: "1071/591" }
+    ]},
 
     { group: "Final Board", type: "image", heading: "Final Presentation Board",
       src: "assets/digital/statler/final-board.jpg", ratio: "3/4", caption: "The full board as presented" }

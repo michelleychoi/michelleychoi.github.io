@@ -553,3 +553,7 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
   .collage .piece { position: relative; left: auto; top: auto; width: auto; }
   .collage .piece.wide { grid-column: 1 / -1; }
 }
+
+/* pair: two sections side by side */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 48px); align-items: start; }
+@media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }

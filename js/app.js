@@ -119,6 +119,9 @@
         const fig = `<figure${s.maxWidth ? ` style="max-width:${esc(s.maxWidth)}"` : ""}>${media(s, s.caption)}${s.caption ? `<figcaption class="mono">${esc(s.caption)}</figcaption>` : ""}</figure>`;
         return s.heading ? `<div class="s-block"><h2>${esc(s.heading)}</h2>${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}${fig}</div>` : fig;
       }
+      case "pair":
+        // two sections side by side (e.g. two images with their own headings)
+        return `<div class="pair">${s.items.map((it) => `<div>${section(it)}</div>`).join("")}</div>`;
       case "gallery":
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}
           <div class="gallery c${s.columns === 3 ? 3 : 2}">${s.images.map((im) =>
