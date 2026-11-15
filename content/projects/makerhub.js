@@ -29,12 +29,12 @@ addProject({
     ]},
 
     { group: "Branding & Materials", type: "pair", items: [
-      { type: "image", heading: "Wordmark",
-        intro: "Focusing on minimalism and simplicity, inspired by digitalism and modeling software, in metallic and flat versions.",
-        src: "assets/digital/makerhub/wordmark-logos.jpg", ratio: "1450/945" },
       { type: "image", heading: "Materials",
         intro: "Inspired by Ithaca's natural landscape: sage green, cream, and brown, with Cornell carnelian as the accent.",
-        src: "assets/digital/makerhub/materials.jpg", ratio: "1425/1300" }
+        src: "assets/digital/makerhub/materials.jpg", ratio: "1425/1300" },
+      { type: "image", heading: "Wordmark",
+        intro: "Focusing on minimalism and simplicity, inspired by digitalism and modeling software, in metallic and flat versions.",
+        src: "assets/digital/makerhub/wordmark-logos.jpg", ratio: "1450/945" }
     ]},
 
     { group: "Moodboard", type: "image", heading: "Moodboard",
