@@ -14,7 +14,7 @@ addProject({
   role: "Designer/Builder",
   tools: "1/16\" and 1/8\" wooden sticks",
   summary:
-    "A 35 g stick bridge with a diamond base, built to hold a 25 lb brick. Spoiler: it held!",
+    "A 35 g stick bridge with a diamond base, built to hold a 25 lb brick.",
   cover: { src: "assets/physical/bridge-cover.jpg", ratio: "16/10", alt: "Finished balsa-stick bridge model on a black background" },
 
   sections: [
@@ -24,7 +24,7 @@ addProject({
       { label: "Load held", value: "25 lb" }
     ]},
     { type: "text", heading: "The Challenge",
-      body: "Hold a 25 lb brick using only 1/16\" and 1/8\" wooden sticks. Spoiler: it held! I also had to design a reachable \"shelter\", which I put at the top with white tissue paper, plus a ladder made from 1/16\" rods." },
+      body: "Hold a 25 lb brick using only 1/16\" and 1/8\" wooden sticks. I also had to design a reachable \"shelter\", which I put at the top with white tissue paper, plus a ladder made from 1/16\" rods." },
     { type: "gallery", heading: "Process", columns: 3, images: [
       { src: "assets/physical/bridge-sketch.jpg", ratio: "4/5", caption: "[Early truss sketches]" },
       { src: "assets/physical/bridge-cut.jpg", ratio: "4/5", caption: "[Cutting members]" },
