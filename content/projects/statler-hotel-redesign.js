@@ -22,7 +22,7 @@ addProject({
 
     { group: "The Spaces", type: "image", heading: "The Floorplan",
       intro: "Guests come in from the elevator and retail entrance, pass the café, and are led by the grand stair toward the bar.",
-      src: "assets/digital/statler/floorplan.jpg", ratio: "1476/798", caption: "Circulation from the entrance, past the café and stairs, to the bar" },
+      src: "assets/digital/statler/floorplan-hd.jpg", ratio: "2952/1596", caption: "Circulation from the entrance, past the café and stairs, to the bar" },
     { group: "The Spaces", type: "gallery", heading: "Three Zones", columns: 3, images: [
       { src: "assets/digital/statler/cafe.jpg", ratio: "1152/639", caption: "Café" },
       { src: "assets/digital/statler/bar.jpg", ratio: "1152/639", caption: "Bar" },
