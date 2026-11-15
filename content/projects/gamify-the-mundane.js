@@ -6,8 +6,8 @@ addProject({
   tab: "digital",
   title: "Gamify the Mundane Challenge",
   kicker: "Design challenge · App concept · Figma",
-  year: "[2026]",
-  role: "[Solo designer]",
+  year: "2026",
+  role: "Designer",
   tools: "Figma",
   summary:
     "The prompt: gamify something you find mundane or boring. I picked dating apps, and designed Go For It, a game where friends get surprise dares to meet new people, race a timer, and compete on a weekly leaderboard.",

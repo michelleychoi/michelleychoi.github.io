@@ -10,8 +10,8 @@ addProject({
   tab: "physical",
   title: "Bridge",
   kicker: "Structural model",
-  year: "[2025]",
-  role: "[Designer + builder]",
+  year: "2026",
+  role: "Designer/Builder",
   tools: "[Basswood, laser cutter, CA glue]",
   summary:
     "[One or two sentences: what the bridge had to do (span, load, material limits) and the result, e.g. held 42 lb at 18 g.]",
