@@ -28,11 +28,14 @@ addProject({
       { src: "assets/digital/makerhub/terrace-after.jpg", ratio: "1362/784", caption: "After: a terrace for group work and a garage to show off student projects" }
     ]},
 
-    { group: "Branding", type: "image", heading: "Wordmark",
-      src: "assets/digital/makerhub/wordmark.jpg", ratio: "2200/1238", caption: "Wordmark design" },
-    { group: "Branding", type: "image", heading: "Materials",
-      intro: "Inspired by Ithaca's natural landscape: sage green, cream, and brown, with Cornell carnelian as the accent.",
-      src: "assets/digital/makerhub/materials.jpg", ratio: "1425/1300", maxWidth: "640px", caption: "Fabric awnings, Beebe Hall's brick, wood furniture, and MakerHub hardware" },
+    { group: "Branding & Materials", type: "pair", items: [
+      { type: "image", heading: "Wordmark",
+        intro: "Focusing on minimalism and simplicity, inspired by digitalism and modeling software, in metallic and flat versions.",
+        src: "assets/digital/makerhub/wordmark-logos.jpg", ratio: "1450/945" },
+      { type: "image", heading: "Materials",
+        intro: "Inspired by Ithaca's natural landscape: sage green, cream, and brown, with Cornell carnelian as the accent.",
+        src: "assets/digital/makerhub/materials.jpg", ratio: "1425/1300" }
+    ]},
 
     { group: "Moodboard", type: "image", heading: "Moodboard",
       src: "assets/digital/makerhub/moodboard.jpg", ratio: "2200/1238", caption: "Creative studio moodboard" }
