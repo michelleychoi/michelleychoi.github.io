@@ -195,7 +195,7 @@
     const next = PROJECTS[list[(list.indexOf(p.slug) + 1) % list.length]];
     const spec = [["Role", p.role], ["Tools", p.tools], ["Year", p.year]]
       .map(([k, v]) => `<div><dt class="mono">${k}</dt><dd>${txt(v)}</dd></div>`).join("");
-    return header(p.tab) + `<main class="view">
+    return header(p.tab) + `<main class="view project-view">
       <section class="wrap p-head">
         <a class="crumb mono muted" href="#${p.tab}">← ${esc(S.tabs[p.tab].label)}</a>
         <span class="mono muted">${esc(p.kicker)}</span>
