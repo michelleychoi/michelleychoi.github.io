@@ -2,7 +2,7 @@
 addProject({
   slug: "sketches",
   tab: "physical",
-  title: "Sketchbook",
+  title: "My Sketchbook",
   kicker: "Drawing practice",
   year: "[2024–now]",
   role: "[Self-directed]",
