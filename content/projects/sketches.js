@@ -7,7 +7,7 @@ addProject({
   year: "2023–Current",
   role: "Self-directed",
   tools: "Ink, Alcohol markers, Procreate, Napkins",
-  summary: "[What you sketch and why: ideation, observation, product studies.]",
+  summary: "An amalgamation of random art projects over the years!",
   hideCover: true, // the cover only shows on the Physical tab card, not at the top of this page
   cover: { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "16/10", alt: "Black and white marker rendering of an interior" },
 
@@ -19,7 +19,7 @@ addProject({
       { src: "assets/physical/sketchbook/marker-street-clean.jpg", title: "Concord", pos: "50% 60%" }
     ]},
 
-    { group: "Napkin Sketches", type: "tiles", items: [
+    { group: "Napkin Sketches", type: "tiles", intro: "A series of napkin sketches I did in high school and left at the cafes I drew them in. Fun fact: the owners of Frame Cafe found my napkin and posted it!!", items: [
       { src: "assets/physical/sketchbook/napkin-ceremony.jpg", title: "Ceremony Cafe", pos: "50% 42%" },
       { src: "assets/physical/sketchbook/napkin-tamper.jpg", title: "Tamper", pos: "50% 50%" },
       { src: "assets/physical/sketchbook/napkin-frame-nyc.jpg", title: "Frame NYC", pos: "50% 40%" }

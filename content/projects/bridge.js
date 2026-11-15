@@ -12,28 +12,28 @@ addProject({
   kicker: "Structural model",
   year: "2026",
   role: "Designer/Builder",
-  tools: "[Basswood, laser cutter, CA glue]",
+  tools: "1/16\" and 1/8\" wooden sticks",
   summary:
-    "[One or two sentences: what the bridge had to do (span, load, material limits) and the result, e.g. held 42 lb at 18 g.]",
+    "A 35 g stick bridge with a diamond base, built to hold a 25 lb brick. Spoiler: it held!",
   cover: { src: "assets/physical/bridge-cover.jpg", ratio: "16/10", alt: "Finished balsa-stick bridge model on a black background" },
 
   sections: [
     { type: "stats", items: [
-      { label: "Span", value: "[24 in]" },
-      { label: "Weight", value: "[18 g]" },
-      { label: "Max load", value: "[42 lb]" }
+      { label: "Size", value: "29 × 8.7 in" },
+      { label: "Weight", value: "35 g" },
+      { label: "Load held", value: "25 lb" }
     ]},
-    { type: "text", heading: "The Brief",
-      body: "[What were the constraints? Who set them? What made it hard?]" },
+    { type: "text", heading: "The Challenge",
+      body: "Hold a 25 lb brick using only 1/16\" and 1/8\" wooden sticks. Spoiler: it held! I also had to design a reachable \"shelter\", which I put at the top with white tissue paper, plus a ladder made from 1/16\" rods." },
     { type: "gallery", heading: "Process", columns: 3, images: [
       { src: "assets/physical/bridge-sketch.jpg", ratio: "4/5", caption: "[Early truss sketches]" },
       { src: "assets/physical/bridge-cut.jpg", ratio: "4/5", caption: "[Cutting members]" },
       { src: "assets/physical/bridge-glue.jpg", ratio: "4/5", caption: "[Assembly jig]" }
     ]},
-    { type: "text", heading: "Testing",
-      body: "[How it was tested, where it failed, what you changed.]" },
+    { type: "text", heading: "Design & Testing",
+      body: "I made a diamond base to set my bridge apart from a regular truss. The base needed thin 1/16\" tension rods, which was a challenge. I used 1/8\" rods to keep the center rigid, then built up entirely with 1/8\" rods to keep the structure stable. I also added asymmetrical support beams to the upper chord to reflect its asymmetry." },
     { type: "image", src: "assets/physical/bridge-test.jpg", ratio: "16/9", caption: "[Load test]" },
-    { type: "text", heading: "What I Learned",
-      body: "[One takeaway you'd bring to a product team.]" }
+    { type: "text", heading: "Takeaway",
+      body: "Building up the base won't do much. Building up is where you get the real structure." }
   ]
 });
