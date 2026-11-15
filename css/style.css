@@ -251,7 +251,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 /* ---------- generative graphics ---------- */
 .band { position: relative; margin-bottom: 40px; }
 .field { display: block; width: 100%; height: clamp(220px, 30vw, 400px); touch-action: pan-y; }
-.field.strip { height: 120px; margin-top: 12px; }
+.field.strip { height: 52px; margin-top: 12px; } /* four glyph rows (cell 13px) */
 .band-cap { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 8px; }
 @media (hover: none) { .band-cap .hint { display: none; } }
 .seal { width: 1.1em; height: 1.1em; vertical-align: -0.12em; margin-right: 0.3em; display: inline-block; }
