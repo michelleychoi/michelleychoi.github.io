@@ -33,7 +33,7 @@ window.SITE = {
       { src: "assets/about/friends/festival.jpg", caption: "" }
     ]},
     // Until a photo is added (set "src"), each one shows as a colored card ("tint": [bottom, top, text color]).
-    { title: "My Communities", ratio: "4/5", items: [
+    { title: "My Communities", note: "(flip the cards!)", ratio: "4/5", items: [
       { src: "", card: "CUSD", caption: "Cornell Undergraduate Sustainable Design",
         back: "I'm on the Sustainable Cities subteam, where we work with the Ithaca Commons to make it a more welcoming, sustainable, and enjoyable place for the people who use it every day. It connects my passion for urban design with my love for art and design, and it's so grounding to work alongside local Ithaca businesses.", tint: ["#3d2fd6", "#8f7dff"] },
       { src: "assets/about/communities/mediocre-melodies-stage3.jpg", caption: "Mediocre Melodies",

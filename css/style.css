@@ -593,3 +593,4 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 /* phones: flip cards one per row so the back text stays readable */
 @media (max-width: 600px) { .pins.flips { grid-template-columns: minmax(0, 300px); justify-content: center; } .flips .flip-back p { font-size: .86rem; } }
 @media (max-width: 980px) and (min-width: 601px) { .pins.flips { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pin-note { position: absolute; right: clamp(16px, 2.6vw, 30px); bottom: clamp(8px, 1.2vw, 14px); font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-size: .92rem; color: var(--muted); }
