@@ -15,10 +15,10 @@ addProject({
   cover: { src: "assets/digital/gamify/cover.jpg", ratio: "16/10", alt: "Go For It hi-fi screens" },
 
   sections: [
-    { type: "stats", items: [
-      { label: "Prompt", value: "Gamify the mundane" },
-      { label: "Mundane thing", value: "Dating apps" },
-      { label: "Hi-fi screens", value: "8" }
+    // "brief": labeled lines (label: answer), shown in a bold display font
+    { type: "brief", items: [
+      { label: "Case", value: "Gamify something you find boring or mundane." },
+      { label: "Identified challenge", value: "Dating apps." }
     ]},
     { type: "text", heading: "The pain point",
       body: "Getting into dating is hard. Over time, the excitement of meeting new people fades, and looking for prospects becomes repetitive and predictable. Dating apps make it easy to look for connections, but harder to actually take action and put yourself out there." },
@@ -35,14 +35,6 @@ addProject({
       body: "The profile tab keeps a history of every card: completion status, the photo proof, points earned, and the fun extras, like whether you got their name and number, whether you'll actually go on a date, and a 1–10 rating. It becomes a little portfolio of the people you met by taking a chance." },
     { type: "image", src: "assets/digital/gamify/lofi-wireframes.png", ratio: "1500/952", caption: "Lo-fi wireframes: task alert → task card → countdown, and the three tabs" },
     { type: "image", src: "assets/digital/gamify/lofi-to-hifi.jpg", ratio: "3200/2302", caption: "Lo-fi to hi-fi: same structure, new visual system" },
-    { type: "gallery", heading: "Hi-fi screens", columns: 3, images: [
-      { src: "assets/digital/gamify/screen-lock.png", ratio: "390/844", caption: "Task alert on the lock screen" },
-      { src: "assets/digital/gamify/screen-task.png", ratio: "390/844", caption: "Task card: difficulty, points, swipe to pass or go" },
-      { src: "assets/digital/gamify/screen-countdown.png", ratio: "390/844", caption: "Countdown + camera for proof" },
-      { src: "assets/digital/gamify/screen-leaderboard.png", ratio: "390/844", caption: "Leaderboard (home)" },
-      { src: "assets/digital/gamify/screen-generator.png", ratio: "390/844", caption: "Task Generator, unlocked for the winner" },
-      { src: "assets/digital/gamify/screen-profile.png", ratio: "390/844", caption: "Profile and card history" }
-    ]},
     { type: "gallery", heading: "Details", columns: 3, images: [
       { src: "assets/digital/gamify/screen-generator-locked.png", ratio: "390/844", caption: "Task Generator, locked for everyone but the winner" },
       { src: "assets/digital/gamify/screen-proof.png", ratio: "390/844", caption: "Card detail: proof, name, number, date? rate 1–10" }

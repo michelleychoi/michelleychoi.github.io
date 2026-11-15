@@ -431,3 +431,10 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 /* phone screen images have rounded transparent corners: no box behind them */
 .media:has(img[src*="/screen-"]) { background: none; }
 .media img[src*="/screen-"] { object-fit: contain; filter: drop-shadow(0 0 0.5px rgba(0,0,0,.35)) drop-shadow(0 10px 22px rgba(20,10,40,.12)); }
+
+/* "brief" section: Case / Identified challenge lines */
+.brief { margin: 0; display: grid; border-top: 1px solid var(--ink); }
+.brief > div { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 8px 24px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.brief dt { color: var(--muted); }
+.brief dd { margin: 0; font-family: "Syne", var(--display); font-weight: 700; font-size: var(--step-2); line-height: 1.15; letter-spacing: -0.01em; }
+@media (max-width: 640px) { .brief > div { grid-template-columns: 1fr; } }

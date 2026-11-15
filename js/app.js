@@ -123,6 +123,8 @@
             `<figure>${media(im, im.caption)}${im.caption ? `<figcaption class="mono">${esc(im.caption)}</figcaption>` : ""}</figure>`).join("")}</div></div>`;
       case "stats":
         return `<div class="stats">${s.items.map((i) => `<div class="stat"><span class="mono muted">${esc(i.label)}</span><b>${esc(i.value)}</b></div>`).join("")}</div>`;
+      case "brief":
+        return `<dl class="brief">${s.items.map((i) => `<div><dt class="mono">${esc(i.label)}:</dt><dd>${esc(i.value)}</dd></div>`).join("")}</dl>`;
       case "figma": {
         const body = s.url
           ? `<iframe class="figma-frame" src="https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(s.url)}" allowfullscreen loading="lazy" title="Figma prototype"></iframe>
