@@ -38,7 +38,7 @@ window.SITE = {
       { src: "", caption: "Teaching Kindergarten", tint: ["#e0a100", "#ffe27a", "#2a2017"] },
       { src: "", caption: "Orchestra", tint: ["#0f5c63", "#7fd3cf"] }
     ]},
-    { title: "Photography", ratio: "4/5", items: [
+    { title: "Some Fun Photography :)", ratio: "4/5", items: [
       { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }, { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }
     ]},
     { title: "Cinephilia Collection", ratio: "2/3", shape: "poster", items: [
