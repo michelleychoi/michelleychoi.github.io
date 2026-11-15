@@ -143,6 +143,13 @@
           <div class="sn-text"><span class="sn-tag mono">${esc(it.label || String.fromCharCode(65 + i))}</span><h3>${esc(it.title)}</h3><p>${txt(it.body)}</p>
           ${it.points ? `<ul>${it.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul>` : ""}</div></div>`).join("")}</div></div>`;
       }
+      case "collage": {
+        // mood board: cut-out pieces placed by x/y/w (percent of the board), tilted by r degrees
+        const pieces = s.items.map((it, i) => `<figure class="piece${it.kind ? " " + it.kind : ""}" style="--x:${it.x}%;--y:${it.y}%;--w:${it.w}%;--r:${it.r || 0}deg;z-index:${it.z || i + 1}">
+          ${it.tape ? `<span class="tape" aria-hidden="true"></span>` : ""}<img src="${esc(it.src)}" alt="${esc(it.label)}" loading="lazy" decoding="async">
+          <figcaption><b>${esc(it.label)}</b>${it.note ? `<span>${esc(it.note)}</span>` : ""}</figcaption></figure>`).join("");
+        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="collage" style="--ratio:${s.ratio || "16/10"}">${pieces}</div></div>`;
+      }
       case "cols":
         // short labeled lists side by side (e.g. lighting layers)
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="cols">${s.items.map((it) => `<div class="col"><h3>${esc(it.title)}</h3><ul>${it.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul></div>`).join("")}</div></div>`;
