@@ -15,7 +15,7 @@ addProject({
   tools: "[Basswood, laser cutter, CA glue]",
   summary:
     "[One or two sentences: what the bridge had to do (span, load, material limits) and the result, e.g. held 42 lb at 18 g.]",
-  cover: { src: "assets/physical/bridge-cover.jpg", ratio: "16/10", alt: "Finished bridge model" },
+  cover: { src: "assets/physical/bridge-cover.jpg", ratio: "16/10", alt: "Finished balsa-stick bridge model on a black background" },
 
   sections: [
     { type: "stats", items: [
