@@ -578,3 +578,18 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .title-card span { font-family: var(--mono); font-size: .72rem; letter-spacing: .14em; opacity: .8; }
 /* boards with 3 items keep the same card size as 4-item boards, centered */
 @media (min-width: 901px) { .pins[style*="--n:3"] { width: 75%; margin-inline: auto; } }
+
+/* flip cards (My Communities): photo turns over to a short description */
+.flip { perspective: 900px; cursor: pointer; outline: none; }
+.flip-in { position: relative; display: grid; transition: transform .6s cubic-bezier(.2,.8,.2,1); transform-style: preserve-3d; }
+.flip-front, .flip-back { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip-back { position: absolute; inset: 0; }
+.flip-back { transform: rotateY(180deg); background: #fbf7f0; color: #2a2730; border-radius: 2px; padding: 12px 13px; display: flex; flex-direction: column; gap: 6px; overflow: auto; }
+.flip-back b { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.15rem; line-height: 1; }
+.flip-back p { margin: 0; font-size: clamp(.68rem, .92vw, .88rem); line-height: 1.36; }
+@media (hover: hover) { .flip:hover .flip-in { transform: rotateY(180deg); } }
+.flip:focus-visible .flip-in, .flip.flipped .flip-in { transform: rotateY(180deg); }
+@media (prefers-reduced-motion: reduce) { .flip-in { transition: none; } }
+/* phones: flip cards one per row so the back text stays readable */
+@media (max-width: 600px) { .pins.flips { grid-template-columns: minmax(0, 300px); justify-content: center; } .flips .flip-back p { font-size: .86rem; } }
+@media (max-width: 980px) and (min-width: 601px) { .pins.flips { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

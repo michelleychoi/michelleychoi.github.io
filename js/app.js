@@ -32,6 +32,11 @@
     return `<div class="media" style="aspect-ratio:${esc(ratio)}"><img src="${esc(img.src)}" alt="${esc(img.alt || img.caption || "")}" loading="lazy"
       data-ratio="${esc(ratio)}" data-label="${esc(label || "Image")}" onerror="window.__ph(this)"></div>`;
   }
+  // flip cards: tap to flip on touch screens (hover and keyboard focus are handled in CSS)
+  document.addEventListener("click", (e) => {
+    const f = e.target.closest && e.target.closest(".flip");
+    if (f && matchMedia("(hover: none)").matches) f.classList.toggle("flipped");
+  });
   window.__ph = (el) => {
     const box = el.parentElement;
     box.outerHTML = ph(el.getAttribute("src"), el.dataset.ratio, el.dataset.label);
@@ -224,10 +229,14 @@
         <span class="k">${esc(l.label)}</span><span class="v">${esc(l.handle || "")}</span><span>↗</span></a></li>`).join("");
     const board = (S.board || []).map((b, bi) => `<div class="pin-board">
         <div class="pin-head"><span class="mono muted">${String(bi + 1).padStart(2, "0")}</span><h2>${esc(b.title)}</h2></div>
-        <div class="pins" style="--n:${Math.min(b.items.length, 4)}">${b.items.map((im, i) => {
+        <div class="pins${b.items.some((im) => im.back) ? " flips" : ""}" style="--n:${Math.min(b.items.length, 4)}">${b.items.map((im, i) => {
           const tilt = [-3, 2.2, -1.4, 3, -2.4, 1.6][(i + bi) % 6];
           const fix = (i + bi) % 2 ? `<span class="tape" aria-hidden="true"></span>` : `<canvas class="seal pin" data-seal="#${[237623, 245496, 110919, 142549][(i + bi) % 4]}" data-colors="${["1,1,1,3", "soft", "soft", "0,1"][(i + bi) % 4]}" aria-hidden="true"></canvas>`;
-          return `<figure class="pinned ${b.shape || ""}" style="--r:${tilt}deg">${fix}${!im.src && im.tint ? titleCard(im, im.ratio || b.ratio || "2/3") : media({ src: im.src, ratio: im.ratio || b.ratio || "4/5", alt: im.caption }, im.caption || b.title)}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
+          return `<figure class="pinned ${b.shape || ""}" style="--r:${tilt}deg">${fix}${(() => {
+            const pic = !im.src && im.tint ? titleCard(im, im.ratio || b.ratio || "2/3") : media({ src: im.src, ratio: im.ratio || b.ratio || "4/5", alt: im.caption }, im.caption || b.title);
+            // "back": the card flips on hover (tap on phones) to show this text
+            return im.back ? `<div class="flip" tabindex="0" aria-label="${esc((im.caption || "") + ": " + im.back)}"><div class="flip-in"><div class="flip-front">${pic}</div><div class="flip-back"><b>${esc(im.card || im.caption || "")}</b><p>${txt(im.back)}</p></div></div></div>` : pic;
+          })()}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
         }).join("")}</div></div>`).join("");
     return header("about") + `<main class="view"><section class="wrap about about-v2">
       <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>

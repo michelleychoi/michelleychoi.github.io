@@ -34,10 +34,14 @@ window.SITE = {
     ]},
     // Until a photo is added (set "src"), each one shows as a colored card ("tint": [bottom, top, text color]).
     { title: "My Communities", ratio: "4/5", items: [
-      { src: "", card: "CUSD", caption: "Cornell Undergraduate Sustainable Design (Cities Design Subteam)", tint: ["#3d2fd6", "#8f7dff"] },
-      { src: "assets/about/communities/mediocre-melodies-stage3.jpg", caption: "Mediocre Melodies" },
-      { src: "assets/about/communities/teaching-kindergarten.jpg", caption: "Teaching Kindergarten" },
-      { src: "assets/about/communities/orchestra.jpg", caption: "Orchestra" }
+      { src: "", card: "CUSD", caption: "Cornell Undergraduate Sustainable Design",
+        back: "I'm on the Sustainable Cities subteam, where we work with the Ithaca Commons to make it a more welcoming, sustainable, and enjoyable place for the people who use it every day. It connects my passion for urban design with my love for art and design, and it's so grounding to work alongside local Ithaca businesses.", tint: ["#3d2fd6", "#8f7dff"] },
+      { src: "assets/about/communities/mediocre-melodies-stage3.jpg", caption: "Mediocre Melodies",
+        back: "Bad singers for a good cause! The name means exactly what we are: a comedic a cappella group of (questionable) singers with personality, making people laugh at our concerts while raising money for different charities. Truly a family of personable and hilarious people, and I'm so honored to be a part of it :)" },
+      { src: "assets/about/communities/teaching-kindergarten.jpg", caption: "Teaching Kindergarten",
+        back: "I taught preschoolers and kindergarteners art and music for four years in high school, and it's definitely something I will always carry with me. My love for teaching will always be one of my passions, and I love volunteering at local preschools even in college!" },
+      { src: "assets/about/communities/orchestra.jpg", caption: "Orchestra",
+        back: "I begged my mom for three years to start violin in the second grade (I know, right? How the turn tables!). I've never stopped playing since, and orchestra is my home, powered by my love of string instruments. You'll always find me nerding out over an orchestral film score." }
     ]},
     { title: "Some Fun Photography :)", ratio: "4/3", items: [
       { src: "assets/about/photos/switzerland.jpg", caption: "" }, { src: "assets/about/photos/snow-sunset.jpg", caption: "" },
