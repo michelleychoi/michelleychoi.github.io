@@ -247,13 +247,18 @@
   }
 
   function reveal() {
-    const groups = document.querySelectorAll(".grp, .pin-board");
-    if (!groups.length || matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-      groups.forEach((g) => g.classList.add("in")); return;
-    }
+    const items = document.querySelectorAll(".grp > *, .pin-board");
+    if (!items.length) return;
+    if (!("IntersectionObserver" in window)) return;
+    const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.documentElement.classList.add("reveal-on");
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
-    groups.forEach((g) => io.observe(g));
+    items.forEach((el) => el.classList.add("rv"));
+    // everything that enters in the same moment slides in one after another, top to bottom
+    const io = new IntersectionObserver((es) => {
+      es.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+        .forEach((e, i) => { e.target.style.transitionDelay = (i * (rm ? 80 : 140)) + "ms"; e.target.classList.add("in"); io.unobserve(e.target); });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    items.forEach((el) => io.observe(el));
   }
 
   function wire() {

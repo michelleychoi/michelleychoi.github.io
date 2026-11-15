@@ -446,12 +446,15 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .grp-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: calc(-1 * clamp(8px, 2vw, 24px)); }
 .grp-head .mono { color: var(--name); }
 .grp-t { font-family: var(--serif, "Instrument Serif"), Georgia, serif; font-style: italic; font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1; }
-/* scroll reveal: each group's sections swipe in together, one after another */
-.reveal-on .grp > *, .reveal-on .pin-board > * { opacity: 0; transform: translateX(-36px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--k, 0) * 110ms + 60ms); }
-.reveal-on .grp > .grp-head { --k: 0; transition-delay: 0ms; }
-.reveal-on .grp.in > *, .reveal-on .pin-board.in > * { opacity: 1; transform: none; }
-.reveal-on .grp-item { --k-base: 1; }
-@media (prefers-reduced-motion: reduce) { .reveal-on .grp > *, .reveal-on .pin-board > * { opacity: 1; transform: none; transition: none; } }
+/* scroll reveal: every chunk (group title, each section, each bulletin panel) slides in from the left as it
+   scrolls into view; pieces that arrive together are staggered (delay is set in app.js) */
+.reveal-on .rv { opacity: 0; transform: translateX(-110px); transition: opacity .7s ease, transform 1s cubic-bezier(.16,1,.3,1); }
+.reveal-on .rv.in { opacity: 1; transform: none; }
+/* reduced motion: keep a short, gentle slide + fade instead of nothing */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on .rv { transform: translateX(-28px); transition: opacity .6s ease, transform .6s ease !important; }
+  .reveal-on .rv.in { transform: none; }
+}
 
 /* ---------- About: bulletin board ---------- */
 .about-v2 { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: end; padding-bottom: 40px; }
@@ -473,7 +476,6 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .pinned .pin { position: absolute; top: -12px; left: 50%; width: 28px; height: 28px; margin-left: -14px; z-index: 2; filter: drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
 .pinned .tape { position: absolute; top: -11px; left: 50%; width: 76px; height: 22px; margin-left: -38px; transform: rotate(calc(var(--r, 0deg) * -2)); z-index: 2;
   background: color-mix(in srgb, var(--s-yellow) 55%, transparent); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
-.reveal-on .pin-board > .pins { transition-delay: 120ms; }
 @media (max-width: 900px) { .about-v2 { grid-template-columns: 1fr; align-items: start; } .pins { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .s-intro { margin: -6px 0 18px; color: var(--muted); max-width: 62ch; }
