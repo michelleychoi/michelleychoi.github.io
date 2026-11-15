@@ -260,6 +260,9 @@
   function boot() {
     app = document.getElementById("app");
     window.addEventListener("hashchange", render);
+    // intro animation plays once, on first open (see "intro" in style.css)
+    document.documentElement.classList.add("intro");
     render();
+    setTimeout(() => document.documentElement.classList.remove("intro"), 1400);
   }
 })();
