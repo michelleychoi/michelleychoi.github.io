@@ -88,11 +88,11 @@
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
         </div>
         <canvas class="field side" data-field="right" aria-hidden="true"></canvas>
-        <a class="scroll-cue mono muted" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Selected work ↓</a>
+        <a class="scroll-cue mono muted" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Selected Work ↓</a>
       </section>
       <div class="work-panel"><section class="wrap work" id="work">
         ${["physical", "digital"].map((t) => `
-          <div class="index-head"><h2>${S.tabs[t].label}</h2><a class="mono" href="#${t}">View all →</a></div>
+          <div class="index-head"><h2>${S.tabs[t].label}</h2><a class="mono" href="#${t}">View All →</a></div>
           <ul class="index">${indexList(t)}</ul>`).join("")}
       </section></div></main><div class="peek" aria-hidden="true"></div>` + footer();
   }
@@ -115,8 +115,10 @@
     switch (s.type) {
       case "text":
         return `<div class="s-text"><h2>${esc(s.heading || "")}</h2><p>${txt(s.body)}</p></div>`;
-      case "image":
-        return `<figure>${media(s, s.caption)}${s.caption ? `<figcaption class="mono">${esc(s.caption)}</figcaption>` : ""}</figure>`;
+      case "image": {
+        const fig = `<figure>${media(s, s.caption)}${s.caption ? `<figcaption class="mono">${esc(s.caption)}</figcaption>` : ""}</figure>`;
+        return s.heading ? `<div class="s-block"><h2>${esc(s.heading)}</h2>${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}${fig}</div>` : fig;
+      }
       case "gallery":
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}
           <div class="gallery c${s.columns === 3 ? 3 : 2}">${s.images.map((im) =>
@@ -143,7 +145,7 @@
   function project(p) {
     const list = S.tabs[p.tab].projects.filter((s) => PROJECTS[s]);
     const next = PROJECTS[list[(list.indexOf(p.slug) + 1) % list.length]];
-    const spec = [["Role", p.role], ["Tools", p.tools], ["Year", p.year], ["Duration", p.duration]]
+    const spec = [["Role", p.role], ["Tools", p.tools], ["Year", p.year]]
       .map(([k, v]) => `<div><dt class="mono">${k}</dt><dd>${txt(v)}</dd></div>`).join("");
     return header(p.tab) + `<main class="view">
       <section class="wrap p-head">
@@ -154,7 +156,7 @@
       <section class="wrap"><dl class="spec">${spec}</dl>${media(p.cover, "Cover image")}</section>
       <section class="wrap sections">${(p.sections || []).map(section).join("")}</section>
       ${next && next.slug !== p.slug ? `<section class="wrap"><a class="next" href="#${next.slug}">
-        <span class="mono muted">Next project</span><span class="t">${esc(next.title)} →</span></a></section>` : ""}
+        <span class="mono muted">Next Project</span><span class="t">${esc(next.title)} →</span></a></section>` : ""}
     </main>` + footer();
   }
 

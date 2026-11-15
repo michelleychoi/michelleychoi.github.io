@@ -13,7 +13,6 @@ addProject({
   year: "[2025]",
   role: "[Designer + builder]",
   tools: "[Basswood, laser cutter, CA glue]",
-  duration: "[6 weeks]",
   summary:
     "[One or two sentences: what the bridge had to do (span, load, material limits) and the result, e.g. held 42 lb at 18 g.]",
   cover: { src: "assets/physical/bridge-cover.jpg", ratio: "16/10", alt: "Finished bridge model" },
@@ -24,7 +23,7 @@ addProject({
       { label: "Weight", value: "[18 g]" },
       { label: "Max load", value: "[42 lb]" }
     ]},
-    { type: "text", heading: "The brief",
+    { type: "text", heading: "The Brief",
       body: "[What were the constraints? Who set them? What made it hard?]" },
     { type: "gallery", heading: "Process", columns: 3, images: [
       { src: "assets/physical/bridge-sketch.jpg", ratio: "4/5", caption: "[Early truss sketches]" },
@@ -34,7 +33,7 @@ addProject({
     { type: "text", heading: "Testing",
       body: "[How it was tested, where it failed, what you changed.]" },
     { type: "image", src: "assets/physical/bridge-test.jpg", ratio: "16/9", caption: "[Load test]" },
-    { type: "text", heading: "What I learned",
+    { type: "text", heading: "What I Learned",
       body: "[One takeaway you'd bring to a product team.]" }
   ]
 });

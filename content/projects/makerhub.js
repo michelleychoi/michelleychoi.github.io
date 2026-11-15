@@ -7,7 +7,6 @@ addProject({
   year: "[2026]",
   role: "[Product designer]",
   tools: "[Figma, ...]",
-  duration: "[X weeks]",
   summary: "[What MakerHub is, who uses it, and what you designed.]",
   cover: { src: "assets/digital/makerhub-cover.png", ratio: "16/10", alt: "MakerHub interface" },
 

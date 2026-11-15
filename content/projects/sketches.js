@@ -7,12 +7,11 @@ addProject({
   year: "[2024–now]",
   role: "[Self-directed]",
   tools: "[Pencil, fineliner, markers]",
-  duration: "[Ongoing]",
   summary: "[What you sketch and why: ideation, observation, product studies.]",
   cover: { src: "assets/physical/sketches-cover.jpg", ratio: "4/3", alt: "Sketchbook spread" },
 
   sections: [
-    { type: "text", heading: "How I sketch",
+    { type: "text", heading: "How I Sketch",
       body: "[A short note on your process: quick thumbnails, perspective studies, exploded views...]" },
     { type: "gallery", columns: 2, images: [
       { src: "assets/physical/sketch-01.jpg", ratio: "3/4", caption: "[Caption]" },
