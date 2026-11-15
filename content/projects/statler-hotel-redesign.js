@@ -8,6 +8,8 @@ addProject({
   year: "2025",
   role: "Interior Designer",
   tools: "SketchUp, Enscape, Adobe Illustrator",
+  // blurb: short line on the Digital/Physical overview cards (summary shows on the project page)
+  blurb: "Social Threshold: turning the Statler Hotel's underused Regent Lounge into a warm social anchor.",
   summary:
     "Social Threshold: turning the Statler Hotel's underused Regent Lounge into a warm social anchor that draws guests toward Banfi's, using rich materials, layered lighting, and a clear visual path.",
   cover: { src: "assets/digital/statler/cover.jpg", ratio: "16/10", alt: "Rendered lounge with leather chairs and a wood-slat café counter" },

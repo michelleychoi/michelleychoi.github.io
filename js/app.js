@@ -125,7 +125,7 @@
       const p = PROJECTS[s];
       return `<a class="card" href="#${p.slug}">${media(p.cover, p.title + " cover")}
         <div class="card-meta"><h3><canvas class="seal" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas>${esc(p.title)}</h3><span class="mono muted">${esc(p.year)}</span></div>
-        <span class="mono muted">${esc(p.kicker)}</span><p>${esc(p.summary)}</p></a>`;
+        <span class="mono muted">${esc(p.kicker)}</span><p>${esc(p.blurb || p.summary)}</p></a>`;
     }).join("");
     return header(id) + `<main class="view"><section class="wrap tab-head">
       <span class="mono muted">${t.projects.length} projects</span><h1>${esc(t.label)}</h1><p>${esc(t.blurb)}</p>

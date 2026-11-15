@@ -9,6 +9,8 @@ addProject({
   year: "2026",
   role: "Designer",
   tools: "Figma",
+  // blurb: short line on the Digital/Physical overview cards (summary shows on the project page)
+  blurb: "A game that dares you to go meet someone new.",
   summary:
     "The prompt: gamify something you find mundane or boring. I picked dating apps, and designed Go For It, a game where friends get surprise dares to meet new people, race a timer, and compete on a weekly leaderboard.",
   cover: { src: "assets/digital/gamify/cover.jpg?v=202611150414", ratio: "16/10", alt: "Go For It hi-fi screens" },
