@@ -2,7 +2,7 @@
 addProject({
   slug: "1101",
   tab: "physical",
-  title: "1101 Projects",
+  title: "Hexchange",
   kicker: "Studio coursework",
   year: "[2025]",
   role: "[Designer]",
