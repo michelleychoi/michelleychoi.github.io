@@ -4,7 +4,7 @@ addProject({
   slug: "statler-hotel-redesign",
   tab: "digital",
   title: "Statler Hotel Redesign",
-  kicker: "Interior design · Hospitality",
+  kicker: "Interior Design Challenge",
   year: "2025",
   role: "Interior Designer",
   tools: "SketchUp, Enscape, Adobe Illustrator",
