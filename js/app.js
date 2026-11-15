@@ -37,6 +37,23 @@
     const f = e.target.closest && e.target.closest(".flip");
     if (f && !e.target.closest("a") && matchMedia("(hover: none)").matches) f.classList.toggle("flipped");
   });
+  // lightbox for tiles: click a tile to see the whole piece; click anywhere or press Esc to close
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest && e.target.closest(".tile-btn");
+    if (!t) return;
+    const box = document.createElement("div");
+    box.className = "lightbox";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-label", t.dataset.title || "Artwork");
+    box.innerHTML = `<figure><img src="${t.dataset.full}" alt="${t.dataset.title || ""}">${t.dataset.title ? `<figcaption>${t.dataset.title}</figcaption>` : ""}</figure><button class="lb-x" type="button" aria-label="Close">×</button>`;
+    const close = () => { box.classList.remove("on"); setTimeout(() => box.remove(), 250); document.removeEventListener("keydown", esc); t.focus(); };
+    const esc = (k) => { if (k.key === "Escape") close(); };
+    box.addEventListener("click", close);
+    document.addEventListener("keydown", esc);
+    document.body.appendChild(box);
+    requestAnimationFrame(() => box.classList.add("on"));
+    box.querySelector(".lb-x").focus();
+  });
   window.__ph = (el) => {
     const box = el.parentElement;
     box.outerHTML = ph(el.getAttribute("src"), el.dataset.ratio, el.dataset.label);
@@ -158,6 +175,17 @@
           <figcaption><b>${esc(it.label)}</b>${it.note ? `<span>${esc(it.note)}</span>` : ""}</figcaption></figure>`).join("");
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="collage" style="--ratio:${s.ratio || "16/10"}">${pieces}</div></div>`;
       }
+      case "tiles": {
+        // artwork as square pinned previews; click opens the full piece (see lightbox below)
+        // per item: pos = which part stays in the square crop (CSS object-position), fit: "contain" = show the whole piece on a white mat
+        const cols = Math.min(s.columns || s.items.length, 4);
+        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="tiles" style="--n:${cols}">${s.items.map((it, i) => {
+          const tilt = [-1.6, 1.2, -0.8, 1.6, -1.2][i % 5];
+          return `<figure class="tile" style="--r:${tilt}deg"><button class="tile-btn" type="button" data-full="${esc(it.src)}" data-title="${esc(it.title || "")}" aria-label="View ${esc(it.title || "artwork")} full size">
+            <img src="${esc(it.src)}" alt="${esc(it.alt || it.title || "")}" loading="lazy" style="object-fit:${it.fit === "contain" ? "contain" : "cover"};object-position:${esc(it.pos || "50% 50%")}${it.fit === "contain" ? ";padding:6%" : ""}"></button>
+            ${it.title ? `<figcaption>${esc(it.title)}</figcaption>` : ""}</figure>`;
+        }).join("")}</div></div>`;
+      }
       case "cols":
         // short labeled lists side by side (e.g. lighting layers)
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="cols">${s.items.map((it) => `<div class="col"><h3>${esc(it.title)}</h3><ul>${it.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul></div>`).join("")}</div></div>`;
@@ -214,7 +242,7 @@
         <span class="mono muted">${esc(p.kicker)}</span>
         <div class="p-title"><canvas class="seal big" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas><h1>${esc(p.title)}</h1></div><p class="summary">${txt(p.summary)}</p>
       </section>
-      <section class="wrap"><dl class="spec">${spec}</dl>${media(p.cover, "Cover image")}</section>
+      <section class="wrap"><dl class="spec">${spec}</dl>${p.hideCover ? "" : media(p.cover, "Cover image")}</section>
       <section class="wrap sections">${sectionsHTML(p.sections || [])}</section>
       ${next && next.slug !== p.slug ? `<section class="wrap"><a class="next" href="#${next.slug}">
         <span class="mono muted">Next Project</span><span class="t">${esc(next.title)} →</span></a></section>` : ""}

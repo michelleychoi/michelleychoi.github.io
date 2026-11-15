@@ -8,28 +8,28 @@ addProject({
   role: "[Self-directed]",
   tools: "[Pencil, fineliner, markers]",
   summary: "[What you sketch and why: ideation, observation, product studies.]",
+  hideCover: true, // the cover only shows on the Physical tab card, not at the top of this page
   cover: { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "16/10", alt: "Black and white marker rendering of an interior" },
 
+  // Each piece is a square pinned print; click opens it full size. "pos" picks what stays in the square crop.
   sections: [
-    { group: "Broken Violin", type: "image", src: "assets/physical/sketchbook/broken-violin.jpg", ratio: "1526/1181", alt: "Broken violin with a medal and sheet music" },
-
-    { group: "Marker Renderings", type: "gallery", columns: 2, images: [
-      { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "806/1080", caption: "Interior, black and white" },
-      { src: "assets/physical/sketchbook/marker-street-clean.jpg", ratio: "810/1082", caption: "Street perspective" }
+    { group: "Featured Works", type: "tiles", items: [
+      { src: "assets/physical/sketchbook/broken-violin.jpg", title: "The Losing Winner", pos: "55% 50%" },
+      { src: "assets/physical/sketchbook/marker-interior-clean.jpg", title: "Blue Atrium", pos: "50% 45%" },
+      { src: "assets/physical/sketchbook/marker-street-clean.jpg", title: "Concord", pos: "50% 60%" }
     ]},
 
-    { group: "Napkin Sketches", type: "gallery", justify: true, images: [
-      { src: "assets/physical/sketchbook/napkin-ceremony.jpg", ratio: "1200/1600", caption: "Ceremony Cafe" },
-      { src: "assets/physical/sketchbook/napkin-tamper.jpg", ratio: "1024/768", caption: "Tamper" },
-      { src: "assets/physical/sketchbook/napkin-frame-nyc.jpg", ratio: "603/1304", caption: "Frame NYC" }
+    { group: "Napkin Sketches", type: "tiles", items: [
+      { src: "assets/physical/sketchbook/napkin-ceremony.jpg", title: "Ceremony Cafe", pos: "50% 42%" },
+      { src: "assets/physical/sketchbook/napkin-tamper.jpg", title: "Tamper", pos: "50% 50%" },
+      { src: "assets/physical/sketchbook/napkin-frame-nyc.jpg", title: "Frame NYC", pos: "50% 40%" }
     ]},
 
-    { group: "Google Doodle", type: "image", src: "assets/physical/sketchbook/google-doodle.jpg", ratio: "1600/938", alt: "Google doodle sketch" },
-
-    { group: "Ink Doodles", type: "gallery", columns: 3, images: [
-      { src: "assets/physical/sketchbook/ink-hawk.jpg", ratio: "3/4", caption: "Hawk" },
-      { src: "assets/physical/sketchbook/ink-tiger.jpg", ratio: "3/4", caption: "Tiger" },
-      { src: "assets/physical/sketchbook/ink-map.jpg", ratio: "1201/1600", caption: "Illustrated map" }
+    { group: "Fun Ink Doodles", type: "tiles", items: [
+      { src: "assets/physical/sketchbook/google-doodle.jpg", title: "Google Doodle", fit: "contain" },
+      { src: "assets/physical/sketchbook/ink-hawk.jpg", title: "Hawk", pos: "50% 28%" },
+      { src: "assets/physical/sketchbook/ink-map.jpg", title: "A History Of...", fit: "contain" },
+      { src: "assets/physical/sketchbook/ink-tiger-crop.jpg", title: "Tiger", pos: "50% 40%" }
     ]}
   ]
 });
