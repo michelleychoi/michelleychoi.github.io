@@ -190,6 +190,14 @@
     return out.join("");
   }
 
+  // stand-in poster for a film until a real poster image is added: title set in type on the film's colors
+  function titleCard(im, ratio) {
+    const m = /^(.*?)\s*\((\d{4})\)$/.exec(im.caption || "") || [0, im.caption || "", ""];
+    const [c1, c2, ink] = im.tint;
+    return `<div class="title-card" style="aspect-ratio:${esc(ratio)};--c1:${esc(c1)};--c2:${esc(c2)};--tc:${esc(ink || "#fff")}" role="img" aria-label="${esc(im.caption || "")}">
+      <b>${esc(m[1])}</b>${m[2] ? `<span>${esc(m[2])}</span>` : ""}</div>`;
+  }
+
   function project(p) {
     const list = S.tabs[p.tab].projects.filter((s) => PROJECTS[s]);
     const next = PROJECTS[list[(list.indexOf(p.slug) + 1) % list.length]];
@@ -219,7 +227,7 @@
         <div class="pins">${b.items.map((im, i) => {
           const tilt = [-3, 2.2, -1.4, 3, -2.4, 1.6][(i + bi) % 6];
           const fix = (i + bi) % 2 ? `<span class="tape" aria-hidden="true"></span>` : `<canvas class="seal pin" data-seal="#${[237623, 245496, 110919, 142549][(i + bi) % 4]}" data-colors="${["1,1,1,3", "soft", "soft", "0,1"][(i + bi) % 4]}" aria-hidden="true"></canvas>`;
-          return `<figure class="pinned ${b.shape || ""}" style="--r:${tilt}deg">${fix}${media({ src: im.src, ratio: im.ratio || b.ratio || "4/5", alt: im.caption }, im.caption || b.title)}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
+          return `<figure class="pinned ${b.shape || ""}" style="--r:${tilt}deg">${fix}${!im.src && im.tint ? titleCard(im, im.ratio || b.ratio || "2/3") : media({ src: im.src, ratio: im.ratio || b.ratio || "4/5", alt: im.caption }, im.caption || b.title)}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
         }).join("")}</div></div>`).join("");
     return header("about") + `<main class="view"><section class="wrap about about-v2">
       <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>

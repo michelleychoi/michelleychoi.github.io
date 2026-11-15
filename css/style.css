@@ -570,3 +570,9 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .project-view .grp-t { font-size: clamp(1.35rem, 2.2vw, 1.8rem); }
 .project-view .brief > div { padding: 14px 0; }
 .project-view .brief dd { font-size: clamp(1.2rem, 2vw, 1.55rem); }
+
+/* film title cards (stand-ins until real posters are added) */
+.title-card { display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding: 14% 11%; color: var(--tc); border-radius: 2px;
+  background: radial-gradient(120% 80% at 70% 15%, color-mix(in srgb, var(--c2) 85%, transparent), transparent 60%), linear-gradient(170deg, var(--c2), var(--c1) 70%); }
+.title-card b { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(1.2rem, 2.2vw, 1.9rem); line-height: 1; text-wrap: balance; }
+.title-card span { font-family: var(--mono); font-size: .72rem; letter-spacing: .14em; opacity: .8; }

@@ -38,7 +38,8 @@ window.SITE = {
       { src: "", caption: "Album · Artist" }, { src: "", caption: "Album · Artist" }, { src: "", caption: "Album · Artist" }, { src: "", caption: "Album · Artist" }
     ]},
     { title: "Cinephilia Collection", ratio: "2/3", shape: "poster", items: [
-      { src: "", caption: "Film (Year)" }, { src: "", caption: "Film (Year)" }, { src: "", caption: "Film (Year)" }, { src: "", caption: "Film (Year)" }
+      { src: "", caption: "Interstellar (2014)", tint: ["#0b0f1a", "#c98a3a"] }, { src: "", caption: "The Truman Show (1998)", tint: ["#1f5d9e", "#bfe0f5"] },
+      { src: "", caption: "The Secret Life of Walter Mitty (2013)", tint: ["#0f4a52", "#e48a3c"] }, { src: "", caption: "Dead Poets Society (1989)", tint: ["#1f2b1d", "#8a6a3b"] }
     ]}
   ],
 
