@@ -27,7 +27,7 @@ window.SITE = {
     "[2–4 sentences about you. What draws you to product design, what you like to make with your hands vs. on screen, and what kind of team you want to learn from.]",
   // Photo collage beside "Hi, I'm Michelle" on the About page. Empty src = placeholder box.
   portrait: [
-    { src: "", ratio: "4/5", label: "Selfie" },
+    { src: "assets/about/selfie.jpg", ratio: "1051/1400", label: "Selfie" },
     { src: "assets/about/friends/alps.jpg", ratio: "3/4", label: "In the Alps" },
     { src: "assets/about/friends/festival.jpg", ratio: "1024/768", label: "Peace sign" }
   ],
