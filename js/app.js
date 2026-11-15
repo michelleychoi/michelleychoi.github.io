@@ -15,7 +15,7 @@
   else
   slugs.forEach((slug) => {
     const s = document.createElement("script");
-    s.src = "content/projects/" + slug + ".js";
+    s.src = "content/projects/" + slug + ".js?v=" + (window.SITE_VERSION || "");
     s.onload = s.onerror = () => { if (--pending === 0) boot(); };
     document.head.appendChild(s);
   });
@@ -259,6 +259,9 @@
         .forEach((e, i) => { e.target.style.transitionDelay = (i * (rm ? 80 : 140)) + "ms"; e.target.classList.add("in"); io.unobserve(e.target); });
     }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
     items.forEach((el) => io.observe(el));
+    // fast scrolls can jump right past a section: show anything already above the screen
+    const passed = () => items.forEach((el) => { if (!el.classList.contains("in") && el.getBoundingClientRect().bottom < 0) { el.style.transitionDelay = "0ms"; el.classList.add("in"); io.unobserve(el); } });
+    addEventListener("scroll", passed, { passive: true });
   }
 
   function wire() {
