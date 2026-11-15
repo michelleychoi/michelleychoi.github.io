@@ -8,13 +8,13 @@ addProject({
   role: "[Self-directed]",
   tools: "[Pencil, fineliner, markers]",
   summary: "[What you sketch and why: ideation, observation, product studies.]",
-  cover: { src: "assets/physical/sketchbook/marker-interior.jpg", ratio: "16/10", alt: "Black and white marker rendering of an interior" },
+  cover: { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "16/10", alt: "Black and white marker rendering of an interior" },
 
   sections: [
     { group: "Broken Violin", type: "image", src: "assets/physical/sketchbook/broken-violin.jpg", ratio: "1526/1181", alt: "Broken violin with a medal and sheet music" },
 
     { group: "Marker Renderings", type: "gallery", columns: 2, images: [
-      { src: "assets/physical/sketchbook/marker-interior.jpg", ratio: "578/775", caption: "Interior, black and white" },
+      { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "806/1080", caption: "Interior, black and white" },
       { src: "assets/physical/sketchbook/marker-street.jpg", ratio: "593/775", caption: "Street perspective" }
     ]},
 
