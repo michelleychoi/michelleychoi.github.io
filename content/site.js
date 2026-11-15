@@ -52,7 +52,7 @@ window.SITE = {
     digital: {
       label: "Digital",
       blurb: "Interfaces, flows, and prototypes.",
-      projects: ["gamify-the-mundane", "makerhub"]
+      projects: ["gamify-the-mundane", "statler-hotel-redesign", "makerhub"]
     }
   }
 };

@@ -518,3 +518,15 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .screen-note:nth-child(2) li::before { background: var(--g-magenta); }
 @media (max-width: 1000px) { .screens { grid-template-columns: 1fr; } .screen-note { grid-template-columns: minmax(0, 260px) minmax(0, 1fr); } }
 @media (max-width: 560px) { .screen-note { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } .sn-text h3 { font-size: 1.3rem; } .sn-text ul { font-size: .88rem; } }
+
+/* wide detail rows: landscape drawing beside its notes, one per row */
+.screens.wide { grid-template-columns: 1fr; }
+.screens.wide .screen-note { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+@media (max-width: 700px) { .screens.wide .screen-note { grid-template-columns: 1fr; } }
+/* cols: short labeled lists side by side */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: clamp(14px, 2vw, 22px); }
+.col { padding: 18px 20px; border-radius: 14px; border: 1px solid var(--line, rgba(127,127,127,.25)); }
+.col h3 { margin: 0 0 10px; font-family: var(--display); font-weight: 700; font-size: var(--step-1, 1.25rem); letter-spacing: -0.01em; }
+.col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.col li { padding-left: 16px; position: relative; line-height: 1.35; color: var(--muted); }
+.col li::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; border-radius: 50%; background: var(--name); }

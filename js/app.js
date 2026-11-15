@@ -138,13 +138,19 @@
           <div class="embed"><iframe src="${esc(s.src)}" title="${esc(s.title || s.heading || "Prototype")}" loading="lazy"></iframe>${s.aside ? `<div class="embed-aside">${s.aside.map((a) => `<div><span class="mono muted">${esc(a.label)}</span><p>${txt(a.body)}</p></div>`).join("")}</div>` : ""}</div></div>`;
       case "screens": {
         // phone screens with their explanation beside each one
-        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}<div class="screens">${s.items.map((it, i) => `<div class="screen-note">
+        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}<div class="screens${s.wide ? " wide" : ""}">${s.items.map((it, i) => `<div class="screen-note">
           <figure>${media({ src: it.src, ratio: it.ratio || "390/844", alt: it.title }, it.title)}</figure>
           <div class="sn-text"><span class="sn-tag mono">${esc(it.label || String.fromCharCode(65 + i))}</span><h3>${esc(it.title)}</h3><p>${txt(it.body)}</p>
           ${it.points ? `<ul>${it.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul>` : ""}</div></div>`).join("")}</div></div>`;
       }
+      case "cols":
+        // short labeled lists side by side (e.g. lighting layers)
+        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="cols">${s.items.map((it) => `<div class="col"><h3>${esc(it.title)}</h3><ul>${it.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul></div>`).join("")}</div></div>`;
       case "brief":
-        return `<dl class="brief">${s.items.map((i) => `<div><dt class="mono">${esc(i.label)}:</dt><dd>${esc(i.value)}</dd></div>`).join("")}</dl>`;
+        {
+          const dl = `<dl class="brief">${s.items.map((i) => `<div><dt class="mono">${esc(i.label)}:</dt><dd>${esc(i.value)}</dd></div>`).join("")}</dl>`;
+          return s.heading ? `<div class="s-block"><h2>${esc(s.heading)}</h2>${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}${dl}</div>` : dl;
+        }
       case "figma": {
         const body = s.url
           ? `<iframe class="figma-frame" src="https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(s.url)}" allowfullscreen loading="lazy" title="Figma prototype"></iframe>
