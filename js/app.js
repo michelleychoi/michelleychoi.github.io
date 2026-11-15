@@ -256,8 +256,8 @@
     // everything that enters in the same moment slides in one after another, top to bottom
     const io = new IntersectionObserver((es) => {
       es.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-        .forEach((e, i) => { e.target.style.transitionDelay = (i * (rm ? 80 : 140)) + "ms"; e.target.classList.add("in"); io.unobserve(e.target); });
-    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+        .forEach((e, i) => { e.target.style.transitionDelay = (i * (rm ? 100 : 220)) + "ms"; e.target.classList.add("in"); io.unobserve(e.target); });
+    }, { threshold: 0, rootMargin: "0px 0px -35% 0px" }); // fires once a section's top is ~65% up the screen
     items.forEach((el) => io.observe(el));
     // fast scrolls can jump right past a section: show anything already above the screen
     const passed = () => items.forEach((el) => { if (!el.classList.contains("in") && el.getBoundingClientRect().bottom < 0) { el.style.transitionDelay = "0ms"; el.classList.add("in"); io.unobserve(el); } });
