@@ -144,10 +144,14 @@
           ${it.points ? `<ul>${it.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul>` : ""}</div></div>`).join("")}</div></div>`;
       }
       case "collage": {
-        // mood board: cut-out pieces placed by x/y/w (percent of the board), tilted by r degrees
-        const pieces = s.items.map((it, i) => `<figure class="piece${it.kind ? " " + it.kind : ""}" style="--x:${it.x}%;--y:${it.y}%;--w:${it.w}%;--r:${it.r || 0}deg;z-index:${it.z || i + 1}">
-          ${it.tape ? `<span class="tape" aria-hidden="true"></span>` : ""}<img src="${esc(it.src)}" alt="${esc(it.label)}" loading="lazy" decoding="async">
-          <figcaption><b>${esc(it.label)}</b>${it.note ? `<span>${esc(it.note)}</span>` : ""}</figcaption></figure>`).join("");
+        // mood board: pieces placed by x/y/w (percent of the board), tilted by r degrees.
+        // cut: "torn" | "torn-all" | "torn-sides" for ripped edges; kind: "photo" (white border), "wide" (full row on phones), "note" (paper with text)
+        const pieces = s.items.map((it, i) => {
+          const tag = it.label ? `<figcaption><b>${esc(it.label)}</b>${it.note ? `<span>${esc(it.note)}</span>` : ""}</figcaption>` : "";
+          const body = it.text ? `<div class="paper">${txt(it.text)}</div>` : `<img src="${esc(it.src)}" alt="${esc(it.label || "")}" loading="lazy" decoding="async">`;
+          return `<figure class="piece${it.kind ? " " + it.kind : ""}${it.cut ? " cut-" + it.cut : ""}" style="--x:${it.x}%;--y:${it.y}%;--w:${it.w}%;--r:${it.r || 0}deg;z-index:${it.z || i + 1}">
+          ${it.tape ? `<span class="tape${it.tape === "side" ? " side" : ""}" aria-hidden="true"></span>` : ""}${body}${tag}</figure>`;
+        }).join("");
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="collage" style="--ratio:${s.ratio || "16/10"}">${pieces}</div></div>`;
       }
       case "cols":
