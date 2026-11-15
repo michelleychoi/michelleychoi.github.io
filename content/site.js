@@ -55,15 +55,15 @@ window.SITE = {
 
   // The two tabs. Order here = order on the site.
   tabs: {
-    physical: {
-      label: "Physical",
-      blurb: "Things built at full scale: models, sketches, and studio work.",
-      projects: ["bridge", "sketches", "1101"]
-    },
     digital: {
       label: "Digital",
       blurb: "Interfaces, flows, and prototypes.",
       projects: ["gamify-the-mundane", "statler-hotel-redesign", "makerhub"]
+    },
+    physical: {
+      label: "Physical",
+      blurb: "Things built at full scale: models, sketches, and studio work.",
+      projects: ["bridge", "sketches", "1101"]
     }
   }
 };

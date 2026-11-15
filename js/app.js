@@ -9,7 +9,7 @@
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
   // ---------- load every project file listed in site.js ----------
-  const slugs = [...S.tabs.physical.projects, ...S.tabs.digital.projects];
+  const slugs = [...S.tabs.digital.projects, ...S.tabs.physical.projects];
   let pending = slugs.length;
   if (window.__PROJECTS_INLINE) addEventListener("DOMContentLoaded", () => boot());
   else
@@ -66,7 +66,7 @@
     const tab = (id, label) => `<a href="#${id}"${active === id ? ' aria-current="page"' : ""}>${label}</a>`;
     return `<header class="bar"><div class="wrap">
       <a class="brand" href="#">${esc(S.name)}</a>
-      <nav class="tabs" aria-label="Sections">${tab("physical", "Physical")}${tab("digital", "Digital")}${tab("about", "About")}</nav>
+      <nav class="tabs" aria-label="Sections">${tab("digital", "Digital")}${tab("physical", "Physical")}${tab("about", "About")}</nav>
       <div class="status mono"><span class="dot"></span>Open to internships</div>
     </div></header>`;
   }
@@ -102,8 +102,8 @@
               <p class="tagline">${txt(S.tagline)}</p>
             </div>
             <nav class="tiles" aria-label="Sections">
-              ${tile("physical", "01", "Physical", count("physical") + " projects", { seal: "michelle", colors: "0,1" })}
-              ${tile("digital", "02", "Digital", count("digital") + " projects", { seal: "#237623", colors: "1,1,1,3", scale: 0.82 })}
+              ${tile("digital", "01", "Digital", count("digital") + " projects", { seal: "michelle", colors: "0,1" })}
+              ${tile("physical", "02", "Physical", count("physical") + " projects", { seal: "#237623", colors: "1,1,1,3", scale: 0.82 })}
               ${tile("about", "03", "About", "Contact + resume", { seal: "#245496", colors: "soft", scale: 0.62 })}
             </nav>
           </div>
@@ -113,7 +113,7 @@
         <a class="scroll-cue mono muted" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Selected Work ↓</a>
       </section>
       <div class="work-panel"><section class="wrap work" id="work">
-        ${["physical", "digital"].map((t) => `
+        ${["digital", "physical"].map((t) => `
           <div class="index-head"><h2>${S.tabs[t].label}</h2><a class="mono" href="#${t}">View All →</a></div>
           <ul class="index">${indexList(t)}</ul>`).join("")}
       </section></div></main><div class="peek" aria-hidden="true"></div>` + footer();
