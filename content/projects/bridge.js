@@ -32,7 +32,7 @@ addProject({
     ]},
     { type: "text", heading: "Design & Testing",
       body: "I made a diamond base to set my bridge apart from a regular truss. The base needed thin 1/16\" tension rods, which was a challenge. I used 1/8\" rods to keep the center rigid, then built up entirely with 1/8\" rods to keep the structure stable. I also added asymmetrical support beams to the upper chord to reflect its asymmetry." },
-    { type: "image", src: "assets/physical/bridge-test.jpg", ratio: "16/9", caption: "[Load test]" },
+    { type: "image", src: "assets/physical/bridge-test.jpg", ratio: "1299/481", caption: "4. Load test: holding the 25 lb brick" },
     { type: "text", heading: "Takeaway",
       body: "Building up the base won't do much. Building up is where you get the real structure." }
   ]
