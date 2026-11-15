@@ -38,8 +38,9 @@ window.SITE = {
       { src: "assets/about/communities/teaching-kindergarten.jpg", caption: "Teaching Kindergarten" },
       { src: "assets/about/communities/orchestra.jpg", caption: "Orchestra" }
     ]},
-    { title: "Some Fun Photography :)", ratio: "4/5", items: [
-      { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }, { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }
+    { title: "Some Fun Photography :)", ratio: "4/3", items: [
+      { src: "assets/about/photos/switzerland.jpg", caption: "" }, { src: "assets/about/photos/snow-sunset.jpg", caption: "" },
+      { src: "assets/about/photos/fair.jpg", caption: "" }, { src: "assets/about/photos/ocean-rocks.jpg", caption: "" }
     ]},
     { title: "Cinephilia Collection", ratio: "2/3", shape: "poster", items: [
       { src: "assets/about/films/interstellar.jpg", caption: "Interstellar (2014)" }, { src: "assets/about/films/truman-show.jpg", caption: "The Truman Show (1998)" },
