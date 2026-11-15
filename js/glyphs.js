@@ -153,7 +153,7 @@
     canvas.width = canvas.height = Math.ceil(px * DPR);
     const g = canvas.getContext("2d");
     g.scale(DPR, DPR); g.translate(px / 2, px / 2);
-    drawGlyph(g, px * 0.47, String(text).startsWith("#") ? Number(String(text).slice(1)) : hash(text), pal.c, pal.ink);
+    drawGlyph(g, px * 0.47 * (Number(canvas.dataset.scale) || 1), String(text).startsWith("#") ? Number(String(text).slice(1)) : hash(text), pal.c, pal.ink);
   }
 
   function orb(canvas) {

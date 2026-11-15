@@ -66,7 +66,7 @@
     const last = parts.length > 1 ? parts.pop() : "";
     const count = (t) => S.tabs[t].projects.filter((s) => PROJECTS[s]).length;
     const tile = (href, n, label, sub, field) => `<a class="tile" href="#${href}">
-        <span class="art glyph"><canvas class="seal" data-seal="${field.seal}" data-colors="${field.colors}" aria-hidden="true"></canvas></span>
+        <span class="art glyph"><canvas class="seal" data-seal="${field.seal}" data-colors="${field.colors}" data-scale="${field.scale || 1}" aria-hidden="true"></canvas></span>
         <span class="lbl"><span class="mono muted">${n}</span><b>${label}</b><span class="mono muted">${sub} →</span></span></a>`;
     return `<main class="view">
       <section class="home">
@@ -82,7 +82,7 @@
             <nav class="tiles" aria-label="Sections">
               ${tile("physical", "01", "Physical", count("physical") + " projects", { seal: "michelle", colors: "0,1" })}
               ${tile("digital", "02", "Digital", count("digital") + " projects", { seal: "choi-03", colors: "3,2" })}
-              ${tile("about", "03", "About", "Contact + resume", { seal: "#245496", colors: "soft" })}
+              ${tile("about", "03", "About", "Contact + resume", { seal: "#245496", colors: "soft", scale: 0.62 })}
             </nav>
           </div>
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
@@ -164,7 +164,7 @@
         <span class="k">${esc(l.label)}</span><span class="v">${esc(l.handle || "")}</span><span>↗</span></a></li>`).join("");
     return header("about") + `<main class="view"><section class="wrap about">
       <div>${media({ src: S.collage, ratio: "4/5", alt: "Photo collage" }, "Photo collage")}</div>
-      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="choi-03" data-colors="3,2"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
+      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="choi-03" data-colors="3,2"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
         <p>${txt(S.about)}</p>
         <ul class="links mono">${emails}${links}</ul>
         <div class="resume" id="resume-slot">
