@@ -31,15 +31,15 @@ window.SITE = {
     { title: "Me & Friends", ratio: "4/5", items: [
       { src: "", caption: "" }, { src: "", caption: "" }, { src: "", caption: "" }, { src: "", caption: "" }
     ]},
-    { title: "Photography", ratio: "4/5", items: [
-      { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }, { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }
-    ]},
     // Until a photo is added (set "src"), each one shows as a colored card ("tint": [bottom, top, text color]).
     { title: "My Communities", ratio: "4/5", items: [
       { src: "", card: "CUSD", caption: "Cornell Undergraduate Sustainable Design", tint: ["#3d2fd6", "#8f7dff"] },
       { src: "", caption: "Mediocre Melodies", tint: ["#d42a73", "#ff9cc6"] },
       { src: "", caption: "Teaching Kindergarten", tint: ["#e0a100", "#ffe27a", "#2a2017"] },
       { src: "", caption: "Orchestra", tint: ["#0f5c63", "#7fd3cf"] }
+    ]},
+    { title: "Photography", ratio: "4/5", items: [
+      { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }, { src: "", caption: "", ratio: "3/2" }, { src: "", caption: "" }
     ]},
     { title: "Cinephilia Collection", ratio: "2/3", shape: "poster", items: [
       { src: "assets/about/films/interstellar.jpg", caption: "Interstellar (2014)" }, { src: "assets/about/films/truman-show.jpg", caption: "The Truman Show (1998)" },
