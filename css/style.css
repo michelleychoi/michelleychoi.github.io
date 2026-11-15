@@ -627,5 +627,5 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .snap:hover { transform: rotate(0deg) scale(1.03); z-index: 3; }
 .snap-1 { --r: -4deg; align-self: start; }
 .snap-2 { --r: 3.5deg; margin-top: 46px; }
-.snap-3 { --r: -2deg; grid-column: 1 / -1; width: 52%; justify-self: center; margin-top: -42px; z-index: 2; }
+.snap-3 { --r: -2deg; grid-column: 1 / -1; width: 64%; justify-self: center; margin-top: -42px; z-index: 2; }
 @media (max-width: 900px) { .about-v3 { grid-template-columns: minmax(0, 1fr); } .snaps { max-width: 460px; } .snap { padding: 7px 7px 20px; } }

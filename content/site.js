@@ -29,7 +29,7 @@ window.SITE = {
   portrait: [
     { src: "", ratio: "4/5", label: "Selfie" },
     { src: "assets/about/friends/alps.jpg", ratio: "3/4", label: "In the Alps" },
-    { src: "assets/about/me-peace.jpg", ratio: "1/1", label: "Peace sign" }
+    { src: "assets/about/friends/festival.jpg", ratio: "1024/768", label: "Peace sign" }
   ],
   // Bulletin board on the About page. Drop photos in assets/board/ and set "src" (empty src = placeholder).
   // "ratio" is the photo's shape; "caption" is the handwritten-style label under it (optional).
