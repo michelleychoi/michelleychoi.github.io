@@ -11,7 +11,7 @@ addProject({
   tools: "Figma",
   summary:
     "The prompt: gamify something you find mundane or boring. I picked dating apps, and designed Go For It, a game where friends get surprise dares to meet new people, race a timer, and compete on a weekly leaderboard.",
-  cover: { src: "assets/digital/gamify/cover.jpg?v=202611150403", ratio: "16/10", alt: "Go For It hi-fi screens" },
+  cover: { src: "assets/digital/gamify/cover.jpg?v=202611150414", ratio: "16/10", alt: "Go For It hi-fi screens" },
 
   sections: [
     // "brief": labeled lines (label: answer), shown in a bold display font
