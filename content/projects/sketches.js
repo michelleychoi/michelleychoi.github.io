@@ -4,9 +4,9 @@ addProject({
   tab: "physical",
   title: "My Sketchbook",
   kicker: "Drawing practice",
-  year: "[2024–now]",
-  role: "[Self-directed]",
-  tools: "[Pencil, fineliner, markers]",
+  year: "2023–Current",
+  role: "Self-directed",
+  tools: "Ink, Alcohol markers, Procreate, Napkins",
   summary: "[What you sketch and why: ideation, observation, product studies.]",
   hideCover: true, // the cover only shows on the Physical tab card, not at the top of this page
   cover: { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "16/10", alt: "Black and white marker rendering of an interior" },
