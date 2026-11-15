@@ -129,8 +129,8 @@
         return `<div class="pair">${s.items.map((it) => `<div>${section(it)}</div>`).join("")}</div>`;
       case "gallery":
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}
-          <div class="gallery c${s.columns === 3 ? 3 : 2}">${s.images.map((im) =>
-            `<figure>${media(im, im.caption)}${im.caption ? `<figcaption class="mono">${esc(im.caption)}</figcaption>` : ""}</figure>`).join("")}</div></div>`;
+          <div class="gallery ${s.justify ? "just" : "c" + (s.columns === 3 ? 3 : 2)}">${s.images.map((im) =>
+            `<figure${s.justify ? ` style="flex:${(([a, b]) => (+a / (+b || 1)) || 1)(String(im.ratio || "1").split("/"))} 1 0"` : ""}>${media(im, im.caption)}${im.caption ? `<figcaption class="mono">${esc(im.caption)}</figcaption>` : ""}</figure>`).join("")}</div></div>`;
       case "stats":
         return `<div class="stats">${s.items.map((i) => `<div class="stat"><span class="mono muted">${esc(i.label)}</span><b>${esc(i.value)}</b></div>`).join("")}</div>`;
       case "split": {

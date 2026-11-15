@@ -597,3 +597,7 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .flip-link { margin-top: auto; align-self: flex-start; font-family: var(--mono); font-size: .72rem; letter-spacing: .04em; color: var(--name); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
 .flip-link:hover { color: var(--g-magenta); }
 @media (hover: none) { .flip:not(.flipped) .flip-link { pointer-events: none; } }
+/* justified gallery: images in one row share a height, widths follow each image's shape */
+.gallery.just { display: flex; gap: 16px; align-items: flex-start; }
+.gallery.just figure { min-width: 0; }
+@media (max-width: 600px) { .gallery.just { flex-direction: column; } .gallery.just figure { flex: none !important; width: 100%; } }
