@@ -35,7 +35,7 @@
   // flip cards: tap to flip on touch screens (hover and keyboard focus are handled in CSS)
   document.addEventListener("click", (e) => {
     const f = e.target.closest && e.target.closest(".flip");
-    if (f && matchMedia("(hover: none)").matches) f.classList.toggle("flipped");
+    if (f && !e.target.closest("a") && matchMedia("(hover: none)").matches) f.classList.toggle("flipped");
   });
   window.__ph = (el) => {
     const box = el.parentElement;
@@ -235,7 +235,7 @@
           return `<figure class="pinned ${b.shape || ""}" style="--r:${tilt}deg">${fix}${(() => {
             const pic = !im.src && im.tint ? titleCard(im, im.ratio || b.ratio || "2/3") : media({ src: im.src, ratio: im.ratio || b.ratio || "4/5", alt: im.caption }, im.caption || b.title);
             // "back": the card flips on hover (tap on phones) to show this text
-            return im.back ? `<div class="flip" tabindex="0" aria-label="${esc((im.caption || "") + ": " + im.back)}"><div class="flip-in"><div class="flip-front">${pic}</div><div class="flip-back"><b>${esc(im.card || im.caption || "")}</b><p>${txt(im.back)}</p></div></div></div>` : pic;
+            return im.back ? `<div class="flip" tabindex="0" aria-label="${esc((im.caption || "") + ": " + im.back)}"><div class="flip-in"><div class="flip-front">${pic}</div><div class="flip-back"><b>${esc(im.card || im.caption || "")}</b><p>${txt(im.back)}</p>${im.link ? `<a class="flip-link" href="${esc(im.link)}" target="_blank" rel="noopener">${esc(im.link.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ↗</a>` : ""}</div></div></div>` : pic;
           })()}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
         }).join("")}</div>${b.note ? `<span class="pin-note">${esc(b.note)}</span>` : ""}</div>`).join("");
     return header("about") + `<main class="view"><section class="wrap about about-v2">
