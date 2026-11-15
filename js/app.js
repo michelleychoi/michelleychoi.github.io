@@ -81,7 +81,7 @@
             </div>
             <nav class="tiles" aria-label="Sections">
               ${tile("physical", "01", "Physical", count("physical") + " projects", { seal: "michelle", colors: "0,1" })}
-              ${tile("digital", "02", "Digital", count("digital") + " projects", { seal: "#237623", colors: "soft", scale: 0.82 })}
+              ${tile("digital", "02", "Digital", count("digital") + " projects", { seal: "#237623", colors: "1,1,1,3", scale: 0.82 })}
               ${tile("about", "03", "About", "Contact + resume", { seal: "#245496", colors: "soft", scale: 0.62 })}
             </nav>
           </div>
@@ -164,7 +164,7 @@
         <span class="k">${esc(l.label)}</span><span class="v">${esc(l.handle || "")}</span><span>↗</span></a></li>`).join("");
     return header("about") + `<main class="view"><section class="wrap about">
       <div>${media({ src: S.collage, ratio: "4/5", alt: "Photo collage" }, "Photo collage")}</div>
-      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="soft" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
+      <div><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}.</h1>
         <p>${txt(S.about)}</p>
         <ul class="links mono">${emails}${links}</ul>
         <div class="resume" id="resume-slot">
