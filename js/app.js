@@ -39,7 +39,7 @@
   });
   // lightbox for tiles: click a tile to see the whole piece; click anywhere or press Esc to close
   document.addEventListener("click", (e) => {
-    const t = e.target.closest && e.target.closest(".tile-btn");
+    const t = e.target.closest && e.target.closest(".art-btn");
     if (!t) return;
     const box = document.createElement("div");
     box.className = "lightbox";
@@ -179,9 +179,9 @@
         // artwork as square pinned previews; click opens the full piece (see lightbox below)
         // per item: pos = which part stays in the square crop (CSS object-position), fit: "contain" = show the whole piece on a white mat
         const cols = Math.min(s.columns || s.items.length, 4);
-        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="tiles" style="--n:${cols}">${s.items.map((it, i) => {
+        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="art-tiles" style="--n:${cols}">${s.items.map((it, i) => {
           const tilt = [-1.6, 1.2, -0.8, 1.6, -1.2][i % 5];
-          return `<figure class="tile" style="--r:${tilt}deg"><button class="tile-btn" type="button" data-full="${esc(it.src)}" data-title="${esc(it.title || "")}" aria-label="View ${esc(it.title || "artwork")} full size">
+          return `<figure class="art-tile" style="--r:${tilt}deg"><button class="art-btn" type="button" data-full="${esc(it.src)}" data-title="${esc(it.title || "")}" aria-label="View ${esc(it.title || "artwork")} full size">
             <img src="${esc(it.src)}" alt="${esc(it.alt || it.title || "")}" loading="lazy" style="object-fit:${it.fit === "contain" ? "contain" : "cover"};object-position:${esc(it.pos || "50% 50%")}${it.fit === "contain" ? ";padding:6%" : ""}"></button>
             ${it.title ? `<figcaption>${esc(it.title)}</figcaption>` : ""}</figure>`;
         }).join("")}</div></div>`;
