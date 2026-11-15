@@ -8,7 +8,7 @@ addProject({
   role: "[Designer]",
   tools: "[Cardboard, foam core, 3D printing, SolidWorks]",
   summary: "[What 1101 is, and the 2–3 projects you're showing from it.]",
-  cover: { src: "assets/physical/1101-cover.jpg", ratio: "16/10", alt: "1101 studio work" },
+  cover: { src: "assets/physical/hexchange-cover.jpg", ratio: "16/10", alt: "Hexchange prototype on a wood stump beside the Hexchange wordmark" },
 
   sections: [
     { type: "text", heading: "[Project A]",
