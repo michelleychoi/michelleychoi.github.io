@@ -37,7 +37,7 @@ window.SITE = {
     digital: {
       label: "Digital",
       blurb: "Interfaces, flows, and prototypes.",
-      projects: ["dcc-date-challenge", "makerhub"]
+      projects: ["gamify-the-mundane", "makerhub"]
     }
   }
 };
