@@ -503,3 +503,18 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 }
 /* phone screens in a gallery (Details row) get more breathing room */
 .gallery:has(img[src*="/screen-"]) { column-gap: clamp(28px, 5vw, 64px); }
+
+/* "screens" section: each phone screen with its notes beside it */
+.screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 5vw, 64px); }
+.screen-note { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); gap: clamp(16px, 2.4vw, 28px); align-items: center; }
+.sn-text { display: grid; gap: 8px; align-content: center; }
+.sn-tag { justify-self: start; padding: 5px 10px; border-radius: 99px; background: var(--name); color: #fff; }
+.screen-note:nth-child(2) .sn-tag { background: var(--g-magenta); }
+.sn-text h3 { margin: 4px 0 0; font-family: var(--display); font-weight: 700; font-size: var(--step-2); letter-spacing: -0.02em; line-height: 1.05; }
+.sn-text p { margin: 0; color: var(--muted); }
+.sn-text ul { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 0.95rem; }
+.sn-text li { padding-left: 16px; position: relative; line-height: 1.35; }
+.sn-text li::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; border-radius: 50%; background: var(--name); }
+.screen-note:nth-child(2) li::before { background: var(--g-magenta); }
+@media (max-width: 1000px) { .screens { grid-template-columns: 1fr; } .screen-note { grid-template-columns: minmax(0, 260px) minmax(0, 1fr); } }
+@media (max-width: 560px) { .screen-note { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } .sn-text h3 { font-size: 1.3rem; } .sn-text ul { font-size: .88rem; } }
