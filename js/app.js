@@ -138,7 +138,7 @@
       case "text":
         return `<div class="s-text"><h2>${esc(s.heading || "")}</h2><p>${txt(s.body)}</p></div>`;
       case "image": {
-        const fig = `<figure${s.maxWidth ? ` style="max-width:${esc(s.maxWidth)}"` : ""}>${media(s, s.caption)}${s.caption ? `<figcaption class="mono">${esc(s.caption)}</figcaption>` : ""}</figure>`;
+        const fig = `<figure${s.maxWidth ? ` style="max-width:${esc(s.maxWidth)}${s.center ? ";margin-inline:auto;text-align:center" : ""}"` : ""}>${media(s, s.caption)}${s.caption ? `<figcaption class="mono">${esc(s.caption)}</figcaption>` : ""}</figure>`;
         return s.heading ? `<div class="s-block"><h2>${esc(s.heading)}</h2>${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}${fig}</div>` : fig;
       }
       case "pair":
