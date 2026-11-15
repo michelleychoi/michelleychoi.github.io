@@ -192,7 +192,7 @@
 
   // stand-in poster for a film until a real poster image is added: title set in type on the film's colors
   function titleCard(im, ratio) {
-    const m = /^(.*?)\s*\((\d{4})\)$/.exec(im.caption || "") || [0, im.caption || "", ""];
+    const m = /^(.*?)\s*\((\d{4})\)$/.exec(im.card || im.caption || "") || [0, im.card || im.caption || "", ""];
     const [c1, c2, ink] = im.tint;
     return `<div class="title-card" style="aspect-ratio:${esc(ratio)};--c1:${esc(c1)};--c2:${esc(c2)};--tc:${esc(ink || "#fff")}" role="img" aria-label="${esc(im.caption || "")}">
       <b>${esc(m[1])}</b>${m[2] ? `<span>${esc(m[2])}</span>` : ""}</div>`;
