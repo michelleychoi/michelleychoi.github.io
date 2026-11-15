@@ -501,3 +501,5 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
   .embed { grid-template-columns: 1fr; }
   .embed iframe { max-width: 420px; justify-self: center; }
 }
+/* phone screens in a gallery (Details row) get more breathing room */
+.gallery:has(img[src*="/screen-"]) { column-gap: clamp(28px, 5vw, 64px); }
