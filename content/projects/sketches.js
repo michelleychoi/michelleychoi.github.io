@@ -15,7 +15,7 @@ addProject({
 
     { group: "Marker Renderings", type: "gallery", columns: 2, images: [
       { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "806/1080", caption: "Interior, black and white" },
-      { src: "assets/physical/sketchbook/marker-street.jpg", ratio: "593/775", caption: "Street perspective" }
+      { src: "assets/physical/sketchbook/marker-street-clean.jpg", ratio: "810/1082", caption: "Street perspective" }
     ]},
 
     { group: "Napkin Sketches", type: "gallery", justify: true, images: [
