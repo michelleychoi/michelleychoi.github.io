@@ -25,10 +25,10 @@ addProject({
     ]},
     { type: "text", heading: "The Challenge",
       body: "Hold a 25 lb brick using only 1/16\" and 1/8\" wooden sticks. I also had to design a reachable \"shelter\", which I put at the top with white tissue paper, plus a ladder made from 1/16\" rods." },
-    { type: "gallery", heading: "Process", columns: 3, images: [
-      { src: "assets/physical/bridge-sketch.jpg", ratio: "4/5", caption: "[Early truss sketches]" },
-      { src: "assets/physical/bridge-cut.jpg", ratio: "4/5", caption: "[Cutting members]" },
-      { src: "assets/physical/bridge-glue.jpg", ratio: "4/5", caption: "[Assembly jig]" }
+    { type: "image", heading: "Process", src: "assets/physical/bridge-base.jpg", ratio: "2914/1080", caption: "1. Base construction: the diamond base, clamped flat" },
+    { type: "gallery", columns: 2, images: [
+      { src: "assets/physical/bridge-upper-chord.jpg", ratio: "4/3", caption: "2. Building up: asymmetrical supports in red" },
+      { src: "assets/physical/bridge-form-study.jpg", ratio: "4/3", caption: "3. Form study: mapping the upper chord" }
     ]},
     { type: "text", heading: "Design & Testing",
       body: "I made a diamond base to set my bridge apart from a regular truss. The base needed thin 1/16\" tension rods, which was a challenge. I used 1/8\" rods to keep the center rigid, then built up entirely with 1/8\" rods to keep the structure stable. I also added asymmetrical support beams to the upper chord to reflect its asymmetry." },
