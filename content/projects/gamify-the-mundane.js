@@ -46,8 +46,16 @@ addProject({
       { src: "assets/digital/gamify/screen-generator-locked.png", ratio: "390/844", caption: "Task Generator, locked for everyone but the winner" },
       { src: "assets/digital/gamify/screen-proof.png", ratio: "390/844", caption: "Card detail: proof, name, number, date? rate 1–10" }
     ]},
-    // Paste the Figma share link (File > Share > Copy link). Leave "" to show a placeholder.
-    { type: "figma", heading: "Interactive Prototype", url: "" },
+    // Clickable prototype (proto/gamify.html). To use a Figma link instead, swap this for:
+    // { type: "figma", heading: "Interactive Prototype", url: "https://www.figma.com/..." },
+    { type: "embed", heading: "Interactive Prototype", src: "proto/gamify.html", title: "Go For It clickable prototype",
+      intro: "Click through one full round. Everything here works.",
+      aside: [
+        { label: "01 · Alert", body: "Tap the notification to open your card." },
+        { label: "02 · Card", body: "Drag the card left to pass or right to go for it, or use the buttons. Passing costs points and deals the next dare." },
+        { label: "03 · Countdown", body: "The 15-minute timer runs for real. Snap a photo, then submit your proof." },
+        { label: "04 · Tabs", body: "Watch the leaderboard update. Skip to Sunday on the Task Generator to unlock it as Winner of the Week, then open a past card on your profile to rate the date." }
+      ]},
     { type: "text", heading: "Takeaway",
       body: "Rather than judging success by whether someone finds a relationship, the app rewards taking chances, trying something new, and actually putting yourself out there. It's built for groups of friends who want dating to feel more spontaneous, social, and playful." }
   ]

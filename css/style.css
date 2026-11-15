@@ -455,3 +455,13 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
   .split-side { grid-template-rows: none; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .split-side .media, .split-side .ph { aspect-ratio: 4/3 !important; flex: none; }
 }
+
+/* "embed" section: the prototype frame with step notes beside it */
+.embed { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.embed iframe { width: 100%; aspect-ratio: 410 / 904; border: 0; border-radius: 28px; background: var(--panel); }
+.embed-aside { display: grid; gap: 22px; max-width: 46ch; }
+.embed-aside p { margin: 4px 0 0; }
+@media (max-width: 760px) {
+  .embed { grid-template-columns: 1fr; }
+  .embed iframe { max-width: 420px; justify-self: center; }
+}

@@ -132,6 +132,10 @@
           <div class="split"><figure class="split-main">${media(s.main, s.main.caption)}${cap(s.main)}</figure>
           <div class="split-side">${(s.side || []).map((im) => `<figure>${media(im, im.caption)}${cap(im)}</figure>`).join("")}</div></div></div>`;
       }
+      case "embed":
+        // a live page in a frame, e.g. the clickable prototype in proto/
+        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
+          <div class="embed"><iframe src="${esc(s.src)}" title="${esc(s.title || s.heading || "Prototype")}" loading="lazy"></iframe>${s.aside ? `<div class="embed-aside">${s.aside.map((a) => `<div><span class="mono muted">${esc(a.label)}</span><p>${txt(a.body)}</p></div>`).join("")}</div>` : ""}</div></div>`;
       case "brief":
         return `<dl class="brief">${s.items.map((i) => `<div><dt class="mono">${esc(i.label)}:</dt><dd>${esc(i.value)}</dd></div>`).join("")}</dl>`;
       case "figma": {
