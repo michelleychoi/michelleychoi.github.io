@@ -683,3 +683,18 @@ section.grid .card > .media, section.grid .card .lock-wrap { aspect-ratio: 16/10
 section.grid .card .lock-wrap > .media { aspect-ratio: 16/10 !important; }
 section.grid .card > :not(.media):not(.lock-wrap) { padding-inline: 6px; }
 section.grid a.card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(20,10,40,.08); border-color: transparent; }
+
+/* === font trial: Helvetica-style grotesk + Roboto Mono (backup of previous look in portfolio-backups/before-fonts-2026-11-16) === */
+:root {
+  --display: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, Menlo, monospace;
+}
+.mono, .nav a, nav a { font-weight: 400; letter-spacing: 0.02em; }
+.home .box .name .nm { font-family: var(--display); font-weight: 500; letter-spacing: -0.02em; }
+.tab-head h1, .p-head h1, .about h1, .b-title h2, .stat b, .next .t, .brief dd, .tile .lbl b, .brand { font-weight: 600; letter-spacing: -0.03em; }
+h1, h2, h3, .card h3, .index .t, .s-text h2, .s-block > h2, .sn-text h3, .col h3 { font-weight: 500; }
+.tabs a { font-weight: 500; letter-spacing: 0.04em; }
+.tab-head h1, .p-head h1, .about h1, .b-title h2, .next .t { font-weight: 500; letter-spacing: -0.035em; line-height: 1; }
+.tabs a { font-weight: 400; }
+.brand { letter-spacing: -0.01em; }
