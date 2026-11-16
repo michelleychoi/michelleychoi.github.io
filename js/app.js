@@ -95,7 +95,7 @@
     return `<main class="view">
       <section class="home">
         <canvas class="home-bg" id="home-bg" aria-hidden="true"></canvas>
-        <span class="flower-hint" aria-hidden="true">move your cursor over the flowers! :3</span>
+        <span class="flower-hint" aria-hidden="true">grow the flowers! :3</span>
         <canvas class="field side" data-field="left" aria-hidden="true"></canvas>
         <div class="stage">
           <div class="box">
