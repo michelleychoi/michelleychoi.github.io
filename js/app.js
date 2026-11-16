@@ -133,7 +133,7 @@
         <span class="mono muted">${esc(p.kicker)}</span><p>${esc(p.blurb || p.summary)}</p></a>`;
     }).join("");
     return header(id) + `<main class="view"><section class="wrap tab-head">
-      <span class="mono muted">${t.projects.length} projects</span><h1>${esc(t.label)}</h1><p>${esc(t.blurb)}</p>
+      <h1>${esc(t.label)}</h1><p>${esc(t.blurb)}</p>
       <canvas class="field strip" data-field="${id}" aria-hidden="true"></canvas></section>
       <section class="wrap grid">${cards}</section></main>` + footer();
   }
