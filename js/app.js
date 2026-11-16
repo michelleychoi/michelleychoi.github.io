@@ -91,7 +91,7 @@
     const count = (t) => S.tabs[t].projects.filter((s) => PROJECTS[s]).length;
     const tile = (href, n, label, sub, field) => `<a class="tile" href="#${href}">
         <span class="art glyph"><canvas class="seal" data-seal="${field.seal}" data-colors="${field.colors}" data-scale="${field.scale || 1}" aria-hidden="true"></canvas></span>
-        <span class="lbl"><span class="mono muted">${n}</span><b>${label}</b>${sub ? `<span class="mono muted">${sub} →</span>` : ""}</span></a>`;
+        <span class="lbl"><b>${label}</b>${sub ? `<span class="mono muted">${sub} →</span>` : ""}</span></a>`;
     return `<main class="view">
       <section class="home">
         <canvas class="home-bg" id="home-bg" aria-hidden="true"></canvas>
