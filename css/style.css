@@ -722,3 +722,6 @@ h1, h2, h3, .card h3, .index .t, .s-text h2, .s-block > h2, .sn-text h3, .col h3
 /* eyebrow matches the Cornell line */
 .stage .eyebrow { font-family: var(--body); font-style: normal; font-weight: 500; color: var(--muted); letter-spacing: 0.005em; }
 @media (min-width: 901px) { .stage .eyebrow { font-size: .88rem; } }
+/* project intro paragraph spans the full width of the big title */
+.p-intro { display: grid; gap: 18px; }
+.p-intro .summary { max-width: 46ch; }

@@ -244,7 +244,7 @@
       <section class="wrap p-head">
         <a class="crumb mono muted" href="#${p.tab}">← ${esc(S.tabs[p.tab].label)}</a>
         <span class="mono muted">${esc(p.kicker)}</span>
-        <div class="p-title"><canvas class="seal big" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas><h1>${esc(p.title)}</h1></div><p class="summary">${txt(p.summary)}</p>
+        <div class="p-intro"><div class="p-title"><canvas class="seal big" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas><h1>${esc(p.title)}</h1></div><p class="summary">${txt(p.summary)}</p></div>
       </section>
       <section class="wrap"><dl class="spec">${spec}</dl>${p.heroVideo ? `<div class="media hero-video" style="aspect-ratio:${esc(p.heroVideo.ratio || "16/9")}"><video src="${esc(p.heroVideo.src)}"${p.heroVideo.poster ? ` poster="${esc(p.heroVideo.poster)}"` : ""} autoplay muted loop playsinline preload="auto" aria-label="${esc(p.heroVideo.alt || p.title + " video")}"></video></div>` : p.hideCover ? "" : media(p.cover, "Cover image")}</section>
       <section class="wrap sections">${sectionsHTML(p.sections || [])}</section>
@@ -330,7 +330,25 @@
     window.scrollTo(0, 0);
     wire();
     coverShift();
+    fitIntro();
   }
+
+  // project intro paragraph: right edge lines up with the end of the big title
+  function fitIntro() {
+    const intro = document.querySelector(".p-intro");
+    if (!intro) return;
+    const h1 = intro.querySelector("h1"), sum = intro.querySelector(".summary");
+    if (!h1 || !sum) return;
+    const set = () => {
+      sum.style.maxWidth = "";
+      const r = document.createRange(); r.selectNodeContents(h1);
+      const right = r.getBoundingClientRect().right - intro.getBoundingClientRect().left;
+      sum.style.maxWidth = Math.max(right, Math.min(560, intro.clientWidth)) + "px";
+    };
+    set();
+    document.fonts?.ready.then(set);
+  }
+  window.addEventListener("resize", () => fitIntro());
 
   function reveal() {
     const items = document.querySelectorAll(".grp > *, .pin-board");
