@@ -9,9 +9,7 @@ addProject({
   tools: "Ink, Alcohol markers, Procreate, Napkins",
   summary: "An amalgamation of random art projects over the years!",
   hideCover: true, // the cover only shows on the Physical tab card, not at the top of this page
-  // Trial cover (Ceremony Cafe napkin). Previous cover, to restore:
-  // cover: { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "16/10", alt: "Black and white marker rendering of an interior" },
-  cover: { src: "assets/physical/sketchbook/cover-ceremony.jpg", ratio: "16/10", alt: "Ink napkin sketch of Ceremony Cafe on a wooden table" },
+  cover: { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "16/10", alt: "Black and white marker rendering of an interior" },
 
   // Each piece is a square pinned print; click opens it full size. "pos" picks what stays in the square crop.
   sections: [
