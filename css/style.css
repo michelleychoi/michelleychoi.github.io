@@ -658,3 +658,11 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .lock-badge { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: rgba(17,17,17,.82); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; backdrop-filter: blur(4px); }
 .card.locked:hover { transform: none; }
 .index li.locked > span { cursor: default; opacity: .55; }
+
+/* copy icon button (two overlapping squares) */
+.copy.copy-ic { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border-radius: 9px; border-color: transparent; color: var(--muted); transition: color .2s, background .2s; }
+.copy.copy-ic:hover { color: var(--ink); background: rgba(0,0,0,.05); border-color: transparent; }
+.copy-ic svg { grid-area: 1 / 1; transition: opacity .2s, transform .2s; }
+.copy-ic .ic-check { opacity: 0; transform: scale(.6); color: #1f9d55; }
+.copy-ic.done .ic-copy { opacity: 0; transform: scale(.6); }
+.copy-ic.done .ic-check { opacity: 1; transform: none; }

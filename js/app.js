@@ -257,7 +257,7 @@
   function about() {
     const emails = (S.emails || [{ label: "Email", address: S.email }]).map((e, i) => `<li><div class="row">
         <span class="k">${esc(e.label)}</span><span class="v" id="email-${i}">${esc(e.address)}</span>
-        <button class="copy mono" type="button" data-copy="${i}">Copy</button></div></li>`).join("");
+        <button class="copy copy-ic" type="button" data-copy="${i}" aria-label="Copy ${esc(e.address)}" title="Copy"><svg class="ic-copy" viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 5.5v-.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="ic-check" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></li>`).join("");
     const links = S.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">
         <span class="k">${esc(l.label)}</span><span class="v">${esc(l.handle || "")}</span><span>↗</span></a></li>`).join("");
     const board = (S.board || []).map((b, bi) => `<div class="pin-board">
@@ -375,7 +375,7 @@
     }
     document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", () => {
       const el = document.getElementById("email-" + b.dataset.copy);
-      navigator.clipboard?.writeText(el.textContent).then(() => { b.textContent = "Copied"; }).catch(() => {
+      navigator.clipboard?.writeText(el.textContent).then(() => { b.classList.add("done"); b.title = "Copied"; setTimeout(() => { b.classList.remove("done"); b.title = "Copy"; }, 1600); }).catch(() => {
         const r = document.createRange(); r.selectNodeContents(el); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
       });
     }));
