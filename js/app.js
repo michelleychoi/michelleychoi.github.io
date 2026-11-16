@@ -147,7 +147,7 @@
       }
       case "pair":
         // two sections side by side (e.g. two images with their own headings)
-        return `<div class="pair">${s.items.map((it) => `<div>${section(it)}</div>`).join("")}</div>`;
+        return `<div class="pair"${s.cols ? ` style="--pair-cols:${s.cols.split(" ").map((r) => { const [w, h] = r.split("/").map(Number); return (w / (h || 1)).toFixed(3) + "fr"; }).join(" ")}"` : ""}>${s.items.map((it) => `<div>${section(it)}</div>`).join("")}</div>`;
       case "gallery":
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}
           <div class="gallery ${s.justify ? "just" : "c" + (s.columns === 3 ? 3 : 2)}">${s.images.map((im) =>

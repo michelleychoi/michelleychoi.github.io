@@ -32,16 +32,12 @@ addProject({
       { src: "assets/digital/makerhub/terrace-after.jpg", ratio: "1362/784", caption: "After: a terrace for group work and a garage for project team constructions" }
     ]},
 
-    { group: "Branding & Materials", type: "pair", items: [
+    { group: "Materials & Moodboard", type: "pair", cols: "1425/1300 2200/1238", items: [
       { type: "image", heading: "Materials",
         intro: "Inspired by Ithaca's natural landscape: sage green, cream, and brown, with Cornell carnelian as the accent.",
         src: "assets/digital/makerhub/materials.jpg?v=202611160338", ratio: "1425/1300" },
-      { type: "image", heading: "Wordmark",
-        intro: "Focusing on minimalism and simplicity, inspired by digitalism and modeling software, in metallic and flat versions.",
-        src: "assets/digital/makerhub/wordmark-logos.jpg", ratio: "1450/945" }
-    ]},
-
-    { group: "Moodboard", type: "image", heading: "Moodboard",
-      src: "assets/digital/makerhub/moodboard.jpg", ratio: "2200/1238", caption: "Creative studio moodboard" }
+      { type: "image", heading: "Moodboard",
+        src: "assets/digital/makerhub/moodboard.jpg", ratio: "2200/1238" }
+    ]}
   ]
 });
