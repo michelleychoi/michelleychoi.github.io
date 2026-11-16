@@ -97,7 +97,6 @@
         <canvas class="home-bg" id="home-bg" aria-hidden="true"></canvas>
         <canvas class="field side" data-field="left" aria-hidden="true"></canvas>
         <div class="stage">
-          <span class="eyebrow">${esc(S.role)} · Portfolio</span>
           <div class="box">
             <div class="home-center">
               <h1 class="name"><span class="hi">Hi, I'm</span><span class="nm">${esc(parts.join(" "))}${last ? "<br>" : ""}${esc(last)}</span></h1>
