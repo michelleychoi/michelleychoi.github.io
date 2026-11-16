@@ -43,10 +43,10 @@ addProject({
     { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi Wireframes", src: "assets/digital/gamify/lofi-wireframes.png", ratio: "1500/952", caption: "Task alert → task card → countdown, and the three tabs" },
     { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi to Hi-fi", src: "assets/digital/gamify/lofi-to-hifi.jpg?v=202611161851", ratio: "3200/2050" },
     { group: "From Lo-fi to Hi-fi", type: "screens", heading: "Details", items: [
-      { label: "A · Locked state", title: "Task Generator", src: "assets/digital/gamify/screen-generator-locked.png",
+      { label: "A · Locked state", title: "Task Generator", src: "assets/digital/gamify/screen-generator-locked.png?v=202611161905",
         body: "The tab everyone wants. It stays locked unless you're Winner of the Week.",
         points: ["Blurred form hints at what you're missing", "Progress bar shows how far behind first place you are", "Gives a reason to accept harder cards instead of passing"] },
-      { label: "B · Profile sheet", title: "Card Detail", src: "assets/digital/gamify/screen-proof.png",
+      { label: "B · Profile sheet", title: "Card Detail", src: "assets/digital/gamify/screen-proof.png?v=202611161905",
         body: "Tap any past card on your profile to open its record.",
         points: ["Photo proof with the time it was taken and points earned", "Their name and number, how fast you finished, and the difficulty", "Going on a date? Yes or no, plus a 1–10 rating"] }
     ]},
