@@ -9,7 +9,7 @@
 window.SITE = {
   name: "Michelle Choi",
   role: "Product designer",
-  tagline: "I'm a curious artist learning how people move through the spaces I create, finding my way into product design one prototype at a time :)",
+  tagline: "I'm a curious artist who makes complex spaces easy to move through, finding my way into product design one prototype at a time :)",
   school: "Cornell University · Design & Environmental Analysis · Class of 2029",
   status: "Looking for Summer 2027 product design internships",
   email: "mychoi1881@gmail.com",
@@ -36,7 +36,7 @@ window.SITE = {
     // Until a photo is added (set "src"), each one shows as a colored card ("tint": [bottom, top, text color]).
     { title: "My Communities", note: "(flip the cards!)", ratio: "4/5", items: [
       { src: "assets/about/communities/cusd.jpg?v=202611161917", card: "CUSD", caption: "Cornell University Sustainable Design", link: "https://www.cusd.cornell.edu/",
-        back: "I'm on the Sustainable Cities project team, where we partner with the Ithaca Commons to build an online presence for local storefronts and bring in more student business from Cornell and Ithaca College. We focus on small businesses fighting to stay afloat as foot traffic shifts online. The work connects my passion for urban design with my love for art and design, and it's so grounding to work alongside local Ithaca businesses.", tint: ["#3d2fd6", "#8f7dff"] },
+        back: "I'm on the Sustainable Cities project team, where we partner with the Ithaca Commons to build an online presence for local storefronts and bring in more student business from Cornell and Ithaca College. The work connects my passion for urban design with my love for art and design, and it's so grounding to work alongside local Ithaca businesses.", tint: ["#3d2fd6", "#8f7dff"] },
       { src: "assets/about/communities/mediocre-melodies-stage3.jpg", caption: "Mediocre Melodies", link: "https://mediocremelodies.com/",
         back: "Bad singers for a good cause! The name means exactly what we are: a comedic a cappella group of (questionable) singers with personality, making people laugh at our concerts while raising money for local charities, like Challenge Contract Staffing. Truly a family of personable and hilarious people, and I'm so honored to be a part of it :)" },
       { src: "assets/about/communities/teaching-kindergarten.jpg", caption: "Teaching Kindergarten",
