@@ -668,3 +668,18 @@ html.intro .home .tiles .tile:nth-child(3) { animation-delay: 0.52s; }
 .copy-ic.done .ic-check { opacity: 1; transform: none; }
 
 .hero-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* overview pages: three smaller cards per row */
+.tab-head + .grid, section.grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 22px; }
+.grid .card { gap: 10px; }
+.grid .card h3 { font-size: clamp(1.15rem, 1.55vw, 1.4rem); display: flex; align-items: center; gap: 8px; }
+.grid .card h3 .seal { width: 22px; height: 22px; }
+.grid .card p { font-size: .92rem; line-height: 1.45; }
+.grid .card .mono { font-size: .68rem; }
+@media (max-width: 900px) { section.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { section.grid { grid-template-columns: minmax(0, 1fr); } }
+/* overview cards in rounded boxes */
+section.grid .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 10px 10px 16px; align-content: start; transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .25s; }
+section.grid .card > .media, section.grid .card .lock-wrap { aspect-ratio: 16/10 !important; border-radius: 10px; overflow: hidden; }
+section.grid .card .lock-wrap > .media { aspect-ratio: 16/10 !important; }
+section.grid .card > :not(.media):not(.lock-wrap) { padding-inline: 6px; }
+section.grid a.card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(20,10,40,.08); border-color: transparent; }
