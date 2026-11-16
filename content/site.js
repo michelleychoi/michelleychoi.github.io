@@ -24,7 +24,7 @@ window.SITE = {
   // Drop the PDF at this path and the Resume button on the About page turns on by itself.
   resume: "assets/resume.pdf",
   about:
-    "I grew up in South Jersey and am now exploring the magical world of tech and design as a sophomore at Cornell! You can always find me doodling and listening to some Fleetwood Mac or Oasis. I love a fun time with friends and good eats.\n\nAlways happy to chat! I love a good conversation :)",
+    "I grew up in South Jersey and am now exploring the magical world of tech and design as a sophomore at Cornell! You can usually find me doodling to Fleetwood Mac or Oasis, or out with friends hunting down good eats.\n\nAlways happy to chat! I love a good conversation :)",
   // Photo collage beside "Hi, I'm Michelle" on the About page. Empty src = placeholder box.
   portrait: [
     { src: "assets/about/selfie.jpg", ratio: "3/4", label: "Selfie" },
