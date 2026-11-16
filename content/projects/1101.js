@@ -3,12 +3,13 @@ addProject({
   slug: "1101",
   tab: "physical",
   title: "Hexchange",
+  locked: true, // shows "In progress" and can't be opened; delete this line to publish
   kicker: "Studio coursework",
   year: "[2025]",
   role: "[Designer]",
   tools: "[Cardboard, foam core, 3D printing, SolidWorks]",
   summary: "[What 1101 is, and the 2–3 projects you're showing from it.]",
-  cover: { src: "assets/physical/hexchange-cover.jpg", ratio: "16/10", alt: "Hexchange prototype on a wood stump beside the Hexchange wordmark" },
+  cover: { src: "assets/physical/hexchange-cover.jpg?v=202611160002", ratio: "16/10", alt: "Hexchange prototype on a wood stump beside the Hexchange wordmark" },
 
   sections: [
     { type: "text", heading: "[Project A]",

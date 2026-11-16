@@ -77,9 +77,11 @@
   function indexList(tabId) {
     return S.tabs[tabId].projects.filter((s) => PROJECTS[s]).map((s) => {
       const p = PROJECTS[s];
-      return `<li><a href="#${p.slug}" data-cover="${esc(p.cover?.src || "")}" data-ratio="${esc(p.cover?.ratio || "16/10")}">
+      // "locked": shown as In progress, not clickable
+      const tag = p.locked ? "span" : "a";
+      return `<li${p.locked ? ' class="locked"' : ""}><${tag} ${p.locked ? 'aria-disabled="true"' : `href="#${p.slug}"`} data-cover="${esc(p.cover?.src || "")}" data-ratio="${esc(p.cover?.ratio || "16/10")}">
         <span class="t"><canvas class="seal" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas>${esc(p.title)}</span><span class="k mono muted">${esc(p.kicker)}</span>
-        <span class="y mono muted">${esc(p.year)}</span><span class="arrow">→</span></a></li>`;
+        <span class="y mono muted">${p.locked ? "In progress" : esc(p.year)}</span><span class="arrow">${p.locked ? "" : "→"}</span></${tag}></li>`;
     }).join("");
   }
 
@@ -123,6 +125,9 @@
     const t = S.tabs[id];
     const cards = t.projects.filter((s) => PROJECTS[s]).map((s) => {
       const p = PROJECTS[s];
+      if (p.locked) return `<div class="card locked" aria-disabled="true"><div class="lock-wrap">${media(p.cover, p.title + " cover")}<span class="lock-badge mono">In progress</span></div>
+        <div class="card-meta"><h3><canvas class="seal" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas>${esc(p.title)}</h3><span class="mono muted">Coming soon</span></div>
+        <span class="mono muted">${esc(p.kicker)}</span>${p.blurb ? `<p>${esc(p.blurb)}</p>` : ""}</div>`;
       return `<a class="card" href="#${p.slug}">${media(p.cover, p.title + " cover")}
         <div class="card-meta"><h3><canvas class="seal" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas>${esc(p.title)}</h3><span class="mono muted">${esc(p.year)}</span></div>
         <span class="mono muted">${esc(p.kicker)}</span><p>${esc(p.blurb || p.summary)}</p></a>`;
@@ -232,7 +237,7 @@
   }
 
   function project(p) {
-    const list = S.tabs[p.tab].projects.filter((s) => PROJECTS[s]);
+    const list = S.tabs[p.tab].projects.filter((s) => PROJECTS[s] && (!PROJECTS[s].locked || s === p.slug));
     const next = PROJECTS[list[(list.indexOf(p.slug) + 1) % list.length]];
     const spec = [["Role", p.role], ["Tools", p.tools], ["Year", p.year]]
       .map(([k, v]) => `<div><dt class="mono">${k}</dt><dd>${txt(v)}</dd></div>`).join("");
@@ -318,6 +323,7 @@
     let html;
     if (h === "physical" || h === "digital") html = tabView(h);
     else if (h === "about") html = about();
+    else if (PROJECTS[h] && PROJECTS[h].locked) { location.replace("#" + PROJECTS[h].tab); return; }
     else if (PROJECTS[h]) html = project(PROJECTS[h]);
     else html = home();
     app.innerHTML = html;
