@@ -742,3 +742,11 @@ h1, h2, h3, .card h3, .index .t, .s-text h2, .s-block > h2, .sn-text h3, .col h3
 
 /* small hint under a project intro (e.g. sketchbook: click to view full) */
 .p-intro .p-hint { font-size: .7rem; letter-spacing: .06em; margin-top: -8px; }
+
+/* cover: tiny floating hint in the lower-left */
+.home > .flower-hint { position: absolute; left: clamp(140px, 17vw, 300px); bottom: 21%; z-index: 1; pointer-events: none;
+  font-family: var(--body); font-size: .78rem; color: var(--muted); background: rgba(255,255,255,.72); padding: 6px 12px; border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(20,10,40,.06); backdrop-filter: blur(3px); white-space: nowrap; animation: hint-bob 3.2s ease-in-out infinite; }
+@keyframes hint-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-7px) rotate(-2deg); } }
+@media (prefers-reduced-motion: reduce) { .home > .flower-hint { animation: none; transform: rotate(-2deg); } }
+@media (max-width: 900px), (hover: none) { .home > .flower-hint { display: none; } }
