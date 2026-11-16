@@ -91,7 +91,7 @@
     const count = (t) => S.tabs[t].projects.filter((s) => PROJECTS[s]).length;
     const tile = (href, n, label, sub, field) => `<a class="tile" href="#${href}">
         <span class="art glyph"><canvas class="seal" data-seal="${field.seal}" data-colors="${field.colors}" data-scale="${field.scale || 1}" aria-hidden="true"></canvas></span>
-        <span class="lbl"><span class="mono muted">${n}</span><b>${label}</b><span class="mono muted">${sub} →</span></span></a>`;
+        <span class="lbl"><span class="mono muted">${n}</span><b>${label}</b>${sub ? `<span class="mono muted">${sub} →</span>` : ""}</span></a>`;
     return `<main class="view">
       <section class="home">
         <canvas class="home-bg" id="home-bg" aria-hidden="true"></canvas>
@@ -104,8 +104,8 @@
               <p class="tagline">${txt(S.tagline)}</p>
             </div>
             <nav class="tiles" aria-label="Sections">
-              ${tile("digital", "01", "Digital", count("digital") + " projects", { seal: "michelle", colors: "0,1" })}
-              ${tile("physical", "02", "Physical", count("physical") + " projects", { seal: "#237623", colors: "1,1,1,3", scale: 0.82 })}
+              ${tile("digital", "01", "Digital", "", { seal: "michelle", colors: "0,1" })}
+              ${tile("physical", "02", "Physical", "", { seal: "#237623", colors: "1,1,1,3", scale: 0.82 })}
               ${tile("about", "03", "About", "Contact + resume", { seal: "#245496", colors: "soft", scale: 0.62 })}
             </nav>
           </div>

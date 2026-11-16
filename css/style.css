@@ -714,3 +714,8 @@ h1, h2, h3, .card h3, .index .t, .s-text h2, .s-block > h2, .sn-text h3, .col h3
   .box .tile .lbl b { font-size: clamp(1.15rem, 1.6vw, 1.5rem); }
   .box .tile .lbl .mono { font-size: .7rem; }
 }
+/* home tiles: label block vertically centered; Hi I'm smaller; name spaced out */
+.box .tile { align-items: center; }
+.box .tile .lbl { align-self: center; align-content: center; }
+.home .box .name .hi { font-size: 0.54em; }
+.home .box .name .nm { letter-spacing: 0.02em; }
