@@ -41,7 +41,7 @@ window.SITE = {
       { src: "assets/about/communities/mediocre-melodies-stage3.jpg", caption: "Mediocre Melodies", link: "https://mediocremelodies.com/",
         back: "Bad singers for a good cause! The name means exactly what we are: a comedic a cappella group of (questionable) singers with personality, making people laugh at our concerts while raising money for local charities, like Challenge Contract Staffing. Truly a family of personable and hilarious people, and I'm so honored to be a part of it :)" },
       { src: "assets/about/communities/teaching-kindergarten.jpg", caption: "Teaching Kindergarten",
-        back: "I taught preschoolers and kindergarteners art and music for four years in high school, and it's definitely something I will always carry with me. My love for teaching will always be one of my passions, and I still volunteer at local preschools even in college!" },
+        back: "I taught preschoolers and kindergarteners art and Korean language for four years in high school, and it's definitely something I will always carry with me. My love for teaching will always be one of my passions, and I still volunteer at local preschools even in college!" },
       { src: "assets/about/communities/orchestra.jpg", caption: "Orchestra",
         back: "I begged my mom for three years to start violin in the second grade. I've never stopped playing since, and orchestra is my home, powered by my love of string instruments. You'll always find me nerding out over an orchestral film score." }
     ]},
