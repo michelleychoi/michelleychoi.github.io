@@ -157,6 +157,13 @@
       case "split": {
         // one main image on the left, a column of small images (e.g. sketches) on the right
         const cap = (im) => im.caption ? `<figcaption class="mono">${esc(im.caption)}</figcaption>` : "";
+        // sideFirst: one sketch on the left, main on the right, both full (uncropped) at the same height
+        if (s.sideFirst && s.side?.length === 1) {
+          const r = (x) => { const [w, h] = String(x || "4/3").split("/").map(Number); return w / (h || 1); };
+          const sk = s.side[0];
+          return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
+          <div class="split-pair" style="grid-template-columns: ${r(sk.ratio).toFixed(4)}fr ${r(s.main.ratio).toFixed(4)}fr"><figure>${media(sk, sk.caption)}${cap(sk)}</figure><figure>${media(s.main, s.main.caption)}${cap(s.main)}</figure></div></div>`;
+        }
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
           <div class="split"><figure class="split-main">${media(s.main, s.main.caption)}${cap(s.main)}</figure>
           <div class="split-side">${(s.side || []).map((im) => `<figure>${media(im, im.caption)}${cap(im)}</figure>`).join("")}</div></div></div>`;

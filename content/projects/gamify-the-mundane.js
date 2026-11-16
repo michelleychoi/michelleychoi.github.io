@@ -27,13 +27,11 @@ addProject({
       body: "Young adults and college students on dating apps who catch themselves mindlessly swiping through profiles, overthinking what to text, waiting for conversations to go somewhere, and repeating the same dating routines." },
     { group: "Understanding the Problem", type: "text", heading: "The Idea",
       body: "My friends and I downloaded Hinge as a joke, and I kept thinking there had to be a more fun way to meet people than swiping. Inspired by BeReal's surprise notification and timer, I designed around \"just going for it\": a card arrives at a random time with a dare (like \"stop someone on the street and get their number\"), you swipe to accept or pass, a 15-minute timer starts, and you snap a photo as proof." },
-    // Pitch board with three sketch slots on the right: set each sketch's "src" (e.g. assets/digital/gamify/sketch-1.jpg)
-    { group: "Early Exploration", type: "split", heading: "Pitch Board & Sketches", intro: "My first lo-fi flow, annotated with notes and open questions from the pitch, next to early sketches.",
+    // Early sketch on the left, pitch board on the right (sideFirst)
+    { group: "Early Exploration", type: "split", sideFirst: true, heading: "Pitch Board & Sketches", intro: "My first lo-fi flow, annotated with notes and open questions from the pitch, next to an early sketch.",
       main: { src: "assets/digital/gamify/pitch-board.jpg", ratio: "16/9", caption: "Lo-fi flow with handwritten notes" },
       side: [
-        { src: "", ratio: "4/3", caption: "[Sketch]" },
-        { src: "", ratio: "4/3", caption: "[Sketch]" },
-        { src: "", ratio: "4/3", caption: "[Sketch]" }
+        { src: "assets/digital/gamify/sketch-1.jpg", ratio: "1500/2000", caption: "Early sketch" }
       ]},
     { group: "Early Exploration", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
       src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
