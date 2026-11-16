@@ -256,7 +256,11 @@
       </section>
       <section class="wrap"><dl class="spec">${spec}</dl>${p.heroVideo ? `<div class="media hero-video" style="aspect-ratio:${esc(p.heroVideo.ratio || "16/9")}"><video src="${esc(p.heroVideo.src)}"${p.heroVideo.poster ? ` poster="${esc(p.heroVideo.poster)}"` : ""} autoplay muted loop playsinline preload="auto" aria-label="${esc(p.heroVideo.alt || p.title + " video")}"></video></div>` : p.hideCover ? "" : media(p.cover, "Cover image")}</section>
       <section class="wrap sections">${sectionsHTML(p.sections || [])}</section>
-      ${next && next.slug !== p.slug ? `<section class="wrap"><a class="next" href="#${next.slug}">
+      ${p.tab === "digital" && list.indexOf(p.slug) === list.length - 1
+        // last Digital project: continue on to the Physical overview instead of looping back
+        ? `<section class="wrap"><a class="next" href="#physical">
+        <span class="mono muted">Next</span><span class="t">Physical →</span></a></section>`
+        : next && next.slug !== p.slug ? `<section class="wrap"><a class="next" href="#${next.slug}">
         <span class="mono muted">Next Project</span><span class="t">${esc(next.title)} →</span></a></section>` : ""}
     </main>` + footer();
   }
