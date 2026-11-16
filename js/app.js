@@ -106,7 +106,7 @@
             <nav class="tiles" aria-label="Sections">
               ${tile("digital", "01", "Digital", "", { seal: "michelle", colors: "0,1" })}
               ${tile("physical", "02", "Physical", "", { seal: "#237623", colors: "1,1,1,3", scale: 0.82 })}
-              ${tile("about", "03", "About", "Contact + resume", { seal: "#245496", colors: "soft", scale: 0.62 })}
+              ${tile("about", "03", "About", "", { seal: "#245496", colors: "soft", scale: 0.62 })}
             </nav>
           </div>
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
