@@ -18,8 +18,7 @@ window.SITE = {
     { label: "School", address: "myc54@cornell.edu" }
   ],
   links: [
-    { label: "LinkedIn", handle: "mychoi1881", url: "https://www.linkedin.com/in/mychoi1881" },
-    { label: "Instagram", handle: "@michelle.__c", url: "https://www.instagram.com/michelle.__c/" }
+    { label: "LinkedIn", handle: "mychoi1881", url: "https://www.linkedin.com/in/mychoi1881" }
   ],
   // Drop the PDF at this path and the Resume button on the About page turns on by itself.
   resume: "assets/resume.pdf",
