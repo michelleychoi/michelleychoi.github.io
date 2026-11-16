@@ -701,3 +701,16 @@ h1, h2, h3, .card h3, .index .t, .s-text h2, .s-block > h2, .sn-text h3, .col h3
 /* keep the new fonts from feeling condensed: neutral spacing on headings */
 .card h3, .index .t, .s-text h2, .s-block > h2, .sn-text h3, .col h3, .index-head h2, .work-head, .home-center .name { letter-spacing: -0.005em; }
 .home-center .name { font-stretch: normal; font-variation-settings: normal; }
+/* home cover: smaller, tighter cluster in the middle of the screen */
+@media (min-width: 901px) {
+  .stage { gap: 18px; }
+  .box { grid-template-columns: max-content clamp(230px, 19vw, 290px); column-gap: clamp(32px, 3.4vw, 52px); }
+  .home .box .name { font-size: clamp(2.1rem, 4.3vw, 4.3rem); }
+  .home-center .tagline { font-size: 1.02rem; max-width: 30ch; }
+  .stage .eyebrow { font-size: 1.12rem; }
+  .stage .facts { font-size: .88rem; width: 0; min-width: 100%; line-height: 1.5; }
+  .home .box .tiles { gap: 10px; }
+  .box .tile { gap: 14px; padding: 10px; }
+  .box .tile .lbl b { font-size: clamp(1.15rem, 1.6vw, 1.5rem); }
+  .box .tile .lbl .mono { font-size: .7rem; }
+}
