@@ -29,7 +29,7 @@ addProject({
     ]},
     { group: "Before & After", type: "gallery", heading: "Terrace Seating & Garage", justify: true, images: [
       { src: "assets/digital/makerhub/terrace-before.jpg", ratio: "1600/1200", caption: "Before" },
-      { src: "assets/digital/makerhub/terrace-after.jpg", ratio: "1362/784", caption: "After: a terrace for group work and a garage to show off student projects" }
+      { src: "assets/digital/makerhub/terrace-after.jpg", ratio: "1362/784", caption: "After: a terrace for group work and a garage for project team constructions" }
     ]},
 
     { group: "Branding & Materials", type: "pair", items: [

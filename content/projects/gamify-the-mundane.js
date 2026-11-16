@@ -41,7 +41,7 @@ addProject({
     { group: "Designing the Game", type: "text", heading: "The Profile",
       body: "The profile tab keeps a history of every card: completion status, the photo proof, points earned, and the fun extras, like whether you got their name and number, whether you'll actually go on a date, and a 1–10 rating. It becomes a little portfolio of the people you met by taking a chance." },
     { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi Wireframes", src: "assets/digital/gamify/lofi-wireframes.png", ratio: "1500/952", caption: "Task alert → task card → countdown, and the three tabs" },
-    { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi to Hi-fi", src: "assets/digital/gamify/lofi-to-hifi.jpg?v=202611160009", ratio: "3200/2050" },
+    { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi to Hi-fi", src: "assets/digital/gamify/lofi-to-hifi.jpg?v=202611161851", ratio: "3200/2050" },
     { group: "From Lo-fi to Hi-fi", type: "screens", heading: "Details", items: [
       { label: "A · Locked state", title: "Task Generator", src: "assets/digital/gamify/screen-generator-locked.png",
         body: "The tab everyone wants. It stays locked unless you're Winner of the Week.",
