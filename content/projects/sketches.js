@@ -8,6 +8,7 @@ addProject({
   role: "Self-directed",
   tools: "Ink, Alcohol markers, Procreate, Napkins",
   summary: "An amalgamation of random art projects over the years!",
+  hint: "Click any piece to see it in full ↗",
   hideCover: true, // the cover only shows on the Physical tab card, not at the top of this page
   cover: { src: "assets/physical/sketchbook/marker-interior-clean.jpg", ratio: "16/10", alt: "Black and white marker rendering of an interior" },
 

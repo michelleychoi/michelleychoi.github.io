@@ -251,7 +251,7 @@
       <section class="wrap p-head">
         <a class="crumb mono muted" href="#${p.tab}">← ${esc(S.tabs[p.tab].label)}</a>
         <span class="mono muted">${esc(p.kicker)}</span>
-        <div class="p-intro"><div class="p-title"><canvas class="seal big" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas><h1>${esc(p.title)}</h1></div><p class="summary">${txt(p.summary)}</p></div>
+        <div class="p-intro"><div class="p-title"><canvas class="seal big" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas><h1>${esc(p.title)}</h1></div><p class="summary">${txt(p.summary)}</p>${p.hint ? `<span class="p-hint mono muted">${esc(p.hint)}</span>` : ""}</div>
       </section>
       <section class="wrap"><dl class="spec">${spec}</dl>${p.heroVideo ? `<div class="media hero-video" style="aspect-ratio:${esc(p.heroVideo.ratio || "16/9")}"><video src="${esc(p.heroVideo.src)}"${p.heroVideo.poster ? ` poster="${esc(p.heroVideo.poster)}"` : ""} autoplay muted loop playsinline preload="auto" aria-label="${esc(p.heroVideo.alt || p.title + " video")}"></video></div>` : p.hideCover ? "" : media(p.cover, "Cover image")}</section>
       <section class="wrap sections">${sectionsHTML(p.sections || [])}</section>
