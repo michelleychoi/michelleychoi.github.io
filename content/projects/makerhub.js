@@ -12,6 +12,8 @@ addProject({
   blurb: "A redesign proposal for the Cornell MakerHub in Beebe Hall.",
   summary:
     "A redesign proposal for the Cornell MakerHub in Beebe Hall: a wordmark, a moodboard, and AI mockups of a space where students collaborate, connect, and create.",
+  // heroVideo: loops (muted) at the top of the project page instead of the cover image
+  heroVideo: { src: "assets/digital/makerhub/playthrough.mp4", poster: "assets/digital/makerhub/playthrough-poster.jpg", ratio: "16/9", alt: "Walkthrough of the MakerHub redesign" },
   cover: { src: "assets/digital/makerhub/cover.jpg", ratio: "2200/1238", alt: "Red CU MakerHub Beebe Hall title slide" },
 
   sections: [

@@ -247,7 +247,7 @@
         <span class="mono muted">${esc(p.kicker)}</span>
         <div class="p-title"><canvas class="seal big" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas><h1>${esc(p.title)}</h1></div><p class="summary">${txt(p.summary)}</p>
       </section>
-      <section class="wrap"><dl class="spec">${spec}</dl>${p.hideCover ? "" : media(p.cover, "Cover image")}</section>
+      <section class="wrap"><dl class="spec">${spec}</dl>${p.heroVideo ? `<div class="media hero-video" style="aspect-ratio:${esc(p.heroVideo.ratio || "16/9")}"><video src="${esc(p.heroVideo.src)}"${p.heroVideo.poster ? ` poster="${esc(p.heroVideo.poster)}"` : ""} autoplay muted loop playsinline preload="auto" aria-label="${esc(p.heroVideo.alt || p.title + " video")}"></video></div>` : p.hideCover ? "" : media(p.cover, "Cover image")}</section>
       <section class="wrap sections">${sectionsHTML(p.sections || [])}</section>
       ${next && next.slug !== p.slug ? `<section class="wrap"><a class="next" href="#${next.slug}">
         <span class="mono muted">Next Project</span><span class="t">${esc(next.title)} →</span></a></section>` : ""}
