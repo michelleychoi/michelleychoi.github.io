@@ -75,7 +75,7 @@ window.SITE = {
     physical: {
       label: "Physical",
       blurb: "Things built at full scale: models, sketches, and studio work.",
-      projects: ["bridge", "sketches", "1101"]
+      projects: ["sketches", "bridge", "1101"]
     }
   }
 };
