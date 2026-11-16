@@ -31,7 +31,7 @@ addProject({
     { group: "Early Exploration", type: "split", sideFirst: true, heading: "Pitch Board & Sketches", intro: "My first lo-fi flow, annotated with notes and open questions from the pitch, next to an early sketch.",
       main: { src: "assets/digital/gamify/pitch-board.jpg", ratio: "16/9", caption: "Lo-fi flow with handwritten notes" },
       side: [
-        { src: "assets/digital/gamify/sketch-1.jpg", ratio: "1500/2000", caption: "Early sketch" }
+        { src: "assets/digital/gamify/sketch-1.jpg?v=202611161855", ratio: "1500/2000", caption: "Early sketch" }
       ]},
     { group: "Early Exploration", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
       src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
