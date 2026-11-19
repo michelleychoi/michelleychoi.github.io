@@ -134,41 +134,71 @@
     let i = Math.min(homePhase, last), busy = false;
     const set = (n) => {
       i = n; homePhase = n;
-      els.forEach((e, k) => { e.classList.toggle("past", k < n); e.classList.toggle("cur", k === n); e.classList.toggle("next", k > n); e.inert = k !== n; });
+      els.forEach((e, k) => { e.classList.toggle("is-past", k < n); e.classList.toggle("is-cur", k === n); e.classList.toggle("is-next", k > n); e.inert = k !== n; });
       root.dataset.phase = n;
       root.querySelectorAll("[data-go]").forEach((a) => a.classList.toggle("on", +a.dataset.go === n));
     };
+    // project screens: shrink the cards until the screen fits without scrolling (desktop only)
+    const fit = () => {
+      const el = els[i]; if (!el.classList.contains("ph-work")) return;
+      const g = el.querySelector(".pgrid"); g.style.removeProperty("--cw");
+      if (innerWidth <= 760) return;
+      for (let k = 0; k < 12 && el.scrollHeight > el.clientHeight; k++) {
+        const w = g.firstElementChild.getBoundingClientRect().width; g.style.setProperty("--cw", Math.floor(w * 0.96) + "px");
+      }
+    };
+    addEventListener("resize", fit);
     const HASH = ["", "digital", "physical", "about"];
     const go = (n) => {
       if (busy || n < 0 || n > last || n === i) return;
       busy = true;
       els[n].scrollTop = 0;
-      set(n);
+      set(n); fit();
       history.replaceState(null, "", HASH[n] ? "#" + HASH[n] : location.pathname + location.search);
       document.title = (n ? ["", S.tabs.digital.label, S.tabs.physical.label, "About"][n] + " · " : "") + S.name;
-      setTimeout(() => { busy = false; }, DUR);
+      setTimeout(() => { busy = false; if (queued) { const d = queued; queued = 0; go(i + d); } }, DUR);
     };
-    set(i);
+    set(i); fit();
     // can the current screen still scroll in this direction? then let it scroll first
     const edge = (dir) => { const e = els[i]; return dir > 0 ? e.scrollTop + e.clientHeight >= e.scrollHeight - 12 : e.scrollTop <= 12; };
-    // one scroll gesture moves at most one screen, and only if it started at the top/bottom edge
-    // (so scrolling up through the About page doesn't fly straight back to Art & Making)
-    let lastWheel = 0, used = false, startEdge = { 1: true, "-1": true };
+    // Wheel / trackpad: one swipe moves exactly one screen.
+    // A swipe is "new" after a short pause, or when the scroll speeds up again (trackpad momentum only ever slows
+    // down), so a quick second swipe isn't mistaken for leftover momentum. The rest of a swipe that already
+    // changed screens is swallowed. If a swipe scrolled the page's own content (the About page) up to its edge,
+    // it stops there; the next swipe moves on.
+    let lastT = 0, lastAbs = 0, swallow = false, moved = false, queued = 0, firedT = -1e9;
+    // screens other than About fit without scrolling, so a queued swipe can always continue from them
+    const edgeAfter = (d) => { const n = i; return n + d >= 0 && n + d <= last && !els[n].classList.contains("ph-about"); };
+    els.forEach((el) => el.addEventListener("scroll", () => { if (!busy) moved = true; }, { passive: true }));
     const onWheel = (e) => {
-      const now = performance.now(), gap = now - lastWheel; lastWheel = now;
-      if (gap > 220 && !busy) { used = false; startEdge = { 1: edge(1), "-1": edge(-1) }; } // a new scroll gesture
-      // the rest of a gesture that already changed screens (incl. trackpad momentum) is swallowed
-      if (used || busy) { if (used) e.preventDefault(); return; }
-      if (Math.abs(e.deltaY) < 4) return;
+      const now = performance.now(), abs = Math.abs(e.deltaY), gap = now - lastT;
+      // (a swipe's own ramp-up right after it fires doesn't count as a new swipe)
+      const fresh = gap > 180 || (now - firedT > 380 && abs > 12 && abs > lastAbs * 1.8);
+      lastT = now; lastAbs = abs;
+      if (busy) { // a new swipe during a transition is remembered and runs right after it
+        e.preventDefault();
+        if (fresh && abs > 12 && swallow) { const d = e.deltaY > 0 ? 1 : -1; if (edgeAfter(d)) queued = d; }
+        return;
+      }
+      if (fresh) { swallow = false; moved = false; }
+      if (swallow) { e.preventDefault(); return; }
+      if (abs < 2) return;
       const dir = e.deltaY > 0 ? 1 : -1;
-      if (!startEdge[dir] || !edge(dir)) return;
-      used = true; e.preventDefault(); go(i + dir);
+      if (!edge(dir) || moved) return;
+      e.preventDefault(); swallow = true; firedT = now; go(i + dir);
     };
     let y0 = null, okUp = false, okDown = false;
-    const onStart = (e) => { y0 = e.touches[0].clientY; okDown = edge(1); okUp = edge(-1); };
+    // touch: a swipe that starts at the top/bottom edge of the screen's content moves to the next/previous screen
+    let x0 = 0;
+    const onStart = (e) => { y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; okDown = edge(1); okUp = edge(-1); };
+    const onMove = (e) => { // at an edge, stop the page from rubber-banding so the swipe reads as a screen change
+      if (y0 == null || busy) return; const dy = y0 - e.touches[0].clientY;
+      if ((dy > 0 && okDown && edge(1)) || (dy < 0 && okUp && edge(-1))) e.preventDefault();
+    };
     const onEnd = (e) => {
-      if (y0 == null) return; const dy = y0 - e.changedTouches[0].clientY; y0 = null;
-      if (dy > 50 && okDown && edge(1)) go(i + 1); else if (dy < -50 && okUp && edge(-1)) go(i - 1);
+      if (y0 == null) return; const t = e.changedTouches[0], dy = y0 - t.clientY, dx = Math.abs(x0 - t.clientX); y0 = null;
+      if (Math.abs(dy) < 40 || dx > Math.abs(dy)) return;
+      if (dy > 0 && okDown && edge(1)) go(i + 1); else if (dy < 0 && okUp && edge(-1)) go(i - 1);
     };
     const onKey = (e) => {
       if (e.target.closest?.("input, textarea")) return;
@@ -182,10 +212,11 @@
     };
     addEventListener("wheel", onWheel, { passive: false });
     addEventListener("touchstart", onStart, { passive: true });
+    addEventListener("touchmove", onMove, { passive: false });
     addEventListener("touchend", onEnd, { passive: true });
     addEventListener("keydown", onKey);
     root.addEventListener("click", onClick);
-    phasesOff = () => { removeEventListener("wheel", onWheel); removeEventListener("touchstart", onStart); removeEventListener("touchend", onEnd); removeEventListener("keydown", onKey); };
+    phasesOff = () => { removeEventListener("wheel", onWheel); removeEventListener("touchstart", onStart); removeEventListener("touchend", onEnd); removeEventListener("touchmove", onMove); removeEventListener("resize", fit); removeEventListener("keydown", onKey); };
   }
   // the name in the top bar always starts home from the cover
   document.addEventListener("click", (e) => { if (e.target.closest?.('a.brand[data-home="0"]')) homePhase = 0; });

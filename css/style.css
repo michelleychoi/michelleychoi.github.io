@@ -787,10 +787,10 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .phases.view { animation: none; }
 .phases > .phase { position: fixed; inset: 0; z-index: 1; height: 100svh; overflow-y: auto; overscroll-behavior: contain; background: var(--paper);
   transition: transform 1.05s cubic-bezier(.7,0,.2,1), opacity .8s cubic-bezier(.7,0,.2,1), filter .9s cubic-bezier(.7,0,.2,1), border-radius 1.05s cubic-bezier(.7,0,.2,1), box-shadow 1.05s; }
-.phases > .phase.cur { transform: none; z-index: 2; }
-.phases > .phase.past { transform: translateY(-10vh) scale(.92); opacity: 0; filter: blur(4px); pointer-events: none; z-index: 1; }
-.phases > .phase.next { transform: translateY(102%); border-radius: 56px 56px 0 0; box-shadow: 0 -18px 60px rgba(30,25,60,.16); z-index: 3; pointer-events: none; }
-.phases > .phase.next + .phase.next { box-shadow: none; }
+.phases > .phase.is-cur { transform: none; z-index: 2; }
+.phases > .phase.is-past { transform: translateY(-10vh) scale(.92); opacity: 0; filter: blur(4px); pointer-events: none; z-index: 1; }
+.phases > .phase.is-next { transform: translateY(102%); border-radius: 56px 56px 0 0; box-shadow: 0 -18px 60px rgba(30,25,60,.16); z-index: 3; pointer-events: none; }
+.phases > .phase.is-next + .phase.is-next { box-shadow: none; }
 .phases > .phase.home { height: 100svh; }
 
 .ph-work .ph-in { min-height: 100%; max-width: 1240px; margin: 0 auto; padding: clamp(84px, 11vh, 110px) clamp(20px, 5vw, 72px) 56px; display: flex; flex-direction: column; justify-content: center; }
@@ -800,8 +800,8 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .pgrid { --cw: min(100%, calc((100svh - 330px) / 2 * 1.6)); display: grid; grid-template-columns: repeat(2, minmax(0, var(--cw))); gap: clamp(18px, 2.6vh, 30px) clamp(18px, 2.4vw, 36px); justify-content: start; }
 .ph-physical .pgrid { --cw: min(100%, calc((100svh - 300px) * 1.35)); }
 .pcard { display: grid; gap: 4px; color: inherit; text-decoration: none; opacity: 0; transform: translateY(34px); transition: opacity .7s ease, transform .9s cubic-bezier(.7,0,.2,1); }
-.phase.cur .pcard { opacity: 1; transform: none; }
-.phase.cur .pcard:nth-child(1) { transition-delay: .35s; } .phase.cur .pcard:nth-child(2) { transition-delay: .45s; } .phase.cur .pcard:nth-child(3) { transition-delay: .55s; }
+.phase.is-cur .pcard { opacity: 1; transform: none; }
+.phase.is-cur .pcard:nth-child(1) { transition-delay: .35s; } .phase.is-cur .pcard:nth-child(2) { transition-delay: .45s; } .phase.is-cur .pcard:nth-child(3) { transition-delay: .55s; }
 .pc-img { overflow: hidden; border-radius: 12px; aspect-ratio: 16 / 10; background: var(--panel); }
 .pc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
 .pcard:hover .pc-img img { transform: scale(1.045); }
@@ -851,11 +851,21 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .ph-head.cell h2 { font-size: clamp(2.6rem, 5.2vw, 4.6rem); grid-column: 1; }
 .ph-head.cell span { grid-column: 2; grid-row: 1; align-self: start; padding-top: 6px; }
 .ph-head.cell p { grid-column: 1 / -1; max-width: 32ch; }
-.phase.cur .ph-head.cell { animation: cover-rise .9s cubic-bezier(.7,0,.2,1) .6s both; }
+.phase.is-cur .ph-head.cell { animation: cover-rise .9s cubic-bezier(.7,0,.2,1) .6s both; }
 @media (max-width: 760px) { .ph-head.cell { order: -1; border-top: 0; border-bottom: 1px solid var(--ink); padding: 0 0 12px; margin: 0; } .ph-head.cell h2 { font-size: clamp(1.9rem, 8vw, 2.6rem); } }
 /* Design title in the top-left cell, Go For It beside it */
 .ph-head.cell { align-self: start; margin: 0; }
-.phase.cur .ph-head.cell { animation-delay: .3s; }
+.phase.is-cur .ph-head.cell { animation-delay: .3s; }
 /* About as the last screen of the swipe-through */
 .ph-about { padding-top: clamp(56px, 8vh, 80px); }
 .ph-about footer .wrap { padding-bottom: 40px; }
+/* lighter screen transitions: only transform + opacity animate (no blur, no animated corners or shadows),
+   so the swoosh stays smooth even with the long About page */
+.phases > .phase { transition: transform 1s cubic-bezier(.7,0,.2,1), opacity .8s cubic-bezier(.7,0,.2,1); will-change: transform; backface-visibility: hidden;
+  border-radius: 0; box-shadow: 0 -24px 60px -20px rgba(30,25,60,.22); }
+.phases > .phase.is-past { filter: none; transform: translateY(-8vh) scale(.96); }
+.phases > .phase.is-next { border-radius: 0; box-shadow: 0 -24px 60px -20px rgba(30,25,60,.22); transform: translateY(100%); }
+.phases > .phase.is-next + .phase.is-next { box-shadow: 0 -24px 60px -20px rgba(30,25,60,.22); visibility: hidden; transition: transform 1s cubic-bezier(.7,0,.2,1), opacity .8s, visibility 0s 1s; }
+.phases > .phase.is-cur, .phases > .phase.is-next { visibility: visible; }
+.phases > .phase.is-past { visibility: hidden; transition: transform 1s cubic-bezier(.7,0,.2,1), opacity .8s cubic-bezier(.7,0,.2,1), visibility 0s 1s; }
+.phases > .phase.is-cur { transition: transform 1s cubic-bezier(.7,0,.2,1), opacity .8s cubic-bezier(.7,0,.2,1), visibility 0s; }
