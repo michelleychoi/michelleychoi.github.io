@@ -972,3 +972,12 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .ph-dots { justify-items: center; }
 .ph-dots a { position: relative; display: grid; place-items: center; width: 14px; height: 14px; }
 .ph-dots span { position: absolute; right: calc(100% + 8px); top: 50%; translate: 0 -50%; }
+
+/* Art & Making text slides in from the left too, same as Design */
+.ph-physical .ph-head h2, .ph-physical .ph-head p, .ph-physical .ph-head > span, .ph-physical .pc-meta, .ph-physical .pc-k { transition: translate 1.1s cubic-bezier(.22,1,.36,1), opacity .8s ease; }
+.ph-physical:not(.play) .ph-head h2, .ph-physical:not(.play) .ph-head p, .ph-physical:not(.play) .ph-head > span, .ph-physical:not(.play) .pc-meta, .ph-physical:not(.play) .pc-k { translate: -7vw 0; opacity: 0; transition: none; }
+.ph-physical.play .ph-head h2 { transition-delay: .05s; } .ph-physical.play .ph-head p { transition-delay: .15s; } .ph-physical.play .ph-head > span { transition-delay: .2s; }
+.ph-physical.play .pcard:nth-child(1) .pc-meta { transition-delay: .28s; } .ph-physical.play .pcard:nth-child(1) .pc-k { transition-delay: .36s; }
+.ph-physical.play .pcard:nth-child(2) .pc-meta { transition-delay: .4s; } .ph-physical.play .pcard:nth-child(2) .pc-k { transition-delay: .48s; }
+.ph-physical.play .pcard:nth-child(3) .pc-meta { transition-delay: .52s; } .ph-physical.play .pcard:nth-child(3) .pc-k { transition-delay: .6s; }
+@media (prefers-reduced-motion: reduce) { .ph-physical .ph-head h2, .ph-physical .ph-head p, .ph-physical .ph-head > span, .ph-physical .pc-meta, .ph-physical .pc-k { translate: none !important; opacity: 1 !important; transition: none !important; } }
