@@ -186,12 +186,13 @@
   // On narrow screens (canvas wider than tall) the streams run sideways instead.
   function streams(canvas, opts = {}) {
     const ctx = canvas.getContext("2d");
-    let W, H, across, sprites = [], cols = [];
+    let W, H, across, sprites = [], cols = [], dotCols = [];
+    const dots = opts.dots ?? true; // dots mode (bob's pick 2026-11-19): soft coloured dots instead of the flower glyphs
     function build() {
       const r = canvas.getBoundingClientRect(); W = r.width; H = r.height; across = W > H;
       canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
       const pal = palette(), soft = pal.soft, px = 30;
-      sprites = [];
+      sprites = []; dotCols = soft;
       for (let i = 0; i < 40; i++) {
         const c = document.createElement("canvas"); c.width = c.height = Math.ceil(px * DPR);
         const g = c.getContext("2d"); g.scale(DPR, DPR); g.translate(px / 2, px / 2);
@@ -232,10 +233,19 @@
           // (changing its speed made glyphs jump), it just breathes a little deeper near the pointer.
           const d = Math.hypot(x - mx, y - my), r = Math.max(0, 1 - d / 130);
           const f = near * r * r * (3 - 2 * r); // smoothstep
-          const breathe = 0.78 + (0.22 + f * 0.1) * Math.sin(s * 1.3 + i * 0.55 + c.phase);
-          const sz = c.size * breathe * (1 + f * 0.75);
-          ctx.globalAlpha = Math.min(1, edge * (0.55 + 0.45 * breathe + f * 0.4));
-          ctx.drawImage(sprites[id], x - sz / 2, y - sz / 2, sz, sz);
+          const wave = Math.sin(s * 1.3 + i * 0.55 + c.phase);
+          if (dots) {
+            // dots: nearly one size, a gentle breath, a touch softer
+            const br = 0.92 + (0.08 + f * 0.08) * wave;
+            const rad = 3.3 * (1 + (c.size - 17) * 0.012) * br * (1 + f * 0.7);
+            ctx.globalAlpha = Math.min(1, edge * 0.85 * (0.62 + 0.38 * br + f * 0.35));
+            ctx.fillStyle = dotCols[id % dotCols.length]; ctx.beginPath(); ctx.arc(x, y, rad, 0, 6.2832); ctx.fill();
+          } else {
+            const breathe = 0.78 + (0.22 + f * 0.1) * wave;
+            const sz = c.size * breathe * (1 + f * 0.75);
+            ctx.globalAlpha = Math.min(1, edge * (0.55 + 0.45 * breathe + f * 0.4));
+            ctx.drawImage(sprites[id], x - sz / 2, y - sz / 2, sz, sz);
+          }
         }
       });
       ctx.globalAlpha = 1;
