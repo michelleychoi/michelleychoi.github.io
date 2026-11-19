@@ -111,7 +111,7 @@
       const t = S.tabs[id], list = t.projects.map((s) => PROJECTS[s]).filter((p) => p && !p.locked);
       const [hero, ...rest] = list;
       const img = (p) => `<div class="pc-img">${p.cover?.live ? liveCover(p.cover) : `<img src="${esc(p.cover?.src || "")}" alt="${esc(p.title)} cover">`}</div>`;
-      const det = (p) => `<span class="mono muted">${esc(p.tags || p.kicker)} · ${esc(p.year)}</span>`;
+      const det = (p) => `<span class="mono muted">${esc(p.tags || p.kicker)}${p.noYearDot ? " " : " · "}${esc(p.year)}</span>`;
       return `<section class="phase ph-work ph-${id}" aria-label="${esc(t.label)}"><div class="ph-in feat">
         <div class="ph-head" style="--o:0"><h2>${esc(t.label)}</h2><span class="mono muted">0${n} / 02</span></div>
         <a class="f-hero" href="#${hero.slug}" style="--o:0">${img(hero)}<div class="f-txt">
@@ -160,7 +160,10 @@
     let i = Math.min(homePhase, last), busy = false;
     const set = (n) => {
       i = n; homePhase = n;
-      els.forEach((e, k) => { e.classList.toggle("is-past", k < n); e.classList.toggle("is-cur", k === n); e.classList.toggle("is-next", k > n); if (k !== n) e.classList.remove("is-peek"); e.inert = k !== n; });
+      els.forEach((e, k) => { e.classList.toggle("is-past", k < n); e.classList.toggle("is-cur", k === n); e.classList.toggle("is-next", k > n); if (k !== n) e.classList.remove("is-peek", "play"); e.inert = k !== n; });
+      // "play" starts the entrance animations (Design text slides in, Go For It cover builds); a swipe adds it
+      // part-way through the slide, otherwise it's added as the screen arrives
+      const cur = els[n]; if (!cur.classList.contains("play")) requestAnimationFrame(() => requestAnimationFrame(() => { if (i === n) cur.classList.add("play"); }));
       root.dataset.phase = n;
       root.querySelectorAll("[data-go]").forEach((a) => a.classList.toggle("on", +a.dataset.go === n));
     };
@@ -197,6 +200,7 @@
     const SH = "0 -24px 60px -20px rgba(30,25,60,.22)"; // soft edge on the screen sliding over
     const paint = () => {
       const { dir, a, b, v } = drag;
+      if (v > 0.35 && !b.classList.contains("play")) b.classList.add("play");
       if (dir > 0) { a.style.transform = `translate3d(0,${-12 * v}%,0)`; a.style.opacity = 1 - 0.4 * v; b.style.transform = `translate3d(0,${100 * (1 - v)}%,0)`; }
       else { a.style.transform = `translate3d(0,${100 * v}%,0)`; b.style.transform = `translate3d(0,${-12 * (1 - v)}%,0)`; b.style.opacity = 0.6 + 0.4 * v; }
     };
@@ -236,7 +240,7 @@
       const d = drag; drag = null; anim = null; if (raf) { cancelAnimationFrame(raf); raf = 0; }
       els.forEach((e) => { e.style.transition = "none"; });
       [d.a, d.b].forEach((e) => { e.style.transform = ""; e.style.opacity = ""; e.style.boxShadow = ""; e.style.visibility = ""; e.style.willChange = ""; });
-      if (commit) land(d.n); else d.b.classList.remove("is-peek");
+      if (commit) land(d.n); else d.b.classList.remove("is-peek", "play");
       void root.offsetHeight; // apply the final classes with no transition, then turn transitions back on
       requestAnimationFrame(() => els.forEach((e) => { e.style.transition = ""; }));
       afterMove();
@@ -590,7 +594,7 @@
   let coverIO = null;
   function liveCovers() {
     if (coverIO) coverIO.disconnect();
-    const els = document.querySelectorAll(".gfi-cover"); if (!els.length) return;
+    const els = [...document.querySelectorAll(".gfi-cover")].filter((e) => !e.closest(".phases")); if (!els.length) return; // home screens use the phase's play class
     if (!("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("play")); return; }
     coverIO = new IntersectionObserver((list) => list.forEach((en) => {
       if (en.intersectionRatio >= 0.4) en.target.classList.add("play");

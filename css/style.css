@@ -950,11 +950,20 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .gfi-ph.m { left: 48.75cqw; top: 13.75cqw; width: 22.5cqw; z-index: 2; }
 .gfi-ph.r { left: 70cqw; top: 18.75cqw; rotate: 11deg; }
 .gfi-t, .gfi-ph { transition: translate 1.2s cubic-bezier(.22,1,.36,1), opacity .8s ease; }
-.gfi-cover:not(.play) .gfi-t { translate: -45cqw 0; opacity: 0; transition: none; }
-.gfi-cover:not(.play) .gfi-ph { translate: 0 48cqw; opacity: 0; transition: none; }
-.gfi-cover.play .gfi-t { transition-delay: .1s; }
-.gfi-cover.play .gfi-ph.l { transition-delay: .25s; }
-.gfi-cover.play .gfi-ph.m { transition-delay: .38s; }
-.gfi-cover.play .gfi-ph.r { transition-delay: .5s; }
+.gfi-cover:not(.play):not(.phase.play .gfi-cover) .gfi-t { translate: -45cqw 0; opacity: 0; transition: none; }
+.gfi-cover:not(.play):not(.phase.play .gfi-cover) .gfi-ph { translate: 0 48cqw; opacity: 0; transition: none; }
+.gfi-cover.play .gfi-t, .phase.play .gfi-t { transition-delay: .1s; }
+.gfi-cover.play .gfi-ph.l, .phase.play .gfi-ph.l { transition-delay: .25s; }
+.gfi-cover.play .gfi-ph.m, .phase.play .gfi-ph.m { transition-delay: .38s; }
+.gfi-cover.play .gfi-ph.r, .phase.play .gfi-ph.r { transition-delay: .5s; }
 .f-hero:hover .gfi-cover { transform: scale(1.03); }
 @media (prefers-reduced-motion: reduce) { .gfi-cover .gfi-t, .gfi-cover .gfi-ph { translate: none !important; opacity: 1 !important; transition: none !important; } }
+
+/* Design screen text slides in from the left as the screen arrives (matches the Go For It cover) */
+.ph-digital .ph-head h2, .ph-digital .ph-head > span, .ph-digital .f-txt > *, .ph-digital .f-sm > div > * { transition: translate 1.1s cubic-bezier(.22,1,.36,1), opacity .8s ease; }
+.ph-digital:not(.play) .ph-head h2, .ph-digital:not(.play) .ph-head > span, .ph-digital:not(.play) .f-txt > *, .ph-digital:not(.play) .f-sm > div > * { translate: -7vw 0; opacity: 0; transition: none; }
+.ph-digital.play .ph-head h2 { transition-delay: .05s; } .ph-digital.play .ph-head > span { transition-delay: .15s; }
+.ph-digital.play .f-txt > :nth-child(1) { transition-delay: .2s; } .ph-digital.play .f-txt > :nth-child(2) { transition-delay: .3s; } .ph-digital.play .f-txt > :nth-child(3) { transition-delay: .38s; }
+.ph-digital.play .f-sm > div > :nth-child(1) { transition-delay: .4s; } .ph-digital.play .f-sm > div > :nth-child(2) { transition-delay: .48s; }
+.ph-digital.play .f-sm + .f-sm > div > :nth-child(1) { transition-delay: .5s; } .ph-digital.play .f-sm + .f-sm > div > :nth-child(2) { transition-delay: .58s; }
+@media (prefers-reduced-motion: reduce) { .ph-digital .ph-head h2, .ph-digital .ph-head > span, .ph-digital .f-txt > *, .ph-digital .f-sm > div > * { translate: none !important; opacity: 1 !important; transition: none !important; } }
