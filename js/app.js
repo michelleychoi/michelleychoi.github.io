@@ -94,6 +94,21 @@
     const card = (p) => `<a class="pcard" href="#${p.slug}"><div class="pc-img"><img src="${esc(p.cover?.src || "")}" alt="${esc(p.title)} cover" loading="lazy"></div>
         <div class="pc-meta"><b><canvas class="seal" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas>${esc(p.title)}</b><span class="mono muted">${esc(p.year)}</span></div>
         <span class="mono muted pc-k">${esc(p.kicker)}</span></a>`;
+    // Design screen: Go For It as the big featured piece, the other two side by side underneath.
+    // Each shows only its details (tags · year), and Go For It fades in first.
+    const featured = (id, n) => {
+      const t = S.tabs[id], list = t.projects.map((s) => PROJECTS[s]).filter((p) => p && !p.locked);
+      const [hero, ...rest] = list;
+      const img = (p) => `<div class="pc-img"><img src="${esc(p.cover?.src || "")}" alt="${esc(p.title)} cover"></div>`;
+      const det = (p) => `<span class="mono muted">${esc(p.tags || p.kicker)} · ${esc(p.year)}</span>`;
+      return `<section class="phase ph-work ph-${id}" aria-label="${esc(t.label)}"><div class="ph-in feat">
+        <div class="ph-head" style="--o:0"><h2>${esc(t.label)}</h2><span class="mono muted">0${n} / 02</span></div>
+        <a class="f-hero" href="#${hero.slug}" style="--o:0">${img(hero)}<div class="f-txt">
+          <h3><canvas class="seal" data-seal="${esc(hero.slug)}" aria-hidden="true"></canvas>${esc(hero.title)}</h3>${det(hero)}<span class="cta mono"><i>→</i>View case study</span></div></a>
+        <div class="f-row">${rest.map((p, k) => `<a class="f-sm" href="#${p.slug}" style="--o:${k + 1}">${img(p)}<div>
+          <h4><canvas class="seal" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas>${esc(p.title)}</h4>${det(p)}</div></a>`).join("")}</div>
+      </div></section>`;
+    };
     const phase = (id, n) => {
       const t = S.tabs[id], list = t.projects.map((s) => PROJECTS[s]).filter((p) => p && !p.locked);
       const head = (cls) => `<div class="ph-head${cls}"><h2>${esc(t.label)}</h2><p>${esc(t.blurb)}</p><span class="mono muted">0${n} / 02</span></div>`;
@@ -114,7 +129,7 @@
         </div>
         <a class="scroll-cue mono" href="#" data-go="1"><i></i>Scroll to see my work</a>
       </section>
-      ${phase("digital", 1)}
+      ${featured("digital", 1)}
       ${phase("physical", 2)}
       <section class="phase ph-about" aria-label="About">${aboutBody()}${footer()}</section>
       <div class="ph-bar"><a class="brand" href="#" data-go="0">${esc(S.name)}</a>
@@ -130,7 +145,7 @@
     document.documentElement.classList.toggle("phased", !!root);
     if (!root) return;
     const els = [...root.querySelectorAll(".phase")], last = els.length - 1;
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, DUR = reduce ? 200 : 1050;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, DUR = reduce ? 200 : 750;
     let i = Math.min(homePhase, last), busy = false;
     const set = (n) => {
       i = n; homePhase = n;
@@ -141,7 +156,7 @@
     // project screens: shrink the cards until the screen fits without scrolling (desktop only)
     const fit = () => {
       const el = els[i]; if (!el.classList.contains("ph-work")) return;
-      const g = el.querySelector(".pgrid"); g.style.removeProperty("--cw");
+      const g = el.querySelector(".pgrid"); if (!g) return; g.style.removeProperty("--cw");
       if (innerWidth <= 760) return;
       for (let k = 0; k < 12 && el.scrollHeight > el.clientHeight; k++) {
         const w = g.firstElementChild.getBoundingClientRect().width; g.style.setProperty("--cw", Math.floor(w * 0.96) + "px");

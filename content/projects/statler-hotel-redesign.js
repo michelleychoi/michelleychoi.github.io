@@ -6,6 +6,7 @@ addProject({
   title: "Statler Hotel Redesign",
   kicker: "Interior Design Challenge · Hospitality",
   year: "2025",
+  tags: "Interior design · Hospitality", // short details shown on the home Design screen
   role: "Interior Designer",
   tools: "SketchUp, Enscape, Adobe Illustrator",
   // blurb: short line on the Digital/Physical overview cards (summary shows on the project page)

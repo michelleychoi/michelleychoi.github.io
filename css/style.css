@@ -869,3 +869,44 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .phases > .phase.is-cur, .phases > .phase.is-next { visibility: visible; }
 .phases > .phase.is-past { visibility: hidden; transition: transform 1s cubic-bezier(.7,0,.2,1), opacity .8s cubic-bezier(.7,0,.2,1), visibility 0s 1s; }
 .phases > .phase.is-cur { transition: transform 1s cubic-bezier(.7,0,.2,1), opacity .8s cubic-bezier(.7,0,.2,1), visibility 0s; }
+/* ---------- Design screen: featured layout ---------- */
+.ph-in.feat { height: 100%; min-height: 0; max-width: 1400px; padding: clamp(78px, 10vh, 96px) clamp(20px, 5vw, 72px) clamp(24px, 4vh, 44px);
+  display: grid; grid-template-rows: auto minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(14px, 2.4vh, 24px); justify-content: stretch; }
+.feat .ph-head { display: flex; justify-content: space-between; align-items: baseline; margin: 0; }
+.feat .pc-img { aspect-ratio: auto; height: 100%; border-radius: 14px; }
+.f-hero { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 48px); min-height: 0; color: inherit; text-decoration: none; }
+.f-txt { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: clamp(10px, 1.8vh, 18px); }
+.f-txt h3 { margin: 0; font-weight: 600; font-size: clamp(1.8rem, min(3.6vw, 5.6vh), 3.4rem); line-height: 1.02; letter-spacing: -0.015em; }
+.f-txt h3 .seal, .f-sm h4 .seal { width: .7em; height: .7em; margin-right: .25em; vertical-align: 0; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 48px); min-height: 0; }
+.f-sm { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 18px; align-items: center; min-height: 0; color: inherit; text-decoration: none; }
+.f-sm h4 { margin: 0 0 8px; font-weight: 600; font-size: clamp(1.15rem, 1.7vw, 1.55rem); line-height: 1.1; }
+.feat .pc-img img { transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.f-hero:hover .pc-img img, .f-sm:hover .pc-img img { transform: scale(1.04); }
+.f-hero:hover h3, .f-sm:hover h4 { color: var(--name); }
+.feat .cta { display: inline-flex; align-items: center; gap: 10px; font-size: .74rem; letter-spacing: .1em; }
+.feat .cta i { font-style: normal; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--ink); transition: background .3s, color .3s, transform .3s; }
+.f-hero:hover .cta i { background: var(--ink); color: var(--paper); transform: translateX(4px); }
+/* Go For It first, then the others a beat apart */
+.feat [style*="--o"] { opacity: 0; }
+.phase.is-cur .feat [style*="--o"] { animation: feat-in .6s cubic-bezier(.22,1,.36,1) both; animation-delay: calc(180ms + var(--o) * 220ms); }
+.phase.is-cur .feat .ph-head { animation-delay: 120ms; }
+@keyframes feat-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+  .ph-in.feat { height: auto; display: block; padding-top: 76px; }
+  .f-hero, .f-row, .f-sm { grid-template-columns: 1fr; }
+  .f-hero { margin: 16px 0 28px; } .f-row { gap: 24px; }
+  .feat .pc-img { aspect-ratio: 16 / 10; height: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .phase.is-cur .feat [style*="--o"] { animation-duration: .01s; animation-delay: 0s; } }
+
+/* ---------- screen transition: a calm slide, ease-out with no overshoot ---------- */
+.phases > .phase, .phases > .phase.is-cur { transition: transform .7s cubic-bezier(.22,1,.36,1), opacity .7s cubic-bezier(.22,1,.36,1), visibility 0s; box-shadow: none; }
+.phases > .phase.is-next { transform: translateY(100%); box-shadow: none; }
+.phases > .phase.is-past { transform: translateY(-12%); opacity: .6; transition: transform .7s cubic-bezier(.22,1,.36,1), opacity .7s cubic-bezier(.22,1,.36,1), visibility 0s .7s; }
+.phases > .phase.is-next + .phase.is-next { transition: transform .7s cubic-bezier(.22,1,.36,1), visibility 0s .7s; box-shadow: none; }
+/* keep each cover's full 16:10 frame (no cropping): the image sets its own width from the row height */
+.f-hero { grid-template-columns: auto minmax(240px, 1fr); }
+.f-sm { grid-template-columns: auto minmax(0, 1fr); }
+.feat .pc-img { height: 100%; aspect-ratio: 16 / 10; width: auto; max-width: 100%; }
+@media (max-width: 760px) { .feat .pc-img { width: 100%; height: auto; } .f-hero, .f-sm { grid-template-columns: 1fr; } }

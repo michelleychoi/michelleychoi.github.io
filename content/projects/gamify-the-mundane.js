@@ -7,6 +7,7 @@ addProject({
   title: "Gamify the Mundane Challenge",
   kicker: "Design challenge · App concept · Figma",
   year: "2026",
+  tags: "App concept · Figma", // short details shown on the home Design screen
   role: "Designer",
   tools: "Figma",
   // blurb: short line on the Digital/Physical overview cards (summary shows on the project page)
