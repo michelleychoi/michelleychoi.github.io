@@ -115,9 +115,9 @@
       return `<section class="phase ph-work ph-${id}" aria-label="${esc(t.label)}"><div class="ph-in feat">
         <div class="ph-head" style="--o:0"><h2>${esc(t.label)}</h2><span class="mono muted">0${n} / 02</span></div>
         <a class="f-hero" href="#${hero.slug}" style="--o:0">${img(hero)}<div class="f-txt">
-          <h3><canvas class="seal" data-seal="${esc(hero.slug)}" aria-hidden="true"></canvas>${esc(hero.title)}</h3>${det(hero)}<span class="cta mono"><i>→</i>View case study</span></div></a>
+          <h3>${esc(hero.title)}</h3>${det(hero)}<span class="cta mono"><i>→</i>View case study</span></div></a>
         <div class="f-row">${rest.map((p, k) => `<a class="f-sm" href="#${p.slug}" style="--o:${k + 1}">${img(p)}<div>
-          <h4><canvas class="seal" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas>${esc(p.title)}</h4>${det(p)}</div></a>`).join("")}</div>
+          <h4>${esc(p.title)}</h4>${det(p)}</div></a>`).join("")}</div>
       </div></section>`;
     };
     const phase = (id, n) => {
