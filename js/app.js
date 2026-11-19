@@ -103,7 +103,7 @@
     const parts = S.name.trim().split(" ");
     const last = parts.length > 1 ? parts.pop() : "";
     const card = (p) => `<a class="pcard" href="#${p.slug}"><div class="pc-img"><img src="${esc(p.cover?.src || "")}" alt="${esc(p.title)} cover" loading="lazy"></div>
-        <div class="pc-meta"><b><canvas class="seal" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas>${esc(p.title)}</b><span class="mono muted">${esc(p.year)}</span></div>
+        <div class="pc-meta"><b>${esc(p.title)}</b><span class="mono muted">${esc(p.year)}</span></div>
         <span class="mono muted pc-k">${esc(p.kicker)}</span></a>`;
     // Design screen: Go For It as the big featured piece, the other two side by side underneath.
     // Each shows only its details (tags · year), and Go For It fades in first.
