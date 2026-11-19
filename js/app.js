@@ -65,8 +65,8 @@
   function header(active) {
     const tab = (id, label) => `<a href="#${id}"${active === id ? ' aria-current="page"' : ""}>${label}</a>`;
     return `<header class="bar"><div class="wrap">
-      <a class="brand" href="#">${esc(S.name)}</a>
-      <nav class="tabs" aria-label="Sections">${tab("digital", "Digital")}${tab("physical", "Physical")}${tab("about", "About")}</nav>
+      <a class="brand" href="#" data-home="0">${esc(S.name)}</a>
+      <nav class="tabs" aria-label="Sections">${tab("digital", S.tabs.digital.label)}${tab("physical", S.tabs.physical.label)}${tab("about", "About")}</nav>
       <div class="status mono"><span class="dot"></span>Open to internships</div>
     </div></header>`;
   }
@@ -85,30 +85,108 @@
     }).join("");
   }
 
+  // Home is a stack of full-screen phases: cover → Design → Art & Making. Each swipe/scroll swooshes to the next,
+  // and one more past Art & Making goes to the About page.
+  let homePhase = 0;
   function home() {
     const parts = S.name.trim().split(" ");
     const last = parts.length > 1 ? parts.pop() : "";
-    const count = (t) => S.tabs[t].projects.filter((s) => PROJECTS[s]).length;
-    const tile = (href, n, label, sub, field) => `<a class="tile" href="#${href}">
-        <span class="art glyph"><canvas class="seal" data-seal="${field.seal}" data-colors="${field.colors}" data-scale="${field.scale || 1}" aria-hidden="true"></canvas></span>
-        <span class="lbl"><b>${label}</b>${sub ? `<span class="mono muted">${sub} →</span>` : ""}</span></a>`;
-    return `<main class="view">
-      <section class="home cover2">
+    const card = (p) => `<a class="pcard" href="#${p.slug}"><div class="pc-img"><img src="${esc(p.cover?.src || "")}" alt="${esc(p.title)} cover" loading="lazy"></div>
+        <div class="pc-meta"><b><canvas class="seal" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas>${esc(p.title)}</b><span class="mono muted">${esc(p.year)}</span></div>
+        <span class="mono muted pc-k">${esc(p.kicker)}</span></a>`;
+    const phase = (id, n) => {
+      const t = S.tabs[id], list = t.projects.map((s) => PROJECTS[s]).filter((p) => p && !p.locked);
+      const head = (cls) => `<div class="ph-head${cls}"><h2>${esc(t.label)}</h2><p>${esc(t.blurb)}</p><span class="mono muted">0${n} / 02</span></div>`;
+      // an odd number of projects: the title fills the empty last cell of the grid instead of sitting on top
+      const inCell = list.length % 2 === 1;
+      return `<section class="phase ph-work ph-${id}" aria-label="${esc(t.label)}"><div class="ph-in">
+        ${inCell ? "" : head("")}
+        <div class="pgrid">${list.map(card).join("")}${inCell ? head(" cell") : ""}</div></div></section>`;
+    };
+    return `<main class="view phases">
+      <section class="phase home cover2" aria-label="Cover">
         <canvas class="streams" id="streams" aria-hidden="true"></canvas>
-        <nav class="cover-nav mono" aria-label="Sections"><a href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Work</a><a href="#about">About</a></nav>
+        <nav class="cover-nav mono" aria-label="Sections"><a href="#" data-go="1">Work</a><a href="#about">About</a></nav>
         <div class="hero">
           <h1 class="name"><span class="hi">Hi, I'm</span><span class="nm">${parts.map((w) => `<span>${esc(w)}</span>`).join("")}${last ? `<span>${esc(last)}</span>` : ""}</span></h1>
           <p class="tagline">${txt(S.tagline)}</p>
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
         </div>
-        <a class="scroll-cue mono" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;"><i></i>Scroll to see my work</a>
+        <a class="scroll-cue mono" href="#" data-go="1"><i></i>Scroll to see my work</a>
       </section>
-      <div class="work-panel"><section class="wrap work" id="work">
-        ${["digital", "physical"].map((t) => `
-          <div class="index-head"><h2>${S.tabs[t].label}</h2><a class="mono" href="#${t}">View All →</a></div>
-          <ul class="index">${indexList(t)}</ul>`).join("")}
-      </section></div></main><div class="peek" aria-hidden="true"></div>` + footer();
+      ${phase("digital", 1)}
+      ${phase("physical", 2)}
+      <div class="ph-bar"><a class="brand" href="#" data-go="0">${esc(S.name)}</a>
+        <nav class="mono" aria-label="Sections"><a href="#" data-go="1">${esc(S.tabs.digital.label)}</a><a href="#" data-go="2">${esc(S.tabs.physical.label)}</a><a href="#about" data-go="3">About</a></nav></div>
+      <nav class="ph-dots" aria-label="Screens">${["Cover", S.tabs.digital.label, S.tabs.physical.label, "About"].map((l, k) => `<a href="#" data-go="${k}" aria-label="${esc(l)}"><i></i><span class="mono">${esc(l)}</span></a>`).join("")}</nav>
+    </main>`;
   }
+
+  let phasesOff = null;
+  function phases() {
+    if (phasesOff) { phasesOff(); phasesOff = null; }
+    const root = document.querySelector(".phases");
+    document.documentElement.classList.toggle("phased", !!root);
+    if (!root) return;
+    const els = [...root.querySelectorAll(".phase")], last = els.length - 1;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, DUR = reduce ? 200 : 1050;
+    let i = Math.min(homePhase, last), busy = false;
+    const set = (n) => {
+      i = n; homePhase = n;
+      els.forEach((e, k) => { e.classList.toggle("past", k < n); e.classList.toggle("cur", k === n); e.classList.toggle("next", k > n); e.inert = k !== n; });
+      root.dataset.phase = n;
+      root.querySelectorAll("[data-go]").forEach((a) => a.classList.toggle("on", +a.dataset.go === n));
+    };
+    const go = (n) => {
+      if (busy || n < 0 || n === i) return;
+      busy = true;
+      if (n > last) { // past the last screen: swoosh out, then the About page
+        els[i].classList.remove("cur"); els[i].classList.add("past"); root.classList.add("leaving");
+        setTimeout(() => { location.hash = "#about"; }, reduce ? 50 : 560);
+        return;
+      }
+      if (n > i) els[n].scrollTop = 0;
+      set(n);
+      setTimeout(() => { busy = false; }, DUR);
+    };
+    set(i);
+    // can the current screen still scroll in this direction? then let it scroll first
+    const edge = (dir) => { const e = els[i]; return dir > 0 ? e.scrollTop + e.clientHeight >= e.scrollHeight - 2 : e.scrollTop <= 1; };
+    let lastWheel = 0, used = false;
+    const onWheel = (e) => {
+      const now = performance.now(), gap = now - lastWheel; lastWheel = now;
+      if (gap > 160) used = false; // a new scroll gesture
+      if (Math.abs(e.deltaY) < 4 || used || busy) return;
+      const dir = e.deltaY > 0 ? 1 : -1;
+      if (!edge(dir)) return;
+      used = true; go(i + dir);
+    };
+    let y0 = null, okUp = false, okDown = false;
+    const onStart = (e) => { y0 = e.touches[0].clientY; okDown = edge(1); okUp = edge(-1); };
+    const onEnd = (e) => {
+      if (y0 == null) return; const dy = y0 - e.changedTouches[0].clientY; y0 = null;
+      if (dy > 50 && okDown && edge(1)) go(i + 1); else if (dy < -50 && okUp && edge(-1)) go(i - 1);
+    };
+    const onKey = (e) => {
+      if (e.target.closest?.("input, textarea")) return;
+      if (["ArrowDown", "PageDown", " "].includes(e.key) && edge(1)) { e.preventDefault(); go(i + 1); }
+      else if (["ArrowUp", "PageUp"].includes(e.key) && edge(-1)) { e.preventDefault(); go(i - 1); }
+    };
+    const onClick = (e) => {
+      const a = e.target.closest("[data-go]"); if (!a || !root.contains(a)) return;
+      e.preventDefault(); const n = +a.dataset.go; if (n === i) return;
+      if (n > last) { go(last + 1); return; }
+      busy = false; go(n);
+    };
+    addEventListener("wheel", onWheel, { passive: true });
+    addEventListener("touchstart", onStart, { passive: true });
+    addEventListener("touchend", onEnd, { passive: true });
+    addEventListener("keydown", onKey);
+    root.addEventListener("click", onClick);
+    phasesOff = () => { removeEventListener("wheel", onWheel); removeEventListener("touchstart", onStart); removeEventListener("touchend", onEnd); removeEventListener("keydown", onKey); };
+  }
+  // the name in the top bar always starts home from the cover
+  document.addEventListener("click", (e) => { if (e.target.closest?.('a.brand[data-home="0"]')) homePhase = 0; });
 
   function tabView(id) {
     const t = S.tabs[id];
@@ -248,7 +326,7 @@
       ${list.indexOf(p.slug) === list.length - 1 && (p.tab === "digital" || p.tab === "physical")
         // last project in a tab: continue on (Digital → Physical overview, Physical → About) instead of looping back
         ? ((to, label) => `<section class="wrap"><a class="next" href="#${to}">
-        <span class="mono muted">Next</span><span class="t">${label} →</span></a></section>`)(...(p.tab === "digital" ? ["physical", "Physical"] : ["about", "About"]))
+        <span class="mono muted">Next</span><span class="t">${label} →</span></a></section>`)(...(p.tab === "digital" ? ["physical", S.tabs.physical.label] : ["about", "About"]))
         : next && next.slug !== p.slug ? `<section class="wrap"><a class="next" href="#${next.slug}">
         <span class="mono muted">Next Project</span><span class="t">${esc(next.title)} →</span></a></section>` : ""}
     </main>` + footer();
@@ -302,6 +380,7 @@
   let shiftOff = null;
   function coverShift() {
     if (shiftOff) { shiftOff(); shiftOff = null; }
+    if (document.querySelector(".phases")) return;
     const home = document.querySelector(".home");
     if (!home || !matchMedia("(min-width: 901px)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let raf = 0;
@@ -330,6 +409,7 @@
     document.title = (PROJECTS[h]?.title ? PROJECTS[h].title + " · " : "") + S.name;
     window.scrollTo(0, 0);
     wire();
+    phases();
     coverShift();
     fitIntro();
   }

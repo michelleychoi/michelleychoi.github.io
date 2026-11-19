@@ -67,14 +67,14 @@ window.SITE = {
   // The two tabs. Order here = order on the site.
   tabs: {
     digital: {
-      label: "Digital",
-      blurb: "Interfaces, flows, and prototypes.",
+      label: "Design",
+      blurb: "Apps and spaces, designed around the people who move through them.",
       projects: ["gamify-the-mundane", "statler-hotel-redesign", "makerhub"]
     },
     physical: {
-      label: "Physical",
-      blurb: "Things built at full scale: models, sketches, and studio work.",
-      projects: ["sketches", "bridge", "1101"]
+      label: "Art & Making",
+      blurb: "Sketches, models, and things I've built by hand.",
+      projects: ["sketches", "bridge"] // "1101" (Hexchange) is hidden for now; add it back here to show it
     }
   }
 };
