@@ -73,7 +73,7 @@ window.SITE = {
     },
     physical: {
       label: "Art & Making",
-      blurb: "Sketches, models, and things I've built by hand.",
+      blurb: "Napkin sketches, models, fun builds.",
       projects: ["sketches", "bridge"] // "1101" (Hexchange) is hidden for now; add it back here to show it
     }
   }
