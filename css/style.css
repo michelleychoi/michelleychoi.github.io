@@ -930,3 +930,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .next-sm { text-decoration: none; color: var(--muted); font-size: .74rem; }
 .next-sm:hover { color: var(--name); }
 @media (max-width: 760px) { .f-hero, .f-sm { display: grid; } .f-hero > .pc-img, .f-sm > .pc-img { width: 100%; } }
+
+/* === label font: DM Sans (picked 2026-11-19; was Roboto Mono) === */
+:root { --mono: "DM Sans", "Inter", Helvetica, Arial, sans-serif; }
+.mono, .nav a, nav a { letter-spacing: 0.08em; }
