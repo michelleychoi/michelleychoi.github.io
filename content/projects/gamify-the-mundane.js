@@ -14,7 +14,7 @@ addProject({
   blurb: "A game that dares you to go meet someone new.",
   summary:
     "The prompt: gamify something you find mundane or boring. I picked dating apps, and designed Go For It, a game where friends get surprise dares to meet new people, race a timer, and compete on a weekly leaderboard.",
-  cover: { src: "assets/digital/gamify/cover.jpg?v=202611160009", ratio: "16/10", alt: "Go For It hi-fi screens" },
+  cover: { src: "assets/digital/gamify/cover-violet.jpg?v=202611192042", ratio: "16/10", alt: "Go For It: three hi-fi app screens on violet", live: "gfi" },
 
   sections: [
     // "brief": labeled lines (label: answer), shown in a bold display font

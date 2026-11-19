@@ -25,7 +25,18 @@
     const r = (ratio || "16/10").replace("/", ":");
     return `<div class="ph" style="aspect-ratio:${esc(ratio || "16/10")}"><span><b>${esc(label || "Image")}</b>${esc(src || "add image path")} · ${esc(r)}</span></div>`;
   }
+  // Go For It's designed cover, built live so it can animate: the title slides in from the left and the
+  // three phones rise from the bottom each time it comes into view (see liveCovers()).
+  const GFI = "assets/digital/gamify/";
+  function liveCover(img) {
+    if (img.live !== "gfi") return "";
+    const ph = (c, f) => `<div class="gfi-ph ${c}"><img src="${GFI}screen-${f}.png" alt="" loading="lazy"></div>`;
+    return `<div class="gfi-cover" role="img" aria-label="${esc(img.alt || "Go For It cover")}">
+      <div class="gfi-t"><b>Go For It.</b><i>Gamify the Mundane Challenge</i></div>
+      ${ph("l", "countdown")}${ph("m", "task")}${ph("r", "leaderboard")}</div>`;
+  }
   function media(img, label) {
+    if (img && img.live) return `<div class="media" style="aspect-ratio:16/10">${liveCover(img)}</div>`;
     if (!img) return ph("", "16/10", label);
     const ratio = img.ratio || "16/10";
     if (!img.src) return ph("", ratio, label);
@@ -99,7 +110,7 @@
     const featured = (id, n) => {
       const t = S.tabs[id], list = t.projects.map((s) => PROJECTS[s]).filter((p) => p && !p.locked);
       const [hero, ...rest] = list;
-      const img = (p) => `<div class="pc-img"><img src="${esc(p.cover?.src || "")}" alt="${esc(p.title)} cover"></div>`;
+      const img = (p) => `<div class="pc-img">${p.cover?.live ? liveCover(p.cover) : `<img src="${esc(p.cover?.src || "")}" alt="${esc(p.title)} cover">`}</div>`;
       const det = (p) => `<span class="mono muted">${esc(p.tags || p.kicker)} · ${esc(p.year)}</span>`;
       return `<section class="phase ph-work ph-${id}" aria-label="${esc(t.label)}"><div class="ph-in feat">
         <div class="ph-head" style="--o:0"><h2>${esc(t.label)}</h2><span class="mono muted">0${n} / 02</span></div>
@@ -534,8 +545,22 @@
     window.scrollTo(0, 0);
     wire();
     phases();
+    liveCovers();
     coverShift();
     fitIntro();
+  }
+
+  // animated covers play when at least ~40% is on screen, and reset once fully off screen so they replay
+  let coverIO = null;
+  function liveCovers() {
+    if (coverIO) coverIO.disconnect();
+    const els = document.querySelectorAll(".gfi-cover"); if (!els.length) return;
+    if (!("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("play")); return; }
+    coverIO = new IntersectionObserver((list) => list.forEach((en) => {
+      if (en.intersectionRatio >= 0.4) en.target.classList.add("play");
+      else if (!en.isIntersecting) en.target.classList.remove("play");
+    }), { threshold: [0, 0.4] });
+    els.forEach((e) => coverIO.observe(e));
   }
 
   // project intro paragraph: right edge lines up with the end of the big title
