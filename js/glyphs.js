@@ -182,5 +182,52 @@
     if (!reduce) start(tick);
   }
 
-  window.Glyphs = { field, seal, orb, hash, draw: drawGlyph };
+  // Glyphs.streams(canvas): a few columns of glyphs flowing down like lines of code, each one gently breathing.
+  // On narrow screens (canvas wider than tall) the streams run sideways instead.
+  function streams(canvas, opts = {}) {
+    const ctx = canvas.getContext("2d");
+    let W, H, across, sprites = [], cols = [];
+    function build() {
+      const r = canvas.getBoundingClientRect(); W = r.width; H = r.height; across = W > H;
+      canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+      const pal = palette(), soft = pal.soft, px = 30;
+      sprites = [];
+      for (let i = 0; i < 40; i++) {
+        const c = document.createElement("canvas"); c.width = c.height = Math.ceil(px * DPR);
+        const g = c.getContext("2d"); g.scale(DPR, DPR); g.translate(px / 2, px / 2);
+        drawGlyph(g, px * 0.46, 977 + i * 7919, soft, soft[3]); sprites.push(c);
+      }
+      const R = rng(opts.seed || 42), n = opts.count || 4;
+      cols = Array.from({ length: n }, (_, k) => {
+        const size = [22, 16, 19, 13][k % 4], gap = size * (1.9 + R() * 0.5), speed = [15, 24, 11, 19][k % 4];
+        const len = Math.ceil(((across ? W : H) + 400) / gap) + 2;
+        const cells = Array.from({ length: len }, () => (R() < 0.2 ? -1 : Math.floor(R() * sprites.length)));
+        return { k, size, gap, speed, cells, len, phase: R() * 10 };
+      });
+    }
+    function draw(t) {
+      if (!canvas.isConnected) { running.delete(draw); return; }
+      const s = reduce ? 0 : t / 1000, span = across ? H : W, along = across ? W : H;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, W, H);
+      cols.forEach((c) => {
+        const lane = ((c.k + 0.5) * span) / cols.length, total = c.len * c.gap, off = (s * c.speed) % total;
+        for (let i = 0; i < c.len; i++) {
+          const id = c.cells[i]; if (id < 0) continue;
+          const p = ((i * c.gap + off) % total) - c.gap; if (p < -c.gap || p > along + c.gap) continue;
+          const edge = Math.min(1, Math.max(0, p / (along * 0.16)), Math.max(0, (along - p) / (along * 0.16)));
+          const breathe = 0.78 + 0.22 * Math.sin(s * 1.3 + i * 0.55 + c.phase), sz = c.size * breathe;
+          ctx.globalAlpha = edge * (0.55 + 0.45 * breathe);
+          ctx.drawImage(sprites[id], (across ? p : lane) - sz / 2, (across ? lane : p) - sz / 2, sz, sz);
+        }
+      });
+      ctx.globalAlpha = 1;
+    }
+    build();
+    let rt = 0;
+    const onResize = () => { if (!canvas.isConnected) return removeEventListener("resize", onResize); clearTimeout(rt); rt = setTimeout(() => { build(); if (reduce) draw(0); }, 120); };
+    addEventListener("resize", onResize);
+    if (reduce) draw(0); else start(draw);
+  }
+
+  window.Glyphs = { field, seal, orb, streams, hash, draw: drawGlyph };
 })();

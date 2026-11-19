@@ -93,26 +93,15 @@
         <span class="art glyph"><canvas class="seal" data-seal="${field.seal}" data-colors="${field.colors}" data-scale="${field.scale || 1}" aria-hidden="true"></canvas></span>
         <span class="lbl"><b>${label}</b>${sub ? `<span class="mono muted">${sub} →</span>` : ""}</span></a>`;
     return `<main class="view">
-      <section class="home">
-        <canvas class="home-bg" id="home-bg" aria-hidden="true"></canvas>
-        <span class="flower-hint" aria-hidden="true">grow the flowers! :3</span>
-        <canvas class="field side" data-field="left" aria-hidden="true"></canvas>
-        <div class="stage">
-          <div class="box">
-            <div class="home-center">
-              <h1 class="name"><span class="hi">Hi, I'm</span><span class="nm">${esc(parts.join(" "))}${last ? "<br>" : ""}${esc(last)}</span></h1>
-              <p class="tagline">${txt(S.tagline)}</p>
-            </div>
-            <nav class="tiles" aria-label="Sections">
-              ${tile("digital", "01", "Digital", "", { seal: "michelle", colors: "0,1" })}
-              ${tile("physical", "02", "Physical", "", { seal: "#237623", colors: "1,1,1,3", scale: 0.82 })}
-              ${tile("about", "03", "About", "", { seal: "#245496", colors: "soft", scale: 0.62 })}
-            </nav>
-          </div>
+      <section class="home cover2">
+        <canvas class="streams" id="streams" aria-hidden="true"></canvas>
+        <nav class="cover-nav mono" aria-label="Sections"><a href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Work</a><a href="#about">About</a></nav>
+        <div class="hero">
+          <h1 class="name"><span class="hi">Hi, I'm</span><span class="nm">${parts.map((w) => `<span>${esc(w)}</span>`).join("")}${last ? `<span>${esc(last)}</span>` : ""}</span></h1>
+          <p class="tagline">${txt(S.tagline)}</p>
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
         </div>
-        <canvas class="field side" data-field="right" aria-hidden="true"></canvas>
-        <a class="scroll-cue mono muted" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;">Selected Work ↓</a>
+        <a class="scroll-cue mono" href="#" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});return false;"><i></i>Scroll to see my work</a>
       </section>
       <div class="work-panel"><section class="wrap work" id="work">
         ${["digital", "physical"].map((t) => `
@@ -399,6 +388,8 @@
           avoid: () => [rel(home.querySelector(".stage")), rel(home.querySelector(".scroll-cue"))]
         } });
       }
+      const st = document.getElementById("streams");
+      if (st && Glyphs.streams) Glyphs.streams(st);
       const orb = document.getElementById("orb");
       if (orb) Glyphs.orb(orb);
     }

@@ -750,3 +750,34 @@ h1, h2, h3, .card h3, .index .t, .s-text h2, .s-block > h2, .sn-text h3, .col h3
 @keyframes hint-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-7px) rotate(-2deg); } }
 @media (prefers-reduced-motion: reduce) { .home > .flower-hint { animation: none; transform: rotate(-2deg); } }
 @media (max-width: 900px), (hover: none) { .home > .flower-hint { display: none; } }
+
+/* ---------- home v4: big left-aligned name, breathing glyph streams down the left ---------- */
+.home.cover2 { --rail: clamp(150px, 15vw, 230px); display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); height: max(640px, 100svh); padding: 0; gap: 0; }
+.home.cover2 > .streams { position: absolute; z-index: 0; top: 0; bottom: 0; left: clamp(28px, 3.4vw, 56px); width: calc(var(--rail) - clamp(28px, 3.4vw, 56px) - 24px); height: 100%; }
+.cover2 .hero { grid-column: 2; align-self: center; padding: 0 clamp(24px, 6vw, 120px) 0 clamp(8px, 2vw, 40px); min-width: 0; }
+.cover2 .name { margin: 0; display: block; }
+.cover2 .name .hi { display: block; font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.2vw, 4.4rem); line-height: 1; color: var(--ink); margin: 0 0 .1em .04em; letter-spacing: 0; }
+.cover2 .name .nm { display: block; font-family: var(--display); font-weight: 600; font-size: clamp(3.6rem, 12.5vw, 13rem); line-height: .9; letter-spacing: -0.012em; color: var(--name); }
+.cover2 .name .nm span { display: block; }
+.cover2 .tagline { margin: clamp(22px, 3.2vh, 40px) 0 0; max-width: 40ch; font-size: clamp(1rem, 1.35vw, 1.3rem); line-height: 1.5; }
+.cover2 .facts { margin-top: 16px; font-size: .92rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.cover2 .facts .dot { margin: 0; }
+.home.cover2 > .scroll-cue { position: absolute; left: calc(var(--rail) + clamp(8px, 2vw, 40px)); bottom: 34px; transform: none; display: flex; align-items: center; gap: 10px; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.cover2 .scroll-cue i { display: block; width: 1px; height: 28px; background: currentColor; transform-origin: top; animation: cue-line 2.2s cubic-bezier(.7,0,.2,1) infinite; }
+@keyframes cue-line { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+.home.cover2 > .cover-nav { position: absolute; top: 26px; right: clamp(20px, 5vw, 72px); display: flex; gap: clamp(16px, 2.4vw, 32px); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; }
+.cover-nav a { color: var(--ink); text-decoration: none; }
+.cover-nav a:hover { color: var(--name); }
+.cover2 .hero > * { animation: cover-rise 1s cubic-bezier(.7,0,.2,1) both; }
+.cover2 .hero > :nth-child(2) { animation-delay: .1s; } .cover2 .hero > :nth-child(3) { animation-delay: .2s; }
+@keyframes cover-rise { from { opacity: 0; transform: translateY(24px); } }
+@media (max-width: 760px) {
+  .home.cover2 { --rail: 0px; grid-template-columns: minmax(0, 1fr); grid-template-rows: 130px minmax(0, 1fr); height: max(600px, 100svh); }
+  .home.cover2 > .streams { position: relative; grid-row: 1; left: 0; width: 100%; height: 110px; margin-top: 20px; }
+  .cover2 .hero { grid-column: 1; grid-row: 2; padding: 0 20px 10vh; }
+  .cover2 .name .nm { font-size: 20vw; }
+  .cover2 .name .hi { font-size: 2.3rem; }
+  .home.cover2 > .scroll-cue { display: flex; left: 20px; }
+  .home.cover2 > .cover-nav { top: auto; bottom: 34px; right: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .cover2 .hero > *, .cover2 .scroll-cue i { animation: none; } }
