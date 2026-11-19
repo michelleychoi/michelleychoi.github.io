@@ -106,7 +106,7 @@
     return `<main class="view phases">
       <section class="phase home cover2" aria-label="Cover">
         <canvas class="streams" id="streams" aria-hidden="true"></canvas>
-        <nav class="cover-nav mono" aria-label="Sections"><a href="#" data-go="1">Work</a><a href="#about">About</a></nav>
+        <nav class="cover-nav mono" aria-label="Sections"><a href="#digital" data-go="1">Work</a><a href="#about" data-go="3">About</a></nav>
         <div class="hero">
           <h1 class="name"><span class="hi">Hi, I'm</span><span class="nm">${parts.map((w) => `<span>${esc(w)}</span>`).join("")}${last ? `<span>${esc(last)}</span>` : ""}</span></h1>
           <p class="tagline">${txt(S.tagline)}</p>
@@ -116,8 +116,9 @@
       </section>
       ${phase("digital", 1)}
       ${phase("physical", 2)}
+      <section class="phase ph-about" aria-label="About">${aboutBody()}${footer()}</section>
       <div class="ph-bar"><a class="brand" href="#" data-go="0">${esc(S.name)}</a>
-        <nav class="mono" aria-label="Sections"><a href="#" data-go="1">${esc(S.tabs.digital.label)}</a><a href="#" data-go="2">${esc(S.tabs.physical.label)}</a><a href="#about" data-go="3">About</a></nav></div>
+        <nav class="mono" aria-label="Sections"><a href="#digital" data-go="1">${esc(S.tabs.digital.label)}</a><a href="#physical" data-go="2">${esc(S.tabs.physical.label)}</a><a href="#about" data-go="3">About</a></nav></div>
       <nav class="ph-dots" aria-label="Screens">${["Cover", S.tabs.digital.label, S.tabs.physical.label, "About"].map((l, k) => `<a href="#" data-go="${k}" aria-label="${esc(l)}"><i></i><span class="mono">${esc(l)}</span></a>`).join("")}</nav>
     </main>`;
   }
@@ -137,29 +138,31 @@
       root.dataset.phase = n;
       root.querySelectorAll("[data-go]").forEach((a) => a.classList.toggle("on", +a.dataset.go === n));
     };
+    const HASH = ["", "digital", "physical", "about"];
     const go = (n) => {
-      if (busy || n < 0 || n === i) return;
+      if (busy || n < 0 || n > last || n === i) return;
       busy = true;
-      if (n > last) { // past the last screen: swoosh out, then the About page
-        els[i].classList.remove("cur"); els[i].classList.add("past"); root.classList.add("leaving");
-        setTimeout(() => { location.hash = "#about"; }, reduce ? 50 : 560);
-        return;
-      }
-      if (n > i) els[n].scrollTop = 0;
+      els[n].scrollTop = 0;
       set(n);
+      history.replaceState(null, "", HASH[n] ? "#" + HASH[n] : location.pathname + location.search);
+      document.title = (n ? ["", S.tabs.digital.label, S.tabs.physical.label, "About"][n] + " · " : "") + S.name;
       setTimeout(() => { busy = false; }, DUR);
     };
     set(i);
     // can the current screen still scroll in this direction? then let it scroll first
-    const edge = (dir) => { const e = els[i]; return dir > 0 ? e.scrollTop + e.clientHeight >= e.scrollHeight - 2 : e.scrollTop <= 1; };
-    let lastWheel = 0, used = false;
+    const edge = (dir) => { const e = els[i]; return dir > 0 ? e.scrollTop + e.clientHeight >= e.scrollHeight - 12 : e.scrollTop <= 12; };
+    // one scroll gesture moves at most one screen, and only if it started at the top/bottom edge
+    // (so scrolling up through the About page doesn't fly straight back to Art & Making)
+    let lastWheel = 0, used = false, startEdge = { 1: true, "-1": true };
     const onWheel = (e) => {
       const now = performance.now(), gap = now - lastWheel; lastWheel = now;
-      if (gap > 160) used = false; // a new scroll gesture
-      if (Math.abs(e.deltaY) < 4 || used || busy) return;
+      if (gap > 220 && !busy) { used = false; startEdge = { 1: edge(1), "-1": edge(-1) }; } // a new scroll gesture
+      // the rest of a gesture that already changed screens (incl. trackpad momentum) is swallowed
+      if (used || busy) { if (used) e.preventDefault(); return; }
+      if (Math.abs(e.deltaY) < 4) return;
       const dir = e.deltaY > 0 ? 1 : -1;
-      if (!edge(dir)) return;
-      used = true; go(i + dir);
+      if (!startEdge[dir] || !edge(dir)) return;
+      used = true; e.preventDefault(); go(i + dir);
     };
     let y0 = null, okUp = false, okDown = false;
     const onStart = (e) => { y0 = e.touches[0].clientY; okDown = edge(1); okUp = edge(-1); };
@@ -175,10 +178,9 @@
     const onClick = (e) => {
       const a = e.target.closest("[data-go]"); if (!a || !root.contains(a)) return;
       e.preventDefault(); const n = +a.dataset.go; if (n === i) return;
-      if (n > last) { go(last + 1); return; }
       busy = false; go(n);
     };
-    addEventListener("wheel", onWheel, { passive: true });
+    addEventListener("wheel", onWheel, { passive: false });
     addEventListener("touchstart", onStart, { passive: true });
     addEventListener("touchend", onEnd, { passive: true });
     addEventListener("keydown", onKey);
@@ -332,7 +334,7 @@
     </main>` + footer();
   }
 
-  function about() {
+  function aboutBody() {
     const emails = (S.emails || [{ label: "Email", address: S.email }]).map((e, i) => `<li><div class="row">
         <span class="k">${esc(e.label)}</span><span class="v" id="email-${i}">${esc(e.address)}</span>
         <button class="copy copy-ic" type="button" data-copy="${i}" aria-label="Copy ${esc(e.address)}" title="Copy"><svg class="ic-copy" viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 5.5v-.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="ic-check" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></li>`).join("");
@@ -361,7 +363,7 @@
           })()}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
         }).join("")}</div>${b.note ? `<span class="pin-note">${esc(b.note)}</span>` : ""}</div>`).join("");
     const snaps = (S.portrait || []).map((im, i) => `<figure class="snap snap-${i + 1}">${media({ src: im.src, ratio: im.ratio || "4/5", alt: im.label }, im.label)}</figure>`).join("");
-    return header("about") + `<main class="view"><section class="wrap about about-v3">
+    return `<section class="wrap about about-v3">
       <div class="about-text"><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}!</h1>
         ${String(S.about || "").split(/\n\s*\n/).map((para) => `<p>${txt(para)}</p>`).join("")}
         <ul class="links mono">${emails}${links}</ul>
@@ -371,8 +373,7 @@
         </div></div>
       <div class="snaps">${snaps}</div>
     </section>
-    ${board ? `<section class="wrap bulletin"><div class="b-title"><span class="mono muted">Off the clock</span><h2>Bulletin Board</h2></div>${board}</section>` : ""}
-    </main>` + footer();
+    ${board ? `<section class="wrap bulletin"><div class="b-title"><span class="mono muted">Off the clock</span><h2>Bulletin Board</h2></div>${board}</section>` : ""}`;
   }
 
   // ---------- router (plain #name hashes) ----------
@@ -400,11 +401,11 @@
   function render() {
     const h = decodeURIComponent(location.hash.slice(1));
     let html;
-    if (h === "physical" || h === "digital") html = tabView(h);
-    else if (h === "about") html = about();
+    const PH = { digital: 1, physical: 2, about: 3 };
+    if (h in PH) { homePhase = PH[h]; html = home(); }
     else if (PROJECTS[h] && PROJECTS[h].locked) { location.replace("#" + PROJECTS[h].tab); return; }
     else if (PROJECTS[h]) html = project(PROJECTS[h]);
-    else html = home();
+    else { if (!h) homePhase = 0; html = home(); }
     app.innerHTML = html;
     document.title = (PROJECTS[h]?.title ? PROJECTS[h].title + " · " : "") + S.name;
     window.scrollTo(0, 0);
