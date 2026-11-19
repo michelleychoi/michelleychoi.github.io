@@ -171,41 +171,47 @@
       set(n); fit();
       history.replaceState(null, "", HASH[n] ? "#" + HASH[n] : location.pathname + location.search);
       document.title = (n ? ["", S.tabs.digital.label, S.tabs.physical.label, "About"][n] + " · " : "") + S.name;
-      setTimeout(() => { busy = false; }, DUR);
+      setTimeout(() => { busy = false; const d = pending; pending = 0; if (d && edge(d)) go(i + d); }, DUR);
     };
     set(i); fit();
     // can the current screen still scroll in this direction? then let it scroll first
     const edge = (dir) => { const e = els[i]; return dir > 0 ? e.scrollTop + e.clientHeight >= e.scrollHeight - 12 : e.scrollTop <= 12; };
-    // Wheel / trackpad: one swipe moves exactly one screen.
-    // A swipe is "new" after a short pause, or when the scroll speeds up again (trackpad momentum only ever slows
-    // down), so a quick second swipe isn't mistaken for leftover momentum. The rest of a swipe that already
-    // changed screens is swallowed. If a swipe scrolled the page's own content (the About page) up to its edge,
-    // it stops there; the next swipe moves on.
     // Wheel / trackpad: one deliberate swipe moves exactly one screen.
-    // - a swipe has to travel a bit (WHEEL_MIN) before it counts, so a small accidental nudge does nothing
-    // - once it fires, everything until the wheel goes quiet (incl. trackpad momentum) is swallowed,
-    //   so one gesture can never skip ahead two screens
+    // - a swipe has to travel a little (WHEEL_MIN) before it counts, so a tiny accidental nudge does nothing
+    // - after a swipe fires, its leftover trackpad momentum is swallowed, so one gesture never skips two screens
+    // - a NEW swipe is recognised by a short pause, a change of direction, or the scroll speeding up again
+    //   (momentum only ever slows down), so a quick second swipe isn't lost in the first one's momentum
+    // - a new swipe made while the screen is still sliding is remembered and runs right after (at most one)
     // - if a gesture scrolled the About page's own content, it stops at the edge; the next gesture moves on
-    const WHEEL_MIN = 70, QUIET = 260;
-    let lastT = 0, swallow = false, moved = false, acc = 0, lastDir = 0;
+    const WHEEL_MIN = 45, QUIET = 170, SPEEDUP_AFTER = 300;
+    let lastT = 0, swallow = false, moved = false, acc = 0, lastDir = 0, fireT = 0, lo = Infinity, pending = 0;
     els.forEach((el) => el.addEventListener("scroll", () => { if (!busy) moved = true; }, { passive: true }));
+    const fire = (dir) => {
+      swallow = true; acc = 0; fireT = performance.now(); lo = Infinity;
+      if (busy) { pending = dir; return; }
+      go(i + dir);
+    };
     const onWheel = (e) => {
       const now = performance.now(), gap = now - lastT; lastT = now;
-      if (busy) { e.preventDefault(); if (Math.sign(e.deltaY)) lastDir = Math.sign(e.deltaY); return; }
-      const sgn = Math.sign(e.deltaY);
-      // a new gesture: the wheel went quiet, or it changed direction (momentum never reverses)
-      if (gap > QUIET || (sgn && sgn !== lastDir)) { swallow = false; moved = false; acc = 0; }
-      if (sgn) lastDir = sgn;
-      if (swallow) { e.preventDefault(); return; }
       const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
       if (!dy) return;
-      const dir = dy > 0 ? 1 : -1;
+      const dir = dy > 0 ? 1 : -1, mag = Math.abs(dy);
+      // is this the start of a new swipe?
+      const sped = swallow && now - fireT > SPEEDUP_AFTER && mag > lo * 2 + 10;
+      if (gap > QUIET || dir !== lastDir || sped) { swallow = false; moved = false; acc = 0; lo = Infinity; }
+      lastDir = dir;
+      if (swallow) { e.preventDefault(); if (now - fireT > 120) lo = Math.min(lo, mag); return; }
+      if (busy) { // screen is sliding: count this swipe, run it when the slide ends
+        e.preventDefault();
+        if (Math.sign(acc) !== dir) acc = 0;
+        acc += dy; if (Math.abs(acc) >= WHEEL_MIN) fire(dir);
+        return;
+      }
       if (!edge(dir) || moved) { acc = 0; return; } // let the page's own content scroll
       e.preventDefault();
       if (Math.sign(acc) !== dir) acc = 0;
       acc += dy;
-      if (Math.abs(acc) < WHEEL_MIN) return;
-      swallow = true; acc = 0; go(i + dir);
+      if (Math.abs(acc) >= WHEEL_MIN) fire(dir);
     };
     let y0 = null, okUp = false, okDown = false;
     // touch: a swipe that starts at the top/bottom edge of the screen's content moves to the next/previous screen
@@ -228,7 +234,7 @@
     const onClick = (e) => {
       const a = e.target.closest("[data-go]"); if (!a || !root.contains(a)) return;
       e.preventDefault(); const n = +a.dataset.go; if (n === i) return;
-      busy = false; go(n);
+      busy = false; pending = 0; go(n);
     };
     addEventListener("wheel", onWheel, { passive: false });
     addEventListener("touchstart", onStart, { passive: true });
