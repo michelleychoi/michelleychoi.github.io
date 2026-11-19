@@ -934,3 +934,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 /* === label font: DM Sans (picked 2026-11-19; was Roboto Mono) === */
 :root { --mono: "DM Sans", "Inter", Helvetica, Arial, sans-serif; }
 .mono, .nav a, nav a { letter-spacing: 0.08em; }
+
+/* scrubbed transitions: a screen being swiped in shows fully formed (no entrance stagger) */
+.phase.is-peek .pcard { opacity: 1; transform: none; transition: none; }
+.phase.is-peek .feat [style*="--o"], .phase.is-peek .ph-head.cell { animation: none !important; opacity: 1; transform: none; }
