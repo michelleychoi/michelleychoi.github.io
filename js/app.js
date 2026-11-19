@@ -377,7 +377,7 @@
       <section class="wrap"><dl class="spec">${spec}</dl>${p.heroVideo ? `<div class="media hero-video" style="aspect-ratio:${esc(p.heroVideo.ratio || "16/9")}"><video src="${esc(p.heroVideo.src)}"${p.heroVideo.poster ? ` poster="${esc(p.heroVideo.poster)}"` : ""} autoplay muted loop playsinline preload="auto" aria-label="${esc(p.heroVideo.alt || p.title + " video")}"></video></div>` : p.hideCover ? "" : media(p.cover, "Cover image")}</section>
       <section class="wrap sections">${sectionsHTML(p.sections || [])}</section>
       <section class="wrap proj-end">
-        <a class="back-all" href="#${p.tab}"><span class="mono muted">Done with this one?</span><span class="t">← Back to all work</span></a>
+        <a class="back-all" href="#${p.tab}"><span class="mono muted">Done with this one?</span><span class="t">← Back</span></a>
         ${next && next.slug !== p.slug ? `<a class="next-sm mono" href="#${next.slug}">Next project: ${esc(next.title)} →</a>` : ""}
       </section>
     </main>` + footer();
