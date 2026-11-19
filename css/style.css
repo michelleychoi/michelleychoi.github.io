@@ -910,3 +910,23 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .f-sm { grid-template-columns: auto minmax(0, 1fr); }
 .feat .pc-img { height: 100%; aspect-ratio: 16 / 10; width: auto; max-width: 100%; }
 @media (max-width: 760px) { .feat .pc-img { width: 100%; height: auto; } .f-hero, .f-sm { grid-template-columns: 1fr; } }
+/* Design screen: titles sit right next to their images */
+.f-sm { display: flex; align-items: center; gap: clamp(14px, 1.4vw, 20px); }
+.f-sm > .pc-img { flex: none; align-self: stretch; height: auto; }
+.f-sm > div:last-child { min-width: 0; }
+.f-hero { display: flex; align-items: center; gap: clamp(22px, 2.6vw, 40px); }
+.f-hero > .pc-img { flex: none; align-self: stretch; height: auto; }
+.f-txt { min-width: 0; flex: 1; }
+/* "View case study": a steady text link with an underline that draws in (no moving circle) */
+.feat .cta { gap: 8px; padding-bottom: 4px; background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat; transition: background-size .35s ease, color .2s; }
+.feat .cta i { width: auto; height: auto; border: 0; border-radius: 0; transition: none; }
+.f-hero:hover .cta { background-size: 100% 1px; color: var(--name); }
+.f-hero:hover .cta i { background: none; color: inherit; transform: none; }
+/* project pages end with a way back to the swipe-through, plus the next project in order */
+.proj-end { display: grid; gap: 14px; justify-items: start; border-top: 1px solid var(--ink); padding-block: 26px 80px; }
+.back-all { display: grid; gap: 6px; text-decoration: none; }
+.back-all .t { font-weight: 500; font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: -0.015em; line-height: 1; transition: color .2s; }
+.back-all:hover .t { color: var(--name); }
+.next-sm { text-decoration: none; color: var(--muted); font-size: .74rem; }
+.next-sm:hover { color: var(--name); }
+@media (max-width: 760px) { .f-hero, .f-sm { display: grid; } .f-hero > .pc-img, .f-sm > .pc-img { width: 100%; } }

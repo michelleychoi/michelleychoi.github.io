@@ -171,7 +171,7 @@
       set(n); fit();
       history.replaceState(null, "", HASH[n] ? "#" + HASH[n] : location.pathname + location.search);
       document.title = (n ? ["", S.tabs.digital.label, S.tabs.physical.label, "About"][n] + " · " : "") + S.name;
-      setTimeout(() => { busy = false; if (queued) { const d = queued; queued = 0; go(i + d); } }, DUR);
+      setTimeout(() => { busy = false; }, DUR);
     };
     set(i); fit();
     // can the current screen still scroll in this direction? then let it scroll first
@@ -181,26 +181,31 @@
     // down), so a quick second swipe isn't mistaken for leftover momentum. The rest of a swipe that already
     // changed screens is swallowed. If a swipe scrolled the page's own content (the About page) up to its edge,
     // it stops there; the next swipe moves on.
-    let lastT = 0, lastAbs = 0, swallow = false, moved = false, queued = 0, firedT = -1e9;
-    // screens other than About fit without scrolling, so a queued swipe can always continue from them
-    const edgeAfter = (d) => { const n = i; return n + d >= 0 && n + d <= last && !els[n].classList.contains("ph-about"); };
+    // Wheel / trackpad: one deliberate swipe moves exactly one screen.
+    // - a swipe has to travel a bit (WHEEL_MIN) before it counts, so a small accidental nudge does nothing
+    // - once it fires, everything until the wheel goes quiet (incl. trackpad momentum) is swallowed,
+    //   so one gesture can never skip ahead two screens
+    // - if a gesture scrolled the About page's own content, it stops at the edge; the next gesture moves on
+    const WHEEL_MIN = 70, QUIET = 260;
+    let lastT = 0, swallow = false, moved = false, acc = 0, lastDir = 0;
     els.forEach((el) => el.addEventListener("scroll", () => { if (!busy) moved = true; }, { passive: true }));
     const onWheel = (e) => {
-      const now = performance.now(), abs = Math.abs(e.deltaY), gap = now - lastT;
-      // (a swipe's own ramp-up right after it fires doesn't count as a new swipe)
-      const fresh = gap > 180 || (now - firedT > 380 && abs > 12 && abs > lastAbs * 1.8);
-      lastT = now; lastAbs = abs;
-      if (busy) { // a new swipe during a transition is remembered and runs right after it
-        e.preventDefault();
-        if (fresh && abs > 12 && swallow) { const d = e.deltaY > 0 ? 1 : -1; if (edgeAfter(d)) queued = d; }
-        return;
-      }
-      if (fresh) { swallow = false; moved = false; }
+      const now = performance.now(), gap = now - lastT; lastT = now;
+      if (busy) { e.preventDefault(); if (Math.sign(e.deltaY)) lastDir = Math.sign(e.deltaY); return; }
+      const sgn = Math.sign(e.deltaY);
+      // a new gesture: the wheel went quiet, or it changed direction (momentum never reverses)
+      if (gap > QUIET || (sgn && sgn !== lastDir)) { swallow = false; moved = false; acc = 0; }
+      if (sgn) lastDir = sgn;
       if (swallow) { e.preventDefault(); return; }
-      if (abs < 2) return;
-      const dir = e.deltaY > 0 ? 1 : -1;
-      if (!edge(dir) || moved) return;
-      e.preventDefault(); swallow = true; firedT = now; go(i + dir);
+      const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
+      if (!dy) return;
+      const dir = dy > 0 ? 1 : -1;
+      if (!edge(dir) || moved) { acc = 0; return; } // let the page's own content scroll
+      e.preventDefault();
+      if (Math.sign(acc) !== dir) acc = 0;
+      acc += dy;
+      if (Math.abs(acc) < WHEEL_MIN) return;
+      swallow = true; acc = 0; go(i + dir);
     };
     let y0 = null, okUp = false, okDown = false;
     // touch: a swipe that starts at the top/bottom edge of the screen's content moves to the next/previous screen
@@ -212,7 +217,7 @@
     };
     const onEnd = (e) => {
       if (y0 == null) return; const t = e.changedTouches[0], dy = y0 - t.clientY, dx = Math.abs(x0 - t.clientX); y0 = null;
-      if (Math.abs(dy) < 40 || dx > Math.abs(dy)) return;
+      if (Math.abs(dy) < 60 || dx > Math.abs(dy)) return;
       if (dy > 0 && okDown && edge(1)) go(i + 1); else if (dy < 0 && okUp && edge(-1)) go(i - 1);
     };
     const onKey = (e) => {
@@ -371,12 +376,10 @@
       </section>
       <section class="wrap"><dl class="spec">${spec}</dl>${p.heroVideo ? `<div class="media hero-video" style="aspect-ratio:${esc(p.heroVideo.ratio || "16/9")}"><video src="${esc(p.heroVideo.src)}"${p.heroVideo.poster ? ` poster="${esc(p.heroVideo.poster)}"` : ""} autoplay muted loop playsinline preload="auto" aria-label="${esc(p.heroVideo.alt || p.title + " video")}"></video></div>` : p.hideCover ? "" : media(p.cover, "Cover image")}</section>
       <section class="wrap sections">${sectionsHTML(p.sections || [])}</section>
-      ${list.indexOf(p.slug) === list.length - 1 && (p.tab === "digital" || p.tab === "physical")
-        // last project in a tab: continue on (Digital → Physical overview, Physical → About) instead of looping back
-        ? ((to, label) => `<section class="wrap"><a class="next" href="#${to}">
-        <span class="mono muted">Next</span><span class="t">${label} →</span></a></section>`)(...(p.tab === "digital" ? ["physical", S.tabs.physical.label] : ["about", "About"]))
-        : next && next.slug !== p.slug ? `<section class="wrap"><a class="next" href="#${next.slug}">
-        <span class="mono muted">Next Project</span><span class="t">${esc(next.title)} →</span></a></section>` : ""}
+      <section class="wrap proj-end">
+        <a class="back-all" href="#${p.tab}"><span class="mono muted">Done with this one?</span><span class="t">← Back to all work</span></a>
+        ${next && next.slug !== p.slug ? `<a class="next-sm mono" href="#${next.slug}">Next project: ${esc(next.title)} →</a>` : ""}
+      </section>
     </main>` + footer();
   }
 
