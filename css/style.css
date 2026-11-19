@@ -967,3 +967,8 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .ph-digital.play .f-sm > div > :nth-child(1) { transition-delay: .4s; } .ph-digital.play .f-sm > div > :nth-child(2) { transition-delay: .48s; }
 .ph-digital.play .f-sm + .f-sm > div > :nth-child(1) { transition-delay: .5s; } .ph-digital.play .f-sm + .f-sm > div > :nth-child(2) { transition-delay: .58s; }
 @media (prefers-reduced-motion: reduce) { .ph-digital .ph-head h2, .ph-digital .ph-head > span, .ph-digital .f-txt > *, .ph-digital .f-sm > div > * { translate: none !important; opacity: 1 !important; transition: none !important; } }
+
+/* side dots: one straight column; the hover label floats to the left so its width can't push a dot */
+.ph-dots { justify-items: center; }
+.ph-dots a { position: relative; display: grid; place-items: center; width: 14px; height: 14px; }
+.ph-dots span { position: absolute; right: calc(100% + 8px); top: 50%; translate: 0 -50%; }
