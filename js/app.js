@@ -274,12 +274,12 @@
     };
     const settle = () => {
       settleT = null; if (!drag || anim) return;
-      const c = drag.t > 0.33 || (peak >= 30 && drag.t > 0.06);
+      const c = (drag.damp || 1) < 1 ? drag.t > 0.5 : drag.t > 0.33 || (peak >= 30 && drag.t > 0.06);
       settleTo(c); if (c) endGesture(performance.now());
     };
     const follow = (e, dy, mag, now) => {
       e.preventDefault(); peak = Math.max(peak, mag);
-      scrub(drag.t + (dy * drag.dir) / SCRUB());
+      scrub(drag.t + (dy * drag.dir * (drag.damp || 1)) / SCRUB());
       clearTimeout(settleT); settleT = null;
       if (drag.t >= 1) { settleTo(true); endGesture(now); return; }
       settleT = setTimeout(settle, SETTLE);
@@ -304,13 +304,15 @@
         acc += dy; if (Math.abs(acc) >= WHEEL_MIN) fire(dir);
         return;
       }
-      if (!edge(dir) || moved) { acc = 0; return; } // let the page's own content scroll
+      if (!edge(dir)) { acc = 0; return; } // let the page's own content scroll
       e.preventDefault();
       if (e.deltaMode !== 0 || (acc === 0 && gap > QUIET && mag >= 90)) { fire(dir); return; } // mouse wheel click
       if (Math.sign(acc) !== dir) acc = 0;
       acc += dy;
       if (Math.abs(acc) < DEAD) return;
-      if (begin(dir)) { peak = mag; scrub((Math.abs(acc) - DEAD) / SCRUB()); acc = 0; settleT = setTimeout(settle, SETTLE); }
+      // a gesture that has just scrolled a long page (About, a tall Art & Making) to its edge carries straight on
+      // into the slide like any other, but damped, so leftover momentum only peeks and a real push finishes it
+      if (begin(dir)) { drag.damp = moved ? 0.3 : 1; peak = mag; scrub(((Math.abs(acc) - DEAD) * drag.damp) / SCRUB()); acc = 0; settleT = setTimeout(settle, SETTLE); }
     };
 
     // Touch: from the top/bottom edge of a screen's content, the next/previous screen follows the finger.
