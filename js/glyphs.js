@@ -205,9 +205,19 @@
         return { k, size, gap, speed, cells, len, phase: R() * 10 };
       });
     }
+    // hover: glyphs near the pointer swell and breathe deeper; the stream keeps flowing
+    let mx = -1e4, my = -1e4, near = 0, nearTarget = 0;
+    const onMove = (e) => {
+      if (!canvas.isConnected) return removeEventListener("pointermove", onMove);
+      const r = canvas.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top;
+      nearTarget = mx > -60 && mx < W + 60 && my > -60 && my < H + 60 ? 1 : 0;
+    };
+    addEventListener("pointermove", onMove, { passive: true });
+    document.addEventListener("pointerleave", () => { nearTarget = 0; });
     function draw(t) {
       if (!canvas.isConnected) { running.delete(draw); return; }
       const s = reduce ? 0 : t / 1000, span = across ? H : W, along = across ? W : H;
+      near += (nearTarget - near) * 0.08;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, W, H);
       cols.forEach((c) => {
         const lane = ((c.k + 0.5) * span) / cols.length, total = c.len * c.gap, off = (s * c.speed) % total;
@@ -215,9 +225,13 @@
           const id = c.cells[i]; if (id < 0) continue;
           const p = ((i * c.gap + off) % total) - c.gap; if (p < -c.gap || p > along + c.gap) continue;
           const edge = Math.min(1, Math.max(0, p / (along * 0.16)), Math.max(0, (along - p) / (along * 0.16)));
-          const breathe = 0.78 + 0.22 * Math.sin(s * 1.3 + i * 0.55 + c.phase), sz = c.size * breathe;
-          ctx.globalAlpha = edge * (0.55 + 0.45 * breathe);
-          ctx.drawImage(sprites[id], (across ? p : lane) - sz / 2, (across ? lane : p) - sz / 2, sz, sz);
+          const x = across ? p : lane, y = across ? lane : p;
+          const d = Math.hypot(x - mx, y - my), f = near * Math.max(0, 1 - d / 120) ** 2; // 0..1, strongest under the pointer
+          const breathe = 0.78 + 0.22 * Math.sin(s * (1.3 + f * 2.2) + i * 0.55 + c.phase);
+          const sz = c.size * breathe * (1 + f * (0.9 + 0.25 * Math.sin(s * 4 + i)));
+          ctx.globalAlpha = Math.min(1, edge * (0.55 + 0.45 * breathe + f * 0.5));
+          if (f > 0.01) { ctx.save(); ctx.translate(x, y); ctx.rotate(f * 0.6 * Math.sin(s * 1.5 + i)); ctx.drawImage(sprites[id], -sz / 2, -sz / 2, sz, sz); ctx.restore(); }
+          else ctx.drawImage(sprites[id], x - sz / 2, y - sz / 2, sz, sz);
         }
       });
       ctx.globalAlpha = 1;
