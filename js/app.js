@@ -165,73 +165,103 @@
       root.querySelectorAll("[data-go]").forEach((a) => a.classList.toggle("on", +a.dataset.go === n));
     };
     // project screens: shrink the cards until the screen fits without scrolling (desktop only)
-    const fit = () => {
-      const el = els[i]; if (!el.classList.contains("ph-work")) return;
+    const fit = (k = i) => {
+      const el = els[k]; if (!el.classList.contains("ph-work")) return;
       const g = el.querySelector(".pgrid"); if (!g) return; g.style.removeProperty("--cw");
       if (innerWidth <= 760) return;
-      for (let k = 0; k < 12 && el.scrollHeight > el.clientHeight; k++) {
+      for (let j = 0; j < 12 && el.scrollHeight > el.clientHeight; j++) {
         const w = g.firstElementChild.getBoundingClientRect().width; g.style.setProperty("--cw", Math.floor(w * 0.96) + "px");
       }
     };
-    addEventListener("resize", fit);
+    const onResize = () => fit();
+    addEventListener("resize", onResize);
     const HASH = ["", "digital", "physical", "about"];
-    const go = (n, dur = DUR) => {
-      if (busy || n < 0 || n > last || n === i) return;
-      busy = true;
-      els[n].scrollTop = 0;
-      set(n); fit();
+    const land = (n) => {
+      set(n);
       history.replaceState(null, "", HASH[n] ? "#" + HASH[n] : location.pathname + location.search);
       document.title = (n ? ["", S.tabs.digital.label, S.tabs.physical.label, "About"][n] + " · " : "") + S.name;
-      setTimeout(() => { busy = false; const d = pending; pending = 0; if (d && edge(d)) go(i + d); }, dur);
     };
-    set(i); fit();
+    const afterMove = () => { busy = false; const d = pending; pending = 0; if (d && edge(d)) go(i + d); };
     // can the current screen still scroll in this direction? then let it scroll first
     const edge = (dir) => { const e = els[i]; return dir > 0 ? e.scrollTop + e.clientHeight >= e.scrollHeight - 12 : e.scrollTop <= 12; };
 
-    // --- Scrubbing: the slide follows the swipe live (trackpad, wheel or finger) ---
-    // drag.t goes 0 → 1 as the next screen slides in. On release it settles to whichever screen is nearer,
-    // or finishes if the swipe was a quick flick. One gesture can only ever move one screen.
-    const SNAP = reduce ? 200 : 480;
-    let drag = null;
+    // --- Motion: every move between neighbouring screens runs on one requestAnimationFrame loop ---
+    // drag.t is where the swipe wants the slide to be (0 = this screen, 1 = the next one); drag.v is what's
+    // shown, eased toward t each frame so uneven trackpad/wheel input still moves smoothly. Only transform and
+    // opacity change. Letting go hands over to a timed ease from the exact spot shown, and the screens' classes
+    // are swapped only once the slide has fully arrived, so nothing jumps at the hand-off.
+    const SNAP = reduce ? 200 : 520, FULL = reduce ? 200 : 720;
+    let drag = null, anim = null, raf = 0;
     const SCRUB = () => Math.max(360, innerHeight * 0.5); // wheel distance for a full screen change
+    const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+    const SH = "0 -24px 60px -20px rgba(30,25,60,.22)"; // soft edge on the screen sliding over
     const paint = () => {
-      const { dir, a, b, t } = drag;
-      const sh = "0 -24px 60px -20px rgba(30,25,60,.22)"; // soft edge on the screen sliding over
-      if (dir > 0) { a.style.transform = `translateY(${-12 * t}%)`; a.style.opacity = 1 - 0.4 * t; b.style.transform = `translateY(${100 * (1 - t)}%)`; b.style.opacity = 1; b.style.boxShadow = sh; }
-      else { a.style.transform = `translateY(${100 * t}%)`; b.style.transform = `translateY(${-12 * (1 - t)}%)`; b.style.opacity = 0.6 + 0.4 * t; a.style.boxShadow = sh; }
+      const { dir, a, b, v } = drag;
+      if (dir > 0) { a.style.transform = `translate3d(0,${-12 * v}%,0)`; a.style.opacity = 1 - 0.4 * v; b.style.transform = `translate3d(0,${100 * (1 - v)}%,0)`; }
+      else { a.style.transform = `translate3d(0,${100 * v}%,0)`; b.style.transform = `translate3d(0,${-12 * (1 - v)}%,0)`; b.style.opacity = 0.6 + 0.4 * v; }
     };
+    const loop = (now) => {
+      raf = 0; if (!drag) return;
+      if (anim) {
+        const k = Math.min(1, (now - anim.start) / anim.dur);
+        drag.v = anim.from + (anim.to - anim.from) * easeOut(k); paint();
+        if (k >= 1) { finish(anim.to === 1); return; }
+      } else {
+        drag.v += (drag.t - drag.v) * 0.3;
+        if (Math.abs(drag.t - drag.v) < 0.0005) drag.v = drag.t;
+        paint();
+        if (drag.v === drag.t) return;
+      }
+      raf = requestAnimationFrame(loop);
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
     const begin = (dir) => {
       const n = i + dir; if (busy || drag || n < 0 || n > last) return false;
       const a = els[i], b = els[n];
-      b.scrollTop = 0; b.classList.add("is-peek"); // the incoming screen shows fully formed while it slides
-      [a, b].forEach((e) => { e.style.transition = "none"; e.style.visibility = "visible"; });
-      drag = { dir, a, b, n, t: 0 };
+      b.scrollTop = 0; fit(n);
+      b.classList.add("is-peek"); // the incoming screen shows fully formed while it slides
+      [a, b].forEach((e) => { e.style.transition = "none"; e.style.visibility = "visible"; e.style.willChange = "transform, opacity"; });
+      (dir > 0 ? b : a).style.boxShadow = SH;
+      drag = { dir, a, b, n, t: 0, v: 0 }; anim = null; busy = true;
       return true;
     };
-    const scrub = (t) => { drag.t = Math.min(1, Math.max(0, t)); paint(); };
-    const release = (commit) => {
-      const d = drag; if (!d) return; drag = null;
-      [d.a, d.b].forEach((e) => { e.style.transition = ""; e.style.transitionDuration = SNAP + "ms"; });
-      void d.a.offsetHeight;
-      [d.a, d.b].forEach((e) => { e.style.transform = ""; e.style.opacity = ""; });
-      if (commit) go(d.n, SNAP); else { busy = true; setTimeout(() => { busy = false; }, SNAP); }
-      setTimeout(() => {
-        [d.a, d.b].forEach((e) => { e.style.transitionDuration = ""; e.style.visibility = ""; e.style.boxShadow = ""; });
-        if (!commit) d.b.classList.remove("is-peek");
-      }, SNAP + 40);
+    const scrub = (t) => { drag.t = Math.min(1, Math.max(0, t)); kick(); };
+    const settleTo = (commit, dur) => {
+      if (!drag) return;
+      const to = commit ? 1 : 0, dist = Math.abs(to - drag.v);
+      anim = { from: drag.v, to, start: performance.now(), dur: dur || Math.max(200, SNAP * Math.sqrt(dist)) };
+      drag.t = to; kick();
     };
+    const finish = (commit) => {
+      const d = drag; drag = null; anim = null; if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      els.forEach((e) => { e.style.transition = "none"; });
+      [d.a, d.b].forEach((e) => { e.style.transform = ""; e.style.opacity = ""; e.style.boxShadow = ""; e.style.visibility = ""; e.style.willChange = ""; });
+      if (commit) land(d.n); else d.b.classList.remove("is-peek");
+      void root.offsetHeight; // apply the final classes with no transition, then turn transitions back on
+      requestAnimationFrame(() => els.forEach((e) => { e.style.transition = ""; }));
+      afterMove();
+    };
+    // jump straight to a screen (nav, dots, keys, mouse wheel clicks): neighbours slide on the same loop
+    const go = (n) => {
+      if (busy || n < 0 || n > last || n === i) return;
+      if (Math.abs(n - i) === 1) { if (begin(n - i)) settleTo(true, FULL); return; }
+      busy = true; els[n].scrollTop = 0; fit(n); land(n);
+      setTimeout(afterMove, DUR);
+    };
+    set(i); fit();
 
     // Wheel / trackpad
     // - the first few px are a dead zone, so a tiny accidental nudge does nothing
-    // - after that the slide follows the scroll; when the scroll goes quiet it settles to the nearer screen
+    // - after that the slide follows the scroll; once the scroll stops it settles to the nearer screen
     //   (past a third of the way, or a quick flick, finishes it)
+    // - if it's sliding back and you swipe again, it catches the slide where it is and keeps following
     // - reaching the next screen ends the gesture: leftover trackpad momentum is swallowed, so it can't skip two
     // - a NEW swipe is recognised by a short pause, a change of direction, or the scroll speeding up again
     // - a classic mouse wheel click just moves one screen
     // - if a gesture scrolled the About page's own content, it stops at the edge; the next gesture moves on
-    const WHEEL_MIN = 45, QUIET = 170, SPEEDUP_AFTER = 300, SETTLE = 200, DEAD = 8;
+    const WHEEL_MIN = 45, QUIET = 170, SPEEDUP_AFTER = 300, SETTLE = 150, DEAD = 6;
     let lastT = 0, swallow = false, moved = false, acc = 0, lastDir = 0, fireT = 0, lo = Infinity, pending = 0, peak = 0, settleT = null;
-    els.forEach((el) => el.addEventListener("scroll", () => { if (!busy && !drag) moved = true; }, { passive: true }));
+    els.forEach((el) => el.addEventListener("scroll", () => { if (!busy) moved = true; }, { passive: true }));
     const endGesture = (now) => { swallow = true; acc = 0; fireT = now; lo = Infinity; };
     const fire = (dir) => {
       endGesture(performance.now());
@@ -239,29 +269,32 @@
       go(i + dir);
     };
     const settle = () => {
-      settleT = null; if (!drag) return;
-      release(drag.t > 0.33 || (peak >= 30 && drag.t > 0.06));
-      endGesture(performance.now());
+      settleT = null; if (!drag || anim) return;
+      const c = drag.t > 0.33 || (peak >= 30 && drag.t > 0.06);
+      settleTo(c); if (c) endGesture(performance.now());
+    };
+    const follow = (e, dy, mag, now) => {
+      e.preventDefault(); peak = Math.max(peak, mag);
+      scrub(drag.t + (dy * drag.dir) / SCRUB());
+      clearTimeout(settleT); settleT = null;
+      if (drag.t >= 1) { settleTo(true); endGesture(now); return; }
+      settleT = setTimeout(settle, SETTLE);
     };
     const onWheel = (e) => {
       const now = performance.now(), gap = now - lastT; lastT = now;
       const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
       if (!dy) return;
       const dir = dy > 0 ? 1 : -1, mag = Math.abs(dy);
-      if (drag) { // mid-scrub: follow the scroll, both ways
-        e.preventDefault(); peak = Math.max(peak, mag); lastDir = dir;
-        scrub(drag.t + (dy * drag.dir) / SCRUB());
-        clearTimeout(settleT); settleT = null;
-        if (drag.t >= 1) { release(true); endGesture(now); return; }
-        settleT = setTimeout(settle, SETTLE);
-        return;
+      if (drag && !anim) { lastDir = dir; follow(e, dy, mag, now); return; }
+      if (drag && anim && anim.to === 0) { // sliding back: catch it and keep following
+        anim = null; drag.t = drag.v; peak = mag; swallow = false; lastDir = dir; follow(e, dy, mag, now); return;
       }
       // is this the start of a new swipe?
       const sped = swallow && now - fireT > SPEEDUP_AFTER && mag > lo * 2 + 10;
       if (gap > QUIET || dir !== lastDir || sped) { swallow = false; moved = false; acc = 0; lo = Infinity; }
       lastDir = dir;
       if (swallow) { e.preventDefault(); if (now - fireT > 120) lo = Math.min(lo, mag); return; }
-      if (busy) { // screen is still settling: count this swipe, run it right after (at most one)
+      if (busy) { // a screen is still arriving: count this swipe, run it right after (at most one)
         e.preventDefault();
         if (Math.sign(acc) !== dir) acc = 0;
         acc += dy; if (Math.abs(acc) >= WHEEL_MIN) fire(dir);
@@ -277,16 +310,19 @@
     };
 
     // Touch: from the top/bottom edge of a screen's content, the next/previous screen follows the finger.
-    // Let go past ~30% (or flick) and it finishes; otherwise it slides back.
+    // Let go past ~30% (or flick) and it finishes; otherwise it slides back (and can be caught again).
     let y0 = null, x0 = 0, okUp = false, okDown = false, ty = 0, tt = 0, tv = 0;
     const onStart = (e) => {
-      y0 = ty = e.touches[0].clientY; x0 = e.touches[0].clientX; tt = performance.now(); tv = 0;
+      const y = e.touches[0].clientY;
+      y0 = ty = y; x0 = e.touches[0].clientX; tt = performance.now(); tv = 0;
       okDown = edge(1); okUp = edge(-1);
+      if (drag && anim && anim.to === 0) { anim = null; drag.t = drag.v; y0 = y + drag.dir * (drag.v * innerHeight + 10); }
     };
     const onMove = (e) => {
       if (y0 == null) return;
       const y = e.touches[0].clientY, dy = y0 - y, dx = Math.abs(x0 - e.touches[0].clientX), now = performance.now();
       if (now > tt) { tv = 0.6 * tv + 0.4 * ((ty - y) / (now - tt)); ty = y; tt = now; }
+      if (drag && anim) { e.preventDefault(); return; }
       if (!drag) {
         if (busy) return;
         const dir = dy > 0 ? 1 : -1;
@@ -302,7 +338,7 @@
     const onEnd = () => {
       if (y0 == null) return; y0 = null;
       if (performance.now() - tt > 100) tv = 0; // held still before letting go: not a flick
-      if (drag) release(drag.t > 0.3 || tv * drag.dir > 0.45);
+      if (drag && !anim) settleTo(drag.t > 0.3 || tv * drag.dir > 0.45);
     };
     const onKey = (e) => {
       if (e.target.closest?.("input, textarea")) return;
@@ -312,7 +348,7 @@
     const onClick = (e) => {
       const a = e.target.closest("[data-go]"); if (!a || !root.contains(a)) return;
       e.preventDefault(); const n = +a.dataset.go; if (n === i) return;
-      busy = false; pending = 0; go(n);
+      if (drag) return; busy = false; pending = 0; go(n);
     };
     addEventListener("wheel", onWheel, { passive: false });
     addEventListener("touchstart", onStart, { passive: true });
@@ -321,7 +357,7 @@
     addEventListener("touchcancel", onEnd, { passive: true });
     addEventListener("keydown", onKey);
     root.addEventListener("click", onClick);
-    phasesOff = () => { removeEventListener("wheel", onWheel); removeEventListener("touchstart", onStart); removeEventListener("touchend", onEnd); removeEventListener("touchcancel", onEnd); removeEventListener("touchmove", onMove); removeEventListener("resize", fit); removeEventListener("keydown", onKey); };
+    phasesOff = () => { removeEventListener("wheel", onWheel); removeEventListener("touchstart", onStart); removeEventListener("touchend", onEnd); removeEventListener("touchcancel", onEnd); removeEventListener("touchmove", onMove); removeEventListener("resize", onResize); removeEventListener("keydown", onKey); };
   }
   // the name in the top bar always starts home from the cover
   document.addEventListener("click", (e) => { if (e.target.closest?.('a.brand[data-home="0"]')) homePhase = 0; });
