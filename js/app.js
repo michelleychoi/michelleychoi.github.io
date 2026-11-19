@@ -97,11 +97,11 @@
     const phase = (id, n) => {
       const t = S.tabs[id], list = t.projects.map((s) => PROJECTS[s]).filter((p) => p && !p.locked);
       const head = (cls) => `<div class="ph-head${cls}"><h2>${esc(t.label)}</h2><p>${esc(t.blurb)}</p><span class="mono muted">0${n} / 02</span></div>`;
-      // an odd number of projects: the title fills the empty last cell of the grid instead of sitting on top
+      // an odd number of projects: the title takes the first (top-left) cell of the grid instead of sitting on top
       const inCell = list.length % 2 === 1;
       return `<section class="phase ph-work ph-${id}" aria-label="${esc(t.label)}"><div class="ph-in">
         ${inCell ? "" : head("")}
-        <div class="pgrid">${list.map(card).join("")}${inCell ? head(" cell") : ""}</div></div></section>`;
+        <div class="pgrid">${inCell ? head(" cell") : ""}${list.map(card).join("")}</div></div></section>`;
     };
     return `<main class="view phases">
       <section class="phase home cover2" aria-label="Cover">

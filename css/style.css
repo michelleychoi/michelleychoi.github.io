@@ -853,3 +853,6 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .ph-head.cell p { grid-column: 1 / -1; max-width: 32ch; }
 .phase.cur .ph-head.cell { animation: cover-rise .9s cubic-bezier(.7,0,.2,1) .6s both; }
 @media (max-width: 760px) { .ph-head.cell { order: -1; border-top: 0; border-bottom: 1px solid var(--ink); padding: 0 0 12px; margin: 0; } .ph-head.cell h2 { font-size: clamp(1.9rem, 8vw, 2.6rem); } }
+/* Design title in the top-left cell, Go For It beside it */
+.ph-head.cell { align-self: start; margin: 0; }
+.phase.cur .ph-head.cell { animation-delay: .3s; }
