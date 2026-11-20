@@ -111,7 +111,7 @@
       const t = S.tabs[id], list = t.projects.map((s) => PROJECTS[s]).filter((p) => p && !p.locked);
       const [hero, ...rest] = list;
       const img = (p) => `<div class="pc-img">${p.cover?.live ? liveCover(p.cover) : `<img src="${esc(p.cover?.src || "")}" alt="${esc(p.title)} cover">`}</div>`;
-      const det = (p) => `<span class="mono muted">${esc(p.tags || p.kicker)}${p.noYearDot ? " " : " · "}${esc(p.year)}</span>`;
+      const det = (p) => `<span class="mono muted">${esc(p.tags || p.kicker).replace(/\n/g, "<br>")}${p.noYearDot ? " " : " · "}${esc(p.year)}</span>`;
       return `<section class="phase ph-work ph-${id}" aria-label="${esc(t.label)}"><div class="ph-in feat">
         <div class="ph-head" style="--o:0"><h2>${esc(t.label)}</h2><span class="mono muted">0${n} / 02</span></div>
         <a class="f-hero" href="#${hero.slug}" style="--o:0">${img(hero)}<div class="f-txt">

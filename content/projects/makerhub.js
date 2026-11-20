@@ -6,8 +6,8 @@ addProject({
   title: "CU MakerHub",
   kicker: "Construction Commission · Group Project",
   year: "2026",
-  tags: "Construction commission · Group project", // short details shown on the home Design screen
-  noYearDot: true, // no "·" between "Group project" and the year
+  tags: "Construction commission\nGroup project", // short details shown on the home Design screen
+  noYearDot: true, // no dots: "Construction commission" on one line, "Group project 2026" on the next
   role: "Designer (team of 4)",
   tools: "SketchUp, Enscape, Animation Software, Canva",
   // blurb: short line on the Digital/Physical overview cards (summary shows on the project page)
