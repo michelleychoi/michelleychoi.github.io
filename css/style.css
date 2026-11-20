@@ -993,3 +993,11 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .f-sm h4 { text-wrap: balance; }
 .f-sm > div { min-width: 0; }
 
+
+/* cover: name and everything around it scaled down ~12% (2026-11-20) */
+@media (min-width: 761px) {
+  .cover2 .name .nm { font-size: clamp(3rem, 8.8vw, 9.25rem); }
+  .cover2 .name .hi { font-size: clamp(1.8rem, 3.7vw, 3.9rem); }
+  .cover2 .tagline { margin-top: clamp(18px, 2.8vh, 34px); font-size: clamp(.95rem, 1.2vw, 1.15rem); }
+  .cover2 .facts { margin-top: 14px; font-size: .84rem; }
+}
