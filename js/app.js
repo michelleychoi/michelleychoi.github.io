@@ -516,7 +516,7 @@
         <button class="copy copy-ic" type="button" data-copy="${i}" aria-label="Copy ${esc(e.address)}" title="Copy"><svg class="ic-copy" viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 5.5v-.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="ic-check" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></li>`).join("");
     const links = S.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">
         <span class="k">${esc(l.label)}</span><span class="v">${esc(l.handle || "")}</span><span>↗</span></a></li>`).join("");
-    const board = (S.board || []).map((b, bi) => `<div class="pin-board">
+    const boards = (S.board || []).map((b, bi) => `<div class="pin-board${b.half ? " half" : ""}">
         <div class="pin-head"><span class="mono muted">${String(bi + 1).padStart(2, "0")}</span><h2>${esc(b.title)}</h2></div>
         <div class="pins${b.items.some((im) => im.back) ? " flips" : ""}" style="--n:${Math.min(b.items.length, 4)}">${b.items.map((im, i) => {
           const tilt = [-3, 2.2, -1.4, 3, -2.4, 1.6][(i + bi) % 6];
@@ -537,7 +537,14 @@
             }
             return im.back ? `<div class="flip" tabindex="0" aria-label="${esc((im.caption || "") + ": " + im.back)}"><div class="flip-in"><div class="flip-front">${pic}</div><div class="flip-back"><b>${esc(im.card || im.caption || "")}</b><p>${txt(im.back)}</p>${im.link ? `<a class="flip-link" href="${esc(im.link)}" target="_blank" rel="noopener">${esc(im.link.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))} ↗</a>` : ""}</div></div></div>` : pic;
           })()}${im.caption ? `<figcaption>${esc(im.caption)}</figcaption>` : ""}</figure>`;
-        }).join("")}</div>${b.note ? `<span class="pin-note">${esc(b.note)}</span>` : ""}</div>`).join("");
+        }).join("")}</div>${b.note ? `<span class="pin-note">${esc(b.note)}</span>` : ""}</div>`);
+    // boards marked "half" sit two to a row (side by side) instead of each taking a full row
+    let board = "";
+    for (let i = 0; i < boards.length; i++) {
+      const b = S.board[i];
+      if (b.half && S.board[i + 1]?.half) { board += `<div class="pin-pair">${boards[i]}${boards[i + 1]}</div>`; i++; }
+      else board += boards[i];
+    }
     const snaps = (S.portrait || []).map((im, i) => `<figure class="snap snap-${i + 1}">${media({ src: im.src, ratio: im.ratio || "4/5", alt: im.label }, im.label)}</figure>`).join("");
     return `<section class="wrap about about-v3">
       <div class="about-text"><div class="about-marks" aria-hidden="true"><canvas class="seal mark" data-seal="michelle" data-colors="0,1"></canvas><canvas class="seal mark" data-seal="#237623" data-colors="1,1,1,3" data-scale="0.82"></canvas><canvas class="seal mark" data-seal="#245496" data-colors="soft" data-scale="0.62"></canvas></div><span class="mono muted">About</span><h1>Hi, I'm ${esc(S.name.split(" ")[0])}!</h1>

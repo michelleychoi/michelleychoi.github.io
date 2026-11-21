@@ -1001,3 +1001,16 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
   .cover2 .tagline { margin-top: clamp(18px, 2.8vh, 34px); font-size: clamp(.95rem, 1.2vw, 1.15rem); }
   .cover2 .facts { margin-top: 14px; font-size: .84rem; }
 }
+
+/* About: photography + films side by side, each a 2x2 grid (2026-11-21) */
+.pin-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 2.6vw, 36px); align-items: stretch; }
+.pin-board.half .pins, .pin-board.half .pins.flips { grid-template-columns: repeat(2, minmax(0, 1fr)); width: auto; margin-inline: 0; }
+@media (max-width: 900px) { .pin-pair { grid-template-columns: minmax(0, 1fr); } }
+@media (min-width: 901px) { .pin-board.half .pins:has(.poster) { width: 72%; margin-inline: auto; gap: clamp(14px, 2vw, 26px); } }
+@media (min-width: 901px) {
+  .pin-board.half .flip-back.lb { padding: 9px 10px; gap: 4px; }
+  .pin-board.half .lb-by, .pin-board.half .lb-foot { display: none; }
+  .pin-board.half .flip-back.lb .lb-title { font-size: clamp(.82rem, 1vw, 1rem); }
+  .pin-board.half .lb-stars { font-size: .8rem; }
+  .pin-board.half .flip-back.lb p { font-size: clamp(.62rem, .74vw, .74rem); line-height: 1.32; }
+}

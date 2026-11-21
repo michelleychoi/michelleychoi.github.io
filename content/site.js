@@ -32,6 +32,7 @@ window.SITE = {
   ],
   // Bulletin board on the About page. Drop photos in assets/board/ and set "src" (empty src = placeholder).
   // "ratio" is the photo's shape; "caption" is the handwritten-style label under it (optional).
+  // "half: true" on two boards in a row puts them side by side.
   board: [
     // Until a photo is added (set "src"), each one shows as a colored card ("tint": [bottom, top, text color]).
     { title: "My Communities", note: "(flip the cards!)", ratio: "4/5", items: [
@@ -45,13 +46,13 @@ window.SITE = {
         back: "I begged my mom for three years to start violin in the second grade. I've never stopped playing since, and orchestra is my home, powered by my love of string instruments. You'll always find me nerding out over an orchestral film score." }
     ]},
     // "hand": captions in black handwriting on a polaroid-style bottom
-    { title: "Some Fun Photography :)", ratio: "4/3", hand: true, items: [
+    { title: "Some Fun Photography :)", ratio: "4/3", hand: true, half: true, items: [
       { src: "assets/about/photos/switzerland.jpg", caption: "Iseltwald, Switzerland. Swam here for hours, taken on my Sony Cybershot!" },
       { src: "assets/about/photos/snow-sunset.jpg", caption: "A snowy sunny day on the Cornell Libe Slope" },
       { src: "assets/about/photos/fair.jpg", caption: "A popup carnival in May post covid" },
       { src: "assets/about/photos/ocean-rocks.jpg", caption: "Southern Maine, motorcyclist on a cliff" }
     ]},
-    { title: "Cinephilia Collection", ratio: "2/3", shape: "poster", items: [
+    { title: "Cinephilia Collection", ratio: "2/3", shape: "poster", half: true, items: [
       // "review" + "stars": the poster flips on hover (tap on phones) to my Letterboxd review
       { src: "assets/about/films/interstellar.jpg", caption: "Interstellar (2014)", stars: 5,
         review: "Never getting over this movie, watching it in IMAX for the sixth time on its 10 year anniversary and hearing Hans Zimmer blasting on speakers right above my head was full full circle." },
