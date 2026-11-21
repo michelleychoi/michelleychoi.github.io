@@ -200,9 +200,10 @@
       }
       const R = rng(opts.seed || 42), n = opts.count || 4;
       cols = Array.from({ length: n }, (_, k) => {
-        const size = [22, 16, 19, 13][k % 4], gap = size * (1.9 + R() * 0.5), speed = [15, 24, 11, 19][k % 4];
+        // dots: one even spacing in every column and no empty slots (bob 2026-11-21: the gaps looked uneven)
+        const size = [22, 16, 19, 13][k % 4], gap = dots ? 34 : size * (1.9 + R() * 0.5), speed = [15, 24, 11, 19][k % 4];
         const len = Math.ceil(((across ? W : H) + 400) / gap) + 2;
-        const cells = Array.from({ length: len }, () => (R() < 0.2 ? -1 : Math.floor(R() * sprites.length)));
+        const cells = Array.from({ length: len }, () => (!dots && R() < 0.2 ? -1 : Math.floor(R() * sprites.length)));
         return { k, size, gap, speed, cells, len, phase: R() * 10 };
       });
     }
@@ -235,10 +236,11 @@
           const f = near * r * r * (3 - 2 * r); // smoothstep
           const wave = Math.sin(s * 1.3 + i * 0.55 + c.phase);
           if (dots) {
-            // dots: nearly one size, a gentle breath, a touch softer
-            const br = 0.92 + (0.08 + f * 0.08) * wave;
-            const rad = 3.3 * (1 + (c.size - 17) * 0.012) * br * (1 + f * 0.7);
-            ctx.globalAlpha = Math.min(1, edge * 0.85 * (0.62 + 0.38 * br + f * 0.35));
+            // dots: one size, each slowly fading in and out on its own rhythm (a gentle breath, not a blink)
+            const fade = 0.5 + 0.5 * Math.sin(s * 0.9 + i * 1.7 + c.k * 2.3 + c.phase);
+            const br = 0.96 + (0.04 + f * 0.08) * wave;
+            const rad = 3.3 * br * (1 + f * 0.7);
+            ctx.globalAlpha = Math.min(1, edge * 0.85 * (0.45 + 0.55 * fade + f * 0.35));
             ctx.fillStyle = dotCols[id % dotCols.length]; ctx.beginPath(); ctx.arc(x, y, rad, 0, 6.2832); ctx.fill();
           } else {
             const breathe = 0.78 + (0.22 + f * 0.1) * wave;
