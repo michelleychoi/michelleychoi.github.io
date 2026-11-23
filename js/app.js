@@ -143,6 +143,7 @@
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
         </div>
         <a class="scroll-cue mono" href="#" data-go="1"><i></i>Scroll to see my work</a>
+        <img class="peek-girl" src="assets/girl-lines.png?v=202611230841" alt="" aria-hidden="true">
       </section>
       ${featured("digital", 1)}
       ${phase("physical", 2)}
