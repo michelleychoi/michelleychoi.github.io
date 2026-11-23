@@ -79,6 +79,6 @@ addProject({
     ]},
 
     { group: "Final Board", type: "image", heading: "Final Presentation Board",
-      src: "assets/digital/statler/final-board.jpg", ratio: "3/4", caption: "The full board as presented" }
+      src: "assets/digital/statler/final-board.jpg", ratio: "3/4", caption: "The full board as presented", maxWidth: "440px", center: true }
   ]
 });
