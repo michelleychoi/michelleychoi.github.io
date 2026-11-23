@@ -32,7 +32,7 @@ addProject({
 
     // "before" plan: bob's marked-up original layout (added 2026-11-23)
     { group: "The Spaces", type: "image", heading: "Before: The Original Floorplan",
-      src: "assets/digital/statler/floorplan-before.jpg?v=202611230405", ratio: "1585/1064", caption: "The original layout, marked up with the problems I found" },
+      src: "assets/digital/statler/floorplan-before.jpg?v=202611230413", ratio: "1263/863", caption: "The original layout, marked up with the problems I found" },
     { group: "The Spaces", type: "image", heading: "After: The New Floorplan",
       intro: "Guests come in from the elevator and retail entrance, pass the café, and are led by the grand stair toward the bar.",
       src: "assets/digital/statler/floorplan-hd.jpg", ratio: "2952/1596", caption: "Circulation from the entrance, past the café and stairs, to the bar" },
