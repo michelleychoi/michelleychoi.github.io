@@ -1014,3 +1014,6 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
   .pin-board.half .lb-stars { font-size: .8rem; }
   .pin-board.half .flip-back.lb p { font-size: clamp(.62rem, .74vw, .74rem); line-height: 1.32; }
 }
+
+/* brief: bulleted values (Statler pain points, 2026-11-23) */
+.brief-pts { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-family: inherit; font-weight: 500; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.4; letter-spacing: 0; }

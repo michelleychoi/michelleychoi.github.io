@@ -17,15 +17,21 @@ addProject({
 
   sections: [
     { group: "The Brief", type: "brief", heading: "Final Project Brief", items: [
-      { label: "Project", value: "The Statler Hotel, Track B." },
-      { label: "Site", value: "The Regent Lounge, an underused space on the way to Banfi's." },
-      { label: "Goal", value: "Make it a warm social anchor that pulls guests toward Banfi's." },
-      { label: "Concept", value: "Social Threshold: material richness, lighting, and visual hierarchy." }
+      { label: "Project", value: "The Statler Hotel, Regent Lounge" },
+      // "points": a bulleted list instead of one line
+      { label: "Pain points", points: [
+        "The bar was too small, with little bar seating, and got packed on alumni weekends",
+        "The grand stair was hidden and didn't feel grand",
+        "The entrance was easy to miss for first-timers",
+        "No clear path for servers and staff, so guests got food from the other side",
+        "Awkward long tables only worked for big parties",
+        "Too much lounge seating that went unused"
+      ]},
+      { label: "Goal", value: "Make it a warm social anchor guests can actually utilize and wayfind easily." }
     ]},
 
     // "before" plan: bob's marked-up original layout (added 2026-11-23)
     { group: "The Spaces", type: "image", heading: "Before: The Original Floorplan",
-      intro: "The old layout had a bar too small for packed alumni weekends, with barely any bar seating. The grand stair was hidden, the entrance was easy to miss for first-timers, and staff had no clear path, so guests had to cross the room for food. Long tables only worked for big parties, and the lounge seating mostly sat empty.",
       src: "assets/digital/statler/floorplan-before.jpg?v=202611230405", ratio: "1585/1064", caption: "The original layout, marked up with the problems I found" },
     { group: "The Spaces", type: "image", heading: "After: The New Floorplan",
       intro: "Guests come in from the elevator and retail entrance, pass the café, and are led by the grand stair toward the bar.",
