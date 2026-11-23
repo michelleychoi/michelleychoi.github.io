@@ -26,11 +26,11 @@ addProject({
       // pain points beside the clean plan; clicking the plan flips it to bob's hand-annotated version
       { label: "Before", title: "Pain Points", points: [
         "Cramped bar with little seating, overwhelmed on alumni weekends",
-        "Hidden stair that didn't feel grand",
-        "Entrance easy to miss for first-timers",
-        "No clear path for staff, so guests crossed the room for food",
-        "Long tables that only fit big parties",
-        "Lounge seating that sat unused"
+        "An underwhelming, hard-to-notice grand staircase",
+        "Entrance to Regent Lounge is easy to miss for first-time visitors",
+        "No clear wayfinding for staff",
+        "Long tables that only fit big parties in front of bar",
+        "Cramped seating arrangement"
       ],
         src: "assets/digital/statler/floorplan-before-clean.jpg?v=202611230810", ratio: "1414/980", caption: "The original layout and how guests moved through it",
         back: { src: "assets/digital/statler/floorplan-before.jpg?v=202611230810", ratio: "1414/980", alt: "The original layout with my handwritten notes" },
@@ -40,9 +40,9 @@ addProject({
           "Bigger wraparound bar with seats on every side, built for alumni-weekend crowds",
           "Grand stair opened up as the room's focal point",
           "Café and wayfinding right at the entrance to guide first-timers in",
-          "Separate staff route, so guests no longer cross the room for food",
-          "Small two-person tables for couples and small groups",
-          "Lounge seating tucked into nooks along the path to the bar"
+          "A separate staff route, kept apart from guest paths",
+          "Small two-person tables in front of the bar for couples and small groups",
+          "Roomier seating, with lounge chairs set into nooks along the path to the bar"
         ],
         src: "assets/digital/statler/floorplan-hd.jpg?v=202611230810", ratio: "2952/1596", caption: "Circulation from the entrance, past the café and stairs, to the bar" }
     ]},
