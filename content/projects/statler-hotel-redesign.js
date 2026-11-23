@@ -79,6 +79,10 @@ addProject({
     ]},
 
     { group: "Final Board", type: "image", heading: "Final Presentation Board",
-      src: "assets/digital/statler/final-board.jpg", ratio: "3/4", caption: "The full board as presented", maxWidth: "440px", center: true }
+      src: "assets/digital/statler/final-board.jpg", ratio: "3/4", caption: "The full board as presented", maxWidth: "440px", center: true },
+
+    // reflection, approved by bob 2026-11-23
+    { group: "Reflection", type: "text", heading: "Presenting to Statler Management",
+      body: "Presenting this redesign to Statler management meant explaining every move in terms they care about: where guests get lost, where staff get stuck, and why the bar runs out of room on alumni weekends. Walking them through the before and after plans taught me to lead with the problem and let the floorplan prove the fix. Next time, I'd test the guest path in person, timing how long a first-time visitor takes to find the lounge before and after." }
   ]
 });
