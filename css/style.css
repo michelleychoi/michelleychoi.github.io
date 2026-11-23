@@ -1017,11 +1017,6 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 
 /* brief: bulleted values (Statler pain points, 2026-11-23) */
 .brief-pts { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-family: inherit; font-weight: 500; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.4; letter-spacing: 0; }
-/* Statler "Three Zones": a little bigger, reaching slightly past the text column on wide screens (2026-11-23) */
-/* bigger again (2026-11-23): café across the top, bar and staircase side by side below */
-@media (min-width: 761px) { .gallery.c3:has(img[src*="statler/cafe"]) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-  .gallery.c3:has(img[src*="statler/cafe"]) figure:first-child { grid-column: 1 / -1; } }
-@media (min-width: 1100px) { .gallery.c3:has(img[src*="statler/cafe"]) { margin-inline: calc(-1 * min(90px, (100vw - 100%) / 2 - 24px)); } }
 
 /* "rows" sections: text left, image right, stacked rows (Statler before/after floorplans, 2026-11-23) */
 .rows { display: grid; gap: clamp(28px, 4vw, 48px); }
