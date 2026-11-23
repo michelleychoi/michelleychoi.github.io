@@ -1045,3 +1045,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 /* Statler Three Zones, option E (2026-11-23): café full width, bar + staircase below, inside the section width */
 @media (min-width: 601px) { .gallery.c3:has(img[src*="statler/cafe"]) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .gallery.c3:has(img[src*="statler/cafe"]) figure:first-child { grid-column: 1 / -1; } }
+/* project page titles: the seal graphic is hidden (kept in the code) and replaced by the cover page dot (2026-11-23) */
+.p-title .seal.big { display: none; }
+.p-title { gap: clamp(10px, 1.2vw, 16px); }
+.p-dot { flex: none; width: clamp(9px, .9vw, 13px); height: clamp(9px, .9vw, 13px); }
