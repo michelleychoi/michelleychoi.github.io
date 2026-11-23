@@ -38,11 +38,11 @@ addProject({
       { label: "After", title: "The New Floorplan", body: "Guests come in from the elevator and retail entrance, pass the café, and are led by the grand stair toward the bar.",
         src: "assets/digital/statler/floorplan-hd.jpg?v=202611230420", ratio: "2952/1596", caption: "Circulation from the entrance, past the café and stairs, to the bar" }
     ]},
-    // stacked: zone name on the left, picture on the right (bob 2026-11-23)
-    { group: "The Spaces", type: "rows", heading: "Three Zones", items: [
-      { title: "Café", src: "assets/digital/statler/cafe.jpg", ratio: "1152/639" },
-      { title: "Bar", src: "assets/digital/statler/bar.jpg", ratio: "1152/639" },
-      { title: "Staircase", src: "assets/digital/statler/staircase.jpg", ratio: "1152/654" }
+    // café full width, bar and staircase side by side below (bob's pick "E", 2026-11-23)
+    { group: "The Spaces", type: "gallery", heading: "Three Zones", columns: 3, images: [
+      { src: "assets/digital/statler/cafe.jpg", ratio: "1152/639", caption: "Café" },
+      { src: "assets/digital/statler/bar.jpg", ratio: "1152/639", caption: "Bar" },
+      { src: "assets/digital/statler/staircase.jpg", ratio: "1152/654", caption: "Staircase" }
     ]},
 
     { group: "Key Details", type: "screens", wide: true, heading: "Millwork & Stair", items: [
