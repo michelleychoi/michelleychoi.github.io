@@ -20,12 +20,12 @@ addProject({
       { label: "Project", value: "The Statler Hotel, Regent Lounge" },
       // "points": a bulleted list instead of one line
       { label: "Pain points", points: [
-        "The bar was too small, with little bar seating, and got packed on alumni weekends",
-        "The grand stair was hidden and didn't feel grand",
-        "The entrance was easy to miss for first-timers",
-        "No clear path for servers and staff, so guests got food from the other side",
-        "Awkward long tables only worked for big parties",
-        "Too much lounge seating that went unused"
+        "Cramped bar with little seating, overwhelmed on alumni weekends",
+        "Hidden stair that didn't feel grand",
+        "Entrance easy to miss for first-timers",
+        "No clear path for staff, so guests crossed the room for food",
+        "Long tables that only fit big parties",
+        "Lounge seating that sat unused"
       ]},
       { label: "Goal", value: "Make it a warm social anchor guests can actually utilize and wayfind easily." }
     ]},
@@ -35,7 +35,7 @@ addProject({
       { label: "Before", title: "The Original Floorplan", body: "The original layout, marked up with the problems I found.",
         src: "assets/digital/statler/floorplan-before.jpg?v=202611230413", ratio: "1263/863" },
       { label: "After", title: "The New Floorplan", body: "Guests come in from the elevator and retail entrance, pass the café, and are led by the grand stair toward the bar.",
-        src: "assets/digital/statler/floorplan-hd.jpg", ratio: "2952/1596", caption: "Circulation from the entrance, past the café and stairs, to the bar" }
+        src: "assets/digital/statler/floorplan-hd.jpg?v=202611230420", ratio: "2952/1596", caption: "Circulation from the entrance, past the café and stairs, to the bar" }
     ]},
     { group: "The Spaces", type: "gallery", heading: "Three Zones", columns: 3, images: [
       { src: "assets/digital/statler/cafe.jpg", ratio: "1152/639", caption: "Café" },
