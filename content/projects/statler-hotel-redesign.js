@@ -33,7 +33,7 @@ addProject({
         "Lounge seating that sat unused"
       ],
         src: "assets/digital/statler/floorplan-before-clean.jpg?v=202611230440", ratio: "1326/880", caption: "The original layout and how guests moved through it",
-        back: { src: "assets/digital/statler/floorplan-before.jpg?v=202611230413", ratio: "1326/880", alt: "The original layout with my handwritten notes" },
+        back: { src: "assets/digital/statler/floorplan-before.jpg?v=202611230444", ratio: "1326/880", alt: "The original layout with my handwritten notes" },
         flipLabel: "Original floorplan. Press to flip to my annotated notes.", flipHint: "↻ Click the plan to see my notes", flipBackHint: "↻ Click to flip back" },
       { label: "After", title: "The New Floorplan", body: "Guests come in from the elevator and retail entrance, pass the café, and are led by the grand stair toward the bar.",
         src: "assets/digital/statler/floorplan-hd.jpg?v=202611230420", ratio: "2952/1596", caption: "Circulation from the entrance, past the café and stairs, to the bar" }
