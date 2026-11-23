@@ -1081,3 +1081,12 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 
 /* About: the three little glyph marks above "Hi, I'm Michelle!" are hidden at bob's request (2026-11-23); delete this line to bring them back */
 .about-marks { display: none !important; }
+/* About: three soft colour dots in place of the marks, like the cover's dots (bob 2026-11-23) */
+.about-dots { display: flex; gap: 12px; margin-bottom: 22px; }
+.about-dots i { width: 12px; height: 12px; border-radius: 50%; opacity: .85; animation: dot-breathe 3.6s ease-in-out infinite; }
+.about-dots i:nth-child(1) { background: var(--s-yellow); }
+.about-dots i:nth-child(2) { background: var(--s-pink); animation-delay: -1.2s; }
+.about-dots i:nth-child(3) { background: var(--s-blue); animation-delay: -2.4s; }
+@keyframes dot-breathe { 50% { opacity: .45; } }
+/* the big greeting has a wide left side-bearing; pull it in so its H lines up with the small ABOUT label and the text (bob 2026-11-23) */
+.about-text h1 { margin-left: -0.05em; }
