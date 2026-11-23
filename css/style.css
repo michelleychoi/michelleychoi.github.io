@@ -1054,3 +1054,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
    Drawn on a canvas (peekGirl in app.js); lines use --ink, eye shine --paper, neckline the --s-* stream colours. */
 .cover2 .peek-girl { position: absolute; right: 1.5vw; bottom: 0; height: min(66vh, 58vw); aspect-ratio: 1119 / 1160; width: auto; margin: 0; pointer-events: none; z-index: 0; color: var(--ink); --pg-hl: var(--paper); }
 @media (max-width: 760px) { .cover2 .peek-girl { height: 19vh; right: 2vw; bottom: 60px; } }
+
+/* text beside an image in a pair (Statler reflection next to the board, 2026-11-23) */
+.pair .s-text { grid-template-columns: 1fr; gap: 14px; }
+.pair > div:has(> .s-text) { align-self: center; }
