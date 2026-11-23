@@ -402,6 +402,11 @@
             `<figure${s.justify ? ` style="flex:${(([a, b]) => (+a / (+b || 1)) || 1)(String(im.ratio || "1").split("/"))} 1 0"` : ""}>${media(im, im.caption)}${im.caption ? `<figcaption class="mono">${esc(im.caption)}</figcaption>` : ""}</figure>`).join("")}</div></div>`;
       case "stats":
         return `<div class="stats">${s.items.map((i) => `<div class="stat"><span class="mono muted">${esc(i.label)}</span><b>${esc(i.value)}</b></div>`).join("")}</div>`;
+      case "rows":
+        // text on the left, image on the right, one row per item, all in one section (Statler before/after plans)
+        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
+          <div class="rows">${s.items.map((it) => `<div class="row"><div class="row-txt">${it.label ? `<span class="mono muted">${esc(it.label)}</span>` : ""}${it.title ? `<h3>${esc(it.title)}</h3>` : ""}${it.body ? `<p>${txt(it.body)}</p>` : ""}</div>
+            <figure>${media(it, it.caption || it.title)}${it.caption ? `<figcaption class="mono">${esc(it.caption)}</figcaption>` : ""}</figure></div>`).join("")}</div></div>`;
       case "split": {
         // one main image on the left, a column of small images (e.g. sketches) on the right
         const cap = (im) => im.caption ? `<figcaption class="mono">${esc(im.caption)}</figcaption>` : "";

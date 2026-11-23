@@ -1019,3 +1019,13 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .brief-pts { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-family: inherit; font-weight: 500; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.4; letter-spacing: 0; }
 /* Statler "Three Zones": a little bigger, reaching slightly past the text column on wide screens (2026-11-23) */
 @media (min-width: 1100px) { .gallery.c3:has(img[src*="statler/cafe"]) { margin-inline: calc(-1 * min(90px, (100vw - 100%) / 2 - 24px)); gap: 14px; } }
+
+/* "rows" sections: text left, image right, stacked rows (Statler before/after floorplans, 2026-11-23) */
+.rows { display: grid; gap: clamp(28px, 4vw, 48px); }
+.rows .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: clamp(20px, 3vw, 40px); align-items: start; }
+.rows .row-txt { display: grid; gap: 8px; align-content: start; }
+.rows .row-txt h3 { margin: 0; font-weight: 500; font-size: clamp(1.15rem, 1.5vw, 1.4rem); line-height: 1.2; }
+.rows .row-txt p { margin: 0; color: var(--muted); line-height: 1.5; }
+.rows figure { margin: 0; display: grid; gap: 6px; min-width: 0; }
+@media (min-width: 1100px) { .rows { margin-right: calc(-1 * min(90px, (100vw - 100%) / 2 - 24px)); } }
+@media (max-width: 760px) { .rows .row { grid-template-columns: 1fr; gap: 12px; } }
