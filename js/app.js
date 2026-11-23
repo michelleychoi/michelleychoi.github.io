@@ -73,7 +73,7 @@
         }
         body.getContext("2d").putImageData(bd, 0, 0); arm.getContext("2d").putImageData(ad, 0, 0);
       };
-      const ctx = cv.getContext("2d"), px = 0.27 * w, py = 0.545 * h; // pivot where the arm meets her side
+      const ctx = cv.getContext("2d"), px = 0.25 * w, py = 0.4886 * h; // pivot where the arm meets her side
       const draw = (deg) => {
         ctx.clearRect(0, 0, w, h); ctx.drawImage(body, 0, 0);
         ctx.save(); ctx.translate(px, py); ctx.rotate((deg * Math.PI) / 180); ctx.translate(-px, -py); ctx.drawImage(arm, 0, 0); ctx.restore();
@@ -194,7 +194,7 @@
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
         </div>
         <a class="scroll-cue mono" href="#" data-go="1"><i></i>Scroll to see my work</a>
-        <canvas class="peek-girl" data-src="assets/girl-draw.png?v=202611230905b" aria-hidden="true"></canvas>
+        <canvas class="peek-girl" data-src="assets/girl-draw.png?v=202611231210d" aria-hidden="true"></canvas>
       </section>
       ${featured("digital", 1)}
       ${phase("physical", 2)}
