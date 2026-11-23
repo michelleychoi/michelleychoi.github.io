@@ -1042,3 +1042,5 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .pf-hint .pf-b, .pf-on .pf-hint .pf-a { display: none; }
 .pf-on .pf-hint .pf-b { display: inline; }
 @media (prefers-reduced-motion: reduce) { .pf-in { transition: none; } }
+/* Three Zones stays inside the section dividers (no overhang) */
+.rows:has(img[src*="statler/cafe"]) { margin-right: 0 !important; }
