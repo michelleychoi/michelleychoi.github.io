@@ -156,6 +156,8 @@
   let homePhase = 0;
   function home() {
     const parts = S.name.trim().split(" ");
+    // every "o" in the cover name is drawn as a perfect ring (bob, 2026-11-23); the letter stays for screen readers
+    const ring = (w) => esc(w).replace(/o/g, `<span class="o-ring" aria-hidden="true"></span><span class="o-sr">o</span>`);
     const last = parts.length > 1 ? parts.pop() : "";
     const card = (p) => `<a class="pcard" href="#${p.slug}"><div class="pc-img"><img src="${esc(p.cover?.src || "")}" alt="${esc(p.title)} cover" loading="lazy"></div>
         <div class="pc-meta"><b>${esc(p.title)}</b><span class="mono muted">${esc(p.year)}</span></div>
@@ -189,7 +191,7 @@
         <canvas class="streams" id="streams" aria-hidden="true"></canvas>
         <nav class="cover-nav mono" aria-label="Sections"><a href="#digital" data-go="1">Work</a><a href="#about" data-go="3">About</a></nav>
         <div class="hero">
-          <h1 class="name"><span class="hi">Hi, I'm</span><span class="nm">${parts.map((w) => `<span>${esc(w)}</span>`).join("")}${last ? `<span>${esc(last)}</span>` : ""}</span></h1>
+          <h1 class="name"><span class="hi">Hi, I'm</span><span class="nm">${parts.map((w) => `<span>${ring(w)}</span>`).join("")}${last ? `<span>${ring(last)}</span>` : ""}</span></h1>
           <p class="tagline">${txt(S.tagline)}</p>
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
         </div>

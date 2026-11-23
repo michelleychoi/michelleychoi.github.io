@@ -1064,3 +1064,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .cover-brief .cb-txt .s-block > h2 { margin-top: 0; }
 .cover-brief .brief > div { grid-template-columns: 1fr; gap: 4px; }
 @media (max-width: 760px) { .cover-brief { grid-template-columns: 1fr; } }
+
+/* cover name: the "o" as a perfect circle (bob, 2026-11-23) */
+.cover2 .name .nm span.o-ring { display: inline-block; width: 0.555em; height: 0.555em; border: 0.106em solid currentColor; border-radius: 50%; box-sizing: border-box; vertical-align: baseline; margin: 0 0.028em 0 0.03em; position: relative; top: -0.008em; }
+.cover2 .name .nm span.o-sr { display: inline-block; position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
