@@ -1058,3 +1058,9 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 /* text beside an image in a pair (Statler reflection next to the board, 2026-11-23) */
 .pair .s-text { grid-template-columns: 1fr; gap: 14px; }
 .pair > div:has(> .s-text) { align-self: center; }
+
+/* cover photo with the brief beside it (Statler, 2026-11-23); stacks on phones */
+.cover-brief { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.cover-brief .cb-txt .s-block > h2 { margin-top: 0; }
+.cover-brief .brief > div { grid-template-columns: 1fr; gap: 4px; }
+@media (max-width: 760px) { .cover-brief { grid-template-columns: 1fr; } }

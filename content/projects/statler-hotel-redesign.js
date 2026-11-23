@@ -15,11 +15,13 @@ addProject({
     "Social Threshold: turning the Statler Hotel's underused Regent Lounge into a warm social anchor that draws guests toward Banfi's, using rich materials, layered lighting, and a clear visual path.",
   cover: { src: "assets/digital/statler/cover.jpg", ratio: "16/10", alt: "Rendered lounge with leather chairs and a wood-slat café counter" },
 
+  // brief sits beside a smaller cover photo at the top (bob, 2026-11-23)
+  sideBrief: { type: "brief", heading: "Final Project Brief", items: [
+    { label: "Project", value: "The Statler Hotel, Regent Lounge" },
+    { label: "Goal", value: "Make it a warm social anchor guests can actually utilize and wayfind easily." }
+  ]},
+
   sections: [
-    { group: "The Brief", type: "brief", heading: "Final Project Brief", items: [
-      { label: "Project", value: "The Statler Hotel, Regent Lounge" },
-      { label: "Goal", value: "Make it a warm social anchor guests can actually utilize and wayfind easily." }
-    ]},
 
     // before/after plans in one section: text on the left, plans stacked on the right ("rows" type, 2026-11-23)
     { group: "The Spaces", type: "rows", heading: "The Floorplan", items: [
