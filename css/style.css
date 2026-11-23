@@ -1090,3 +1090,9 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 @keyframes dot-breathe { 50% { opacity: .45; } }
 /* the big greeting has a wide left side-bearing; pull it in so its H lines up with the small ABOUT label and the text (bob 2026-11-23) */
 .about-text h1 { margin-left: -0.05em; }
+/* cover scroll cue: a little more noticeable (bob 2026-11-23): darker, slightly bigger, purple line + gently bobbing arrow */
+.home.cover2 > .scroll-cue { color: var(--ink); font-size: .8rem; gap: 12px; }
+.cover2 .scroll-cue i { width: 2px; height: 36px; border-radius: 2px; background: var(--name); }
+.cover2 .scroll-cue::after { content: "↓"; color: var(--name); font-size: 1.05rem; letter-spacing: 0; animation: cue-bob 1.8s ease-in-out infinite; }
+.cover2 .scroll-cue:hover { color: var(--name); }
+@keyframes cue-bob { 50% { transform: translateY(4px); } }
