@@ -16,7 +16,7 @@ addProject({
   cover: { src: "assets/digital/statler/cover.jpg", ratio: "16/10", alt: "Rendered lounge with leather chairs and a wood-slat café counter" },
 
   // brief sits beside a smaller cover photo at the top (bob, 2026-11-23)
-  sideBrief: { type: "brief", heading: "Final Project Brief", items: [
+  sideBrief: { type: "brief", heading: "Project Brief", items: [
     { label: "Project", value: "The Statler Hotel, Regent Lounge" },
     { label: "Goal", value: "Make it a warm social anchor guests can actually utilize and wayfind easily." }
   ]},
@@ -81,7 +81,7 @@ addProject({
     ]},
 
     // board left, reflection right (bob, 2026-11-23); stacks on phones
-    { group: "Final Board & Reflection", type: "pair", cols: "3/4 5/4", items: [
+    { group: "Board & Reflection", type: "pair", cols: "3/4 5/4", items: [
       { type: "image",
         src: "assets/digital/statler/final-board.jpg", ratio: "3/4", caption: "The full board as presented" },
       { type: "text", heading: "Presenting to Statler Management",
