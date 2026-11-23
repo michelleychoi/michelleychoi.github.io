@@ -43,9 +43,9 @@
     return `<div class="media" style="aspect-ratio:${esc(ratio)}"><img src="${esc(img.src)}" alt="${esc(img.alt || img.caption || "")}" loading="lazy"
       data-ratio="${esc(ratio)}" data-label="${esc(label || "Image")}" onerror="window.__ph(this)"></div>`;
   }
-  // cover drawing (bob's line drawing, 2026-11-23): her lines sketch themselves in, stroke by stroke.
-  // girl-draw.png packs the art: alpha = the line, red = when that bit of line appears (0-1), green = neckline dot.
-  // Lines use the page ink colour and the neckline uses the name colour, so dark mode just works.
+  // cover drawing (bob's line drawing, 2026-11-23): her raised hand waves gently every few seconds.
+  // girl-draw.png packs the art: alpha = the line, green 128 = the waving arm, green 255 = a neckline dot
+  // (red = which dot, for the rainbow), blue = the white shine in her eyes. Colours come from CSS so dark mode follows the page.
   function peekGirl(cv) {
     const img = new Image();
     img.onload = () => {
@@ -53,28 +53,43 @@
       cv.width = w; cv.height = h;
       const o = document.createElement("canvas"); o.width = w; o.height = h;
       const oc = o.getContext("2d"); oc.drawImage(img, 0, 0);
-      const src = oc.getImageData(0, 0, w, h).data, idx = [];
-      for (let i = 3; i < src.length; i += 4) if (src[i]) idx.push(i - 3);
-      const ctx = cv.getContext("2d"), out = ctx.createImageData(w, h), d = out.data;
+      const src = oc.getImageData(0, 0, w, h).data;
+      const layer = () => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
+      const body = layer(), arm = layer();
       const rgb = (v) => { const x = String(v).trim();
         if (x[0] === "#") return [1, 3, 5].map((k) => parseInt(x.slice(k, k + 2), 16) || 0);
         return (x.match(/\d+/g) || [0, 0, 0]).slice(0, 3).map(Number); };
-      let last = 0;
-      const paint = (t) => {
-        last = t;
-        const cs = getComputedStyle(cv), ink = rgb(cs.color), dot = rgb(cs.getPropertyValue("--pg-dot") || "#4e4cf0");
-        for (const j of idx) {
-          const k = Math.max(0, Math.min(1, (t - src[j] / 255) / 0.035));
-          const c = src[j + 1] > 127 ? dot : ink;
-          d[j] = c[0]; d[j + 1] = c[1]; d[j + 2] = c[2]; d[j + 3] = src[j + 3] * k;
+      const paintLayers = () => {
+        const cs = getComputedStyle(cv), ink = rgb(cs.color), hl = rgb(cs.getPropertyValue("--pg-hl") || "#fff");
+        const rainbow = ["--s-pink", "--s-yellow", "--s-purple", "--s-blue"].map((v) => rgb(cs.getPropertyValue(v) || "#888"));
+        const bd = body.getContext("2d").createImageData(w, h), ad = arm.getContext("2d").createImageData(w, h);
+        for (let j = 0; j < src.length; j += 4) {
+          const a = src[j + 3]; if (!a) continue;
+          const g = src[j + 1], isDot = g > 200, isArm = g > 100 && g <= 200, b = src[j + 2] / 255;
+          let c = isDot ? rainbow[(Math.max(1, src[j]) - 1) % 4] : ink;
+          c = [0, 1, 2].map((k) => c[k] + (hl[k] - c[k]) * b);
+          const t = isArm ? ad.data : bd.data;
+          t[j] = c[0]; t[j + 1] = c[1]; t[j + 2] = c[2]; t[j + 3] = a;
         }
-        ctx.putImageData(out, 0, 0);
+        body.getContext("2d").putImageData(bd, 0, 0); arm.getContext("2d").putImageData(ad, 0, 0);
       };
-      matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => setTimeout(() => paint(last), 30));
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return paint(2);
-      paint(0);
-      const t0 = performance.now() + 450, dur = 2600;
-      const step = (now) => { const t = Math.max(0, (now - t0) / dur) * 1.04; paint(t); if (t < 1.04 && cv.isConnected) requestAnimationFrame(step); };
+      const ctx = cv.getContext("2d"), px = 0.27 * w, py = 0.545 * h; // pivot where the arm meets her side
+      const draw = (deg) => {
+        ctx.clearRect(0, 0, w, h); ctx.drawImage(body, 0, 0);
+        ctx.save(); ctx.translate(px, py); ctx.rotate((deg * Math.PI) / 180); ctx.translate(-px, -py); ctx.drawImage(arm, 0, 0); ctx.restore();
+      };
+      paintLayers(); draw(0);
+      matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => setTimeout(() => { paintLayers(); draw(0); }, 30));
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      // three small waves (about 2.1s), then a pause, repeating; eased in and out so it never snaps
+      const t0 = performance.now() + 700;
+      const step = (now) => {
+        if (!cv.isConnected) return;
+        const t = ((now - t0) / 1000) % 5.2;
+        const env = t > 0 && t < 2.1 ? Math.sin((Math.PI * t) / 2.1) : 0;
+        draw(-7 * env * Math.sin((2 * Math.PI * t) / 0.7));
+        requestAnimationFrame(step);
+      };
       requestAnimationFrame(step);
     };
     img.src = cv.dataset.src;
@@ -179,7 +194,7 @@
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
         </div>
         <a class="scroll-cue mono" href="#" data-go="1"><i></i>Scroll to see my work</a>
-        <canvas class="peek-girl" data-src="assets/girl-draw.png?v=202611230915" aria-hidden="true"></canvas>
+        <canvas class="peek-girl" data-src="assets/girl-draw.png?v=202611230905b" aria-hidden="true"></canvas>
       </section>
       ${featured("digital", 1)}
       ${phase("physical", 2)}
