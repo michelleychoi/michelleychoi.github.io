@@ -1052,5 +1052,5 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 
 /* cover: bob's line drawing (v2: white shine in her eyes, rainbow dotted neckline, gently waving hand) peeking in from the right (2026-11-23).
    Drawn on a canvas (peekGirl in app.js); lines use --ink, eye shine --paper, neckline the --s-* stream colours. */
-.cover2 .peek-girl { position: absolute; right: 3vw; bottom: 0; height: min(70vh, 62vw); aspect-ratio: 1119 / 1160; width: auto; margin: 0; pointer-events: none; z-index: 0; color: var(--ink); --pg-hl: var(--paper); }
+.cover2 .peek-girl { position: absolute; right: 3vw; bottom: 0; height: min(66vh, 58vw); aspect-ratio: 1119 / 1160; width: auto; margin: 0; pointer-events: none; z-index: 0; color: var(--ink); --pg-hl: var(--paper); }
 @media (max-width: 760px) { .cover2 .peek-girl { height: 19vh; right: 2vw; bottom: 60px; } }
