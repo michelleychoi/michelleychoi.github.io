@@ -37,7 +37,7 @@ addProject({
         src: "assets/digital/statler/floorplan-before-clean.jpg?v=202611230810", ratio: "1414/980", caption: "The original layout and how guests moved through it",
         back: { src: "assets/digital/statler/floorplan-before.jpg?v=202611230810", ratio: "1414/980", alt: "The original layout with my handwritten notes" },
         flipLabel: "Original floorplan. Press to flip to my annotated notes.", flipHint: "↻ Click the plan to see my notes", flipBackHint: "↻ Click to flip back" },
-      { label: "After", title: "What I Changed", body: "Guests come in from the elevator and retail entrance, pass the café, and are led by the grand stair toward the bar.",
+      { label: "After", title: "What I Changed",
         points: [
           "Bigger wraparound bar with seats on every side, built for alumni-weekend crowds",
           "Grand stair opened up as the room’s focal point, wooden slats increase view",
