@@ -23,7 +23,11 @@ addProject({
       { label: "Concept", value: "Social Threshold: material richness, lighting, and visual hierarchy." }
     ]},
 
-    { group: "The Spaces", type: "image", heading: "The Floorplan",
+    // "before" plan: bob's marked-up original layout (added 2026-11-23)
+    { group: "The Spaces", type: "image", heading: "Before: The Original Floorplan",
+      intro: "The old layout had a bar too small for packed alumni weekends, with barely any bar seating. The grand stair was hidden, the entrance was easy to miss for first-timers, and staff had no clear path, so guests had to cross the room for food. Long tables only worked for big parties, and the lounge seating mostly sat empty.",
+      src: "assets/digital/statler/floorplan-before.jpg?v=202611230405", ratio: "1585/1064", caption: "The original layout, marked up with the problems I found" },
+    { group: "The Spaces", type: "image", heading: "After: The New Floorplan",
       intro: "Guests come in from the elevator and retail entrance, pass the café, and are led by the grand stair toward the bar.",
       src: "assets/digital/statler/floorplan-hd.jpg", ratio: "2952/1596", caption: "Circulation from the entrance, past the café and stairs, to the bar" },
     { group: "The Spaces", type: "gallery", heading: "Three Zones", columns: 3, images: [
