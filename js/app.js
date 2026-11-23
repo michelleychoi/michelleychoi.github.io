@@ -81,13 +81,13 @@
       paintLayers(); draw(0);
       matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => setTimeout(() => { paintLayers(); draw(0); }, 30));
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      // three small waves (about 2.1s), then a pause, repeating; eased in and out so it never snaps
+      // two small waves (about 1.4s), then a longer pause; eased in and out so it never snaps (toned down 2026-11-23)
       const t0 = performance.now() + 700;
       const step = (now) => {
         if (!cv.isConnected) return;
-        const t = ((now - t0) / 1000) % 5.2;
-        const env = t > 0 && t < 2.1 ? Math.sin((Math.PI * t) / 2.1) : 0;
-        draw(-7 * env * Math.sin((2 * Math.PI * t) / 0.7));
+        const t = ((now - t0) / 1000) % 7;
+        const env = t > 0 && t < 1.4 ? Math.sin((Math.PI * t) / 1.4) : 0;
+        draw(-4 * env * Math.sin((2 * Math.PI * t) / 0.7));
         requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
