@@ -18,22 +18,23 @@ addProject({
   sections: [
     { group: "The Brief", type: "brief", heading: "Final Project Brief", items: [
       { label: "Project", value: "The Statler Hotel, Regent Lounge" },
-      // "points": a bulleted list instead of one line
-      { label: "Pain points", points: [
+      { label: "Goal", value: "Make it a warm social anchor guests can actually utilize and wayfind easily." }
+    ]},
+
+    // before/after plans in one section: text on the left, plans stacked on the right ("rows" type, 2026-11-23)
+    { group: "The Spaces", type: "rows", heading: "The Floorplan", items: [
+      // pain points beside the clean plan; clicking the plan flips it to bob's hand-annotated version
+      { label: "Before", title: "Pain Points", points: [
         "Cramped bar with little seating, overwhelmed on alumni weekends",
         "Hidden stair that didn't feel grand",
         "Entrance easy to miss for first-timers",
         "No clear path for staff, so guests crossed the room for food",
         "Long tables that only fit big parties",
         "Lounge seating that sat unused"
-      ]},
-      { label: "Goal", value: "Make it a warm social anchor guests can actually utilize and wayfind easily." }
-    ]},
-
-    // before/after plans in one section: text on the left, plans stacked on the right ("rows" type, 2026-11-23)
-    { group: "The Spaces", type: "rows", heading: "The Floorplan", items: [
-      { label: "Before", title: "The Original Floorplan", body: "The original layout, marked up with the problems I found.",
-        src: "assets/digital/statler/floorplan-before.jpg?v=202611230413", ratio: "1263/863" },
+      ],
+        src: "assets/digital/statler/floorplan-before-clean.jpg?v=202611230440", ratio: "1326/880", caption: "The original layout and how guests moved through it",
+        back: { src: "assets/digital/statler/floorplan-before.jpg?v=202611230413", ratio: "1326/880", alt: "The original layout with my handwritten notes" },
+        flipLabel: "Original floorplan. Press to flip to my annotated notes.", flipHint: "↻ Click the plan to see my notes", flipBackHint: "↻ Click to flip back" },
       { label: "After", title: "The New Floorplan", body: "Guests come in from the elevator and retail entrance, pass the café, and are led by the grand stair toward the bar.",
         src: "assets/digital/statler/floorplan-hd.jpg?v=202611230420", ratio: "2952/1596", caption: "Circulation from the entrance, past the café and stairs, to the bar" }
     ]},

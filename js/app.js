@@ -43,6 +43,10 @@
     return `<div class="media" style="aspect-ratio:${esc(ratio)}"><img src="${esc(img.src)}" alt="${esc(img.alt || img.caption || "")}" loading="lazy"
       data-ratio="${esc(ratio)}" data-label="${esc(label || "Image")}" onerror="window.__ph(this)"></div>`;
   }
+  // floorplan flip (Statler before plan): click, tap, Enter or Space turns it over
+  const planFlip = (f) => { const on = f.classList.toggle("flipped"); f.setAttribute("aria-pressed", on); f.closest("figure")?.classList.toggle("pf-on", on); };
+  document.addEventListener("click", (e) => { const f = e.target.closest && e.target.closest(".plan-flip, .pf-hint"); if (f) planFlip(f.classList.contains("pf-hint") ? f.closest("figure").querySelector(".plan-flip") : f); });
+  document.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.classList?.contains("plan-flip")) { e.preventDefault(); planFlip(e.target); } });
   // flip cards: tap to flip on touch screens (hover and keyboard focus are handled in CSS)
   document.addEventListener("click", (e) => {
     const f = e.target.closest && e.target.closest(".flip");
@@ -405,8 +409,12 @@
       case "rows":
         // text on the left, image on the right, one row per item, all in one section (Statler before/after plans)
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
-          <div class="rows">${s.items.map((it) => `<div class="row"><div class="row-txt">${it.label ? `<span class="mono muted">${esc(it.label)}</span>` : ""}${it.title ? `<h3>${esc(it.title)}</h3>` : ""}${it.body ? `<p>${txt(it.body)}</p>` : ""}</div>
-            <figure>${media(it, it.caption || it.title)}${it.caption ? `<figcaption class="mono">${esc(it.caption)}</figcaption>` : ""}</figure></div>`).join("")}</div></div>`;
+          <div class="rows">${s.items.map((it) => `<div class="row"><div class="row-txt">${it.label ? `<span class="mono muted">${esc(it.label)}</span>` : ""}${it.title ? `<h3>${esc(it.title)}</h3>` : ""}${it.body ? `<p>${txt(it.body)}</p>` : ""}${it.points ? `<ul class="row-pts">${it.points.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}</div>
+            <figure>${it.back
+              // "back": click (or tap) the image to flip it over to a second image, e.g. the annotated version
+              ? `<div class="plan-flip" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(it.flipLabel || "Flip image")}"><div class="pf-in"><div class="pf-front">${media(it, it.caption || it.title)}</div><div class="pf-back">${media(it.back, it.back.alt || it.title)}</div></div></div>
+                <span class="pf-hint mono"><span class="pf-a">${esc(it.flipHint || "Click to flip")}</span><span class="pf-b">${esc(it.flipBackHint || "Click to flip back")}</span></span>`
+              : media(it, it.caption || it.title)}${it.caption ? `<figcaption class="mono">${esc(it.caption)}</figcaption>` : ""}</figure></div>`).join("")}</div></div>`;
       case "split": {
         // one main image on the left, a column of small images (e.g. sketches) on the right
         const cap = (im) => im.caption ? `<figcaption class="mono">${esc(im.caption)}</figcaption>` : "";
