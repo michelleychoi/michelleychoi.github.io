@@ -1043,7 +1043,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .pf-on .pf-hint .pf-b { display: inline; }
 @media (prefers-reduced-motion: reduce) { .pf-in { transition: none; } }
 /* Statler Three Zones, option E (2026-11-23): café full width, bar + staircase below, inside the section width */
-@media (min-width: 601px) { .gallery.c3:has(img[src*="statler/cafe"]) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@media (min-width: 0px) { .gallery.c3:has(img[src*="statler/cafe"]) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .gallery.c3:has(img[src*="statler/cafe"]) figure:first-child { grid-column: 1 / -1; } }
 /* project page titles: the seal graphic is hidden (kept in the code) and replaced by the cover page dot (2026-11-23) */
 .p-title .seal.big { display: none; }
@@ -1065,6 +1065,12 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .cover-brief .brief > div { grid-template-columns: 1fr; gap: 4px; }
 @media (max-width: 760px) { .cover-brief { grid-template-columns: 1fr; } }
 
-/* cover name: the "o" as a perfect circle (bob, 2026-11-23) */
-.cover2 .name .nm span.o-ring { display: inline-block; width: 0.555em; height: 0.555em; border: 0.106em solid currentColor; border-radius: 50%; box-sizing: border-box; vertical-align: baseline; margin: 0 0.028em 0 0.03em; position: relative; top: -0.008em; }
-.cover2 .name .nm span.o-sr { display: inline-block; position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* phone top bar: keep the name and the three tabs on one line (2026-11-23) */
+@media (max-width: 520px) {
+  .bar .wrap { gap: 8px; }
+  .brand, .tabs a, .ph-bar nav a { white-space: nowrap; }
+  .bar .brand { font-size: .95rem; }
+  .tabs { gap: 2px; }
+  .tabs a { padding: 5px 7px; font-size: .66rem; letter-spacing: .04em; }
+}
