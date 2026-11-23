@@ -1017,3 +1017,5 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 
 /* brief: bulleted values (Statler pain points, 2026-11-23) */
 .brief-pts { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-family: inherit; font-weight: 500; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.4; letter-spacing: 0; }
+/* Statler "Three Zones": a little bigger, reaching slightly past the text column on wide screens (2026-11-23) */
+@media (min-width: 1100px) { .gallery.c3:has(img[src*="statler/cafe"]) { margin-inline: calc(-1 * min(90px, (100vw - 100%) / 2 - 24px)); gap: 14px; } }
