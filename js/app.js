@@ -43,6 +43,42 @@
     return `<div class="media" style="aspect-ratio:${esc(ratio)}"><img src="${esc(img.src)}" alt="${esc(img.alt || img.caption || "")}" loading="lazy"
       data-ratio="${esc(ratio)}" data-label="${esc(label || "Image")}" onerror="window.__ph(this)"></div>`;
   }
+  // cover drawing (bob's line drawing, 2026-11-23): her lines sketch themselves in, stroke by stroke.
+  // girl-draw.png packs the art: alpha = the line, red = when that bit of line appears (0-1), green = neckline dot.
+  // Lines use the page ink colour and the neckline uses the name colour, so dark mode just works.
+  function peekGirl(cv) {
+    const img = new Image();
+    img.onload = () => {
+      const w = img.naturalWidth, h = img.naturalHeight;
+      cv.width = w; cv.height = h;
+      const o = document.createElement("canvas"); o.width = w; o.height = h;
+      const oc = o.getContext("2d"); oc.drawImage(img, 0, 0);
+      const src = oc.getImageData(0, 0, w, h).data, idx = [];
+      for (let i = 3; i < src.length; i += 4) if (src[i]) idx.push(i - 3);
+      const ctx = cv.getContext("2d"), out = ctx.createImageData(w, h), d = out.data;
+      const rgb = (v) => { const x = String(v).trim();
+        if (x[0] === "#") return [1, 3, 5].map((k) => parseInt(x.slice(k, k + 2), 16) || 0);
+        return (x.match(/\d+/g) || [0, 0, 0]).slice(0, 3).map(Number); };
+      let last = 0;
+      const paint = (t) => {
+        last = t;
+        const cs = getComputedStyle(cv), ink = rgb(cs.color), dot = rgb(cs.getPropertyValue("--pg-dot") || "#4e4cf0");
+        for (const j of idx) {
+          const k = Math.max(0, Math.min(1, (t - src[j] / 255) / 0.035));
+          const c = src[j + 1] > 127 ? dot : ink;
+          d[j] = c[0]; d[j + 1] = c[1]; d[j + 2] = c[2]; d[j + 3] = src[j + 3] * k;
+        }
+        ctx.putImageData(out, 0, 0);
+      };
+      matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => setTimeout(() => paint(last), 30));
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return paint(2);
+      paint(0);
+      const t0 = performance.now() + 450, dur = 2600;
+      const step = (now) => { const t = Math.max(0, (now - t0) / dur) * 1.04; paint(t); if (t < 1.04 && cv.isConnected) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    };
+    img.src = cv.dataset.src;
+  }
   // floorplan flip (Statler before plan): click, tap, Enter or Space turns it over
   const planFlip = (f) => { const on = f.classList.toggle("flipped"); f.setAttribute("aria-pressed", on); f.closest("figure")?.classList.toggle("pf-on", on); };
   document.addEventListener("click", (e) => { const f = e.target.closest && e.target.closest(".plan-flip, .pf-hint"); if (f) planFlip(f.classList.contains("pf-hint") ? f.closest("figure").querySelector(".plan-flip") : f); });
@@ -143,7 +179,7 @@
           <div class="facts"><span class="dot"></span>${esc(S.school)}</div>
         </div>
         <a class="scroll-cue mono" href="#" data-go="1"><i></i>Scroll to see my work</a>
-        <img class="peek-girl" src="assets/girl-lines.png?v=202611230841" alt="" aria-hidden="true">
+        <canvas class="peek-girl" data-src="assets/girl-draw.png?v=202611230915" aria-hidden="true"></canvas>
       </section>
       ${featured("digital", 1)}
       ${phase("physical", 2)}
@@ -684,6 +720,8 @@
       }
       const st = document.getElementById("streams");
       if (st && Glyphs.streams) Glyphs.streams(st);
+      const pg = document.querySelector(".peek-girl[data-src]");
+      if (pg) peekGirl(pg);
       const orb = document.getElementById("orb");
       if (orb) Glyphs.orb(orb);
     }

@@ -1050,8 +1050,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .p-title { gap: clamp(10px, 1.2vw, 16px); }
 .p-dot { flex: none; width: clamp(9px, .9vw, 13px); height: clamp(9px, .9vw, 13px); }
 
-/* cover: bob's line drawing peeking in from the right edge (2026-11-23). Lines go light in dark mode. */
-.cover2 .peek-girl { position: absolute; right: -5vw; bottom: 0; height: min(64vh, 62vw); width: auto; margin: 0; pointer-events: none; z-index: 0; user-select: none; }
-@media (max-width: 760px) { .cover2 .peek-girl { height: 25vh; right: -10vw; bottom: 64px; } }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cover2 .peek-girl { filter: invert(1) brightness(.95); } }
-:root[data-theme="dark"] .cover2 .peek-girl { filter: invert(1) brightness(.95); }
+/* cover: bob's line drawing (with the arm added and a purple dotted neckline) peeking in from the right (2026-11-23).
+   A canvas draws her in; colours come from --ink (lines) and --name (neckline) so dark mode follows the page. */
+.cover2 .peek-girl { position: absolute; right: 1.5vw; bottom: 0; height: min(64vh, 62vw); aspect-ratio: 605 / 735; width: auto; margin: 0; pointer-events: none; z-index: 0; color: var(--ink); --pg-dot: var(--name); }
+@media (max-width: 760px) { .cover2 .peek-girl { height: 25vh; right: -4vw; bottom: 64px; } }
