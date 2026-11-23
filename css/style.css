@@ -1025,7 +1025,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .rows .row-txt h3 { margin: 0; font-weight: 500; font-size: clamp(1.15rem, 1.5vw, 1.4rem); line-height: 1.2; }
 .rows .row-txt p { margin: 0; color: var(--muted); line-height: 1.5; }
 .rows figure { margin: 0; display: grid; gap: 6px; min-width: 0; }
-@media (min-width: 1100px) { .rows { margin-right: calc(-1 * min(90px, (100vw - 100%) / 2 - 24px)); } }
+/* plans stay inside the section lines (bob, 2026-11-23); was a 90px overhang to the right */
 @media (max-width: 760px) { .rows .row { grid-template-columns: 1fr; gap: 12px; } }
 
 /* rows: bullet list + flipping floorplan (Statler before plan, 2026-11-23) */
