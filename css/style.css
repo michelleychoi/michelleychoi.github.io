@@ -1074,3 +1074,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
   .tabs { gap: 2px; }
   .tabs a { padding: 5px 7px; font-size: .66rem; letter-spacing: .04em; }
 }
+
+/* project pages use the overview bar too (2026-11-23): same look, but sticky with a soft backdrop so text scrolls under it */
+.ph-bar.is-page { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; opacity: 1; transform: none; pointer-events: auto; transition: none;
+  background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }

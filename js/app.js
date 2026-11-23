@@ -128,13 +128,11 @@
   const txt = (t) => `<span${isPlaceholder(t) ? ' class="muted"' : ""}>${esc(t)}</span>`;
 
   // ---------- chrome ----------
+  // Same bar as the overview screens (brand left, plain mono links right), kept on screen while the page scrolls
   function header(active) {
-    const tab = (id, label) => `<a href="#${id}"${active === id ? ' aria-current="page"' : ""}>${label}</a>`;
-    return `<header class="bar"><div class="wrap">
-      <a class="brand" href="#" data-home="0">${esc(S.name)}</a>
-      <nav class="tabs" aria-label="Sections">${tab("digital", S.tabs.digital.label)}${tab("physical", S.tabs.physical.label)}${tab("about", "About")}</nav>
-      <div class="status mono"><span class="dot"></span>Open to internships</div>
-    </div></header>`;
+    const tab = (id, label) => `<a href="#${id}"${active === id ? ' class="on" aria-current="page"' : ""}>${label}</a>`;
+    return `<header class="ph-bar is-page"><a class="brand" href="#" data-home="0">${esc(S.name)}</a>
+      <nav class="mono" aria-label="Sections">${tab("digital", esc(S.tabs.digital.label))}${tab("physical", esc(S.tabs.physical.label))}${tab("about", "About")}</nav></header>`;
   }
   const footer = () => `<footer><div class="wrap mono muted">
     <span>${esc(S.name)} · ${esc(S.role)}</span><span>${esc(S.email)}</span></div></footer>`;
