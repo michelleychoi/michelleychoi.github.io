@@ -732,7 +732,7 @@
         } });
       }
       const st = document.getElementById("streams");
-      if (st && Glyphs.streams) Glyphs.streams(st);
+      if (st && Glyphs.streams) Glyphs.streams(st, { count: 3 }); // 3 columns of dots, not 4 (bob 2026-11-24)
       const pg = document.querySelector(".peek-girl[data-src]");
       if (pg) peekGirl(pg);
       const orb = document.getElementById("orb");

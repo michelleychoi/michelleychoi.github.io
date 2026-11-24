@@ -752,7 +752,7 @@ h1, h2, h3, .card h3, .index .t, .s-text h2, .s-block > h2, .sn-text h3, .col h3
 @media (max-width: 900px), (hover: none) { .home > .flower-hint { display: none; } }
 
 /* ---------- home v4: big left-aligned name, breathing glyph streams down the left ---------- */
-.home.cover2 { --rail: clamp(150px, 15vw, 230px); display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); height: max(640px, 100svh); padding: 0; gap: 0; }
+.home.cover2 { --rail: clamp(124px, 12.5vw, 192px); /* was 150/15vw/230 with 4 dot columns; 3 columns since 2026-11-24, name moved left to match */ display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); height: max(640px, 100svh); padding: 0; gap: 0; }
 .home.cover2 > .streams { position: absolute; z-index: 0; top: 0; bottom: 0; left: clamp(28px, 3.4vw, 56px); width: calc(var(--rail) - clamp(28px, 3.4vw, 56px) - 24px); height: 100%; }
 .cover2 .hero { grid-column: 2; align-self: center; padding: 0 clamp(24px, 6vw, 120px) 0 clamp(8px, 2vw, 40px); min-width: 0; }
 .cover2 .name { margin: 0; display: block; }
@@ -772,8 +772,8 @@ h1, h2, h3, .card h3, .index .t, .s-text h2, .s-block > h2, .sn-text h3, .col h3
 .cover2 .hero > :nth-child(2) { animation-delay: .1s; } .cover2 .hero > :nth-child(3) { animation-delay: .2s; }
 @keyframes cover-rise { from { opacity: 0; transform: translateY(24px); } }
 @media (max-width: 760px) {
-  .home.cover2 { --rail: 0px; grid-template-columns: minmax(0, 1fr); grid-template-rows: 130px minmax(0, 1fr); height: max(600px, 100svh); }
-  .home.cover2 > .streams { position: relative; grid-row: 1; left: 0; width: 100%; height: 110px; margin-top: 20px; }
+  .home.cover2 { --rail: 0px; grid-template-columns: minmax(0, 1fr); grid-template-rows: 102px minmax(0, 1fr); height: max(600px, 100svh); }
+  .home.cover2 > .streams { position: relative; grid-row: 1; left: 0; width: 100%; height: 82px; margin-top: 20px; }
   .cover2 .hero { grid-column: 1; grid-row: 2; padding: 0 20px 10vh; }
   .cover2 .name .nm { font-size: 17vw; }
   .cover2 .name .hi { font-size: 2.3rem; }
