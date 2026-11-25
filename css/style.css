@@ -940,7 +940,7 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .phase.is-peek .feat [style*="--o"], .phase.is-peek .ph-head.cell { animation: none !important; opacity: 1; transform: none; }
 
 /* === Go For It live cover (violet fan): title slides in from the left, phones rise from the bottom === */
-.gfi-cover { position: relative; width: 100%; height: 100%; overflow: hidden; container-type: inline-size; background: #e6e3fb; /* flat lilac (option A), bob 2026-11-25; was ombre B */ color: #4e4af0; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.gfi-cover { position: relative; width: 100%; height: 100%; overflow: hidden; container-type: inline-size; background: linear-gradient(135deg, #e9e6fc 0%, #f1e8f8 60%, #f8e8f1 100%); /* soft lilac-to-blush fade (option B), bob 2026-11-25 */ color: #4e4af0; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
 .gfi-t { position: absolute; left: 5.6cqw; top: 5cqw; }
 .gfi-t b { display: block; font-family: "Archivo", sans-serif; font-weight: 900; font-stretch: 125%; font-size: 6cqw; line-height: .9; letter-spacing: -.01em; }
 .gfi-t i { display: block; margin-top: 1.3cqw; font-family: "Instrument Serif", serif; font-style: italic; font-size: 2.75cqw; line-height: 1; opacity: .85; }
