@@ -21,7 +21,7 @@ window.SITE = {
     { label: "LinkedIn", handle: "mychoi1881", url: "https://www.linkedin.com/in/mychoi1881" }
   ],
   // Drop the PDF at this path and the Resume button on the About page turns on by itself.
-  resume: "assets/michelle-choi-resume.pdf",
+  resume: "assets/michelle-choi-resume-2026-11-25.pdf",
   about:
     "I grew up in South Jersey and started out in urban planning before falling into the vast world of tech and design as a sophomore at Cornell! You can usually find me doodling to Fleetwood Mac or Oasis, or out with friends hunting down good eats.\n\nAlways happy to chat! I love a good conversation :)",
   // Photo collage beside "Hi, I'm Michelle" on the About page. Empty src = placeholder box.
