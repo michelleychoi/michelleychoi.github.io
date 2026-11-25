@@ -513,7 +513,7 @@
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="cols">${s.items.map((it) => `<div class="col"><h3>${esc(it.title)}</h3><ul>${it.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul></div>`).join("")}</div></div>`;
       case "brief":
         {
-          const dl = `<dl class="brief">${s.items.map((i) => `<div><dt class="mono">${esc(i.label)}:</dt><dd>${i.points ? `<ul class="brief-pts">${i.points.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : esc(i.value)}</dd></div>`).join("")}</dl>`;
+          const dl = `<dl class="brief">${s.items.map((i) => `<div><dt class="mono">${esc(i.label)}:</dt><dd${i.para ? ' class="brief-p"' : ""}>${i.points ? `<ul class="brief-pts">${i.points.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : esc(i.value)}</dd></div>`).join("")}</dl>`;
           return s.heading ? `<div class="s-block"><h2>${esc(s.heading)}</h2>${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}${dl}</div>` : dl;
         }
       case "figma": {

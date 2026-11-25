@@ -20,14 +20,9 @@ addProject({
     // "brief": labeled lines (label: answer), shown in a bold display font
     { type: "brief", items: [
       { label: "Case", value: "Gamify something you find boring or mundane." },
-      { label: "Identified challenge", value: "Dating apps." }
+      { label: "Identified challenge", value: "Dating apps." },
+      { label: "Pain point", para: true, value: "Getting into dating is hard, and young adults and college students end up mindlessly swiping through profiles. My friends and I downloaded Hinge as a joke, and I kept thinking there had to be a more fun way to meet people. Inspired by BeReal's surprise notification and timer, I designed around \"just going for it.\"" }
     ]},
-    { group: "Understanding the Problem", type: "text", heading: "The Pain Point",
-      body: "Getting into dating is hard. Over time, the excitement of meeting new people fades, and looking for prospects becomes repetitive and predictable. Dating apps make it easy to look for connections, but harder to actually take action and put yourself out there." },
-    { group: "Understanding the Problem", type: "text", heading: "Who It's For",
-      body: "Young adults and college students on dating apps who catch themselves mindlessly swiping through profiles, overthinking what to text, waiting for conversations to go somewhere, and repeating the same dating routines." },
-    { group: "Understanding the Problem", type: "text", heading: "The Idea",
-      body: "My friends and I downloaded Hinge as a joke, and I kept thinking there had to be a more fun way to meet people than swiping. Inspired by BeReal's surprise notification and timer, I designed around \"just going for it\": a card arrives at a random time with a dare (like \"stop someone on the street and get their number\"), you swipe to accept or pass, a 15-minute timer starts, and you snap a photo as proof." },
     // Early sketch on the left, pitch board on the right (sideFirst)
     { group: "Early Exploration", type: "split", sideFirst: true, heading: "Pitch Board & Sketches", intro: "My first lo-fi flow, annotated with notes and open questions from the pitch, next to an early sketch.",
       main: { src: "assets/digital/gamify/pitch-board.jpg", ratio: "16/9", caption: "Lo-fi flow with handwritten notes" },

@@ -1096,3 +1096,5 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 .cover2 .scroll-cue::after { content: "↓"; color: var(--name); font-size: 1.05rem; letter-spacing: 0; animation: cue-bob 1.8s ease-in-out infinite; }
 .cover2 .scroll-cue:hover { color: var(--name); }
 @keyframes cue-bob { 50% { transform: translateY(4px); } }
+
+.brief dd.brief-p, .project-view .brief dd.brief-p { font-family: inherit; font-weight: 400; font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.55; letter-spacing: 0; max-width: 62ch; }
