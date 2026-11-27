@@ -1098,3 +1098,42 @@ html.phased, html.phased body { height: 100%; overflow: hidden; overscroll-behav
 @keyframes cue-bob { 50% { transform: translateY(4px); } }
 
 .brief dd.brief-p, .project-view .brief dd.brief-p { font-family: inherit; font-weight: 400; font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.55; letter-spacing: 0; max-width: 62ch; }
+
+/* ---------- prototype: jump button, live phone, floating pill (Go For It "Try It") ---------- */
+.play-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 4px; }
+.play-cta { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; border: 0; cursor: pointer;
+  background: transparent; color: var(--name); box-shadow: inset 0 0 0 1.5px var(--name); font: 600 1.05rem/1.2 var(--body); transition: background .2s, color .2s; }
+.play-cta:hover { background: var(--name); color: var(--paper); }
+.live-chip { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #fff; color: #4e4af0;
+  font-family: var(--mono); font-weight: 700; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 2px 8px rgba(40,20,80,.1); }
+.live-chip i { width: 8px; height: 8px; border-radius: 50%; background: #ff3d8b; box-shadow: 0 0 0 4px rgba(255,61,139,.2); animation: pulse 2.4s ease-in-out infinite; }
+.try-phone { position: relative; }
+.try-phone .live-chip { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.tap-note { position: absolute; right: -170px; top: 61%; width: 150px; font-family: "Caveat", cursive; font-weight: 600; font-size: 1.55rem; line-height: 1.05; color: var(--name); transform: rotate(-4deg); }
+.tap-note svg { display: block; margin: 0 0 4px -6px; }
+.embed.dressed { grid-template-columns: auto minmax(0, 1fr); }
+.embed.dressed .try-phone { justify-self: start; }
+/* the whole phone fits inside the screen, under the top bar */
+.embed.dressed iframe { height: min(calc(100vh - 150px), 820px); height: min(calc(100svh - 150px), 820px); width: auto; max-width: none; aspect-ratio: 410 / 904;
+  box-shadow: 0 0 0 6px rgba(255,255,255,.7), 0 30px 60px rgba(60,30,120,.22); }
+.embed.dressed .embed-aside { margin-left: clamp(0px, 9vw, 130px); }
+.embed.dressed .embed-aside > div { background: color-mix(in srgb, #fff 62%, transparent); border-radius: 16px; padding: 14px 16px; }
+:root[data-theme="dark"] .embed.dressed .embed-aside > div { background: rgba(255,255,255,.06); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .embed.dressed .embed-aside > div { background: rgba(255,255,255,.06); } }
+.float-pill { position: fixed; left: 50%; bottom: 26px; z-index: 60; display: inline-flex; align-items: center; gap: 12px; padding: 8px 20px 8px 8px; border: 0; border-radius: 999px; cursor: pointer;
+  background: #1d1a3a; color: #fff; font: 600 1rem/1.2 var(--body); box-shadow: 0 14px 34px rgba(20,10,50,.32); white-space: nowrap;
+  transform: translate(-50%, 24px); opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .4s cubic-bezier(.22,1,.36,1); }
+.float-pill.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.float-pill:hover { background: #2b2660; }
+.float-pill img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: 50% 12%; }
+.float-pill small { font-family: var(--mono); font-weight: 600; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: #b9b5ff; margin-left: 4px; }
+body { transition: background-color .15s linear; }
+@media (max-width: 760px) {
+  .embed.dressed { grid-template-columns: 1fr; }
+  .embed.dressed .try-phone { justify-self: center; }
+  .embed.dressed iframe { height: calc(100vh - 120px); height: calc(100svh - 120px); }
+  .embed.dressed .embed-aside { margin-left: 0; }
+  .tap-note { position: static; width: auto; text-align: center; margin-top: 14px; transform: rotate(-2deg); }
+  .tap-note svg { display: none; }
+  .float-pill { bottom: 18px; max-width: calc(100vw - 32px); }
+}

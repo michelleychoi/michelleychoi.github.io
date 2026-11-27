@@ -14,6 +14,8 @@ addProject({
   blurb: "A game that dares you to go meet someone new.",
   summary:
     "The prompt: gamify something you find mundane or boring. I picked dating apps, and designed Go For It, a game where friends get surprise dares to meet new people, race a timer, and compete on a weekly leaderboard.",
+  // play: "Jump to the prototype" button under the summary + floating pill while reading (both scroll to the prototype)
+  play: { label: "Jump to the prototype ↓", pill: "Try the prototype", time: "1 min", thumb: "assets/digital/gamify/proto-thumb.jpg" },
   cover: { src: "assets/digital/gamify/cover-violet.jpg?v=202611192042", ratio: "16/10", alt: "Go For It: three hi-fi app screens on violet", live: "gfi" },
 
   sections: [
@@ -48,8 +50,10 @@ addProject({
     ]},
     // Clickable prototype (proto/gamify.html). To use a Figma link instead, swap this for:
     // { type: "figma", heading: "Interactive Prototype", url: "https://www.figma.com/..." },
-    { group: "Try It", type: "embed", heading: "Interactive Prototype", src: "proto/gamify.html", title: "Go For It clickable prototype",
+    // live: tag on the phone; tapNote: handwritten hint; shift: page background fades to light lilac here
+    { group: "Try It", type: "embed", heading: "Try the Prototype", src: "proto/gamify.html", title: "Go For It clickable prototype",
       intro: "Click through one full round. Everything here works.",
+      live: "Live · tap to play", tapNote: "start here! tap the notification", shift: true,
       aside: [
         { label: "01 · Alert", body: "Tap the notification to open your card." },
         { label: "02 · Card", body: "Drag the card left to pass or right to go for it, or use the buttons. Passing costs points and deals the next dare." },

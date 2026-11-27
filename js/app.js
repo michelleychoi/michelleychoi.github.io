@@ -479,10 +479,17 @@
           <div class="split"><figure class="split-main">${media(s.main, s.main.caption)}${cap(s.main)}</figure>
           <div class="split-side">${(s.side || []).map((im) => `<figure>${media(im, im.caption)}${cap(im)}</figure>`).join("")}</div></div></div>`;
       }
-      case "embed":
+      case "embed": {
         // a live page in a frame, e.g. the clickable prototype in proto/
-        return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
-          <div class="embed"><iframe src="${esc(s.src)}" title="${esc(s.title || s.heading || "Prototype")}" loading="lazy"></iframe>${s.aside ? `<div class="embed-aside">${s.aside.map((a) => `<div><span class="mono muted">${esc(a.label)}</span><p>${txt(a.body)}</p></div>`).join("")}</div>` : ""}</div></div>`;
+        // live: tag on top of the phone; tapNote: handwritten hint beside it; the phone always fits the screen height
+        const frame = `<iframe src="${esc(s.src)}" title="${esc(s.title || s.heading || "Prototype")}" loading="lazy"></iframe>`;
+        const arrow = `<svg width="70" height="34" viewBox="0 0 70 34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M66 6 C 46 2, 22 8, 6 26"/><path d="M6 26 L 8 13 M6 26 L 18 23"/></svg>`;
+        const phone = s.live || s.tapNote
+          ? `<div class="try-phone">${s.live ? `<span class="live-chip"><i></i>${esc(s.live)}</span>` : ""}${frame}${s.tapNote ? `<div class="tap-note">${arrow}${esc(s.tapNote)}</div>` : ""}</div>`
+          : frame;
+        return `<div class="s-block" id="try-proto">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
+          <div class="embed${s.live || s.tapNote ? " dressed" : ""}"${s.shift ? " data-shift" : ""}>${phone}${s.aside ? `<div class="embed-aside">${s.aside.map((a) => `<div><span class="mono muted">${esc(a.label)}</span><p>${txt(a.body)}</p></div>`).join("")}</div>` : ""}</div></div>`;
+      }
       case "screens": {
         // phone screens with their explanation beside each one
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}<div class="screens${s.wide ? " wide" : ""}">${s.items.map((it, i) => `<div class="screen-note">
@@ -562,7 +569,7 @@
       <section class="wrap p-head">
         <a class="crumb mono muted" href="#${p.tab}">← ${esc(S.tabs[p.tab].label)}</a>
         <span class="mono muted">${esc(p.kicker)}</span>
-        <div class="p-intro"><div class="p-title"><span class="dot p-dot" aria-hidden="true"></span><canvas class="seal big" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas><h1>${esc(p.title)}</h1></div><p class="summary">${txt(p.summary)}</p>${p.hint ? `<span class="p-hint mono muted">${esc(p.hint)}</span>` : ""}</div>
+        <div class="p-intro"><div class="p-title"><span class="dot p-dot" aria-hidden="true"></span><canvas class="seal big" data-seal="${esc(p.slug)}" aria-hidden="true"></canvas><h1>${esc(p.title)}</h1></div><p class="summary">${txt(p.summary)}</p>${p.hint ? `<span class="p-hint mono muted">${esc(p.hint)}</span>` : ""}${p.play ? `<div class="play-row"><button class="play-cta" type="button" data-jump="try-proto">${esc(p.play.label || "Jump to the prototype ↓")}</button></div>` : ""}</div>
       </section>
       <section class="wrap"><dl class="spec">${spec}</dl>${p.heroVideo ? `<div class="media hero-video" style="aspect-ratio:${esc(p.heroVideo.ratio || "16/9")}"><video src="${esc(p.heroVideo.src)}"${p.heroVideo.poster ? ` poster="${esc(p.heroVideo.poster)}"` : ""} autoplay muted loop playsinline preload="auto" aria-label="${esc(p.heroVideo.alt || p.title + " video")}"></video></div>` : p.hideCover ? "" : p.sideBrief ? `<div class="cover-brief">${media(p.cover, "Cover image")}<div class="cb-txt">${section(p.sideBrief)}</div></div>` : media(p.cover, "Cover image")}</section>
       <section class="wrap sections">${sectionsHTML(p.sections || [])}</section>
@@ -570,7 +577,7 @@
         <a class="back-all" href="#${p.tab}"><span class="mono muted">Done with this one?</span><span class="t">← Back</span></a>
         ${next && next.slug !== p.slug ? `<a class="next-sm mono" href="#${next.slug}">Next project: ${esc(next.title)} →</a>` : ""}
       </section>
-    </main>` + footer();
+    </main>` + (p.play && p.play.pill ? `<button class="float-pill" type="button" data-jump="try-proto" aria-label="${esc(p.play.pill)}">${p.play.thumb ? `<img src="${esc(p.play.thumb)}" alt="">` : ""}${esc(p.play.pill)}${p.play.time ? `<small>${esc(p.play.time)}</small>` : ""}</button>` : "") + footer();
   }
 
   function aboutBody() {
@@ -662,6 +669,54 @@
     liveCovers();
     coverShift();
     fitIntro();
+    tryProto();
+  }
+
+  // prototype section: buttons that scroll to it, a floating "Try the prototype" pill shown while reading the
+  // case study (hidden at the top and once the prototype is on screen), and the page background fading to light
+  // lilac while the prototype section is in view, so it feels like its own space
+  let tryOff = null;
+  function tryProto() {
+    if (tryOff) { tryOff(); tryOff = null; }
+    const root = document.documentElement;
+    root.style.removeProperty("--paper"); root.style.removeProperty("--line");
+    const target = document.getElementById("try-proto");
+    if (!target) return;
+    const jump = (e) => {
+      const b = e.target.closest?.("[data-jump]"); if (!b) return;
+      const el = document.getElementById(b.dataset.jump); if (!el) return;
+      e.preventDefault();
+      const bar = document.querySelector(".bar")?.offsetHeight || 0;
+      scrollTo({ top: el.getBoundingClientRect().top + scrollY - bar - 16, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    };
+    document.addEventListener("click", jump);
+    const pill = document.querySelector(".float-pill");
+    const emb = target.querySelector(".embed");
+    const grp = target.closest(".grp") || target;
+    const shift = emb && emb.hasAttribute("data-shift");
+    const hex = (c) => { c = c.trim().replace("#", ""); if (c.length === 3) c = [...c].map((x) => x + x).join(""); return [0, 2, 4].map((i) => parseInt(c.slice(i, i + 2), 16)); };
+    const cs = getComputedStyle(root);
+    const P0 = hex(cs.getPropertyValue("--paper") || "#f4f2f0"), L0 = hex(cs.getPropertyValue("--line") || "#dcd7d6");
+    const dark = P0[0] + P0[1] + P0[2] < 300;
+    const P1 = dark ? [0x1d, 0x19, 0x30] : [0xec, 0xe6, 0xfb], L1 = dark ? [0x34, 0x2d, 0x52] : [0xd6, 0xcd, 0xf3];
+    const mix = (a, b, t) => "#" + a.map((v, i) => Math.round(v + (b[i] - v) * t).toString(16).padStart(2, "0")).join("");
+    const clamp = (x) => Math.max(0, Math.min(1, x)), ease = (t) => t * t * (3 - 2 * t);
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const vh = innerHeight, g = grp.getBoundingClientRect(), e = (emb || target).getBoundingClientRect();
+      if (shift) {
+        const t = ease(clamp((vh * 0.9 - g.top) / (vh * 0.55))) * (1 - ease(clamp((vh * 0.45 - e.bottom) / (vh * 0.4))));
+        if (t <= 0.001) { root.style.removeProperty("--paper"); root.style.removeProperty("--line"); }
+        else { root.style.setProperty("--paper", mix(P0, P1, t)); root.style.setProperty("--line", mix(L0, L1, t)); }
+      }
+      if (pill) pill.classList.toggle("on", scrollY > vh * 0.6 && g.top > vh * 0.85);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    update();
+    tryOff = () => { document.removeEventListener("click", jump); removeEventListener("scroll", onScroll); removeEventListener("resize", onScroll); cancelAnimationFrame(raf); };
   }
 
   // animated covers play when at least ~40% is on screen, and reset once fully off screen so they replay
