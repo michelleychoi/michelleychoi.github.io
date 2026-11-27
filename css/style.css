@@ -1139,3 +1139,7 @@ body { transition: background-color .15s linear; }
 }
 /* short paragraph under a section's images (e.g. under the Go For It pitch board) */
 .s-outro { margin: 22px 0 0; max-width: none; font-size: var(--step-1); line-height: 1.5; }
+/* 2026-11-27: no italics in section headings / GFI cover subtitle: small spaced capitals (option C) */
+.grp-t, .project-view .grp-t { font-family: "DM Sans", var(--body), sans-serif; font-style: normal; font-weight: 500; text-transform: uppercase; letter-spacing: .14em; font-size: clamp(.9rem, 1.1vw, 1.05rem); }
+.grp-head { align-items: center; }
+.gfi-t i { font-family: "DM Sans", var(--body), sans-serif; font-style: normal; font-weight: 500; text-transform: uppercase; letter-spacing: .14em; font-size: 1.75cqw; margin-top: 2.2cqw; }
