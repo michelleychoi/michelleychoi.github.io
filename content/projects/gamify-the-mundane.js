@@ -30,7 +30,9 @@ addProject({
       main: { src: "assets/digital/gamify/pitch-board.jpg", ratio: "16/9", caption: "Lo-fi flow with handwritten notes" },
       side: [
         { src: "assets/digital/gamify/sketch-1.jpg?v=202611161855", ratio: "1500/2000", caption: "Early sketch" }
-      ]},
+      ],
+      // outro: short paragraph under the images
+      outro: "Starting off, I knew I wanted an app centered around quick, thrilling tasks under timer pressure. A \"now or never\" push. I wanted it to feel less like dating and more like a dare between friends: a little scary, a little silly, and over before you can back out. My pitch board mapped out that first rush: a surprise alert, a dare you can't predict, and 15 minutes to go for it." },
     { group: "Early Exploration", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
       src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
     { group: "Designing the Game", type: "text", heading: "Making It a Game",

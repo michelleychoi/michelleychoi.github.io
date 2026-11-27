@@ -473,7 +473,7 @@
           const r = (x) => { const [w, h] = String(x || "4/3").split("/").map(Number); return w / (h || 1); };
           const sk = s.side[0];
           return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
-          <div class="split-pair" style="grid-template-columns: ${r(sk.ratio).toFixed(4)}fr ${r(s.main.ratio).toFixed(4)}fr"><figure>${media(sk, sk.caption)}${cap(sk)}</figure><figure>${media(s.main, s.main.caption)}${cap(s.main)}</figure></div></div>`;
+          <div class="split-pair" style="grid-template-columns: ${r(sk.ratio).toFixed(4)}fr ${r(s.main.ratio).toFixed(4)}fr"><figure>${media(sk, sk.caption)}${cap(sk)}</figure><figure>${media(s.main, s.main.caption)}${cap(s.main)}</figure></div>${s.outro ? `<p class="s-outro">${txt(s.outro)}</p>` : ""}</div>`;
         }
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
           <div class="split"><figure class="split-main">${media(s.main, s.main.caption)}${cap(s.main)}</figure>
