@@ -14,8 +14,10 @@ addProject({
   blurb: "A game that dares you to go meet someone new.",
   summary:
     "The prompt: gamify something you find mundane or boring. I picked dating apps, and designed Go For It, a game where friends get surprise dares to meet new people, race a timer, and compete on a weekly leaderboard.",
-  // play: "Jump to the prototype" button under the summary + floating pill while reading (both scroll to the prototype)
-  play: { label: "Jump to the prototype ↓", pill: "Try the prototype", time: "1 min", thumb: "assets/digital/gamify/proto-thumb.jpg" },
+  // play: "Jump to the prototype" button under the summary (scrolls to the prototype).
+  // A floating pill while reading was tried and removed (2026-11-27); to bring it back add:
+  //   pill: "Try the prototype", time: "1 min", thumb: "assets/digital/gamify/proto-thumb.jpg"
+  play: { label: "Jump to the prototype ↓" },
   cover: { src: "assets/digital/gamify/cover-violet.jpg?v=202611192042", ratio: "16/10", alt: "Go For It: three hi-fi app screens on violet", live: "gfi" },
 
   sections: [
