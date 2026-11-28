@@ -1139,6 +1139,8 @@ body { transition: background-color .15s linear; }
 }
 /* short paragraph under a section's images (e.g. under the Go For It pitch board) */
 .s-outro { margin: 22px 0 0; max-width: none; font-size: var(--step-1); line-height: 1.5; }
-/* 2026-11-27: no italics in section headings / GFI cover subtitle: clean sans (option B; option C small caps was tried first) */
-.grp-t, .project-view .grp-t { font-family: "Inter", var(--body), sans-serif; font-style: normal; font-weight: 600; letter-spacing: -.02em; }
+/* 2026-11-27: no italics in section headings / GFI cover subtitle: clean sans (option B), with stronger hierarchy (option G):
+   bold group header, smaller bold titles for the sections inside it. Options C (small caps) and B-plain were tried first. */
+.grp-t, .project-view .grp-t { font-family: "Inter", var(--body), sans-serif; font-style: normal; font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -.025em; }
+.grp-item .s-text h2, .grp-item .s-block > h2, .grp-item .sn-text h3 { font-size: clamp(1.05rem, 1.4vw, 1.25rem); font-weight: 600; }
 .gfi-t i { font-family: "Inter", var(--body), sans-serif; font-style: normal; font-weight: 500; font-size: 2.1cqw; letter-spacing: -.005em; margin-top: 1.8cqw; }
