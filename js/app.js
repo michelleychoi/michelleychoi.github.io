@@ -94,9 +94,29 @@
     };
     img.src = cv.dataset.src;
   }
-  // floorplan flip (Statler before plan): click, tap, Enter or Space turns it over
-  const planFlip = (f) => { const on = f.classList.toggle("flipped"); f.setAttribute("aria-pressed", on); f.closest("figure")?.classList.toggle("pf-on", on); };
+  // floorplan flip (Statler before plan). 2026-11-28: flips on its own so visitors notice it:
+  // hover on desktop (flips back when the mouse leaves), scrolled into view on phones. Click, tap, Enter or Space still toggle it.
+  const canHover = matchMedia("(hover: hover) and (pointer: fine)");
+  const planSet = (f, on) => { f.classList.toggle("flipped", on); f.setAttribute("aria-pressed", on); f.closest("figure")?.classList.toggle("pf-on", on); };
+  // desktop: a click while hovering keeps the notes up after the mouse leaves; a second click flips back
+  const planFlip = (f) => { const on = canHover.matches ? !f._pinned : !f.classList.contains("flipped"); f._pinned = on; f._manual = true; planSet(f, on);
+    const b = f.closest("figure")?.querySelector(".pf-b"); if (b && canHover.matches) b.textContent = on ? "↻ Click to flip back" : "↻ Click to keep my notes up"; };
   document.addEventListener("click", (e) => { const f = e.target.closest && e.target.closest(".plan-flip, .pf-hint"); if (f) planFlip(f.classList.contains("pf-hint") ? f.closest("figure").querySelector(".plan-flip") : f); });
+  document.addEventListener("mouseover", (e) => { if (!canHover.matches) return; const f = e.target.closest && e.target.closest(".plan-flip"); if (f && !f.contains(e.relatedTarget)) planSet(f, true); });
+  document.addEventListener("mouseout", (e) => { if (!canHover.matches) return; const f = e.target.closest && e.target.closest(".plan-flip"); if (f && !f.contains(e.relatedTarget)) planSet(f, !!f._pinned); });
+  function planAuto() {
+    const plans = document.querySelectorAll(".plan-flip");
+    plans.forEach((f) => { const fig = f.closest("figure"); const a = fig?.querySelector(".pf-a"), b = fig?.querySelector(".pf-b");
+      if (a && b) { if (canHover.matches) { a.textContent = "↻ Hover the plan to see my notes"; b.textContent = "↻ Click to keep my notes up"; } else { a.textContent = "↻ Tap to see my notes"; b.textContent = "↻ My notes. Tap to flip back"; } } });
+    if (canHover.matches || !("IntersectionObserver" in window) || !plans.length) return;
+    // phones: once the plan is mostly on screen, show the clean plan for a beat, then turn it to my notes; reset when it scrolls away so it plays again
+    const io = new IntersectionObserver((es) => es.forEach((en) => { const f = en.target; if (f._manual) return;
+      clearTimeout(f._t);
+      if (en.intersectionRatio >= 0.6) f._t = setTimeout(() => { if (!f._manual) planSet(f, true); }, 900);
+      else if (en.intersectionRatio < 0.15) planSet(f, false);
+    }), { threshold: [0, 0.15, 0.6] });
+    plans.forEach((f) => io.observe(f));
+  }
   document.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.classList?.contains("plan-flip")) { e.preventDefault(); planFlip(e.target); } });
   // flip cards: tap to flip on touch screens (hover and keyboard focus are handled in CSS)
   document.addEventListener("click", (e) => {
@@ -772,6 +792,7 @@
 
   function wire() {
     reveal();
+    planAuto();
     if (window.Glyphs) {
       document.querySelectorAll("canvas[data-seal]").forEach((c) => Glyphs.seal(c, c.dataset.seal, c.dataset.colors === "soft" ? "soft" : c.dataset.colors ? c.dataset.colors.split(",").map(Number) : null));
       const cfg = {
