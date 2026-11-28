@@ -471,6 +471,20 @@
       <section class="wrap grid">${cards}</section></main>` + footer();
   }
 
+  // research section (Go For It "Why Not Just Swipe?", 2026-11-28): dating-app pile vs one dare card, stats beside
+  function research(s) {
+    const head = `${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}`;
+    const stack = Array.from({ length: 6 }, (_, i) => `<div class="pc" style="--i:${i}"><i></i><b></b><b></b></div>`).join("");
+    const d = s.dare || {};
+    return `<div class="s-block rv-b">${head}<div class="rv-body"><div class="vs">
+      <div class="vs-side vs-swipe"><span class="mono vs-tag">${esc(s.leftTag || "Dating apps")}</span><div class="pile" aria-hidden="true">${stack}<div class="pc top" style="--i:6"><i></i><b></b><b></b><span class="sw x">✕</span><span class="sw x2">✕</span></div></div>
+        <p class="vs-cap">${esc(s.leftCap || "")}</p></div>
+      <div class="vs-mid mono">vs</div>
+      <div class="vs-side vs-dare"><span class="mono vs-tag">${esc(s.rightTag || "Go For It")}</span><div class="dare"><span class="mono d-lv">${esc(d.level || "")}</span><p>${esc(d.text || "")}</p><span class="d-t">${esc(d.timer || "15:00")}</span></div>
+        <p class="vs-cap">${esc(s.rightCap || "")}</p></div></div>
+      <div class="chips">${s.items.map((it) => `<div class="chip"><b>${esc(it.stat)}</b><span>${txt(it.short)}</span><small class="mono">${esc(it.cite)}</small></div>`).join("")}</div></div></div>`;
+  }
+
   function section(s) {
     switch (s.type) {
       case "text":
@@ -550,6 +564,7 @@
             ${it.title ? `<figcaption>${esc(it.title)}</figcaption>` : ""}</figure>`;
         }).join("")}</div></div>`;
       }
+      case "research": return research(s);
       case "cols":
         // short labeled lists side by side (e.g. lighting layers)
         return `<div class="s-block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}<div class="cols">${s.items.map((it) => `<div class="col"><h3>${esc(it.title)}</h3><ul>${it.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul></div>`).join("")}</div></div>`;

@@ -37,6 +37,17 @@ addProject({
       outro: "Starting off, I knew I wanted an app centered around quick, thrilling tasks under timer pressure. A \"now or never\" push. I wanted it to feel less like dating and more like a dare between friends: a little scary, a little silly, and over before you can back out. My pitch board mapped out that first rush: a surprise alert, a dare you can't predict, and 15 minutes to go for it." },
     { group: "Early Exploration", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
       src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
+    // Research: why endless swiping falls short (sources verified 2026-11-28; see mockups/gfi-research/)
+    { group: "Early Exploration", type: "research", heading: "Why Not Just Swipe?",
+      intro: "I wanted to know if the burnt-out swiping feeling was just me. It wasn't. The problem isn't the swipe itself (my dare cards use one!). It's an endless pile of people you never actually meet.",
+      leftTag: "Dating apps", leftCap: "An endless pile of profiles",
+      rightTag: "Go For It", rightCap: "One dare, one person, right now",
+      dare: { level: "Hard · 400 pts", text: "Ask someone cute to go on a spontaneous 10-minute date.", timer: "15:00" },
+      items: [
+        { stat: "−27%", short: "The more profiles people saw, the less likely they were to say yes.", cite: "Pronk & Denissen, 2020" },
+        { stat: "24 vs 6", short: "People who picked from 24 profiles were less satisfied a week later than people who picked from 6.", cite: "D'Angelo & Toma, 2017" },
+        { stat: "46%", short: "of U.S. adults who've used dating apps say it's been a negative experience.", cite: "Pew Research Center, 2023" }
+      ]},
     { group: "Designing the Game", type: "text", heading: "Making It a Game", wide: true,
       body: "Here's where I hit a wall: why would anyone keep coming back to do something this nerve-racking? My solution was a leaderboard with friends — join with a group and compete for points. The points depend on the task's difficulty, how fast you finish, and how many cards you accept versus pass. The \"Winner of the Week\" then unlocks the Task Generator and writes the dares for everyone else's next round, so passing has a real cost: you might get stuck with whatever the winner dreams up." },
     { group: "Designing the Game", type: "image", heading: "Points by Difficulty", src: "assets/digital/gamify/difficulty-cards.jpg", ratio: "3200/1440", caption: "Example dares at each level (point values are illustrative)" },
