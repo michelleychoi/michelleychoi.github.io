@@ -1157,3 +1157,6 @@ body { transition: background-color .15s linear; }
 }
 /* the prototype keeps a big title ("Try the Prototype"), larger than the small in-section headings */
 #try-proto > h2 { font-size: var(--step-2); font-weight: 500; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 22px; }
+/* Try the Prototype: big title beside the phone, above the steps (option A look) */
+#try-proto.title-beside .embed-aside > h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 600; font-size: clamp(2.2rem, 4.4vw, 3.6rem); letter-spacing: -0.03em; line-height: 1; background: none; padding: 0; }
+@media (max-width: 760px) { #try-proto.title-beside .embed { display: flex; flex-direction: column; } #try-proto.title-beside .embed-aside { display: contents; } #try-proto.title-beside .embed-aside > h2 { order: -1; margin-bottom: 18px; align-self: flex-start; font-size: 2.2rem; } #try-proto.title-beside .embed-aside > div { order: 1; } #try-proto.title-beside .try-phone { order: 0; align-self: center; } }

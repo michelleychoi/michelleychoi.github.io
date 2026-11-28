@@ -56,7 +56,7 @@ addProject({
     // { type: "figma", heading: "Interactive Prototype", url: "https://www.figma.com/..." },
     // live: tag on the phone; tapNote: handwritten hint; shift: page background fades to light lilac here
     { group: "Try It", type: "embed", heading: "Try the Prototype", src: "proto/gamify.html", title: "Go For It clickable prototype",
-      live: "Live · tap to play", tapNote: "start here! tap the notification", shift: true,
+      live: "Live · tap to play", tapNote: "start here! tap the notification", shift: true, titleBeside: true,
       aside: [
         { label: "01 · Alert", body: "Tap the notification to open your card." },
         { label: "02 · Card", body: "Drag the card left to pass or right to go for it, or use the buttons. Passing costs points and deals the next dare." },

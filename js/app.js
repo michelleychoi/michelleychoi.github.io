@@ -488,8 +488,10 @@
         const phone = s.live || s.tapNote
           ? `<div class="try-phone">${s.live ? `<span class="live-chip"><i></i>${esc(s.live)}</span>` : ""}${frame}${s.tapNote ? `<div class="tap-note">${arrow}${esc(s.tapNote)}</div>` : ""}</div>`
           : frame;
-        return `<div class="s-block" id="try-proto">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
-          <div class="embed${s.live || s.tapNote ? " dressed" : ""}"${s.shift ? " data-shift" : ""}>${phone}${s.aside ? `<div class="embed-aside">${s.aside.map((a) => `<div><span class="mono muted">${esc(a.label)}</span><p>${txt(a.body)}</p></div>`).join("")}</div>` : ""}</div></div>`;
+        // titleBeside: the heading sits big beside the phone, above the steps, instead of above the phone
+        const head = s.heading ? `<h2>${esc(s.heading)}</h2>` : "";
+        return `<div class="s-block${s.titleBeside ? " title-beside" : ""}" id="try-proto">${s.titleBeside ? "" : head}${s.intro ? `<p class="s-intro">${txt(s.intro)}</p>` : ""}
+          <div class="embed${s.live || s.tapNote ? " dressed" : ""}"${s.shift ? " data-shift" : ""}>${phone}${s.aside ? `<div class="embed-aside">${s.titleBeside ? head : ""}${s.aside.map((a) => `<div><span class="mono muted">${esc(a.label)}</span><p>${txt(a.body)}</p></div>`).join("")}</div>` : ""}</div></div>`;
       }
       case "screens": {
         // phone screens with their explanation beside each one
