@@ -1160,3 +1160,9 @@ body { transition: background-color .15s linear; }
 /* Try the Prototype: big title beside the phone, above the steps (option A look) */
 #try-proto.title-beside .embed-aside > h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 600; font-size: clamp(2.2rem, 4.4vw, 3.6rem); letter-spacing: -0.03em; line-height: 1; background: none; padding: 0; }
 @media (max-width: 760px) { #try-proto.title-beside .embed { display: flex; flex-direction: column; } #try-proto.title-beside .embed-aside { display: contents; } #try-proto.title-beside .embed-aside > h2 { order: -1; margin-bottom: 18px; align-self: flex-start; font-size: 2.2rem; } #try-proto.title-beside .embed-aside > div { order: 1; } #try-proto.title-beside .try-phone { order: 0; align-self: center; } }
+
+/* 2026-11-28 (bob): home sections fade into each other instead of sliding over like cards; the next one still drifts up.
+   Only applies with .phases.fade (PHASE_FADE in app.js); remove that flag to get the old card slide back. */
+.phases.fade > .phase, .phases.fade > .phase.is-cur { transition: transform .7s cubic-bezier(.22,1,.36,1), opacity .6s ease, visibility 0s; box-shadow: none; }
+.phases.fade > .phase.is-next { transform: translateY(14%); opacity: 0; box-shadow: none; border-radius: 0; }
+.phases.fade > .phase.is-past { transform: translateY(-6%); opacity: 0; transition: transform .7s cubic-bezier(.22,1,.36,1), opacity .6s ease, visibility 0s .7s; }

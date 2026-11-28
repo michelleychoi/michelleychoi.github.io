@@ -224,6 +224,7 @@
   }
 
   let phasesOff = null;
+  const PHASE_FADE = true; // flip to false to bring back the card slide between home sections
   function phases() {
     if (phasesOff) { phasesOff(); phasesOff = null; }
     const root = document.querySelector(".phases");
@@ -271,10 +272,21 @@
     let drag = null, anim = null, raf = 0;
     const SCRUB = () => Math.max(360, innerHeight * 0.5); // wheel distance for a full screen change
     const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+    // Home section transition: true = soft fade + drift up (bob, 2026-11-28); false = the old card slide-over
+    const FADE = PHASE_FADE; root.classList.toggle("fade", FADE);
     const SH = "0 -24px 60px -20px rgba(30,25,60,.22)"; // soft edge on the screen sliding over
     const paint = () => {
       const { dir, a, b, v } = drag;
       if (v > 0.35 && !b.classList.contains("play")) b.classList.add("play");
+      if (FADE) {
+        // 2026-11-28 (bob): sections fade into each other instead of one card sliding over the other. The incoming
+        // screen still drifts up a little; whichever screen is on top does the fading, so the page never dips to blank.
+        const e = v * v * (3 - 2 * v);
+        if (dir > 0) { a.style.transform = `translate3d(0,${-6 * v}%,0)`; a.style.opacity = 1 - 0.5 * e; b.style.transform = `translate3d(0,${14 * (1 - v)}%,0)`; b.style.opacity = e; }
+        else { a.style.transform = `translate3d(0,${14 * v}%,0)`; a.style.opacity = 1 - e; b.style.transform = `translate3d(0,${-6 * (1 - v)}%,0)`; b.style.opacity = 0.5 + 0.5 * e; }
+        return;
+      }
+      // old card-slide transition (kept so it's easy to switch back: set PHASE_FADE to false)
       if (dir > 0) { a.style.transform = `translate3d(0,${-12 * v}%,0)`; a.style.opacity = 1 - 0.4 * v; b.style.transform = `translate3d(0,${100 * (1 - v)}%,0)`; }
       else { a.style.transform = `translate3d(0,${100 * v}%,0)`; b.style.transform = `translate3d(0,${-12 * (1 - v)}%,0)`; b.style.opacity = 0.6 + 0.4 * v; }
     };
@@ -299,7 +311,7 @@
       b.scrollTop = 0; fit(n);
       b.classList.add("is-peek"); // the incoming screen shows fully formed while it slides
       [a, b].forEach((e) => { e.style.transition = "none"; e.style.visibility = "visible"; e.style.willChange = "transform, opacity"; });
-      (dir > 0 ? b : a).style.boxShadow = SH;
+      if (!FADE) (dir > 0 ? b : a).style.boxShadow = SH;
       drag = { dir, a, b, n, t: 0, v: 0 }; anim = null; busy = true;
       return true;
     };
