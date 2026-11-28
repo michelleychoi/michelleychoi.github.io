@@ -53,7 +53,7 @@ addProject({
       { heading: "Profile", src: "assets/digital/gamify/screen-proof.png?v=202611161905", tag: "Profile sheet", body: "Keeps a history of every card, and becomes a little portfolio of the people you met by taking a chance.", points: ["Photo proof with the time it was taken and points earned", "Their name and number, how fast you finished, and the difficulty", "Going on a date? Yes or no, plus a 1–10 rating"], color: "magenta" },
       { heading: "Task Generator", src: "assets/digital/gamify/screen-generator-locked.png?v=202611161905", tag: "Locked state", body: "The tab everyone wants. It stays locked unless you're Winner of the Week.", points: ["Blurred form hints at what you're missing", "Progress bar shows how far behind first place you are", "Gives a reason to accept harder cards instead of passing"] }
     ]},
-    { group: "Designing the Game", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
+    { group: "Designing the Game", type: "image", heading: "User Flow", bleed: true, intro: "One round, from the surprise task alert to the winner writing next week's cards.",
       src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
     { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi Wireframes", src: "assets/digital/gamify/lofi-wireframes.png", ratio: "1500/952", caption: "Task alert → task card → countdown, and the three tabs" },
     { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi to Hi-fi", src: "assets/digital/gamify/lofi-to-hifi.jpg?v=202611161851", ratio: "3200/2050" },
