@@ -1155,3 +1155,5 @@ body { transition: background-color .15s linear; }
   .grp-head { flex-direction: column; align-items: flex-start; gap: 4px; }
   .grp-head .mono { position: static; transform: none; margin: 0; }
 }
+/* the prototype keeps a big title ("Try the Prototype"), larger than the small in-section headings */
+#try-proto > h2 { font-size: var(--step-2); font-weight: 500; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 22px; }
