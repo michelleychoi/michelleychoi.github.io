@@ -1197,3 +1197,5 @@ body { transition: background-color .15s linear; }
   .rv-b .rv-body, .rv-b .vs { grid-template-columns: 1fr; } .rv-b .vs { gap: 12px; } .rv-b .vs-mid { text-align: center; }
   .rv-b .chips { gap: 22px; }
 }
+/* 2026-11-28: cover "Hi, I'm" in handwriting (Caveat) instead of italic serif, matching the line-drawing girl (option D) */
+.cover2 .name .hi { font-family: "Caveat", "Bradley Hand", cursive; font-style: normal; font-weight: 600; font-size: clamp(2.2rem, 4.4vw, 4.6rem); transform: rotate(-3deg); transform-origin: left bottom; margin-bottom: .12em; }
