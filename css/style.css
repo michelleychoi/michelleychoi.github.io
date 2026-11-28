@@ -1199,3 +1199,36 @@ body { transition: background-color .15s linear; }
 }
 /* 2026-11-28: cover "Hi, I'm" in handwriting (Caveat) instead of italic serif, matching the line-drawing girl (option D) */
 .cover2 .name .hi { font-family: "Caveat", "Bradley Hand", cursive; font-style: normal; font-weight: 600; font-size: clamp(2.2rem, 4.4vw, 4.6rem); transform: rotate(-3deg); transform-origin: left bottom; margin-bottom: .12em; }
+
+/* "feature": one phone screen beside its own text (Go For It, 2026-11-28 mockup) */
+.feature .ft-body { display: grid; gap: clamp(24px, 4vw, 56px); align-items: center; }
+.feature.ft-right .ft-body { grid-template-columns: minmax(0, 1fr) minmax(0, 270px); }
+.feature.ft-left .ft-body { grid-template-columns: minmax(0, 270px) minmax(0, 1fr); }
+.feature.ft-solo .ft-body { grid-template-columns: minmax(0, 270px); }
+.feature .ft-shot { margin: 0; }
+.feature .ft-shot img { border-radius: 22px; }
+.ft-text { display: grid; gap: 12px; max-width: 58ch; }
+.ft-text p { margin: 0; }
+.ft-text .ft-lead { color: var(--muted); }
+.ft-text ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+.ft-text li { padding-left: 16px; position: relative; line-height: 1.4; }
+.ft-text li::before { content: ""; position: absolute; left: 0; top: .52em; width: 7px; height: 7px; border-radius: 50%; background: var(--name); }
+@media (max-width: 700px) {
+  .feature.ft-right .ft-body, .feature.ft-left .ft-body { grid-template-columns: 1fr; gap: 18px; }
+  .feature .ft-shot { max-width: 230px; }
+  .feature.ft-left .ft-shot { order: -1; }
+  .feature.ft-right .ft-shot { order: 2; }
+}
+.ft-text h2 { margin: 0 0 4px; }
+.grp-item .ft-text h2 { font-family: var(--display); font-size: clamp(1.05rem, 1.4vw, 1.25rem); font-weight: 600; letter-spacing: -0.005em; line-height: 1.1; }
+.ft-text .ft-tag { margin-bottom: 2px; }
+.feature.ft-magenta .ft-tag { background: var(--g-magenta); }
+.feature.ft-magenta .ft-text li::before { background: var(--g-magenta); }
+/* lean: on desktop, push the text block over to sit next to a screen on the right (hug) or right-align it (flush) */
+@media (min-width: 701px) {
+  .feature.ft-lean-hug .ft-text, .feature.ft-lean-flush .ft-text { justify-self: end; }
+  .feature.ft-lean-flush .ft-text { text-align: right; }
+  .feature.ft-lean-flush .ft-tag { justify-self: end; }
+  .feature.ft-lean-flush .ft-text li { padding-left: 0; padding-right: 16px; }
+  .feature.ft-lean-flush .ft-text li::before { left: auto; right: 0; }
+}

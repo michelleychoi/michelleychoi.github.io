@@ -35,8 +35,6 @@ addProject({
       ],
       // outro: short paragraph under the images
       outro: "Starting off, I knew I wanted an app centered around quick, thrilling tasks under timer pressure. A \"now or never\" push. I wanted it to feel less like dating and more like a dare between friends: a little scary, a little silly, and over before you can back out. My pitch board mapped out that first rush: a surprise alert, a dare you can't predict, and 15 minutes to go for it." },
-    { group: "Early Exploration", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
-      src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
     // Research: why endless swiping falls short (sources verified 2026-11-28; see mockups/gfi-research/)
     { group: "Early Exploration", type: "research", heading: "Why Not Just Swipe?",
       intro: "I wanted to know if the burnt-out swiping feeling was just me. It wasn't. The problem isn't the swipe itself (my dare cards use one!). It's an endless pile of people you never actually meet.",
@@ -51,18 +49,18 @@ addProject({
     { group: "Designing the Game", type: "text", heading: "Making It a Game", wide: true,
       body: "Here's where I hit a wall: why would anyone keep coming back to do something this nerve-racking? My solution was a leaderboard with friends — join with a group and compete for points. The points depend on the task's difficulty, how fast you finish, and how many cards you accept versus pass. The \"Winner of the Week\" then unlocks the Task Generator and writes the dares for everyone else's next round, so passing has a real cost: you might get stuck with whatever the winner dreams up." },
     { group: "Designing the Game", type: "image", heading: "Points by Difficulty", src: "assets/digital/gamify/difficulty-cards.jpg", ratio: "3200/1440", caption: "Example dares at each level (point values are illustrative)" },
-    { group: "Designing the Game", type: "text", heading: "The Profile",
-      body: "The profile tab keeps a history of every card: completion status, the photo proof, points earned, and the fun extras, like whether you got their name and number, whether you'll actually go on a date, and a 1–10 rating. It becomes a little portfolio of the people you met by taking a chance." },
+    { group: "Designing the Game", type: "feature", heading: "The Profile", side: "left", src: "assets/digital/gamify/screen-proof.png?v=202611161905",
+      tag: "Profile sheet", color: "magenta",
+      body: "The profile tab keeps a history of every card: completion status, the photo proof, points earned, and the fun extras, like whether you got their name and number, whether you'll actually go on a date, and a 1–10 rating. It becomes a little portfolio of the people you met by taking a chance.",
+      points: ["Photo proof with the time it was taken and points earned", "Their name and number, how fast you finished, and the difficulty", "Going on a date? Yes or no, plus a 1–10 rating"] },
+    { group: "Designing the Game", type: "feature", heading: "Task Generator", side: "right", src: "assets/digital/gamify/screen-generator-locked.png?v=202611161905",
+      tag: "Locked state", lean: "flush",
+      body: "The tab everyone wants. It stays locked unless you're Winner of the Week.",
+      points: ["Blurred form hints at what you're missing", "Progress bar shows how far behind first place you are", "Gives a reason to accept harder cards instead of passing"] },
+    { group: "Designing the Game", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
+      src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
     { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi Wireframes", src: "assets/digital/gamify/lofi-wireframes.png", ratio: "1500/952", caption: "Task alert → task card → countdown, and the three tabs" },
     { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi to Hi-fi", src: "assets/digital/gamify/lofi-to-hifi.jpg?v=202611161851", ratio: "3200/2050" },
-    { group: "From Lo-fi to Hi-fi", type: "screens", heading: "Details", items: [
-      { label: "A · Locked state", title: "Task Generator", src: "assets/digital/gamify/screen-generator-locked.png?v=202611161905",
-        body: "The tab everyone wants. It stays locked unless you're Winner of the Week.",
-        points: ["Blurred form hints at what you're missing", "Progress bar shows how far behind first place you are", "Gives a reason to accept harder cards instead of passing"] },
-      { label: "B · Profile sheet", title: "Card Detail", src: "assets/digital/gamify/screen-proof.png?v=202611161905",
-        body: "Tap any past card on your profile to open its record.",
-        points: ["Photo proof with the time it was taken and points earned", "Their name and number, how fast you finished, and the difficulty", "Going on a date? Yes or no, plus a 1–10 rating"] }
-    ]},
     // Clickable prototype (proto/gamify.html). To use a Figma link instead, swap this for:
     // { type: "figma", heading: "Interactive Prototype", url: "https://www.figma.com/..." },
     // live: tag on the phone; tapNote: handwritten hint; shift: page background fades to light lilac here

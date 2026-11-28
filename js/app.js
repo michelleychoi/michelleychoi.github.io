@@ -564,6 +564,16 @@
             ${it.title ? `<figcaption>${esc(it.title)}</figcaption>` : ""}</figure>`;
         }).join("")}</div></div>`;
       }
+      case "feature": {
+        // one phone screen beside its own text (Go For It: The Profile, Task Generator). side: "right" (default) or "left";
+        // body/points optional: with neither, it's just the heading and the screen
+        const words = s.body || s.lead || s.points;
+        const h = s.heading ? `<h2>${esc(s.heading)}</h2>` : "";
+        const tag = s.tag ? `<span class="sn-tag mono ft-tag">${esc(s.tag)}</span>` : "";
+        const t = words ? `<div class="ft-text">${tag}${h}${s.lead ? `<p class="ft-lead">${txt(s.lead)}</p>` : ""}${s.body ? `<p>${txt(s.body)}</p>` : ""}${s.points ? `<ul>${s.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul>` : ""}</div>` : "";
+        const fig = `<figure class="ft-shot">${media({ src: s.src, ratio: s.ratio || "390/844", alt: s.alt || s.heading }, s.alt || s.heading)}${s.caption ? `<figcaption class="mono">${esc(s.caption)}</figcaption>` : ""}</figure>`;
+        return `<div class="s-block feature${s.color ? " ft-" + esc(s.color) : ""}${s.lean ? " ft-lean-" + esc(s.lean) : ""} ft-${s.side === "left" ? "left" : "right"}${words ? "" : " ft-solo"}">${words ? "" : h}<div class="ft-body">${s.side === "left" ? fig + t : t + fig}</div></div>`;
+      }
       case "research": return research(s);
       case "cols":
         // short labeled lists side by side (e.g. lighting layers)
