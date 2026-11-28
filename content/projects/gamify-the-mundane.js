@@ -49,14 +49,10 @@ addProject({
     { group: "Designing the Game", type: "text", heading: "Making It a Game", wide: true,
       body: "Here's where I hit a wall: why would anyone keep coming back to do something this nerve-racking? My solution was a leaderboard with friends — join with a group and compete for points. The points depend on the task's difficulty, how fast you finish, and how many cards you accept versus pass. The \"Winner of the Week\" then unlocks the Task Generator and writes the dares for everyone else's next round, so passing has a real cost: you might get stuck with whatever the winner dreams up." },
     { group: "Designing the Game", type: "image", heading: "Points by Difficulty", src: "assets/digital/gamify/difficulty-cards.jpg", ratio: "3200/1440", caption: "Example dares at each level (point values are illustrative)" },
-    { group: "Designing the Game", type: "feature", heading: "The Profile", side: "left", src: "assets/digital/gamify/screen-proof.png?v=202611161905",
-      tag: "Profile sheet", color: "magenta",
-      body: "The profile tab keeps a history of every card: completion status, the photo proof, points earned, and the fun extras, like whether you got their name and number, whether you'll actually go on a date, and a 1–10 rating. It becomes a little portfolio of the people you met by taking a chance.",
-      points: ["Photo proof with the time it was taken and points earned", "Their name and number, how fast you finished, and the difficulty", "Going on a date? Yes or no, plus a 1–10 rating"] },
-    { group: "Designing the Game", type: "feature", heading: "Task Generator", side: "right", src: "assets/digital/gamify/screen-generator-locked.png?v=202611161905",
-      tag: "Locked state", lean: "flush",
-      body: "The tab everyone wants. It stays locked unless you're Winner of the Week.",
-      points: ["Blurred form hints at what you're missing", "Progress bar shows how far behind first place you are", "Gives a reason to accept harder cards instead of passing"] },
+    { group: "Designing the Game", type: "duo", layout: "note", items: [
+      { heading: "Profile", src: "assets/digital/gamify/screen-proof.png?v=202611161905", tag: "Profile sheet", body: "Keeps a history of every card, and becomes a little portfolio of the people you met by taking a chance.", points: ["Photo proof with the time it was taken and points earned", "Their name and number, how fast you finished, and the difficulty", "Going on a date? Yes or no, plus a 1–10 rating"], color: "magenta" },
+      { heading: "Task Generator", src: "assets/digital/gamify/screen-generator-locked.png?v=202611161905", tag: "Locked state", body: "The tab everyone wants. It stays locked unless you're Winner of the Week.", points: ["Blurred form hints at what you're missing", "Progress bar shows how far behind first place you are", "Gives a reason to accept harder cards instead of passing"] }
+    ]},
     { group: "Designing the Game", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
       src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
     { group: "From Lo-fi to Hi-fi", type: "image", heading: "Lo-fi Wireframes", src: "assets/digital/gamify/lofi-wireframes.png", ratio: "1500/952", caption: "Task alert → task card → countdown, and the three tabs" },

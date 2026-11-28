@@ -574,6 +574,15 @@
         const fig = `<figure class="ft-shot">${media({ src: s.src, ratio: s.ratio || "390/844", alt: s.alt || s.heading }, s.alt || s.heading)}${s.caption ? `<figcaption class="mono">${esc(s.caption)}</figcaption>` : ""}</figure>`;
         return `<div class="s-block feature${s.color ? " ft-" + esc(s.color) : ""}${s.lean ? " ft-lean-" + esc(s.lean) : ""} ft-${s.side === "left" ? "left" : "right"}${words ? "" : " ft-solo"}">${words ? "" : h}<div class="ft-body">${s.side === "left" ? fig + t : t + fig}</div></div>`;
       }
+      case "duo": {
+        // two features side by side (Go For It: The Profile + Task Generator). layout: "stack" | "note" | "mirror"
+        const one = (it, i) => {
+          const fig = `<figure class="duo-shot">${media({ src: it.src, ratio: it.ratio || "390/844", alt: it.heading }, it.heading)}</figure>`;
+          const t = `<div class="duo-text">${it.tag ? `<span class="sn-tag mono">${esc(it.tag)}</span>` : ""}<h2>${esc(it.heading)}</h2>${it.body ? `<p>${txt(it.body)}</p>` : ""}${it.points ? `<ul>${it.points.map((pt) => `<li>${txt(pt)}</li>`).join("")}</ul>` : ""}</div>`;
+          return `<div class="duo-item${it.color ? " duo-" + esc(it.color) : ""}">${(s.layout === "mirror" && i === 1) || (s.layout === "zig" && i === 0) ? fig + t : t + fig}</div>`;
+        };
+        return `<div class="s-block duo duo-${esc(s.layout || "stack")}">${s.items.map(one).join("")}</div>`;
+      }
       case "research": return research(s);
       case "cols":
         // short labeled lists side by side (e.g. lighting layers)
