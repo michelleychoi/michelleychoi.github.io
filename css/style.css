@@ -1144,3 +1144,7 @@ body { transition: background-color .15s linear; }
 .grp-t, .project-view .grp-t { font-family: "Inter", var(--body), sans-serif; font-style: normal; font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -.025em; }
 .grp-item .s-text h2, .grp-item .s-block > h2, .grp-item .sn-text h3 { font-size: clamp(1.05rem, 1.4vw, 1.25rem); font-weight: 600; }
 .gfi-t i { font-family: "Inter", var(--body), sans-serif; font-style: normal; font-weight: 500; font-size: 2.1cqw; letter-spacing: -.005em; margin-top: 1.8cqw; }
+/* "wide" text section: narrower heading column, body runs to the right edge */
+.s-text.wide { grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); }
+.s-text.wide p { max-width: none; }
+@media (max-width: 760px) { .s-text.wide { grid-template-columns: 1fr; gap: 10px; } }

@@ -37,7 +37,7 @@ addProject({
       outro: "Starting off, I knew I wanted an app centered around quick, thrilling tasks under timer pressure. A \"now or never\" push. I wanted it to feel less like dating and more like a dare between friends: a little scary, a little silly, and over before you can back out. My pitch board mapped out that first rush: a surprise alert, a dare you can't predict, and 15 minutes to go for it." },
     { group: "Early Exploration", type: "image", heading: "User Flow", intro: "One round, from the surprise task alert to the winner writing next week's cards.",
       src: "assets/digital/gamify/user-flow.jpg", ratio: "3200/1562", caption: "Accept, race the timer, snap proof, climb the leaderboard" },
-    { group: "Designing the Game", type: "text", heading: "Making It a Game",
+    { group: "Designing the Game", type: "text", heading: "Making It a Game", wide: true,
       body: "Here's where I hit a wall: why would anyone keep coming back to do something this nerve-racking? My solution was a leaderboard with friends — join with a group and compete for points. The points depend on the task's difficulty, how fast you finish, and how many cards you accept versus pass. The \"Winner of the Week\" then unlocks the Task Generator and writes the dares for everyone else's next round, so passing has a real cost: you might get stuck with whatever the winner dreams up." },
     { group: "Designing the Game", type: "image", heading: "Points by Difficulty", src: "assets/digital/gamify/difficulty-cards.jpg", ratio: "3200/1440", caption: "Example dares at each level (point values are illustrative)" },
     { group: "Designing the Game", type: "text", heading: "The Profile",
