@@ -1252,7 +1252,7 @@ body { transition: background-color .15s linear; }
 .duo-stack .duo-shot { max-width: 250px; }
 .duo-stack .duo-item { grid-template-rows: auto 1fr; }
 /* note: screen + text beside it inside each half (screen first) */
-.duo-note .duo-item { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); align-items: center; }
+.duo-note .duo-item { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; } /* screens ~12% bigger, text narrower (was 0.8fr 1fr) */
 .duo-note .duo-shot { order: -1; }
 .duo-note .duo-text p { font-size: .95em; }
 /* mirror: text | screen | screen | text, screens meet in the middle */
